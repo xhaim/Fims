@@ -2,7 +2,7 @@
  <ul class="list-unstyled" data-aos="slide-right" id="left-nav-list">
      <li id="list-item">
          <div class="d-xl-flex align-items-xl-center" id="div_left"><i class="fa fa-dashboard"
-                 id="icon"></i><a>Dashboard</a></div>
+                 id="icon"></i><a href="{{url('/dashboard')}}" style="text-decoration: none">Dashboard</a></div>
      </li>
      {{-- Files Nav --}}
      <li class="list-item">
@@ -15,10 +15,10 @@
      </li>
      <div id="fileContent" class="collapse">
          <ul>
-             <li><a href="#" style="text-decoration: none"> Association</a></li>
-             <li>Farmer's Assistance</li>
+             <li><a href="{{url('assoc-crud-datatable')}}" style="text-decoration: none;font-size:15px;"> Association</a></li>
+             <li><a href="{{url('registry-crud-datatable')}}" style="text-decoration: none;font-size:15px;"> Farmer's Assistance</a></li>
              <li>Masterlist</li>
-             <li>Rental Tractor</li>
+             <li><a href="{{url('/rental-crud-datatable')}}" style="text-decoration: none;font-size:15px;"> Rental Tractor </a></li>
          </ul>
      </div>
      <li class="list-item">
@@ -32,11 +32,12 @@
      </li>
      <div id="manageContent" class="collapse">
          <ul>
-             <li> Corn</li>
-             <li>HVCDP</li>
+            <li><a href="{{url('ricehybrid-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Rice</a></li>
+             <li><a href="{{url('corn-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Corn</a></li>
+             <li><a href="{{url('/hvcdp')}}" style="text-decoration: none;font-size:15px"> HVCDP</a></li>
              <li>Fishery</li>
-             <li>Livestock</li>
-             </li>
+             <li><a href="{{url('livestock-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Livestock</a></li>
+          
          </ul>
      </div>
      <li class="list-item" style="margin-bottom: 10px;">
@@ -59,10 +60,10 @@
      </li>
      <div id="monitorContent" class="collapse">
          <ul>
-             <li>Rice Seeds</li>
-             <li> Corn Seeds</li>
-             <li>Fertilizer</li>
-             <li>Vegetable Seeds</li>
+             <li><a href="{{url('riceseeds-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Rice Seeds</a></li>
+             <li> <a href="{{url('cornseeds-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Corn Seeds</a></li>
+             <li><a href="{{url('fert-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Fertilizer</a></li>
+             <li><a href="{{url('vegseeds-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Vegetable Seeds</a></li>
          </ul>
      </div>
  </ul>

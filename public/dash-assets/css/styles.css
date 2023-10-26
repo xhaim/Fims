@@ -23,7 +23,6 @@ body {
 }
 
 div {
-  height: 100%;
   width: 100%;
   max-height: 100%;
 }
@@ -39,11 +38,9 @@ div {
 }
 
 #main-container {
-  margin-left: 0px;
-  height: 100%;
-  max-height: 100%;
   border-left: 1px solid var(--bs-yellow);
-  min-height: 580px;
+  min-height: 700px;
+  overflow-y: scroll;
 }
 
 #col-header {
@@ -100,7 +97,6 @@ div {
 #main-container {
   margin-left: 0px;
   height: 100%;
-  max-height: 100%;
   border-left: 1px solid var(--bs-yellow);
 }
 
@@ -246,4 +242,3 @@ a:hover {
 #div_left {
   font-size: 18px;
 }
-

@@ -12,18 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('associations', function (Blueprint $table) {
-            
-                $table->id();
-                $table->string('name')->nullable();
-                $table->string('barangay');
-                $table->string('contact_number');
-                $table->string('chairman');
-                $table->string('name_of_association');
-                $table->string('number_of_farmers');
-                $table->string('registered_on_date_');
-                $table->timestamps();
-            });
-        
+            $table->id();
+            $table->string('association');
+            $table->string('barangay');
+            $table->string('chairman');
+            $table->string('contact');
+            $table->string('no_of_farmers');
+            $table->string('registered');
+            $table->timestamps();
+        });
     }
 
     /**
