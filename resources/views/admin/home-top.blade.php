@@ -24,9 +24,7 @@
             <h1 class="text-center d-xxl-flex justify-content-center align-items-center align-self-center align-items-xxl-center" id="fims-heading"><img id="logo" src="{{asset('dash-assets/img/DA_Logo.png')}} ">MAM<span id="header">SoCB</span></h1><i class="fa fa-align-justify" id="burger"></i>
         </div>
         <div class="col d-flex d-sm-flex d-md-flex d-xl-flex d-xxl-flex align-items-center align-items-sm-center align-items-md-center justify-content-xl-end align-items-xl-center justify-content-xxl-end align-items-xxl-center" id="col-head-2">
-            <div class="d-xxl-flex justify-content-xxl-start align-items-xxl-end" id="div"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-search d-xxl-flex align-items-xxl-center" id="search_i">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
-                </svg><input class="form-control-lg search-input" type="search" placeholder="Search here..."></div>
+            <div class="d-xxl-flex justify-content-xxl-start align-items-xxl-end" id="div"></div>
             <div id="div2" class="profile">
                 @guest
                 @if (Route::has('login'))

@@ -16,8 +16,8 @@
      <div id="fileContent" class="collapse">
          <ul>
              <li><a href="{{url('assoc-crud-datatable')}}" style="text-decoration: none;font-size:15px;"> Association</a></li>
-             <li><a href="{{url('registry-crud-datatable')}}" style="text-decoration: none;font-size:15px;"> Farmer's Assistance</a></li>
-             <li>Masterlist</li>
+             <li> Farmer's Assistance</li>
+             <li><a href="{{url('registry-crud-datatable')}}" style="text-decoration: none;font-size:15px;">Masterlist</a></li>
              <li><a href="{{url('/rental-crud-datatable')}}" style="text-decoration: none;font-size:15px;"> Rental Tractor </a></li>
          </ul>
      </div>

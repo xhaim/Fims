@@ -71,7 +71,7 @@
   <!-- boostrap company model -->
     <div class="modal fade" id="vegseeds-modal" aria-hidden="true">
       <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <div class="modal-content"style="width: 500px;left:190px">
           <div class="modal-header" style="height: 80px;">
             <h4 class="modal-title" id="VegSeedsModal"></h4>
           </div>
@@ -80,28 +80,28 @@
               <input type="hidden" name="id" id="id">
 
               <div class="form-group">
-                <label for="var" class="col-sm-2 control-label" >Variety</label>
+                <label for="var" class="col-sm-8 control-label" >Variety</label>
                 <div class="col-sm-12">
                   <input type="text" class="form-control" id="variety" name="variety" placeholder="Enter Variety Name" maxlength="50" required="">
                 </div>
               </div>  
  
               <div class="form-group">
-                <label for="no." class="col-sm-3 control-label">No. of Seeds Received</label>
+                <label for="no." class="col-sm-8 control-label">No. of Seeds Received</label>
                 <div class="col-sm-12">
                   <input type="number" class="form-control" id="seeds_received" name="seeds_received" placeholder="Enter No. of Seeds Received" maxlength="20" required="">
                 </div>
               </div>
  
               <div class="form-group">
-                <label class="col-sm-3 control-label">Date Received</label>
+                <label class="col-sm-8 control-label">Date Received</label>
                 <div class="col-sm-12">
                   <input type="date" class="form-control" id="date_received" name="date_received" maxlength="11" placeholder="Enter Date Received" required="">
                 </div>
               </div>
 
               <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Source of Funds</label>
+                <label for="name" class="col-sm-8 control-label">Source of Funds</label>
                 <div class="col-sm-12">
                   <input type="text" class="form-control" id="source_of_funds" name="source_of_funds" placeholder="Enter Source of Funds" maxlength="50" required="">
                 </div>

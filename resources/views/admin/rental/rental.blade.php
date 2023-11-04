@@ -377,7 +377,7 @@
             <div class="form-group">
               <label for="remarks" class="col-sm-8 control-label">Remarks</label>
               <div class="col-sm-12">
-                <textarea class="form-control" id="remarks" name="remarks" placeholder="Enter Remarks" rows="3" maxlength="255" required></textarea>
+                <textarea class="form-control" id="remarks" name="remarks" placeholder="Enter Remarks" rows="3"  ></textarea>
               </div>
             </div>
             

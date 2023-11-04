@@ -12,6 +12,7 @@ use App\Http\Controllers\LivestockAjaxCRUDController;
 use App\Http\Controllers\FertilizerAjaxCRUDController;
 use App\Http\Controllers\RentalAjaxCRUDController;
 use App\Http\Controllers\RiceHybridAjaxCrudContoller;
+use App\Http\Controllers\RegistryAjaxCrudController;
 
 
 Route::get('/', function () {
@@ -69,3 +70,9 @@ Route::post('store-ricehybrid', [RiceHybridAjaxCrudContoller::class, 'store']);
 Route::post('edit-ricehybrid', [RiceHybridAjaxCrudContoller::class, 'edit']);
 Route::post('delete-ricehybrid', [RiceHybridAjaxCrudContoller::class, 'destroy']);
 Route::get('get-farmer-details/{id}', [RiceHybridAjaxCrudContoller::class, 'getFarmerDetails'])->name('farmer.details');
+// Registry
+Route::get('registry-crud-datatable', [RegistryAjaxCrudController::class, 'index']);
+Route::post('store-registry', [RegistryAjaxCrudController::class, 'store']);
+Route::post('edit-registry', [RegistryAjaxCrudController::class, 'edit']);
+Route::post('delete-registry', [RegistryAjaxCrudController::class, 'destroy']);
+// Route::get('get-registry-details/{id}', [RegistryAjaxCrudController::class, 'getRegistryDetails'])->name('farmer.details');
