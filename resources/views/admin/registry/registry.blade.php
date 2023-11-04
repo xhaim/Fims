@@ -122,6 +122,7 @@
   <script src="{{asset('dash-assets/js/registry/CheckBoxHandler.js')}}"></script>
   <script src="{{asset('dash-assets/js/registry/HouseholdMemberHandler.js')}}"></script>
   <script src="{{asset('dash-assets/js/registry/MemAf.js')}}"></script>
+  <script src="{{asset('dash-assets/js/registry/Awards.js')}}"></script>
   @include('admin.registry.registry-ajax')
   
   </html>

@@ -96,7 +96,7 @@ nextPartBtn3.addEventListener("click", function(){
 // FIFTH PART
 backPartBtn4.addEventListener("click", function(){
   fourthModalPart.removeAttribute("hidden");
-  OptionalModalPart.setAttribute("hidden", "hidden");
+  OptionalModalPart1.setAttribute("hidden", "hidden");
   nextPartBtn3.style.display = "inline-flex";
   nextPartBtn4.style.display = "none";
   backPartBtn4.style.display = "none";

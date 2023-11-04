@@ -44,6 +44,7 @@ function addMemAf() {
             <button class="btn-danger" type="button" onclick="removeMemAf(${MemAfCount})">Remove Membership & Affiliation</button>
     
         </div>
+        <hr>
         <!-- Add other form fields here -->
     `;
     

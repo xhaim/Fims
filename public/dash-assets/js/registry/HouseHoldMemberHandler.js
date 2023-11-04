@@ -61,6 +61,7 @@ function addMember() {
             <button class="btn-danger" type="button" onclick="removeMember(${memberCount})">Remove Member</button>
     
         </div>
+        <hr>
         <!-- Add other form fields here -->
     `;
     

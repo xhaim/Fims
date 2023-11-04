@@ -35,4 +35,4 @@
     </div>
   
 </div>
-<button class="btn btn-primary mt-3" type="button" id="AddMemAf" onclick="addMemAf()">Add Member</button>
+<button class="btn btn-primary mt-3" type="button" id="AddMemAf" onclick="addMemAf()">Add Membership/Affiliations</button>

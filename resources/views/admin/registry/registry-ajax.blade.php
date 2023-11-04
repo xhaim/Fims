@@ -376,12 +376,6 @@
             $('#city').val(res.city);
             $('#geo_coordinates').val(res.geo_coordinates);
             $('#years_of_residency').val(res.years_of_residency);
-
-            // ORGANIZATION
-            $('#membership').val(res.membership);
-            $('#position').val(res.position);
-            $('#member_since').val(res.member_since);
-            $('#status').val(res.status);
             
             // HH MEMBER
             $('#hh_member').val(res.hh_member);
@@ -481,7 +475,12 @@
             }
 
 // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG //
-            
+            // ORGANIZATION
+            $('#membership').val(res.membership);
+            $('#position').val(res.position);
+            $('#member_since').val(res.member_since);
+            $('#status').val(res.status);
+
             const OrgformContainer = document.getElementById('MemAfDetails');
             MemAfCount = 2;
             let lastValidMemAfCount = 2;
@@ -550,6 +549,73 @@
 
 // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG //
             
+// AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS 
+
+            // ORGANIZATION
+            $('#award').val(res.award);
+            $('#awarding_body').val(res.awarding_body);
+            $('#date_received').val(res.date_received);
+
+            const AwCiFormContainer = document.getElementById('Awards');
+            AwardsCount = 2;
+            let lastValidAwardsCount = 2;
+            
+            for (let a = 2; a <= 5; a++) {
+
+              
+                // Check if the required data exists in the response for the current member
+                if (res[`membership${a}`] && typeof res[`membership${a}`] === 'string' && res[`membership${a}`].trim() !== '') {
+                    const newAwCiDetails = document.createElement('div');
+                    newAwCiDetails.id = `AwCi${a}`;
+                    
+                    newAwCiDetails.innerHTML = `           
+                    <h5>Awards</h5>
+
+                    <div class="col-sm-12">
+                    <h6>Awards & Citations received (if any);</h6>
+                    </div>
+                    <div class="form-group">
+                    <label for="award" class="col-sm-8 control-label">Name of Award/Citation</label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="award${AwardsCount}" name="award${AwardsCount}" placeholder="Enter Name of Award/Citation" maxlength="255" >
+                    </div>
+                    </div>
+                    
+                    <div class="form-group">
+                    <label for="awarding_body" class="col-sm-8 control-label">Awarding Body</label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="awarding_body${AwardsCount}" name="awarding_body${AwardsCount}" placeholder="Enter Awarding Body" maxlength="255" >
+                    </div>
+                    </div>
+                    
+                    <div class="form-group">
+                    <label for="date_received" class="col-sm-8 control-label">Date Received</label>
+                    <div class="col-sm-12">
+                        <input type="date" class="form-control" id="date_received${AwardsCount}" name="date_received${AwardsCount}" placeholder="Enter Date Received" maxlength="100" >
+                    </div>
+                    </div>
+                
+        
+                    <button class="btn-danger" type="button" onclick="removeAwCi${AwardsCount}">Remove Award/Citation</button>
+            
+                </div>
+                <hr>
+                <!-- Add other form fields here -->
+                 `;
+                
+                      AwCiFormContainer.appendChild(newAwCiDetails);
+                $(`#award${a}`).val(res[`award${a}`]);
+                $(`#awarding_body${a}`).val(res[`awarding_body${a}`]);
+                $(`#date_received${a}`).val(res[`date_received${a}`]);
+                lastValidAwardsCount = a + 1; // Update lastValidAwardsCount
+                }
+                AwardsCount = lastValidAwardsCount;
+                console.log('Value of a:', a);
+                console.log('Value of AwardsCount:', AwardsCount);
+                console.log('Value of LVA:', lastValidAwardsCount);
+            }
+
+// AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS 
            }
        });
      }  
