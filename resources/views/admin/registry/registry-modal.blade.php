@@ -86,7 +86,7 @@
               <div class="form-group">
                 <label for="geo_coordinates" class="col-sm-8 control-label">Geo Coordinates</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="geo_coordinates" name="geo_coordinates" placeholder="Enter Geo Coordinates" maxlength="100" >
+                  <input type="text" class="form-control" id="geo_coordinates" name="geo_coordinates" placeholder="Enter Geo Coordinates" maxlength="100" >
                 </div>
               </div>
 
@@ -102,12 +102,15 @@
             {{-- third part of form --}}
           
           <div id="third_part" hidden="hidden">
-            <div class="col-sm-12">
-              <h6>Membership and Affiliations (if any);</h6>
-            </div>
             {{-- M&A -- M&A -- M&A -- M&A -- M&A -- M&A -- M&A -- M&A -- M&A -- M&A -- M&A -- M&A -- M&A -- M&A -- M&A -- M&A -- M&A --}}
             @include('admin.registry.memaf')
 
+          </div>
+          {{-- end of third modal part --}}
+
+          {{-- third Awards part of form --}}
+          
+          <div id="third_awards_part" hidden="hidden">
             {{--  A&C --  A&C --  A&C --  A&C --  A&C --  A&C --  A&C --  A&C --  A&C --  A&C --  A&C --  A&C --  A&C --  A&C --}}
             @include('admin.registry.awards')
 
@@ -151,6 +154,8 @@
             </button>
             <button type="button" class="btn btn-primary" id="btn-back2" style="display: none">Back
             </button>
+            <button type="button" class="btn btn-primary" id="btn-awards-back2" style="display: none">Back
+            </button>
             <button type="button" class="btn btn-primary" id="btn-back3" style="display: none">Back
             </button>
             <button type="button" class="btn btn-primary" id="btn-back4" style="display: none">Back
@@ -166,6 +171,8 @@
             <button type="button" class="btn btn-primary" id="btn-next1" style="display: none">Next
             </button>
             <button type="button" class="btn btn-primary" id="btn-next2" style="display: none">Next
+            </button>
+            <button type="button" class="btn btn-primary" id="btn-awards-next2" style="display: none">Next
             </button>
             <button type="button" class="btn btn-primary" id="btn-next3" style="display: none">Add Particular
             </button>

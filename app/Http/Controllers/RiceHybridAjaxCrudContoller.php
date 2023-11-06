@@ -38,7 +38,7 @@ class RiceHybridAjaxCrudContoller extends Controller
                 'birthdate' => $request->birthdate,
                 'farm_area' => $request->farm_area,
                 'sex' => $request->sex,
-                'y_n' => json_encode($request->y_n), // Convert to JSON
+                'membership' => json_encode($request->membership), // Convert to JSON
                 'quantity' => $request->quantity,
                 'date_received' => $request->date_received,
             ]
@@ -65,6 +65,13 @@ class RiceHybridAjaxCrudContoller extends Controller
         $farmer = Ricehybrid::where('id', $request->id)->delete();
 
         return response()->json($farmer);
+    }
+    // In your controller, retrieve the data
+    public function fetchData() {
+        // Retrieve data from your model or source (e.g., database)
+        $data = Ricehybrid::all(); // Replace YourModel with your actual model
+
+        return response()->json($data);
     }
 }
 

@@ -1,4 +1,4 @@
-<script type="text/javascript">
+{{-- <script type="text/javascript">
         
     $(document).ready( function () {
     
@@ -74,9 +74,12 @@
             $('#location').val(res.location);
             $('#project_description').val(res.project_description);
             $('#contact').val(res.contact);
+            $('#actual_land_area_of_farm').val(res.actual_land_area_of_farm);
+            $('#date_inspected').val(res.date_inspected);
             $('#inspector').val(res.inspector);
             $('#fuel_requirement').val(res.fuel_requirement);
             $('#hours_of_operation').val(res.hours_of_operation);
+            
 
             // Checkboxes (assuming res.equipment is an array)
             $('input[type="checkbox"]').prop('checked', false); // Clear all checkboxes first
@@ -157,4 +160,4 @@
       });
     
     
-   </script>
+   </script> --}}

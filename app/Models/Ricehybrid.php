@@ -20,7 +20,7 @@ class Ricehybrid extends Model
         'birthdate',
         'farm_area',
         'sex',
-        'y_n',
+        'membership',
         'quantity',
         'date_received',
     ];

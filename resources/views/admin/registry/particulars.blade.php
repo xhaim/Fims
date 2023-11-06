@@ -14,7 +14,7 @@
   <div class="form-group">
     <label for="geographic_coordinates" class="col-sm-8 control-label">Geographic Coordinates</label>
     <div class="col-sm-12">
-      <input type="number" class="form-control" id="geographic_coordinates" name="geographic_coordinates" placeholder="Enter Geographic Coordinates" maxlength="255" >
+      <input type="text" class="form-control" id="geographic_coordinates" name="geographic_coordinates" placeholder="Enter Geographic Coordinates" maxlength="255" >
     </div>
   </div>
   
@@ -80,9 +80,9 @@
 {{-- // TOPOGRAPHY // TOPOGRAPHY // TOPOGRAPHY // TOPOGRAPHY // TOPOGRAPHY // TOPOGRAPHY // TOPOGRAPHY // TOPOGRAPHY // TOPOGRAPHY // --}}
 
 <div class="form-group">
-    <label for="area" class="col-sm-8 control-label">Area(Hectares)</label>
+    <label for="hectares" class="col-sm-8 control-label">Area(Hectares)</label>
     <div class="col-sm-12">
-      <input type="number" class="form-control" name="hectares" name="hectares" placeholder="Enter Area(Hectares)" maxlength="100" >
+      <input type="number" class="form-control" id="hectares" name="hectares" placeholder="Enter Area(Hectares)" maxlength="100" >
     </div>
   </div>
   
@@ -90,22 +90,22 @@
     <label class="col-sm-8 control-label">Land type:</label>
     <div class="col-sm-12">
       <div class="form-group form-check">
-        <input type="checkbox" id="flatCheckbox" class="form-check-input" name="land" value="Flat" onclick="handleLandTypeChange('Flat')">
+        <input type="checkbox" id="flatCheckbox" class="form-check-input" name="land" value="Flat" onclick="handleLandTypeChange(this.value)">
         <label for="flatCheckbox" class="form-check-label">Flat</label>
       </div>
 
       <div class="form-group form-check">
-          <input type="checkbox" id="gentlySlopingCheckbox" class="form-check-input" name="land" value="Gently Sloping" onclick="handleLandTypeChange('Gently Sloping')">
+          <input type="checkbox" id="gentlySlopingCheckbox" class="form-check-input" name="land" value="Gently Sloping" onclick="handleLandTypeChange(this.value)">
           <label for="gentlySlopingCheckbox" class="form-check-label">Gently Sloping</label>
       </div>
 
       <div class="form-group form-check">
-          <input type="checkbox" id="rollingUndulatingCheckbox" class="form-check-input" name="land" value="Rolling/Undulating" onclick="handleLandTypeChange('Rolling/Undulating')">
+          <input type="checkbox" id="rollingUndulatingCheckbox" class="form-check-input" name="land" value="Rolling or Undulating" onclick="handleLandTypeChange(this.value)">
           <label for="rollingUndulatingCheckbox" class="form-check-label">Rolling/Undulating</label>
       </div>
 
       <div class="form-group form-check">
-          <input type="checkbox" id="hillySteepSlopesCheckbox" class="form-check-input" name="land" value="Hilly/Steep Slopes" onclick="handleLandTypeChange('Hilly/Steep Slopes')">
+          <input type="checkbox" id="hillySteepSlopesCheckbox" class="form-check-input" name="land" value="Hilly or Steep Slopes" onclick="handleLandTypeChange(this.value)">
           <label for="hillySteepSlopesCheckbox" class="form-check-label">Hilly/Steep Slopes</label>
       </div>
     </div>
@@ -122,23 +122,23 @@
     <div class="col-sm-12">
       <div class="checkbox">
         <label>
-          <input type="checkbox" id="irrigated" name="source" value="Irrigated" onclick="handleWaterSourceChange('Irrigated')"> Irrigated
+          <input type="checkbox" id="irrigated" name="source" value="Irrigated" onclick="handleWaterSourceChange(this.value)"> Irrigated
         </label>
       </div>
       <div class="checkbox">
         <label>
-          <input type="checkbox" id="swip" name="source" value="SWIP/SIS" onclick="handleWaterSourceChange('SWIP/SIS')"> SWIP/SIS
+          <input type="checkbox" id="swip" name="source" value="SWIP or SIS" onclick="handleWaterSourceChange(this.value)"> SWIP/SIS
         </label>
       </div>
       <div class="checkbox">
         <label>
-          <input type="checkbox" id="pump" name="source" value="Water Pump" onclick="handleWaterSourceChange('Water Pump')"> Water Pump
+          <input type="checkbox" id="pump" name="source" value="Water Pump" onclick="handleWaterSourceChange(this.value)"> Water Pump
         </label>
       </div>
      
       <div class="checkbox">
         <label>
-          <input type="checkbox" id="rainfed" name="source" value="Rainfed" onclick="handleWaterSourceChange('Rainfed')"> Rainfed
+          <input type="checkbox" id="rainfed" name="source" value="Rainfed" onclick="handleWaterSourceChange(this.value)"> Rainfed
         </label>
       </div>
     </div>

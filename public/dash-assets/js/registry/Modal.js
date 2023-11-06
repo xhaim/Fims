@@ -1,11 +1,13 @@
 var nextPartBtn = document.getElementById("btn-next");
 var nextPartBtn1 = document.getElementById("btn-next1");
 var nextPartBtn2 = document.getElementById("btn-next2");
+var nextAwardsPartBtn = document.getElementById("btn-awards-next2");
 var nextPartBtn3 = document.getElementById("btn-next3");
 var nextPartBtn4 = document.getElementById("btn-next4");
 
 var backPartBtn1 = document.getElementById("btn-back1");
 var backPartBtn2 = document.getElementById("btn-back2");
+var backAwardsPartBtn = document.getElementById("btn-awards-back2");
 var backPartBtn3 = document.getElementById("btn-back3");
 var backPartBtn4 = document.getElementById("btn-back4");
 var backPartBtn5 = document.getElementById("btn-back5");
@@ -16,6 +18,7 @@ var saveBtn = document.getElementById("btn-save");
 var firstModalPart = document.getElementById("first_part");
 var secondModalPart = document.getElementById("second_modal_part");
 var thirdModalPart = document.getElementById("third_part");
+var AwardsModalPart = document.getElementById("third_awards_part");
 var fourthModalPart = document.getElementById("fourth_part");
 var OptionalModalPart1 = document.getElementById("optional_part1");
 var OptionalModalPart2 = document.getElementById("optional_part2");
@@ -27,6 +30,7 @@ nextPartBtn.addEventListener("click", function(){
   nextPartBtn.style.display = "none";
   nextPartBtn1.style.display = "inline-flex";
   backPartBtn1.style.display = "inline-flex";
+  $('#RegistryModal').html("Additional Information");
   saveBtn.style.display = "none";
 });
 
@@ -38,6 +42,7 @@ backPartBtn1.addEventListener("click", function(){
   nextPartBtn.style.display = "inline-flex";
   nextPartBtn1.style.display = "none";
   backPartBtn1.style.display = "none";
+  $('#RegistryModal').html("House Hold Members");
   saveBtn.style.display = "none";
 });
 
@@ -48,6 +53,7 @@ nextPartBtn1.addEventListener("click", function(){
   nextPartBtn2.style.display = "inline-flex";
   backPartBtn2.style.display = "inline-flex";
   backPartBtn1.style.display = "none";
+  $('#RegistryModal').html("Organizations/Affiliations (if any);");
   saveBtn.style.display = "none";
 });
 
@@ -59,27 +65,53 @@ backPartBtn2.addEventListener("click", function(){
   nextPartBtn2.style.display = "none";
   backPartBtn2.style.display = "none";
   backPartBtn1.style.display = "inline-flex";
+  $('#RegistryModal').html("Additional Information");
   saveBtn.style.display = "none";
 });
 
 nextPartBtn2.addEventListener("click", function(){
   thirdModalPart.setAttribute("hidden", "hidden");
-  fourthModalPart.removeAttribute("hidden");
+  AwardsModalPart.removeAttribute("hidden");
   nextPartBtn2.style.display = "none";
+  nextAwardsPartBtn.style.display = "inline-flex";
+  backAwardsPartBtn.style.display = "inline-flex";
+  backPartBtn2.style.display = "none";
+  $('#RegistryModal').html("Awards/Citations (if any);");
+  saveBtn.style.display = "none";
+});
+
+// AWARDS PART
+backAwardsPartBtn.addEventListener("click", function(){
+  thirdModalPart.removeAttribute("hidden");
+  AwardsModalPart.setAttribute("hidden", "hidden");
+  nextPartBtn2.style.display = "inline-flex";
+  nextAwardsPartBtn.style.display = "none";
+  backAwardsPartBtn.style.display = "none";
+  backPartBtn2.style.display = "inline-flex";
+  $('#RegistryModal').html("Organizations/Affiliations (if any);");
+  saveBtn.style.display = "none";
+});
+
+nextAwardsPartBtn.addEventListener("click", function(){
+  AwardsModalPart.setAttribute("hidden", "hidden");
+  fourthModalPart.removeAttribute("hidden");
+  nextAwardsPartBtn.style.display = "none";
   nextPartBtn3.style.display = "inline-flex";
   backPartBtn3.style.display = "inline-flex";
-  backPartBtn2.style.display = "none";
+  backAwardsPartBtn.style.display = "none";
+  $('#RegistryModal').html("Particulars");
   saveBtn.style.display = "inline-flex";
 });
 
 // FOURTH PART
 backPartBtn3.addEventListener("click", function(){
-  thirdModalPart.removeAttribute("hidden");
+  AwardsModalPart.removeAttribute("hidden");
   fourthModalPart.setAttribute("hidden", "hidden");
-  nextPartBtn2.style.display = "inline-flex";
+  nextAwardsPartBtn.style.display = "inline-flex";
   nextPartBtn3.style.display = "none";
   backPartBtn3.style.display = "none";
-  backPartBtn2.style.display = "inline-flex";
+  backAwardsPartBtn.style.display = "inline-flex";
+  $('#RegistryModal').html("Awards/Citations (if any);");
   saveBtn.style.display = "none";
 });
 

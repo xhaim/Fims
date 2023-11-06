@@ -8,7 +8,7 @@ function addMemAf() {
     const newMemAfDetails = document.createElement('div');
     newMemAfDetails.id = `MemAf${MemAfCount}`;
     newMemAfDetails.innerHTML = `
-            <h5>Organization</h5>
+            <h5>Organization Details</h5>
 
             <div class="form-group">
             <label for="membership" class="col-sm-8 control-label">Name of Organizations/Clubs/Cooperative/Associations</label>
@@ -41,7 +41,7 @@ function addMemAf() {
             </div>
             </div>
 
-            <button class="btn-danger" type="button" onclick="removeMemAf(${MemAfCount})">Remove Membership & Affiliation</button>
+            <button class="btn-danger" type="button" id="RemMemAfBtn${MemAfCount}" onclick="removeMemAf(${MemAfCount})">Remove Membership & Affiliation</button>
     
         </div>
         <hr>
@@ -65,7 +65,7 @@ function removeMemAf(memberId) {
     const member_since = document.getElementById(`member_since${memberId}`);
     const status = document.getElementById(`status${memberId}`);
     
-
+    
     membership.value = '';
     position.value = '';
     member_since.value = '';
@@ -74,4 +74,5 @@ function removeMemAf(memberId) {
     if (MemAfToRemove) {
         MemAfToRemove.remove();
     }
+    MemAfCount--;
 }

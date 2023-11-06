@@ -33,6 +33,9 @@
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)">Add</a>
             </div>
+            <div class="pull-right mb-2">
+              <a class="btn btn-warning" onClick="printDataTable()" href="javascript:void(0)">printAll </a>
+          </div>
           </div>
         </div>
     
@@ -59,7 +62,7 @@
                         <p><strong>Birthdate:</strong> <span id="view-birthdate"></span></p>
                         <p><strong>Farm Area:</strong> <span id="view-farm_area"></span></p>
                         <p><strong>Sex:</strong> <span id="view-sex"></span></p>
-                        <p><strong>Y/N:</strong> <span id="view-y_n"></span></p>
+                        <p><strong>Y/N:</strong> <span id="view-membership"></span></p>
                         <p><strong>Quantity:</strong> <span id="view-quantity"></span></p>
                         <p><strong>Date Received:</strong><span id="view-date_received"></span></p>
                     </div>
@@ -161,42 +164,42 @@
               <label class="col-sm-8 control-label">Sex</label>
               <div class="col-sm-12">
                 <select class="form-select" aria-label="select sex" id="sex" name="sex">
-                  <option value="1">Female</option>
-                  <option value="2">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
                 </select>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-sm-8 control-label">Y/N</label>
+              <label class="col-sm-8 control-label">Membership:</label>
               <div class="col-sm-12">
-                  <div class="checkbox">
-                      <label>
-                          <input type="checkbox" id="y_n" name="y_n" value="4Ps"> 4Ps
-                      </label>
-                  </div>
-                  <div class="checkbox">
-                      <label>
-                          <input type="checkbox" id="y_n" name="y_n" value="IP"> IP 
-                      </label>
-                  </div>
-                  <div class="checkbox">
-                      <label>
-                          <input type="checkbox" id="y_n" name="y_n" value="ARB"> ARB 
-                      </label>
-                  </div>
-                  <div class="checkbox">
-                      <label>
-                          <input type="checkbox" id="y_n" name="y_n" value="PWD"> PWD 
-                      </label>
-                  </div>
-                  <div class="checkbox">
-                      <label>
-                          <input type="checkbox" id="y_n" name="y_n" value="SC"> SC 
-                      </label>
-                  </div>
+		          <div class="checkbox">
+                  <label>
+                    <input type="checkbox" id="4PS" name="membership[]" value="4PS"> 4PS
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" id="IP" name="membership[]" value="IP"> IP
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" id="ARB" name="membership[]" value="ARB"> ARB
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" id="PWD" name="membership[]" value="PWD"> PWD
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" id="SC" name="membership[]" value="SC"> SC
+                  </label>
+                </div>
               </div>
-          </div>
+            </div>
           
 
             <div class="form-group">

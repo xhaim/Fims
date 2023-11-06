@@ -56,13 +56,22 @@
              $('#birthdate').val(res.birthdate);
              $('#farm_area').val(res.farm_area);
              $('#sex').val(res.sex);
-             // Checkboxes (assuming res.equipment is an array)
-             $('input[type="checkbox"]').prop('checked', false); // Clear all checkboxes first
-               if (Array.isArray(res.y_n)) {
-               res.y_n.forEach(function (y_n) {
-                   $('#' + y_n).prop('checked', true); // Check the corresponding checkboxes
-               });
-               }
+
+             const membershipString = res.membership;    
+            const membershipArray = JSON.parse(membershipString);
+            Object.freeze(membershipArray); // Freeze the array to make it a constant
+
+            membershipArray.forEach(item => {
+                const checkboxId = item; // Generate checkbox ID
+                const checkbox = document.getElementById(checkboxId);
+                
+                if (checkbox) {
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+            });
+
+            console.log(membershipArray);
+
              $('#quantity').val(res.quantity);
              $('#date_received').val(res.date_received);
           }
@@ -82,7 +91,7 @@
                $("#view-birthdate").text(data.birthdate);
                $("#view-farm_area").text(data.farm_area);
                $("#view-sex").text(data.sex);
-               $("#view-y_n").text(data.y_n);
+               $("#view-membership").text(data.membership);
                $("#view-quantity").text(data.quantity);
                $("#view-date_received").text(data.date_received);
    
@@ -113,6 +122,103 @@
              });
           }
      }
+
+     // AJAX request to fetch data from the server
+     function printDataTable() {
+          $.ajax({
+              url: '/print-Allrice', // Replace with your Laravel route URL to fetch data
+              method: 'GET',
+              success: function (data) {
+                  // Once the data is fetched successfully, you can proceed to print it
+                  printData(data);
+              },
+              error: function (error) {
+                  console.error('Error fetching data:', error);
+              }
+          });
+      }
+
+      // Function to print the data fetched from the server
+      function printData(data) {
+          // Columns to exclude (you can adjust these according to your requirements)
+          const excludedColumns = ['created_at', 'updated_at'];
+
+          const headers = ['', '',
+        { name: "Farmer's Name", columns: ['id', 'RSBSA No.','Firstname', 'Middle', 'Last','Barangay', 'Farm Location', 'Birthdate',
+        'Farm Area', 'Sex', 'Membership', 'Quantity', 'DateReceived'] },'','','','','','','',''];
+
+          // Create a new window for printing
+          let printWindow = window.open('', '_blank');
+
+          // Construct the HTML content to be printed with CSS styles for table borders
+          let htmlContent = `
+              <html>
+              <head>
+                  <title>Data Table Print</title>
+                  <style>
+                      table {
+                          border-collapse: collapse;
+                          width: 100%;
+                      }
+                      table, th, td {
+                          border: 1px solid black;
+                      }
+                      th, td {
+                          padding: 8px;
+                          text-align: left;
+                      }
+                  </style>
+              </head>
+              <body>
+
+                // Add Decals Here
+
+                  <table>
+          `;
+
+          // Adding table headers
+    headers.forEach(header => {
+        if (typeof header === 'object') {
+            htmlContent += `<th colspan="${3}" style="text-align:center;">${header.name}</th>`;
+        } else if (!excludedColumns.includes(header)) {
+            htmlContent += `<th>${header}</th>`;
+        }
+    });
+    htmlContent += '</tr><tr>';
+
+              // Generate sub-headers for "Farmer's Name" columns
+    headers.forEach(header => {
+        if (typeof header === 'object') {
+            header.columns.forEach(column => {
+                htmlContent += `<th>${column}</th>`;
+            });
+        }
+    });
+
+          // Assuming each data row is an object
+          data.forEach(row => {
+              htmlContent += '<tr>';
+              for (const key in row) {
+                  if (row.hasOwnProperty(key) && !excludedColumns.includes(key)) {
+                      htmlContent += '<td>' + row[key] + '</td>';
+                  }
+              }
+              htmlContent += '</tr>';
+          });
+
+          htmlContent += `
+                  </table>
+              </body>
+              </html>
+          `;
+
+          // Write the HTML content to the new window and print it
+          printWindow.document.write(htmlContent);
+          printWindow.document.close();
+          printWindow.print();
+      }
+
+
     
      $('#FarmersForm').submit(function(e) {
     

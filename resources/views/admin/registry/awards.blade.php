@@ -1,9 +1,8 @@
 <div id="Awards">
       {{-- 1st --}}
     <div id="AwCi">
-      <div class="col-sm-12">
-        <h6>Awards & Citations received (if any);</h6>
-      </div>
+      <h5>Award Details</h5>
+      
       <div class="form-group">
         <label for="award" class="col-sm-8 control-label">Name of Award/Citation</label>
         <div class="col-sm-12">

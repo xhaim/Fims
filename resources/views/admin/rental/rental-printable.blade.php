@@ -110,8 +110,8 @@
                 <p>CONTACT NO: <span id="view-contact"></span></p>
                 <p class="signature" style="width: 150px; margin-left: 425px; ">Applicant Signature</p>
                 <p style="text-indent: 20px;">II. Ocular Inspection of Farm (by MAO's Office)</p>
-                <p>Actual Land Area of Farm: <span id="actual_land_area_of_farm"></span></p>
-                <p>Date Inspected: <span id="date_inspected"></span></p>
+                <p>Actual Land Area of Farm: <span id="view-actual_land_area_of_farm"></span></p>
+                <p>Date Inspected: <span id="view-date_inspected"></span></p>
                   
                         <p style="margin-left: 450px;">Inspected by:</p>
                         <div class="signature_one" style=" margin-top:-5px; height: 1px; border:none;">

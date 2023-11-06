@@ -58,7 +58,7 @@ function addMember() {
                 <input type="date" class="form-control" id="birthdate${memberCount}" name="birthdate${memberCount}" placeholder="Enter Date of Birth (mm/dd/yyyy)" required="">
             </div>
             </div>
-            <button class="btn-danger" type="button" onclick="removeMember(${memberCount})">Remove Member</button>
+            <button class="btn-danger" type="button" id="RemHHMBtn${memberCount}" onclick="removeMember(${memberCount})">Remove Member</button>
     
         </div>
         <hr>
@@ -96,4 +96,5 @@ function removeMember(memberId) {
     if (elementToRemove) {
         elementToRemove.remove();
     }
+    memberCount--;
 }

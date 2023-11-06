@@ -27,41 +27,29 @@ function setRentCheckboxValue(value) {
 
 function setOthersCheckboxValue(value) {
   const othersCheckbox = document.getElementById('othersCheckbox');
-  othersCheckbox.value = value;
+  othersCheckbox.value = 'Others: '+value;
 }
 
-// Tenure 2 // Tenure 2 Tenure 2 // Tenure 2 Tenure 2 // Tenure 2 Tenure 2 // Tenure 2 Tenure 2 // Tenure 2 Tenure 2 // Tenure 2
+// Tenure 2 // Tenure 2 // Tenure 2 // Tenure 2 // Tenure 2 // Tenure 2 // Tenure 2 // Tenure 2 // Tenure 2 // Tenure 2 // Tenure 2 // Tenure 2
+function handleCheckboxChange2(checkbox) {
+    const checkboxes2 = ['Owned', 'Rent', 'Tenant', 'Others'];
 
-  function handleCheckboxChange2(tenure) {
-  var checkboxes = document.getElementsByName('tenure2');
+    checkboxes2.forEach(option => {
+        if (option !== checkbox) {
+            document.getElementById(`${option.toLowerCase()}Checkbox2`).checked = false;
+        }
+    });
 
-  checkboxes.forEach(function(checkbox) {
-      if (checkbox.value !== tenure) {
-          checkbox.checked = false;
-      }
-  });
-
-  const rentYearsInput = document.getElementById('rentYears2');
-  const otherInput = document.getElementById('otherInput2');
-
-  if (tenure === 'Rent2' && rentYearsInput) {
-      rentYearsInput.style.display = 'inline-block';
-      if (otherInput) {
-          otherInput.style.display = 'none';
-      }
-  } else if (tenure === 'Others2' && otherInput) {
-      otherInput.style.display = 'inline-block';
-      if (rentYearsInput) {
-          rentYearsInput.style.display = 'none';
-      }
-  } else {
-      if (rentYearsInput) {
-          rentYearsInput.style.display = 'none';
-      }
-      if (otherInput) {
-          otherInput.style.display = 'none';
-      }
-  }
+    if (checkbox === 'Rent') {
+        document.getElementById('rentYears2').style.display = 'inline-block';
+        document.getElementById('otherInput2').style.display = 'none';
+    } else if (checkbox === 'Others') {
+        document.getElementById('otherInput2').style.display = 'inline-block';
+        document.getElementById('rentYears2').style.display = 'none';
+    } else {
+        document.getElementById('rentYears2').style.display = 'none';
+        document.getElementById('otherInput2').style.display = 'none';
+    }
 }
 
 function setRent2CheckboxValue(value) {
@@ -71,41 +59,29 @@ function setRent2CheckboxValue(value) {
 
 function setOthers2CheckboxValue(value) {
   const othersCheckbox2 = document.getElementById('othersCheckbox2');
-  othersCheckbox2.value = value;
+  othersCheckbox2.value = 'Others: '+value;
 }
 
 // Tenure 3 // Tenure 3 // Tenure 3 // Tenure 3 // Tenure 3 // Tenure 3 // Tenure 3 // Tenure 3 // Tenure 3 // Tenure 3 // Tenure 3
+function handleCheckboxChange3(checkbox) {
+    const checkboxes3 = ['Owned', 'Rent', 'Tenant', 'Others'];
 
-function handleCheckboxChange3(tenure3) {
-  var checkboxes3 = document.getElementsByName('tenure3');
+    checkboxes3.forEach(option => {
+        if (option !== checkbox) {
+            document.getElementById(`${option.toLowerCase()}Checkbox3`).checked = false;
+        }
+    });
 
-  checkboxes3.forEach(function (checkbox) {
-      if (checkbox.value !== tenure3) {
-          checkbox.checked = false;
-      }
-  });
-
-  const rentYearsInput3 = document.getElementById('rentYears3');
-  const otherInput3 = document.getElementById('otherInput3');
-
-  if (tenure3 === 'Rent3' && rentYearsInput3) {
-      rentYearsInput3.style.display = 'inline-block';
-      if (otherInput3) {
-          otherInput3.style.display = 'none';
-      }
-  } else if (tenure3 === 'Others3' && otherInput3) {
-      otherInput3.style.display = 'inline-block';
-      if (rentYearsInput3) {
-          rentYearsInput3.style.display = 'none';
-      }
-  } else {
-      if (rentYearsInput3) {
-          rentYearsInput3.style.display = 'none';
-      }
-      if (otherInput3) {
-          otherInput3.style.display = 'none';
-      }
-  }
+    if (checkbox === 'Rent') {
+        document.getElementById('rentYears3').style.display = 'inline-block';
+        document.getElementById('otherInput3').style.display = 'none';
+    } else if (checkbox === 'Others') {
+        document.getElementById('otherInput3').style.display = 'inline-block';
+        document.getElementById('rentYears3').style.display = 'none';
+    } else {
+        document.getElementById('rentYears3').style.display = 'none';
+        document.getElementById('otherInput3').style.display = 'none';
+    }
 }
 
 function setRent3CheckboxValue(value) {
@@ -115,7 +91,7 @@ function setRent3CheckboxValue(value) {
 
 function setOthers3CheckboxValue(value) {
   const othersCheckbox3 = document.getElementById('othersCheckbox3');
-  othersCheckbox3.value = value;
+  othersCheckbox3.value = 'Others: '+value;
 }
 
 

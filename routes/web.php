@@ -64,11 +64,12 @@ Route::post('store-rental', [RentalAjaxCRUDController::class, 'store']);
 Route::post('edit-rental', [RentalAjaxCRUDController::class, 'edit']);
 Route::post('delete-rental', [RentalAjaxCRUDController::class, 'destroy']);
 Route::get('get-rental-details/{id}', [RentalAjaxCRUDController::class, 'getRentalDetails'])->name('rental.details');
-// 
+// Rice Hybrid
 Route::get('ricehybrid-crud-datatable', [RiceHybridAjaxCrudContoller::class, 'index']);
 Route::post('store-ricehybrid', [RiceHybridAjaxCrudContoller::class, 'store']);
 Route::post('edit-ricehybrid', [RiceHybridAjaxCrudContoller::class, 'edit']);
 Route::post('delete-ricehybrid', [RiceHybridAjaxCrudContoller::class, 'destroy']);
+Route::get('/print-Allrice', [RiceHybridAjaxCrudContoller::class, 'fetchData']);
 Route::get('get-farmer-details/{id}', [RiceHybridAjaxCrudContoller::class, 'getFarmerDetails'])->name('farmer.details');
 // Registry
 Route::get('registry-crud-datatable', [RegistryAjaxCrudController::class, 'index']);

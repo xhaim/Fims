@@ -1,6 +1,135 @@
-<script>
+<script type="text/javascript">
+        
+    $(document).ready( function () {
     
-    function viewFunc(id) {
+     $.ajaxSetup({
+       headers: {
+       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+       }
+     });
+       $('#rental-crud-datatable').DataTable({
+              processing: true,
+              serverSide: true,
+              ajax: "{{ url('rental-crud-datatable') }}",
+              columns: [
+                        { data: 'applicant', name: 'applicant' },
+                        { data: 'address', name: 'address' },
+                        { data: 'location', name: 'location' },
+                        { data: 'project_description', name: 'project_description' },
+                        { data: 'contact', name: 'contact' },
+                        { data: 'actual_land_area_of_farm', name: 'actual_land_area_of_farm', visible: true  },
+                        { data: 'date_inspected', name: 'date_inspected' , visible: true },
+                        { data: 'inspector', name: 'inspector', visible: false },
+                        { data: 'fuel_requirement', name: 'fuel_requirement', visible: false },
+                        { data: 'hours_of_operation', name: 'hours_of_operation', visible: false },
+                        { data: 'equipment', name: 'equipment', visible: false },
+                        { data: 'area', name: 'area', visible: false},
+                        { data: 'rental_rate', name: 'rental_rate', visible: false },
+                        { data: 'total_rental_amount', name: 'total_rental_amount', visible: false },
+                        { data: 'payment', name: 'payment', visible: false },
+                        { data: 'or_number', name: 'or_number', visible: false },
+                        { data: 'payment_date', name: 'payment_date', visible: false },
+                        { data: 'payment_amount', name: 'payment_amount', visible: false },
+                        { data: 'municipal_treasurer', name: 'municipal_treasurer', visible: false },
+                        { data: 'source_of_fund', name: 'source_of_fund', visible: false },
+                        { data: 'funds_available', name: 'funds_available', visible: false },
+                        { data: 'municipal_accountant', name: 'municipal_accountant', visible: false },
+                        { data: 'municipal_budget_officer', name: 'municipal_budget_officer', visible: false },
+                        { data: 'municipal_mayor', name: 'municipal_mayor', visible: false },
+                        { data: 'schedule_of_operation', name: 'schedule_of_operation', visible: false },
+                        { data: 'plate_number_tractor', name: 'plate_number_tractor', visible: false },
+                        { data: 'mao_tractor_incharge', name: 'mao_tractor_incharge', visible: false },
+                        { data: 'actual_land_area_served', name: 'actual_land_area_served', visible: false },
+                        { data: 'actual_hours_of_operation', name: 'actual_hours_of_operation', visible: false },
+                        { data: 'remarks', name: 'remarks', visible: false },
+                        { data: 'mo_field_inspector', name: 'mo_field_inspector', visible: false },
+                        { data: 'created_at', name: 'created_at' },
+                        {data: 'action', name: 'action', orderable: false},
+                    ],
+                    order: [[0, 'desc']]
+          });
+    
+     });
+      
+     function add(){
+    
+          $('#RentalForm').trigger("reset");
+          $('#RentalModal').html("Add Rental Tractor");
+          $('#rental-modal').modal('show');
+          $('#id').val('');
+    
+     } 
+
+     function editFunc(id){
+        
+       $.ajax({
+           type:"POST",
+           url: "{{ url('edit-rental') }}",
+           data: { id: id },
+           dataType: 'json',
+           success: function(res){
+             $('#RentalModal').html("Edit Rental Tractor");
+             $('#rental-modal').modal('show');
+             $('#id').val(res.id);
+            $('#applicant').val(res.applicant);
+            $('#address').val(res.address);
+            $('#location').val(res.location);
+            $('#project_description').val(res.project_description);
+            $('#contact').val(res.contact);
+            $('#actual_land_area_of_farm').val(res.actual_land_area_of_farm);
+            $('#date_inspected').val(res.date_inspected);
+            $('#inspector').val(res.inspector);
+            $('#fuel_requirement').val(res.fuel_requirement);
+            $('#hours_of_operation').val(res.hours_of_operation);
+            
+
+            const equipmentString = res.equipment;    
+            const equipmentArray = JSON.parse(equipmentString);
+            Object.freeze(equipmentArray); // Freeze the array to make it a constant
+
+            equipmentArray.forEach(item => {
+                const checkboxId = item.toLowerCase().replace(/\s/g, '_'); // Generate checkbox ID
+                const checkbox = document.getElementById(checkboxId);
+                
+                if (checkbox) {
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+            });
+
+            console.log(equipmentArray);
+
+
+
+
+            $('#area').val(res.area);
+            $('#rental_rate').val(res.rental_rate);
+            $('#total_rental_amount').val(res.total_rental_amount);
+            $('#payment').val(res.payment);
+            $('#or_number').val(res.or_number);
+            $('#payment_date').val(res.payment_date);
+            $('#payment_amount').val(res.payment_amount);
+            $('#municipal_treasurer').val(res.municipal_treasurer);
+            $('#source_of_fund').val(res.source_of_fund);
+            $('#funds_available').val(res.funds_available);
+            $('#municipal_accountant').val(res.municipal_accountant);
+            $('#municipal_budget_officer').val(res.municipal_budget_officer);
+            $('#municipal_mayor').val(res.municipal_mayor);
+            $('#schedule_of_operation').val(res.schedule_of_operation);
+            $('#plate_number_tractor').val(res.plate_number_tractor);
+            $('#mao_tractor_incharge').val(res.mao_tractor_incharge);
+            $('#actual_land_area_served').val(res.actual_land_area_served);
+            $('#actual_hours_of_operation').val(res.actual_hours_of_operation);
+            $('#remarks').val(res.remarks);
+            $('#mo_field_inspector').val(res.mo_field_inspector);
+
+            console.log(res);
+
+           }
+       });
+     }  
+
+
+     function viewFunc(id) {
     $.ajax({
         type: "GET",
         url: "{{ url('get-rental-details') }}/" + id,
@@ -11,8 +140,8 @@
             $("#view-location").text(data.location);
             $("#view-project_description").text(data.project_description);
             $("#view-contact").text(data.contact);
-            $('#actual_land_area_of_farm').text(data.actual_land_area_of_farm);
-            $('#date_inspected').text(data.date_inspected);
+            $('#view-actual_land_area_of_farm').text(data.actual_land_area_of_farm);
+            $('#view-date_inspected').text(data.date_inspected);
             $("#view-inspector").text(data.inspector);
             $("#view-fuel_requirement").text(data.fuel_requirement);
             $("#view-hours_of_operation").text(data.hours_of_operation);
@@ -47,8 +176,54 @@
         },
     });
 }
-
-  </script>
+    
+     function deleteFunc(id){
+           if (confirm("Delete Record?") == true) {
+           var id = id;
+             
+             // ajax
+             $.ajax({
+                 type:"POST",
+                 url: "{{ url('delete-rental') }}",
+                 data: { id: id },
+                 dataType: 'json',
+                 success: function(res){
+    
+                   var oTable = $('#rental-crud-datatable').dataTable();
+                   oTable.fnDraw(false);
+                }
+             });
+          }
+     }
+    
+     $('#RentalForm').submit(function(e) {
+    
+        e.preventDefault();
+      
+        var formData = new FormData(this);
+      
+        $.ajax({
+           type:'POST',
+           url: "{{ url('store-rental')}}",
+           data: formData,
+           cache:false,
+           contentType: false,
+           processData: false,
+           success: (data) => {
+             $("#rental-modal").modal('hide');
+             var oTable = $('#rental-crud-datatable').dataTable();
+             oTable.fnDraw(false);
+             $("#btn-save").html('Submit');
+             $("#btn-save"). attr("disabled", false);
+           },
+           error: function(data){
+              console.log(data);
+            }
+          });
+      });
+    
+    
+   </script>
 
   {{-- View Modal JS SCRIPT --}}
   <script>

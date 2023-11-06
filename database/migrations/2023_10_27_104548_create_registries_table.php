@@ -220,7 +220,7 @@ return new class extends Migration
             $table->text('membership5')->nullable();
             $table->text('position5')->nullable();
             $table->integer('member_since5')->nullable();
-            $table->enum('status5', ['ACTIVE', 'INACTIVE'],);
+            $table->enum('status5', ['ACTIVE', 'INACTIVE'])->nullable();
 
             // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS //
             
@@ -265,7 +265,7 @@ return new class extends Migration
             $table->text('existing_crop')->nullable();
             $table->text('previous_crop')->nullable();
             // TOPOGRAPHY
-            $table->float('hectares')->nullable();
+            $table->text('hectares')->nullable();
             $table->json('land')->nullable();
             $table->text('soil_type')->nullable();
             $table->json('source')->nullable();
@@ -280,7 +280,7 @@ return new class extends Migration
             $table->text('existing_crop2')->nullable();
             $table->text('previous_crop2')->nullable();
             // TOPOGRAPHY
-            $table->float('hectares2')->nullable();
+            $table->text('hectares2')->nullable();
             $table->json('land2')->nullable();
             $table->text('soil_type2')->nullable();
             $table->json('source2')->nullable();
@@ -295,7 +295,7 @@ return new class extends Migration
             $table->text('existing_crop3')->nullable();
             $table->text('previous_crop3')->nullable();
             // TOPOGRAPHY
-            $table->float('hectares3')->nullable();
+            $table->text('hectares3')->nullable();
             $table->json('land3')->nullable();
             $table->text('soil_type3')->nullable();
             $table->json('source3')->nullable();

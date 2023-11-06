@@ -8,7 +8,7 @@ function addAwCi() {
     const newAwCiDetails = document.createElement('div');
     newAwCiDetails.id = `AwCi${AwardsCount}`;
     newAwCiDetails.innerHTML = `
-        <h5>Awards</h5>
+        <h5>Award Details</h5>
 
             <div class="col-sm-12">
             <h6>Awards & Citations received (if any);</h6>
@@ -35,7 +35,7 @@ function addAwCi() {
             </div>
         
 
-            <button class="btn-danger" type="button" onclick="removeAwCi${AwardsCount}">Remove Award/Citation</button>
+            <button class="btn-danger" type="button" onclick="removeAwCi(${AwardsCount})">Remove Award/Citation</button>
     
         </div>
         <hr>
@@ -66,4 +66,5 @@ function removeAwCi(awardsId) {
     if (AwCiToRemove) {
         AwCiToRemove.remove();
     }
+    AwardsCount--;
 }

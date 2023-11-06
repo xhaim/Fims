@@ -39,6 +39,9 @@
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)">Add </a>
             </div>
+            <div class="pull-right mb-2">
+              <a class="btn btn-warning" onClick="printDataTable()" href="javascript:void(0)">printAll </a>
+          </div>
         </div>
     </div>
     
@@ -195,6 +198,7 @@
           });
        }
   }
+
  
   $('#RiceSeedsForm').submit(function(e) {
  
@@ -221,6 +225,10 @@
          }
        });
    });
+
+  //  PRINT DATATABLE //
+
+  
  
 </script>
 </html>

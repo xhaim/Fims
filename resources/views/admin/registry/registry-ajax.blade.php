@@ -297,7 +297,7 @@
      function add(){
     
           $('#RegistryForm').trigger("reset");
-          $('#RegistryModal').html("Add registry Tractor");
+          $('#RegistryModal').html("Add Registry");
           $('#registry-modal').modal('show');
           $('#id').val('');
           
@@ -319,12 +319,28 @@
                 $(`#birthdate${i}`).val('');
                 $(`#hhMemberDetails${i}`).css('display', 'none');
                 $(`#remove2ndMemberButton`).css('display', 'none');
-                $(`#add2ndMemberButton`).css('display', 'block')                
+                $(`#add2ndMemberButton`).css('display', 'block');               
                 $(`#add3rdMemberButton`).css('display', 'none');
                 $(`#remove3rdMemberButton`).css('display', 'none');
                 $(`#add${i}thMemberButton`).css('display', 'none');
                 $(`#remove${i}thMemberButton`).css('display', 'none');
           }
+
+          for (let m = 2; m <= 5; m++) {
+                $(`#membership${m}`).val('');
+                $(`#position${m}`).val('');
+                $(`#member_since${m}`).val('');
+                $(`#status${m}`).val('');
+                $(`#MemAf${m}`).css('display', 'none');
+          }
+
+          for (let a = 2; a <= 5; a++) {
+                $(`#award${a}`).val('');
+                $(`#awarding_body${a}`).val('');
+                $(`#date_received${a}`).val('');
+                $(`#AwCi${a}`).css('display', 'none');
+          }
+    
     
      }   
 
@@ -337,12 +353,13 @@
            dataType: 'json',
            success: function(res){
             
-            $('#RegistryModal').html("Edit registry Tractor");
+            $('#RegistryModal').html("Edit Registry");
             $('#registry-modal').modal('show');
 
             
             $('#first_part').removeAttr('hidden');
             $('#second_modal_part').attr('hidden', 'hidden');
+            $('#third_awards_part').attr('hidden', 'hidden');
             $('#third_part').attr('hidden', 'hidden');
             $('#fourth_part').attr('hidden', 'hidden');
             $('#optional_part1').attr('hidden', 'hidden');
@@ -361,6 +378,8 @@
             $("#btn-back3").css('display', 'none');
             $("#btn-back4").css('display', 'none');
             $("#btn-back5").css('display', 'none');
+
+            
 
 
             $('#id').val(res.id);
@@ -494,7 +513,7 @@
                     newMemAfDetails.id = `MemAf${m}`;
                     
                     newMemAfDetails.innerHTML = `           
-                        <h5>Organization</h5>
+                        <h5>Organization Details</h5>
 
                             <div class="form-group">
                             <label for="membership" class="col-sm-8 control-label">Name of Organizations/Clubs/Cooperative/Associations</label>
@@ -527,7 +546,7 @@
                             </div>
                             </div>
 
-                            <button class="btn-danger" type="button" onclick="removeMemAf(${m})">Remove Membership & Affiliation</button>
+                            <button class="btn-danger" type="button" id="RemMemAfBtn${m}" onclick="removeMemAf(${m})">Remove Membership & Affiliation</button>
                     
                     
                     <!-- Add other form fields here -->
@@ -569,7 +588,7 @@
                     newAwCiDetails.id = `AwCi${a}`;
                     
                     newAwCiDetails.innerHTML = `           
-                    <h5>Awards</h5>
+                    <h5>Award Details</h5>
 
                     <div class="col-sm-12">
                     <h6>Awards & Citations received (if any);</h6>
@@ -596,7 +615,7 @@
                     </div>
                 
         
-                    <button class="btn-danger" type="button" onclick="removeAwCi${AwardsCount}">Remove Award/Citation</button>
+                    <button class="btn-danger" type="button" id="RemAwCiBtn${AwardsCount}" onclick="removeAwCi(${AwardsCount})">Remove Award/Citation</button>
             
                 </div>
                 <hr>
@@ -615,7 +634,240 @@
                 console.log('Value of LVA:', lastValidAwardsCount);
             }
 
+            $('#remarks').val(res.remarks);
+
 // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS 
+
+// PARTICULARS // PARTICULARS // PARTICULARS // PARTICULARS // PARTICULARS // PARTICULARS // PARTICULARS // PARTICULARS // PARTICULARS
+            // Particulars
+            $('#purok').val(res.purok);
+            $('#brngy').val(res.brngy);
+            $('#geographic_coordinates').val(res.geographic_coordinates);
+            $('#title_no').val(res.title_no);
+            $('#tax_declarration_no').val(res.tax_declarration_no);
+
+            // Tenure Display Saved Data
+
+            const tenureString = "["+res.tenure+"]";    
+            const tenureArray = JSON.parse(tenureString);
+            Object.freeze(tenureArray); // Freeze the Tenure array to make it a constant
+
+            tenureArray.forEach(item => {
+                const checkboxId = item; // Generate checkbox ID
+                
+                
+                if (checkboxId === "Owned") {
+                    const checkbox = document.getElementById('ownedCheckbox');
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+                if (checkboxId.includes("Rent")) {
+                    const checkbox = document.getElementById('rentCheckbox');
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                    var originalString = tenureString;
+                    var strippedString = originalString.replace(/Rent: | year\(s\)/g, "");
+                    var output = JSON.parse(strippedString);
+                    var numberOnly = output[0].match(/\d+/);
+
+                    $('#rentYears').val(numberOnly[0]);
+                    $('#rentYears').css('display', 'block');
+
+                    console.log(numberOnly[0]);
+                    console.log(strippedString); // Output: 2 year(s)
+                }
+                if (checkboxId === "Tenant") {
+                    const checkbox = document.getElementById('tenantCheckbox');
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+                if (checkboxId.includes("Others")) {
+                    const checkbox = document.getElementById('othersCheckbox');
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                    var originalOthersString = checkboxId;
+                    var strippedOthersString = originalOthersString.replace("Others: ", "");
+
+                    $('#otherInput').val(strippedOthersString);
+                    $('#otherInput').css('display', 'block');
+
+                    console.log(strippedOthersString); // Output: 
+                }
+            });
+
+            $('#existing_crop').val(res.existing_crop);
+            $('#previous_crop').val(res.previous_crop);
+            $('#hectares').val(res.hectares);
+            console.log(res);
+
+            // Land Checkbox Edit Res
+            const landString = "["+res.land+"]";    
+            const landArray = JSON.parse(landString);
+            Object.freeze(landArray); // Freeze the array to make it a constant
+
+            landArray.forEach(item => {
+                const checkboxId = item; // Generate checkbox ID
+                
+                
+                if (checkboxId === "Flat") {
+                    const checkbox = document.getElementById('flatCheckbox');
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+                if (checkboxId === "Gently Sloping") {
+                    const checkbox = document.getElementById('gentlySlopingCheckbox');
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+                if (checkboxId === "Rolling or Undulating") {
+                    const checkbox = document.getElementById('rollingUndulatingCheckbox');
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+                if (checkboxId === "Hilly or Steep Slopes") {
+                    const checkbox = document.getElementById('hillySteepSlopesCheckbox');
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+            });
+
+            console.log(landArray);
+
+            $('#soil_type').val(res.soil_type);
+
+            const sourceString = "["+res.source+"]";    
+            const sourceArray = JSON.parse(sourceString);
+            Object.freeze(sourceArray); // Freeze the array to make it a constant
+
+            sourceArray.forEach(item => {
+                const checkboxId = item; // Generate checkbox ID
+                
+                
+                if (checkboxId === "Irrigated") {
+                    const checkbox = document.getElementById('irrigated');
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+                if (checkboxId === "SWIP or SIS") {
+                    const checkbox = document.getElementById('swip');
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+                if (checkboxId === "Water Pump") {
+                    const checkbox = document.getElementById('pump');
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+                if (checkboxId === "Rainfed") {
+                    const checkbox = document.getElementById('rainfed');
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+            });
+
+            // Particulars 2-3
+            for (let p = 2; p <= 3; p++) {
+                $(`#purok${p}`).val(res[`purok${p}`]);
+                $(`#brngy${p}`).val(res[`brngy${p}`]);
+                $(`#geographic_coordinates${p}`).val(res[`geographic_coordinates${p}`]);
+                $(`#title_no${p}`).val(res[`title_no${p}`]);
+                $(`#tax_declarration_no${p}`).val(res[`tax_declarration_no${p}`]);
+                $(`#tenure${p}`).val(res[`tenure${p}`]);
+
+                // Tenure Display Saved Data
+
+            const tenureString = "["+res[`tenure${p}`]+"]";    
+            const tenureArray = JSON.parse(tenureString);
+            Object.freeze(tenureArray); // Freeze the Tenure array to make it a constant
+
+            tenureArray.forEach(item => {
+                const checkboxId = item; // Generate checkbox ID
+                
+                
+                if (checkboxId === "Owned") {
+                    const checkbox = document.getElementById(`ownedCheckbox${p}`);
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+                if (checkboxId.includes("Rent")) {
+                    const checkbox = document.getElementById(`rentCheckbox${p}`);
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                    var originalString = tenureString;
+                    var strippedString = originalString.replace(/Rent: | year\(s\)/g, "");
+                    var output = JSON.parse(strippedString);
+                    var numberOnly = output[0].match(/\d+/);
+
+                    $(`#rentYears${p}`).val(numberOnly[0]);
+                    $(`#rentYears${p}`).css('display', 'block');
+
+                    console.log(numberOnly[0]);
+                    console.log(strippedString); // Output: 2 year(s)
+                }
+                if (checkboxId === "Tenant") {
+                    const checkbox = document.getElementById(`tenantCheckbox${p}`);
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+                if (checkboxId.includes("Others")) {
+                    const checkbox = document.getElementById(`othersCheckbox${p}`);
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                    var originalOthersString = checkboxId;
+                    var strippedOthersString = originalOthersString.replace("Others: ", "");
+
+                    $(`#otherInput${p}`).val(strippedOthersString);
+                    $(`#otherInput${p}`).css('display', 'block');
+
+                    console.log(strippedOthersString); // Output: 
+                }
+            });
+            
+                $(`#existing_crop${p}`).val(res[`existing_crop${p}`]);
+                $(`#previous_crop${p}`).val(res[`previous_crop${p}`]);
+                $(`#hectares${p}`).val(res[`hectares${p}`]);
+
+            const landString = "["+res[`land${p}`]+"]";    
+            const landArray = JSON.parse(landString);
+            Object.freeze(landArray); // Freeze the array to make it a constant
+
+            landArray.forEach(item => {
+                const checkboxId = item; // Generate checkbox ID
+                
+                
+                if (checkboxId === "Flat") {
+                    const checkbox = document.getElementById(`flatCheckbox${p}`);
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+                if (checkboxId === "Gently Sloping") {
+                    const checkbox = document.getElementById(`gentlySlopingCheckbox${p}`);
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+                if (checkboxId === "Rolling or Undulating") {
+                    const checkbox = document.getElementById(`rollingUndulatingCheckbox${p}`);
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+                if (checkboxId === "Hilly or Steep Slopes") {
+                    const checkbox = document.getElementById(`hillySteepSlopesCheckbox${p}`);
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+            });
+            
+            $(`#soil_type${p}`).val(res[`soil_type${p}`]);
+
+            const sourceString = "["+res[`source${p}`]+"]";    
+            const sourceArray = JSON.parse(sourceString);
+            Object.freeze(sourceArray); // Freeze the array to make it a constant
+
+            sourceArray.forEach(item => {
+                const checkboxId = item; // Generate checkbox ID
+                
+                
+                if (checkboxId === "Irrigated") {
+                    const checkbox = document.getElementById(`irrigated${p}`);
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+                if (checkboxId === "SWIP or SIS") {
+                    const checkbox = document.getElementById(`swip${p}`);
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+                if (checkboxId === "Water Pump") {
+                    const checkbox = document.getElementById(`pump${p}`);
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+                if (checkboxId === "Rainfed") {
+                    const checkbox = document.getElementById(`rainfed${p}`);
+                    checkbox.checked = true; // Check the checkbox if the item exists in the array
+                }
+            });
+                
+                console.log('Value of p:', p);
+            }
+
            }
        });
      }  
