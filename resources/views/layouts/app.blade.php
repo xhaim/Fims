@@ -24,7 +24,7 @@
                     <img id="img_logo" src="{{asset('login-assets/img/PicsArt_03-01-08.13.45.png')}}">
                     <img id="img_logo" src="{{asset('login-assets/img/PicsArt_03-01-05.09.12.png')}}">
                     <img id="img_logo" src="{{asset('login-assets/img/PicsArt_03-01-12.00.461.png')}}"></div>
-                <h1 class="d-xl-flex d-xxl-flex align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="heading">Department of Agriculture&nbsp;<span id="span">Management System of Carmen</span></h1>
+                <h1 class="d-xl-flex d-xxl-flex align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="heading">Municipal Agriculture&nbsp;<span id="span">Management System of Carmen Bohol</span></h1>
             </div>
         </div>
         <main class="">

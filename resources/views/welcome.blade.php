@@ -52,8 +52,8 @@
     <main class="page landing-page">
         <section class="clean-block clean-hero">
             <div class="text">
-                <h2 data-aos="fade" data-aos-duration="3000" data-aos-once="true">Department of Agriculture</h2>
-                <p data-aos="fade" data-aos-duration="3000">Management System of Carmen</p>
+                <h2 data-aos="fade" data-aos-duration="3000" data-aos-once="true">Municipal Agriculture</h2>
+                <p data-aos="fade" data-aos-duration="3000">Management System of Carmen Bohol</p>
                 <a href="{{ route('login') }}"><button
                     class="btn btn-outline-light btn-lg" data-aos="zoom-out" data-aos-duration="3000" type="button">Log
                     in</button></a>

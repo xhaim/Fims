@@ -38,10 +38,9 @@
             </div>
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)">Add </a>
+                <button style="background-color: #87CEEB" id="printButton"  
+                onClick="printDataTable()" href="javascript:void(0)">Print DataTable</button>
             </div>
-            <div class="pull-right mb-2">
-              <a class="btn btn-warning" onClick="printDataTable()" href="javascript:void(0)">printAll </a>
-          </div>
         </div>
     </div>
     

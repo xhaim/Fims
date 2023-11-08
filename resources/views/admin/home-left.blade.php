@@ -15,10 +15,10 @@
      </li>
      <div id="fileContent" class="collapse">
          <ul>
-             <li><a href="{{url('assoc-crud-datatable')}}" style="text-decoration: none;font-size:15px;"> Association</a></li>
-             <li> Farmer's Assistance</li>
-             <li><a href="{{url('registry-crud-datatable')}}" style="text-decoration: none;font-size:15px;">Masterlist</a></li>
-             <li><a href="{{url('/rental-crud-datatable')}}" style="text-decoration: none;font-size:15px;"> Rental Tractor </a></li>
+             <li  id="div_left" style="list-style: none"><a href="{{url('assoc-crud-datatable')}}" style="text-decoration: none;font-size:15px;"> Association</a></li>
+             <li   id="div_left" style="list-style: none"> Farmer's Assistance</li>
+             <li  id="div_left" style="list-style: none"><a href="{{url('registry-crud-datatable')}}" style="text-decoration: none;font-size:15px;">Masterlist</a></li>
+             <li   id="div_left" style="list-style: none"><a href="{{url('/rental-crud-datatable')}}" style="text-decoration: none;font-size:15px;"> Rental Tractor </a></li>
          </ul>
      </div>
      <li class="list-item">
@@ -32,11 +32,33 @@
      </li>
      <div id="manageContent" class="collapse">
          <ul>
-            <li><a href="{{url('ricehybrid-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Rice</a></li>
-             <li><a href="{{url('corn-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Corn</a></li>
-             <li><a href="{{url('/hvcdp')}}" style="text-decoration: none;font-size:15px"> HVCDP</a></li>
-             <li>Fishery</li>
-             <li><a href="{{url('livestock-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Livestock</a></li>
+            <li  id="div_left" style="list-style: none"><a href="{{url('ricehybrid-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Rice</a></li>
+             <li   id="div_left" style="list-style: none"><a href="{{url('corn-crud-datatable')}}" style="text-decoration: none;font-size:15px">Corn</a></li>
+             <li  style="list-style: none;font-size:15px">
+                <div id="div_left">
+                    <a id="link" href="#" class="collapse-button" data-toggle="collapse"
+                        data-target="#hvcdpContent" style="list-style: none;font-size:15px">
+                        HVCDP <i class="fa fa-chevron-down collapse-icon-manage"></i>
+                    </a>
+                </div>
+                <div id="hvcdpContent" class="collapse">
+                    <ul>
+                        <li  id="div_left" style="list-style: none"> 
+                            <a href="{{url('veg-crud-datatable')}}" style="text-decoration: none;font-size:15px">Vegetables</a></li>
+                        <li  id="div_left" style="list-style: none">
+                            <a href="{{url('root-crud-datatable')}}" style="text-decoration: none;font-size:15px">Root Crops</a></li>
+                        <li  id="div_left" style="list-style: none">
+                            <a href="{{url('cacao-crud-datatable')}}" style="text-decoration: none;font-size:15px">Cacao Farmer</a></li>
+                        <li  id="div_left" style="list-style: none">
+                            <a href="{{url('coffee-crud-datatable')}}" style="text-decoration: none;font-size:15px">Coffee Farmer</a></li>
+                        <li  id="div_left" style="list-style: none">
+                            <a href="{{url('bamboo-crud-datatable')}}" style="text-decoration: none;font-size:15px">Bamboo Farmer</a></li>
+                        <li  id="div_left" style="list-style: none">
+                            <a href="{{url('fruits-crud-datatable')}}" style="text-decoration: none;font-size:15px">Fruits</a></li>
+                    </ul>
+            </li>
+             <li  id="div_left" style="list-style: none">  <a href="{{url('fishery-crud-datatable')}}" style="text-decoration: none;font-size:15px">Fishery</a></li>
+             <li  id="div_left" style="list-style: none"><a href="{{url('livestock-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Livestock</a></li>
           
          </ul>
      </div>
@@ -60,10 +82,20 @@
      </li>
      <div id="monitorContent" class="collapse">
          <ul>
-             <li><a href="{{url('riceseeds-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Rice Seeds</a></li>
-             <li> <a href="{{url('cornseeds-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Corn Seeds</a></li>
-             <li><a href="{{url('fert-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Fertilizer</a></li>
-             <li><a href="{{url('vegseeds-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Vegetable Seeds</a></li>
+             <li  id="div_left" style="list-style: none">
+                <a href="{{url('riceseeds-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Rice Seeds</a></li>
+             <li  id="div_left" style="list-style: none">
+                 <a href="{{url('cornseeds-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Corn Seeds</a></li>
+             <li  id="div_left" style="list-style: none">
+                <a href="{{url('fert-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Fertilizer</a></li>
+             <li  id="div_left" style="list-style: none">
+                <a href="{{url('vegseeds-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Vegetable Seeds</a></li>
+             <li  id="div_left" style="list-style: none"> 
+                <a href="{{url('popu-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Livestock Population</a></li> 
+            <li  id="div_left" style="list-style: none">
+                     <a href="{{url('vacc-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Vaccination Report</a></li> 
+            <li  id="div_left" style="list-style: none">
+                    <a href="{{url('roms-crud-datatable')}}" style="text-decoration: none;font-size:15px"> ROMS Protocol</a></li> 
          </ul>
      </div>
  </ul>
