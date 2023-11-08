@@ -583,7 +583,7 @@
 
               
                 // Check if the required data exists in the response for the current member
-                if (res[`membership${a}`] && typeof res[`membership${a}`] === 'string' && res[`membership${a}`].trim() !== '') {
+                if (res[`award${a}`] && typeof res[`award${a}`] === 'string' && res[`award${a}`].trim() !== '') {
                     const newAwCiDetails = document.createElement('div');
                     newAwCiDetails.id = `AwCi${a}`;
                     
@@ -645,6 +645,7 @@
             $('#geographic_coordinates').val(res.geographic_coordinates);
             $('#title_no').val(res.title_no);
             $('#tax_declarration_no').val(res.tax_declarration_no);
+            
 
             // Tenure Display Saved Data
 
@@ -655,7 +656,7 @@
             tenureArray.forEach(item => {
                 const checkboxId = item; // Generate checkbox ID
                 
-                
+                if(checkboxId !== null){
                 if (checkboxId === "Owned") {
                     const checkbox = document.getElementById('ownedCheckbox');
                     checkbox.checked = true; // Check the checkbox if the item exists in the array
@@ -668,8 +669,9 @@
                     var output = JSON.parse(strippedString);
                     var numberOnly = output[0].match(/\d+/);
 
-                    $('#rentYears').val(numberOnly[0]);
-                    $('#rentYears').css('display', 'block');
+                    $(`#rentYears`).val(numberOnly[0]);
+                    $(`#rentCheckbox`).val('Rent: '+numberOnly[0]+"year(s)");
+                    $(`#rentYears`).css('display', 'block');
 
                     console.log(numberOnly[0]);
                     console.log(strippedString); // Output: 2 year(s)
@@ -685,10 +687,12 @@
                     var strippedOthersString = originalOthersString.replace("Others: ", "");
 
                     $('#otherInput').val(strippedOthersString);
+                    $('#othersCheckbox').val(checkboxId);
                     $('#otherInput').css('display', 'block');
 
                     console.log(strippedOthersString); // Output: 
                 }
+            }
             });
 
             $('#existing_crop').val(res.existing_crop);
@@ -753,6 +757,8 @@
                 }
             });
 
+            $(`#notes`).val(res[`notes`]);
+
             // Particulars 2-3
             for (let p = 2; p <= 3; p++) {
                 $(`#purok${p}`).val(res[`purok${p}`]);
@@ -768,10 +774,11 @@
             const tenureArray = JSON.parse(tenureString);
             Object.freeze(tenureArray); // Freeze the Tenure array to make it a constant
 
+            console.log('TENUREARR',tenureArray);
             tenureArray.forEach(item => {
                 const checkboxId = item; // Generate checkbox ID
                 
-                
+                if(checkboxId !== null){
                 if (checkboxId === "Owned") {
                     const checkbox = document.getElementById(`ownedCheckbox${p}`);
                     checkbox.checked = true; // Check the checkbox if the item exists in the array
@@ -785,6 +792,7 @@
                     var numberOnly = output[0].match(/\d+/);
 
                     $(`#rentYears${p}`).val(numberOnly[0]);
+                    $(`#rentCheckbox${p}`).val('Rent: '+numberOnly[0]+"year(s)");
                     $(`#rentYears${p}`).css('display', 'block');
 
                     console.log(numberOnly[0]);
@@ -801,10 +809,12 @@
                     var strippedOthersString = originalOthersString.replace("Others: ", "");
 
                     $(`#otherInput${p}`).val(strippedOthersString);
+                    $(`#othersCheckbox${p}`).val(checkboxId);
                     $(`#otherInput${p}`).css('display', 'block');
 
                     console.log(strippedOthersString); // Output: 
                 }
+            }
             });
             
                 $(`#existing_crop${p}`).val(res[`existing_crop${p}`]);
@@ -866,11 +876,301 @@
             });
                 
                 console.log('Value of p:', p);
+                $(`#notes${p}`).val(res[`notes${p}`]);
             }
 
            }
        });
      }  
+
+     function viewFunc(id) {
+    $.ajax({
+        type: "GET",
+        url: "{{ url('get-registry-details') }}/" + id,
+        success: function (data) {
+            // // Populate the modal with record details
+            $('#view-rsbsa_id').text(data.rsbsa_id);
+            $('#view-date_enrolled').text(data.date_enrolled);
+
+            // INCOME
+            $('#view-income_source').text(data.income_source);
+            $('#view-est_annual_income').text('PHP '+data.est_annual_income);
+            $('#view-address').text(data.address);
+            $('#view-sitio_purok').text(data.sitio_purok);
+            $('#view-barangay').text(data.barangay);
+            $('#view-city').text(data.city);
+            $('#view-geo_coordinates').text(data.geo_coordinates);
+            $('#view-years_of_residency').text(data.years_of_residency+' year(s)');
+
+            // HH MEMBER
+            $('#view-hh_member').text(data.hh_member);
+            $('#view-surname').text(data.surname);
+            $('#view-firstname').text(data.firstname);
+            $('#view-middlename').text(data.middlename);
+            $('#view-gender').text(data.gender);
+            $('#view-age').text(data.age);
+            $('#view-birthdate').text(data.birthdate);
+
+// HHMEMBERS // HHMEMBERS // HHMEMBERS // HHMEMBERS // HHMEMBERS // HHMEMBERS // HHMEMBERS // HHMEMBERS // HHMEMBERS // HHMEMBERS // HHMEMBERS  
+
+            const formContainer = document.getElementById('HHMemberView');
+            memberCount = 2;
+            let lastValidMemberCount = 2;
+            // HH MEMBER 2-20
+            for (let i = 2; i <= 20; i++) {
+
+              
+                // Check if the required data exists in the response for the current member
+                if (data[`hh_member${i}`] && typeof data[`hh_member${i}`] === 'string' && data[`hh_member${i}`].trim() !== '') {
+                    const newMemberDetails = document.createElement('div')
+                    newMemberDetails.id = `HHMList${i}`;
+                    
+                    if(data[`hh_member${i}`] == ''){
+                        $(`#HHMList${i}`).attr('hidden', 'hidden');
+                    }
+
+                    newMemberDetails.innerHTML = `
+                    <div class="columns2">
+                        <div class="column3" style="height:25px;">
+                <p id="view-hh_member${i}" style="font-size:12px; height:1px; margin-top:-1px;"></p>
+            </div>
+              
+            <div class="column3" style="height:25px;">
+                <p id="view-surname${i}" style="font-size:12px; height:1px; margin-top:-1px;"></p>
+            </div>
+          
+            <div class="column3" style="height:25px;">
+                <p id="view-firstname${i}" style="font-size:12px; height:1px; margin-top:-1px;"></p>
+            </div>
+          
+            <div class="column3" style="height:25px;">
+                <p id="view-middlename${i}" style="font-size:12px; height:1px; margin-top:-1px;"></p>
+            </div>
+          
+            <div class="column3" style="height:25px;">
+                <p id="view-gender${i}" style="font-size:12px; height:1px; margin-top:-1px;"></p>
+            </div>
+          
+            <div class="column3" style="height:25px;">
+                <p id="view-age${i}" style="font-size:12px; height:1px; margin-top:-1px;"></p>
+            </div>
+          
+            <div class="column3" style="height:25px;">
+                <p id="view-birthdate${i}" style="font-size:12px; height:1px; margin-top:-1px;"></p>
+            </div>
+        </div>
+        </div>
+                    `;
+                
+                    formContainer.appendChild(newMemberDetails);
+                $(`#view-hh_member${i}`).text(data[`hh_member${i}`]);
+                $(`#view-surname${i}`).text(data[`surname${i}`]);
+                $(`#view-firstname${i}`).text(data[`firstname${i}`]);
+                $(`#view-middlename${i}`).text(data[`middlename${i}`]);
+                $(`#view-gender${i}`).text(data[`gender${i}`]);
+                $(`#view-age${i}`).text(data[`age${i}`]);
+                $(`#view-birthdate${i}`).text(data[`birthdate${i}`]);
+                lastValidMemberCount = i + 1; // Update lastValidMemberCount
+                }
+                memberCount = lastValidMemberCount;
+                console.log('Value of i:', i);
+                console.log('Value of memberCount:', memberCount);
+                console.log('Value of LVM:', lastValidMemberCount);
+            }
+
+// ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG //
+            // ORGANIZATION
+            $('#view-membership').text(data.membership);
+            $('#view-position').text(data.position);
+            $('#view-member_since').text(data.member_since);
+            $('#view-status').text(data.status);
+
+            const OrgformContainer = document.getElementById('ViewOrg');
+            MemAfCount = 2;
+            let lastValidMemAfCount = 2;
+            // HH MEMBER 2-20
+            for (let m = 2; m <= 5; m++) {
+
+              
+                // Check if the required data exists in the response for the current member
+                if (data[`membership${m}`] && typeof data[`membership${m}`] === 'string' && data[`membership${m}`].trim() !== '') {
+                    const newMemAfDetails = document.createElement('div');
+                    newMemAfDetails.id = `ORGList${m}`;
+
+                    if(data[`membership${m}`] == ''){
+                        $(`#ORGList${m}`).attr('hidden', 'hidden');
+                    }
+                    
+                    newMemAfDetails.innerHTML = `           
+                    <div class="columns2" style="margin-top:0px;">
+                        <div class="column3" style="height:25px;">
+                            <p id="view-membership${m}" style="font-size:12px; height:1px; margin-top:-1px;"></p>
+                        </div>
+                        <div class="column3" style="height:25px;">
+                            <p id="view-position${m}" style="font-size:12px; height:1px; margin-top:-1px;"></p>
+                        </div>
+                        <div class="column3" style="height:25px;">
+                            <p id="view-member_since${m}" style="font-size:12px; height:1px; margin-top:-1px;"></p>
+                        </div>
+                        <div class="column3" style="height:25px;">
+                            <p id="view-status${m}" style="font-size:12px; height:1px; margin-top:-1px;"></p>
+                        </div>
+                    </div>
+                      `;
+                
+                      OrgformContainer.appendChild(newMemAfDetails);
+                $(`#view-membership${m}`).text(data[`membership${m}`]);
+                $(`#view-position${m}`).text(data[`position${m}`]);
+                $(`#view-member_since${m}`).text(data[`member_since${m}`]);
+                $(`#view-status${m}`).text(data[`status${m}`]);
+                lastValidMemAfCount = m + 1; // Update lastValidMemAfCount
+                }
+                MemAfCount = lastValidMemAfCount;
+                console.log('Value of m:', m);
+                console.log('Value of MemAfCount:', MemAfCount);
+                console.log('Value of LVMA:', lastValidMemAfCount);
+            }
+
+
+// ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG // ORG //
+            
+// AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS 
+
+            // ORGANIZATION
+            $('#view-award').text(data.award);
+            $('#view-awarding_body').text(data.awarding_body);
+            $('#view-date_received').text(data.date_received);
+
+            const AwCiString = data[`award`];
+            console.log(AwCiString);
+            if(AwCiString == null){
+                $(`#AwardList`).attr('hidden', 'hidden');
+            }
+
+            $('#view-award2').text(data.award2);
+            $('#view-awarding_body2').text(data.awarding_body2);
+            $('#view-date_received2').text(data.date_received2);
+
+            const AwCiString2 = data[`award2`];
+            console.log(AwCiString2);
+            if(AwCiString2 == null){
+                $(`#AwardList2`).attr('hidden', 'hidden');
+            }
+
+            $('#view-award3').text(data.award3);
+            $('#view-awarding_body3').text(data.awarding_body3);
+            $('#view-date_received3').text(data.date_received3);
+
+            const AwCiString3 = data[`award3`];
+            console.log(AwCiString3);
+            if(AwCiString3 == null){
+                $(`#AwardList3`).attr('hidden', 'hidden');
+            }
+
+            $('#view-award4').text(data.award4);
+            $('#view-awarding_body4').text(data.awarding_body4);
+            $('#view-date_received4').text(data.date_received4);
+
+            const AwCiString4 = data[`award4`];
+            console.log(AwCiString4);
+            if(AwCiString4 == null){
+                $(`#AwardList4`).attr('hidden', 'hidden');
+            }
+
+            $('#view-award5').text(data.award5);
+            $('#view-awarding_body5').text(data.awarding_body5);
+            $('#view-date_received5').text(data.date_received5);
+
+            const AwCiString5 = data[`award5`];
+            console.log(AwCiString5);
+            if(AwCiString5 == null){
+                $(`#AwardList5`).attr('hidden', 'hidden');
+            }
+
+
+            $('#view-remarks').text(data.remarks);
+
+// AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS 
+
+            // Particulars
+            $('#view-FarmAddress').text("Purok " + data.purok + "," + data.brngy + "," + data.city);
+            $('#view-purok').text(data.purok);
+            $('#view-brngy').text(data.brngy);
+            $('#view-geographic_coordinates').text(data.geographic_coordinates);
+            $('#view-title_no').text(data.title_no);
+            $('#view-tax_declarration_no').text(data.tax_declarration_no);
+            $('#view-tenure').text(data.tenure);
+            $(`#view-existing_crop`).text(data[`existing_crop`]);
+            $(`#view-previous_crop`).text(data[`previous_crop`]);
+            $(`#view-hectares`).text(data[`hectares`]);
+            $(`#view-land_type`).text(data[`land`]);
+            $(`#view-soil_type`).text(data[`soil_type`]);
+            $(`#view-source`).text(data[`source`]);
+            $(`#view_notes`).text(data[`notes`]);
+            
+
+
+            for (let p = 2; p <= 3; p++) {
+
+                const FarmString = "Purok " + data[`purok${p}`] + "," + data[`brngy${p}`]  + "," + data.city;
+                if (FarmString.includes('null')){
+                    $(`#view-FarmAddress${p}`).text(" ");
+                }else{
+                    $(`#view-FarmAddress${p}`).text(FarmString);
+                }
+                
+                $(`#view-purok${p}`).text(data[`purok${p}`]);
+                $(`#view-brngy${p}`).text(data[`brngy${p}`]);
+                $(`#view-geographic_coordinates${p}`).text(data[`geographic_coordinates${p}`]);
+                $(`#view-title_no${p}`).text(data[`title_no${p}`]);
+                $(`#view-tax_declarration_no${p}`).text(data[`tax_declarration_no${p}`]);
+
+                const TenureString = data[`tenure${p}`];
+                if (TenureString.includes('null')){
+                    $(`#view-tenure${p}`).text(" ");
+                }else{
+                    $(`#view-tenure${p}`).text(TenureString);
+                }
+
+                $(`#view-existing_crop${p}`).text(data[`existing_crop${p}`]);
+                $(`#view-previous_crop${p}`).text(data[`previous_crop${p}`]);
+                $(`#view-hectares${p}`).text(data[`hectares${p}`]);
+
+                const LandString = data[`land${p}`];
+                if (LandString.includes('null')){
+                    $(`#view-land_type${p}`).text(" ");
+                }else{
+                    $(`#view-land_type${p}`).text(LandString);
+                }
+
+                $(`#view-soil_type${p}`).text(data[`soil_type${p}`]);
+
+                const SourceString = data[`source${p}`];
+                if (SourceString.includes('null')){
+                    $(`#view-source${p}`).text(" ");
+                }else{
+                    $(`#view-source${p}`).text(SourceString);
+                }
+
+                
+                $(`#view_notes${p}`).text(data[`notes${p}`]);
+            
+            }
+
+            $('#hhm_ownerSig').text(data.firstname + " " +data.surname);
+           
+            // Certification
+            $('#hhm_owner').text(data.firstname + " " +data.surname);
+            $('#brgny_cert').text(data.brngy);
+
+            // Show the modal
+            $("#viewModal").modal("show");
+        },
+        error: function (data) {
+            console.log("Error:", data);
+        },
+    });
+}
 
      
     
@@ -921,3 +1221,41 @@
     
     
    </script>
+
+   {{-- View Modal JS SCRIPT --}}
+  <script>
+    var printClicked = false; // Initialize a flag variable
+
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        // Set the flag to true when printDiv is clicked
+        printClicked = true;
+
+        window.onafterprint = function() {
+            document.body.innerHTML = originalContents;
+        };
+
+        window.print();
+    }
+
+    function closeviewModal() {
+        var addRoomModal = document.getElementById("viewModal");
+        addRoomModal.classList.remove('show');
+        $("#viewModal").modal('hide');
+        setTimeout(function() {
+            var modalBackdrop = document.querySelector('.modal-backdrop.fade.show');
+            if (modalBackdrop) {
+                modalBackdrop.remove('show');
+            }
+            
+            // Check if printDiv was clicked before running location.reload()
+            if (printClicked) {
+                location.reload();
+            }
+        }, 400);
+    }
+  </script>

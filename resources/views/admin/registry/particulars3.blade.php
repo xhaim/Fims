@@ -146,9 +146,9 @@
     </div>
   </div>
 </div>
-{{-- <div class="form-group">
+<div class="form-group">
   <label for="notes3" class="col-sm-8 control-label">Remarks/Notes</label>
   <div class="col-sm-12">
     <textarea class="form-control" id="notes3" name="notes3" placeholder="Enter Remarks/Notes" rows="3"></textarea>
   </div>
-</div> --}}
+</div>

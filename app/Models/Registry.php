@@ -289,6 +289,8 @@ class Registry extends Model
         'land',
         'soil_type',
         'source',
+        // Remarks
+        'notes',
 
         // PARTICULAR 2
         'purok2',
@@ -304,6 +306,8 @@ class Registry extends Model
         'land2',
         'soil_type2',
         'source2',
+        // Remarks
+        'notes2',
 
         // PARTICULAR 3
         'purok3',
@@ -319,6 +323,8 @@ class Registry extends Model
         'land3',
         'soil_type3',
         'source3',
+        // Remarks
+        'notes3',
 
     ];
 }

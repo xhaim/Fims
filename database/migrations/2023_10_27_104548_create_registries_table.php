@@ -269,6 +269,8 @@ return new class extends Migration
             $table->json('land')->nullable();
             $table->text('soil_type')->nullable();
             $table->json('source')->nullable();
+            // REMARKS
+            $table->text('notes')->nullable();
 
             // PARTICULAR 2
             $table->text('purok2')->nullable();
@@ -284,6 +286,8 @@ return new class extends Migration
             $table->json('land2')->nullable();
             $table->text('soil_type2')->nullable();
             $table->json('source2')->nullable();
+            // REMARKS2
+            $table->text('notes2')->nullable();
 
             // PARTICULAR 3
             $table->text('purok3')->nullable();
@@ -299,6 +303,8 @@ return new class extends Migration
             $table->json('land3')->nullable();
             $table->text('soil_type3')->nullable();
             $table->json('source3')->nullable();
+            // REMARKS
+            $table->text('notes3')->nullable();
 
             $table->timestamps();
         });

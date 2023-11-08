@@ -19,6 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/registry-printable', function () {
+    return view('admin.registry.registry-printable');
+});
+
 Auth::routes();
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -76,4 +80,4 @@ Route::get('registry-crud-datatable', [RegistryAjaxCrudController::class, 'index
 Route::post('store-registry', [RegistryAjaxCrudController::class, 'store']);
 Route::post('edit-registry', [RegistryAjaxCrudController::class, 'edit']);
 Route::post('delete-registry', [RegistryAjaxCrudController::class, 'destroy']);
-// Route::get('get-registry-details/{id}', [RegistryAjaxCrudController::class, 'getRegistryDetails'])->name('farmer.details');
+Route::get('get-registry-details/{id}', [RegistryAjaxCrudController::class, 'getRegistryDetails'])->name('farmer.details');

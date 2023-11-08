@@ -321,6 +321,8 @@ class RegistryAjaxCrudController extends Controller
             'land' => json_encode($request->land),
             'soil_type' => $request-> soil_type,
             'source' => json_encode($request->source),
+            // REMARKS
+            'notes' => $request->notes,
     
             // PARTICULAR 2
             'purok2' => $request-> purok2,
@@ -336,6 +338,9 @@ class RegistryAjaxCrudController extends Controller
             'land2' => json_encode($request->land2),
             'soil_type2' => $request-> soil_type2,
             'source2' => json_encode($request->source2),
+            // REMARKS
+            'notes2' => $request->notes2,
+            
     
             // PARTICULAR 3
             'purok3' => $request-> purok3,
@@ -351,6 +356,8 @@ class RegistryAjaxCrudController extends Controller
             'land3' => json_encode($request->land3),
             'soil_type3' => $request-> soil_type3,
             'source3' => json_encode($request->source3),
+            // REMARKS
+            'notes3' => $request->notes3,
     
            ]
        );
