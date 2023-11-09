@@ -62,7 +62,7 @@
           
          </ul>
      </div>
-     <li class="list-item" style="margin-bottom: 10px;">
+     <li class="list-item">
          <div id="div_left" style="font-size: 18px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em"
                  height="1em" viewBox="0 0 24 24" fill="none" id="icon">
                  <path
@@ -98,4 +98,15 @@
                     <a href="{{url('roms-crud-datatable')}}" style="text-decoration: none;font-size:15px"> ROMS Protocol</a></li> 
          </ul>
      </div>
+     {{-- Users Nav --}}
+     @if (auth()->user()->role == 'superad')
+     <li class="list-item" style="margin-bottom: 10px;">
+        <div id="div_left">
+            <i class="fa fa-user" id="icon"></i>
+            <a id="link" href="{{ url('/user-management')}}" class="collapse-button" data-toggle="collapse">
+                    Users
+            </a>
+        </div>
+    </li>
+    @endif
  </ul>

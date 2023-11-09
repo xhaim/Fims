@@ -174,7 +174,7 @@
           $('#variety').val(res.variety);
           $('#seeds_received').val(res.seeds_received);
           $('#date_received').val(res.date_received);
-          $('#sources_of_funds').val(res.sources_of_funds);
+          $('#source_of_funds').val(res.source_of_funds);
        }
     });
   }  
