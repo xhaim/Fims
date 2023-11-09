@@ -42,6 +42,9 @@ Route::group(['middleware' => ['auth', 'checkRole:superad']], function () {
     Route::post('edit-user', [UserController::class, 'edit']);
     Route::post('delete-user', [UserController::class, 'destroy']);
     Route::get('get-user-details/{id}', [UserController::class, 'getUserDetails'])->name('user.details');
+    Route::get('/register', function () {
+        return view('dashboard');
+    });
 
 });
 

@@ -28,7 +28,7 @@
         <div class="row">
           <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Distribution of Rice</h2>
+                <h2>Users</h2>
             </div>
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)">Add User</a>
