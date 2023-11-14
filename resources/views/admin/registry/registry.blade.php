@@ -72,6 +72,7 @@
               <tr>
                 
                 <th>RSBSA ID</th>
+                <th>GENERATED ID</th>
                 <th>Date Enrolled</th>
                 <th>Income Source</th>
                 <th>Address</th>

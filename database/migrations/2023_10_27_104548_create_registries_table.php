@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('registries', function (Blueprint $table) {
             $table->id();
             $table->text('rsbsa_id')->nullable();
+            $table->text('generated_id')->nullable();
             $table->string('date_enrolled')->nullable();
 
             // Household Members // Household Members // Household Members // Household Members // Household Members //

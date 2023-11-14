@@ -43,6 +43,7 @@ class RegistryAjaxCrudController extends Controller
            ['id' => $registryId],
            [
             'rsbsa_id' => $request-> rsbsa_id,
+            'generated_id' => $request-> generated_id,
             'date_enrolled' => $request-> date_enrolled,
     
             // household members columns //////////////////////////////////////////////////////////////////////////////////////////

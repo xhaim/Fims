@@ -13,6 +13,7 @@
               ajax: "{{ url('registry-crud-datatable') }}",
               columns: [
                         { data: 'rsbsa_id', name: 'rsbsa_id'},
+                        { data: 'generated_id', name: 'generated_id'},
                         { data: 'date_enrolled', name: 'date_enrolled' },
 
                         // // hh 1
@@ -384,6 +385,7 @@
 
             $('#id').val(res.id);
             $('#rsbsa_id').val(res.rsbsa_id);
+            $('#generated_id').val(res.generated_id);
             $('#date_enrolled').val(res.date_enrolled);
 
             // INCOME

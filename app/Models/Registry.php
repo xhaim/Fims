@@ -11,6 +11,7 @@ class Registry extends Model
 
     protected $fillable = [
         'rsbsa_id',
+        'generated_id',
         'date_enrolled',
 
         // household members columns //////////////////////////////////////////////////////////////////////////////////////////

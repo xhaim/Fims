@@ -18,17 +18,17 @@
                 </div>
               </div>
 
-              {{-- <div class="form-group">
-                <label for="generated" class="col-sm-8 control-label">Generated ID</label>
+              <div class="form-group">
+                <label for="generated_id" class="col-sm-8 control-label">Generated ID</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="generated" name="generated" placeholder="Enter Generated ID" maxlength="100" >
+                  <input type="number" class="form-control" id="generated_id" name="generated_id" placeholder="Enter Generated ID" maxlength="100" >
                 </div>
-              </div> --}}
+              </div>
               
               <div class="form-group">
                 <label for="date" class="col-sm-8 control-label">Date & Time of Enrolment</label>
                 <div class="col-sm-12">
-                  <input type="date" class="form-control" id="date_enrolled" name="date_enrolled" placeholder="Enter Generated ID" maxlength="100" >
+                  <input type="date" class="form-control" id="date_enrolled" name="date_enrolled" placeholder="Enter Date Enrolled" maxlength="100" >
                 </div>
               </div>
 

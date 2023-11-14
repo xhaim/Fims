@@ -25,6 +25,9 @@ use App\Http\Controllers\ROMSAjaxCRUDController;
 use App\Http\Controllers\VaccinationAjaxCRUDController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Dash;
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -58,7 +61,9 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
 
+
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [Dash::class, 'showRowCount']);
 
 // association
 Route::get('assoc-crud-datatable', [AssociationAjaxCRUDController::class, 'index']);
