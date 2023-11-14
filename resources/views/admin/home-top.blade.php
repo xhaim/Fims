@@ -50,6 +50,10 @@
                             {{ __('Logout') }}
                         </a>
 
+                        <a href="{{route('profile.edit')}}">
+                            {{ __('Profile') }}
+                        </a>
+
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
