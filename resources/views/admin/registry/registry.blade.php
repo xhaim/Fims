@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>registry Tractor</title>
+    <title>Association</title>
      
     <meta name="csrf-token" content="{{ csrf_token() }}">
      
@@ -14,9 +14,7 @@
 
     <link rel="stylesheet" href="{{asset('dash-assets/css/jquery.css')}}">
 
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-
-    
+    <script src="{{asset('dash-assets/js/datatables.min.js')}}"></script>
     
     <link rel="icon" type="image/png" sizes="1024x1024" href="{{asset('dash-assets/img/DA_Logo.png')}}">
     <link rel="icon" type="image/png" sizes="1024x1024" href="{{asset('dash-assets/img/DA_Logo.png')}}">
