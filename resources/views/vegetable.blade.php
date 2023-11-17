@@ -52,7 +52,7 @@
  
     <div class="card-body">
  
-        <table class="table table-bordered" id="veg-crud-datatable">
+        <table class="table table-bordered display responsive nowrap" id="veg-crud-datatable">
            <thead>
               <tr>
                  <th>Id</th>

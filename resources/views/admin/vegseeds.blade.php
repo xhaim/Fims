@@ -50,7 +50,7 @@
  
     <div class="card-body">
  
-        <table class="table table-bordered" id="vegseeds-crud-datatable">
+        <table class="table table-bordered display responsive nowrap" id="vegseeds-crud-datatable">
            <thead>
               <tr>
                 

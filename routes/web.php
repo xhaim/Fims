@@ -26,6 +26,11 @@ use App\Http\Controllers\VaccinationAjaxCRUDController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dash;
+use App\Http\Controllers\CsvImportController;
+
+
+
+
 
 
 
@@ -129,6 +134,11 @@ Route::post('store-registry', [RegistryAjaxCrudController::class, 'store']);
 Route::post('edit-registry', [RegistryAjaxCrudController::class, 'edit']);
 Route::post('delete-registry', [RegistryAjaxCrudController::class, 'destroy']);
 Route::get('get-registry-details/{id}', [RegistryAjaxCrudController::class, 'getRegistryDetails'])->name('farmer.details');
+
+Route::get('/upload-csv', [CsvImportController::class, 'showForm']);
+Route::post('/upload-csv', [CsvImportController::class, 'import']);
+
+
 
 // Fishery
 Route::get('fishery-crud-datatable', [DataTableAjaxCRUDController::class, 'index']);

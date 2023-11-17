@@ -72,7 +72,7 @@
               </div>
           </div>
           
-            <table class="table table-bordered display responsive nowrap" id="ricehybrid-crud-datatable">
+            <table class="table table-bordered display responsive nowrap display responsive nowrap" id="ricehybrid-crud-datatable">
                <thead>
                   <tr>
                     <th>RSBSA No.</th>

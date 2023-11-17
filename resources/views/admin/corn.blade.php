@@ -49,7 +49,7 @@
  
     <div class="card-body">
  
-        <table class="table table-bordered display responsive nowrap" id="corn-crud-datatable">
+        <table class="table table-bordered display responsive nowrap display responsive nowrap" id="corn-crud-datatable">
            <thead>
               <tr>
                 <th>RSBSA ID</th>

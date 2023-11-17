@@ -52,7 +52,7 @@
  
     <div class="card-body">
  
-        <table class="table table-bordered display responsive nowrap" id="riceseeds-crud-datatable">
+        <table class="table table-bordered display responsive nowrap display responsive nowrap" id="riceseeds-crud-datatable">
            <thead>
               <tr>
                 

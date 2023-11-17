@@ -52,7 +52,7 @@
  
     <div class="card-body">
  
-        <table class="table table-bordered" id="bamboo-crud-datatable">
+        <table class="table table-bordered display responsive nowrap" id="bamboo-crud-datatable">
            <thead>
               <tr>
                  <th>Id</th>

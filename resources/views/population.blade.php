@@ -53,7 +53,7 @@
  
     <div class="card-body">
  
-        <table class="table table-bordered" id="popu-crud-datatable">
+        <table class="table table-bordered display responsive nowrap" id="popu-crud-datatable">
            <thead>
               <tr>
                  <th>Id</th>

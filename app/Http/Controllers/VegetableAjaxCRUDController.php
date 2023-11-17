@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
  
 use Illuminate\Http\Request;
  
-use App\Models\Vegetable;
+use App\Models\Vegreq;
  
 use Datatables;
  
-class VegetableAjaxCRUDController extends Controller
+class VegreqAjaxCRUDController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,13 +18,13 @@ class VegetableAjaxCRUDController extends Controller
     public function index()
     {
         if(request()->ajax()) {
-            return datatables()->of(Vegetable::select('*'))
-            ->addColumn('action', 'veg-action')
+            return datatables()->of(Vegreq::select('*'))
+            ->addColumn('action', 'admin/vegreq-action')
             ->rawColumns(['action'])
             ->addIndexColumn()
             ->make(true);
         }
-        return view('vegetable');
+        return view('admin/vegreq');
     }
       
       
@@ -39,7 +39,7 @@ class VegetableAjaxCRUDController extends Controller
  
         $vegId = $request->id;
  
-        $veg   =   Vegetable::updateOrCreate(
+        $veg   =   Vegreq::updateOrCreate(
                     [
                      'id' => $vegId
                     ],
@@ -73,7 +73,7 @@ class VegetableAjaxCRUDController extends Controller
     public function edit(Request $request)
     {   
         $where = array('id' => $request->id);
-        $veg  = Vegetable::where($where)->first();
+        $veg  = Vegreq::where($where)->first();
       
         return Response()->json($veg);
     }
@@ -87,7 +87,7 @@ class VegetableAjaxCRUDController extends Controller
      */
     public function destroy(Request $request)
     {
-        $veg = Vegetable::where('id',$request->id)->delete();
+        $veg = Vegreq::where('id',$request->id)->delete();
       
         return Response()->json($veg);
     }

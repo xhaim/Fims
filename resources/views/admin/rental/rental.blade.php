@@ -74,7 +74,7 @@
         </div>
         {{-- end of show modal --}}
 
-        <table class="table table-bordered display responsive nowrap" id="rental-crud-datatable">
+        <table class="table table-bordered display responsive nowrap display responsive nowrap" id="rental-crud-datatable">
            <thead>
               <tr>
                 

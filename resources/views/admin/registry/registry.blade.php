@@ -39,6 +39,10 @@
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)">Add</a>
             </div>
+            <div class="pull-right mb-2">
+                @include('csv.importRegistries')
+            </div>
+
         </div>
     </div>
     
@@ -67,7 +71,7 @@
     </div>
     {{-- end of show modal --}}
 
-        <table class="table table-bordered display responsive nowrap" id="registry-crud-datatable">
+        <table class="table table-bordered display responsive nowrap display responsive nowrap" id="registry-crud-datatable">
            <thead>
               <tr>
                 

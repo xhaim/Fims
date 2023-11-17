@@ -45,7 +45,7 @@
           <!-- Modal for viewing details -->
           @include('user.user-viewmodal')
           
-            <table class="table table-bordered display responsive nowrap" id="user-management">
+            <table class="table table-bordered display responsive nowrap display responsive nowrap" id="user-management">
                <thead>
                   <tr>
                     <th>Role</th>

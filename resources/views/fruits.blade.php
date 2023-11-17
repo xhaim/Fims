@@ -53,7 +53,7 @@
  
     <div class="card-body">
  
-        <table class="table table-bordered" id="fruits-crud-datatable">
+        <table class="table table-bordered display responsive nowrap" id="fruits-crud-datatable">
            <thead>
               <tr>
                  <th>Id</th>

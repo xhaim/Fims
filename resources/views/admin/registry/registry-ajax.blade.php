@@ -1095,13 +1095,23 @@
 // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS // AWARDS & CITATIONS 
 
             // Particulars
-            $('#view-FarmAddress').text("Purok " + data.purok + "," + data.brngy + "," + data.city);
+            const FarmString1 = "Purok " + data[`purok`] + "," + data[`brngy`]  + "," + data.city;
+                if (FarmString1.includes('null')){
+                    $(`#view-FarmAddress`).text(" ");
+                }else{
+                    $(`#view-FarmAddress`).text(FarmString1);
+                }
             $('#view-purok').text(data.purok);
             $('#view-brngy').text(data.brngy);
             $('#view-geographic_coordinates').text(data.geographic_coordinates);
             $('#view-title_no').text(data.title_no);
             $('#view-tax_declarration_no').text(data.tax_declarration_no);
-            $('#view-tenure').text(data.tenure);
+            const TenureString1 = data && data[`tenure`]; // Check if data is not null or undefined
+                if (TenureString1 && TenureString1.includes('null')) {
+                    $(`#view-tenure`).text(" ");
+                } else {
+                    $(`#view-tenure`).text(TenureString1);
+                }
             $(`#view-existing_crop`).text(data[`existing_crop`]);
             $(`#view-previous_crop`).text(data[`previous_crop`]);
             $(`#view-hectares`).text(data[`hectares`]);
@@ -1127,10 +1137,10 @@
                 $(`#view-title_no${p}`).text(data[`title_no${p}`]);
                 $(`#view-tax_declarration_no${p}`).text(data[`tax_declarration_no${p}`]);
 
-                const TenureString = data[`tenure${p}`];
-                if (TenureString.includes('null')){
+                const TenureString = data && data[`tenure${p}`]; // Check if data is not null or undefined
+                if (TenureString && TenureString1.includes('null')) {
                     $(`#view-tenure${p}`).text(" ");
-                }else{
+                } else {
                     $(`#view-tenure${p}`).text(TenureString);
                 }
 
@@ -1138,21 +1148,23 @@
                 $(`#view-previous_crop${p}`).text(data[`previous_crop${p}`]);
                 $(`#view-hectares${p}`).text(data[`hectares${p}`]);
 
-                const LandString = data[`land${p}`];
-                if (LandString.includes('null')){
+                const LandString = data && data[`land${p}`]; // Check if data is not null or undefined
+                if (LandString && LandString.includes('null')) {
                     $(`#view-land_type${p}`).text(" ");
-                }else{
+                } else {
                     $(`#view-land_type${p}`).text(LandString);
                 }
 
+
                 $(`#view-soil_type${p}`).text(data[`soil_type${p}`]);
 
-                const SourceString = data[`source${p}`];
-                if (SourceString.includes('null')){
+                const SourceString = data && data[`source${p}`]; // Check if data is not null or undefined
+                if (SourceString && SourceString.includes('null')) {
                     $(`#view-source${p}`).text(" ");
-                }else{
+                } else {
                     $(`#view-source${p}`).text(SourceString);
                 }
+
 
                 
                 $(`#view_notes${p}`).text(data[`notes${p}`]);

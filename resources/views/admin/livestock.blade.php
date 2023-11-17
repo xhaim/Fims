@@ -50,7 +50,7 @@
  
     <div class="card-body">
  
-        <table class="table table-bordered display responsive nowrap" id="livestock-crud-datatable">
+        <table class="table table-bordered display responsive nowrap display responsive nowrap" id="livestock-crud-datatable">
            <thead>
               <tr>
                 <th>RSBSA ID</th>

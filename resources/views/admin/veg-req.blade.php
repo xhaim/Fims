@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Corn Seeds</title>
+    <title>Vegetable Request</title>
      
     <meta name="csrf-token" content="{{ csrf_token() }}">
      
@@ -34,7 +34,7 @@
 <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Corn Seeds</h2>
+                <h2>Vegetable Request</h2>
             </div>
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)">Add </a>
@@ -50,14 +50,14 @@
  
     <div class="card-body">
  
-        <table class="table table-bordered display responsive nowrap" id="cornseeds-crud-datatable">
+        <table class="table table-bordered display responsive nowrap display responsive nowrap" id="vegreq-crud-datatable">
            <thead>
               <tr>
-                <th>Id</th>
-                <th>Variety</th>
-                <th>No. of Seeds Received(sack/pack)</th>
-                <th>Date Received</th>
-                <th>Source of Funds</th>
+                
+                <th>Name </th>
+                <th>No. of Pack</th>
+                <th>Barangay</th>
+                <th>Contact Number</th>
                 <th>Registered-in Date</th>
                 <th width="150px">Action</th>
               </tr>
@@ -69,47 +69,47 @@
 </div>
 </div>
   <!-- boostrap company model -->
-    <div class="modal fade" id="cornseeds-modal" aria-hidden="true">
+    <div class="modal fade" id="vegreq-modal" aria-hidden="true">
       <div class="modal-dialog modal-lg">
-        <div class="modal-content" style="width: 500px;left:190px">
+        <div class="modal-content"style="width: 500px;left:190px">
           <div class="modal-header" style="height: 80px;">
-            <h4 class="modal-title" id="CornSeedsModal"></h4>
+            <h4 class="modal-title" id="VegReqModal"></h4>
           </div>
           <div class="modal-body">
-            <form action="javascript:void(0)" id="CornSeedsForm" name="CornSeedsForm" class="form-horizontal" method="POST" enctype="multipart/form-data">
+            <form action="javascript:void(0)" id="VegReqForm" name="VegReqForm" class="form-horizontal" method="POST" enctype="multipart/form-data">
               <input type="hidden" name="id" id="id">
 
               <div class="form-group">
-                <label for="name" class="col-sm-8 control-label" >Variety</label>
+                <label for="name" class="col-sm-8 control-label" >Name</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="variety" name="variety" placeholder="Enter Variety" maxlength="50" required="">
+                  <input type="text" class="form-control" id="name" name="variety" placeholder="Enter  Name"  required="">
                 </div>
               </div>  
  
               <div class="form-group">
-                <label for="name" class="col-sm-8 control-label">No. of Seeds Received</label>
+                <label for="no." class="col-sm-8 control-label">No. of Seeds(pack)</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="seeds_received" name="seeds_received" placeholder="Enter No. of Seeds Received" maxlength="20" required="">
+                  <input type="number" class="form-control" id="seeds_received" name="seeds_received" placeholder="Enter No. of Seeds(pack)" maxlength="20" required="">
                 </div>
               </div>
  
               <div class="form-group">
-                <label class="col-sm-8 control-label">Date Received</label>
+                <label class="col-sm-8 control-label">Barangay</label>
                 <div class="col-sm-12">
-                  <input type="date" class="form-control" id="date_received" name="date_received" maxlength="11" placeholder="Enter Date Received" required="">
+                  <input type="date" class="form-control" id="barangay" name="barangay" maxlength="100" placeholder="Enter Barangay" required="">
                 </div>
               </div>
 
               <div class="form-group">
-                <label for="name" class="col-sm-8 control-label">Source of Funds</label>
+                <label for="contact" class="col-sm-8 control-label">Contact Number</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="source_of_funds" name="source_of_funds" placeholder="Enter Source of Funds" maxlength="50" required="">
+                  <input type="text" class="form-control" id="contact" name="contact" placeholder="Enter Contact Number" maxlength="11" >
                 </div>
               </div>
 
  
               <div class="col-sm-offset-2 col-sm-10" style="margin-top: 20px;">
-                <button type="submit" class="btn btn-success" id="btn-save">Save
+                <button type="submit" class="btn btn-success" id="btn-save">Submit
                 </button>
               </div>
             </form>
@@ -132,17 +132,16 @@
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
-    $('#cornseeds-crud-datatable').DataTable({
+    $('#vegreq-crud-datatable').DataTable({
            processing: true,
            serverSide: true,
-           ajax: "{{ url('cornseeds-crud-datatable') }}",
+           ajax: "{{ url('vegreq-crud-datatable') }}",
            columns: [
-                    { data: 'id', name: 'id' },
-                    { data: 'variety', name: 'variety' },
+                    
+                    { data: 'name', name: 'name' },
                     { data: 'seeds_received', name: 'seeds_received' },
-                    { data: 'date_received', name: 'date_received' },
-                    { data: 'source_of_funds', name: 'source_of_funds' },
-                  
+                    { data: 'barangay', name: 'barangay' },
+                    { data: 'contact', name: 'contact' }, 
                     { data: 'created_at', name: 'created_at' },
                     {data: 'action', name: 'action', orderable: false},
                  ],
@@ -153,9 +152,9 @@
    
   function add(){
  
-       $('#CornSeedsForm').trigger("reset");
-       $('#CornSeedsModal').html("Add Corn Seeds");
-       $('#cornseeds-modal').modal('show');
+       $('#VegReqForm').trigger("reset");
+       $('#VegReqModal').html("Add");
+       $('#vegreq-modal').modal('show');
        $('#id').val('');
  
   }   
@@ -163,17 +162,17 @@
      
     $.ajax({
         type:"POST",
-        url: "{{ url('edit-cornseeds') }}",
+        url: "{{ url('edit-vegreq') }}",
         data: { id: id },
         dataType: 'json',
         success: function(res){
-          $('#CornseedsModal').html("Edit Corn Seeds");
-          $('#cornseeds-modal').modal('show');
+          $('#VegReqModal').html("Edit");
+          $('#vegreq-modal').modal('show');
           $('#id').val(res.id);
-          $('#variety').val(res.variety);
+          $('#name').val(res.name);
           $('#seeds_received').val(res.seeds_received);
-          $('#date_received').val(res.date_received);
-          $('#sources_of_funds').val(res.sources_of_funds);
+          $('#barangay').val(res.barangay);
+          $('#contact').val(res.contact);
        }
     });
   }  
@@ -185,19 +184,19 @@
           // ajax
           $.ajax({
               type:"POST",
-              url: "{{ url('delete-cornseeds') }}",
+              url: "{{ url('delete-vegreq') }}",
               data: { id: id },
               dataType: 'json',
               success: function(res){
  
-                var oTable = $('#cornseeds-crud-datatable').dataTable();
+                var oTable = $('#vegreq-crud-datatable').dataTable();
                 oTable.fnDraw(false);
              }
           });
        }
   }
  
-  $('#CornSeedsForm').submit(function(e) {
+  $('#VegReqForm').submit(function(e) {
  
      e.preventDefault();
    
@@ -205,14 +204,14 @@
    
      $.ajax({
         type:'POST',
-        url: "{{ url('store-cornseeds')}}",
+        url: "{{ url('store-vegreq')}}",
         data: formData,
         cache:false,
         contentType: false,
         processData: false,
         success: (data) => {
-          $("#cornseeds-modal").modal('hide');
-          var oTable = $('#cornseeds-crud-datatable').dataTable();
+          $("#vegreq-modal").modal('hide');
+          var oTable = $('#vegreq-crud-datatable').dataTable();
           oTable.fnDraw(false);
           $("#btn-save").html('Submit');
           $("#btn-save"). attr("disabled", false);

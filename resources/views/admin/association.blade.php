@@ -70,7 +70,7 @@
         </div>
     </div>
 
-        <table class="table table-bordered display responsive nowrap" id="assoc-crud-datatable">
+        <table class="table table-bordered display responsive nowrap display responsive nowrap" id="assoc-crud-datatable">
            <thead>
               <tr>
                 <th>Name of Association</th>
