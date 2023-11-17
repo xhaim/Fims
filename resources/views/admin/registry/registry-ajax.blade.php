@@ -386,7 +386,11 @@
             $('#id').val(res.id);
             $('#rsbsa_id').val(res.rsbsa_id);
             $('#generated_id').val(res.generated_id);
-            $('#date_enrolled').val(res.date_enrolled);
+            var dateParts = res.date_enrolled.split('/');
+            var formattedDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
+
+            // Set the formatted date to the input field
+            $('#date_enrolled').val(formattedDate);
 
             // INCOME
             $('#income_source').val(res.income_source);
@@ -405,7 +409,13 @@
             $('#middlename').val(res.middlename);
             $('#gender').val(res.gender);
             $('#age').val(res.age);
-            $('#birthdate').val(res.birthdate);
+
+            var BdateParts = res.birthdate.split('/');
+            var formattedBDate = BdateParts[2] + '-' + BdateParts[1] + '-' + BdateParts[0];
+
+            // Set the formatted date to the input field
+            $('#birthdate').val(formattedBDate);
+
 
                      
 // HHMEMBERS // HHMEMBERS // HHMEMBERS // HHMEMBERS // HHMEMBERS // HHMEMBERS // HHMEMBERS // HHMEMBERS // HHMEMBERS // HHMEMBERS // HHMEMBERS  
@@ -486,7 +496,13 @@
                 $(`#middlename${i}`).val(res[`middlename${i}`]);
                 $(`#gender${i}`).val(res[`gender${i}`]);
                 $(`#age${i}`).val(res[`age${i}`]);
-                $(`#birthdate${i}`).val(res[`birthdate${i}`]);
+
+                var BdateParts = res[`birthdate${i}`].split('/');
+                var formattedBDate = BdateParts[2] + '-' + BdateParts[1] + '-' + BdateParts[0];
+
+                // Set the formatted date to the input field
+                $(`#birthdate${i}`).val(formattedBDate);
+
                 lastValidMemberCount = i + 1; // Update lastValidMemberCount
                 }
                 memberCount = lastValidMemberCount;
@@ -575,7 +591,12 @@
             // ORGANIZATION
             $('#award').val(res.award);
             $('#awarding_body').val(res.awarding_body);
-            $('#date_received').val(res.date_received);
+
+            var AwarddateParts1 = res[`date_received`].split('/');
+                var formattedAwardDate1 = AwarddateParts1[2] + '-' + AwarddateParts1[1] + '-' + AwarddateParts1[0];
+
+                // Set the formatted date to the input field
+                $(`#date_received`).val(formattedAwardDate1);
 
             const AwCiFormContainer = document.getElementById('Awards');
             AwardsCount = 2;
@@ -627,7 +648,13 @@
                       AwCiFormContainer.appendChild(newAwCiDetails);
                 $(`#award${a}`).val(res[`award${a}`]);
                 $(`#awarding_body${a}`).val(res[`awarding_body${a}`]);
-                $(`#date_received${a}`).val(res[`date_received${a}`]);
+
+                var AwarddateParts = res[`date_received${a}`].split('/');
+                var formattedAwardDate = AwarddateParts[2] + '-' + AwarddateParts[1] + '-' + AwarddateParts[0];
+
+                // Set the formatted date to the input field
+                $(`#date_received${a}`).val(formattedAwardDate);
+
                 lastValidAwardsCount = a + 1; // Update lastValidAwardsCount
                 }
                 AwardsCount = lastValidAwardsCount;
