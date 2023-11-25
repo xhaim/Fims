@@ -31,14 +31,16 @@
 <div class="col" id="main-container">
 <div class="container mt-2">
  
-<div class="row">
+    <div class="row">
         <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
+            <div class="pull-left" style="display:flex; width:100%;">
                 <h2>Rice Seeds</h2>
             </div>
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)">Add </a>
                 <a class="btn btn-secondary" onClick="printDataTable()" href="javascript:void(0)">printAll </a>
+                
+                <a class="btn btn-warning" id="toggleDatatables" style="margin-left:960px;" onclick="toggleDatatables()">View Archive</a>
             </div>
         </div>
     </div>
@@ -51,6 +53,7 @@
  
     <div class="card-body">
  
+      <div id="MainTable">
         <table class="table table-bordered display responsive nowrap display responsive nowrap" id="riceseeds-crud-datatable">
            <thead>
               <tr>
@@ -64,6 +67,23 @@
               </tr>
            </thead>
         </table>
+      </div>
+
+        <div id="Archive" hidden="hidden">
+        <table class="table table-bordered display responsive nowrap display responsive nowrap" id="riceseeds-archive-datatable" style="width:100%;" >
+           <thead>
+              <tr>
+                
+                <th>Variety</th>
+                <th>No. of Seeds Received</th>
+                <th>Date Received</th>
+                <th>Source of Funds</th>
+                <th>Registered-in Date</th>
+                <th width="150px">Action</th>
+              </tr>
+           </thead>
+        </table>
+        </div>
  
     </div>
 </div>
@@ -124,109 +144,6 @@
 <!-- end bootstrap model -->
 
 </body>
-<script type="text/javascript">
-      
- $(document).ready( function () {
- 
-  $.ajaxSetup({
-    headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-    $('#riceseeds-crud-datatable').DataTable({
-           processing: true,
-           serverSide: true,
-           ajax: "{{ url('riceseeds-crud-datatable') }}",
-           columns: [
-                   
-                    { data: 'variety', name: 'variety' },
-                    { data: 'seeds_received', name: 'seeds_received' },
-                    { data: 'date_received', name: 'date_received' },
-                    { data: 'source_of_funds', name: 'source_of_funds' },
-                    { data: 'created_at', name: 'created_at' },
-                    {data: 'action', name: 'action', orderable: false},
-                 ],
-                 order: [[0, 'desc']]
-       });
- 
-  });
-   
-  function add(){
- 
-       $('#RiceSeedsForm').trigger("reset");
-       $('#RiceSeedsModal').html("Add Rice Seeds");
-       $('#riceseeds-modal').modal('show');
-       $('#id').val('');
- 
-  }   
-  function editFunc(id){
-     
-    $.ajax({
-        type:"POST",
-        url: "{{ url('edit-riceseeds') }}",
-        data: { id: id },
-        dataType: 'json',
-        success: function(res){
-          $('#RiceseedsModal').html("Edit Rice Seeds");
-          $('#riceseeds-modal').modal('show');
-          $('#id').val(res.id);
-          $('#variety').val(res.variety);
-          $('#seeds_received').val(res.seeds_received);
-          $('#date_received').val(res.date_received);
-          $('#source_of_funds').val(res.source_of_funds);
-       }
-    });
-  }  
- 
-  function deleteFunc(id){
-        if (confirm("Delete Record?") == true) {
-        var id = id;
-          
-          // ajax
-          $.ajax({
-              type:"POST",
-              url: "{{ url('delete-riceseeds') }}",
-              data: { id: id },
-              dataType: 'json',
-              success: function(res){
- 
-                var oTable = $('#riceseeds-crud-datatable').dataTable();
-                oTable.fnDraw(false);
-             }
-          });
-       }
-  }
 
- 
-  $('#RiceSeedsForm').submit(function(e) {
- 
-     e.preventDefault();
-   
-     var formData = new FormData(this);
-   
-     $.ajax({
-        type:'POST',
-        url: "{{ url('store-riceseeds')}}",
-        data: formData,
-        cache:false,
-        contentType: false,
-        processData: false,
-        success: (data) => {
-          $("#riceseeds-modal").modal('hide');
-          var oTable = $('#riceseeds-crud-datatable').dataTable();
-          oTable.fnDraw(false);
-          $("#btn-save").html('Submit');
-          $("#btn-save"). attr("disabled", false);
-        },
-        error: function(data){
-           console.log(data);
-         }
-       });
-   });
-
-  //  PRINT DATATABLE //
-
-  
- 
-</script>
+@include('admin/riceseeds/rice-scripts')
 </html>

@@ -91,6 +91,11 @@ Route::post('store-riceseeds', [RiceSeedsAjaxCRUDController::class, 'store']);
 Route::post('edit-riceseeds', [RiceSeedsAjaxCRUDController::class, 'edit']);
 Route::post('delete-riceseeds', [RiceSeedsAjaxCRUDController::class, 'destroy']);
 
+Route::post('/rice-seeds/archive', [RiceSeedsAjaxCrudController::class, 'archive'])->name('rice-seeds.archive');
+Route::post('/rice-seeds/restore', [RiceSeedsAjaxCrudController::class, 'restore'])->name('rice-seeds.restore');
+Route::get('riceseeds-archive-datatable', [RiceSeedsAjaxCRUDController::class, 'archive_index']);
+
+
 // Vegetable seeds
 Route::get('vegseeds-crud-datatable', [VegSeedsAjaxCRUDController::class, 'index']);
 Route::post('store-vegseeds', [VegSeedsAjaxCRUDController::class, 'store']);
