@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Corn;
+use App\Models\Archivedcorns;
 use Datatables;
 use Illuminate\Support\Facades\DB;
 
@@ -61,6 +62,95 @@ class CornAjaxController extends Controller
   
      }
        
+
+     // START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //
+
+    //  Archive Datatable
+    public function archive_index()
+    {
+        if (request()->ajax()) {
+            return datatables()->of(Archivedcorns::select('*'))
+                ->addColumn('action', 'admin/archive-corn-action')
+                ->rawColumns(['action'])
+                ->addIndexColumn()
+                ->make(true);
+        }
+
+        return view('admin/corn');
+    }
+
+
+   //  ARCHIVE
+   public function archive(Request $request)
+   {
+       // Validate the request, if necessary
+       $request->validate([
+           'id' => 'required|exists:corns,id',
+       ]);
+
+       // Get the record to be archived
+       $corn = Corn::find($request->id);
+
+       // Create a new archived record
+       $archivedRecord = Archivedcorns::create([
+            'rsbsa' => $corn->rsbsa, 
+            'generated'=> $corn->generated,
+            'association'=> $corn->association,
+            'barangay'=> $corn->barangay,
+            'name'=> $corn->name,
+            'birth'=> $corn->birth,
+            'season'=> $corn->season,
+            'age'=> $corn->age,
+            'sex'=> $corn->sex,
+            'cropping'=> $corn->cropping,
+            'area'=> $corn->area,
+            'location'=> $corn->location,
+           // Add any additional columns needed for the archived table
+       ]);
+
+       // Delete the record from the main table
+       $corn->delete();
+
+       return response()->json(['success' => true]);
+   }
+
+   // RESTORE ARCHIVED
+   public function restore(Request $request)
+   {
+       // Validate the request, if necessary
+       $request->validate([
+           'id' => 'required|exists:archived_corn,id',
+       ]);
+
+       // Get the record to be unarchived
+       $archivedcorn = Archivedcorns::find($request->id);
+
+       // Create a new record in the main table
+       $corn = Corn::create([
+        'rsbsa' => $archivedcorn->rsbsa, 
+        'generated'=> $archivedcorn->generated,
+        'association'=> $archivedcorn->association,
+        'barangay'=> $archivedcorn->barangay,
+        'name'=> $archivedcorn->name,
+        'birth'=> $archivedcorn->birth,
+        'season'=> $archivedcorn->season,
+        'age'=> $archivedcorn->age,
+        'sex'=> $archivedcorn->sex,
+        'cropping'=> $archivedcorn->cropping,
+        'area'=> $archivedcorn->area,
+        'location'=> $archivedcorn->location,
+           // Add any additional columns needed for the main table
+       ]);
+
+       // Delete the record from the archived table
+       $archivedcorn->delete();
+
+       return response()->json(['success' => true]);
+   }
+
+
+   // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING //
+
        
     //  /**
     //   * Show the form for editing the specified resource.

@@ -85,6 +85,10 @@ Route::post('edit-corn', [CornAjaxController::class, 'edit']);
 Route::post('delete-corn', [CornAjaxController::class, 'destroy']);
 Route::get('/print-corn', [CornAjaxController::class, 'fetchData']);
 
+Route::post('/corn/archive', [CornAjaxController::class, 'archive'])->name('corn.archive');
+Route::post('/corn/restore', [CornAjaxController::class, 'restore'])->name('corn.restore');
+Route::get('corn-archive-datatable', [CornAjaxController::class, 'archive_index']);
+
 // rice seeds
 Route::get('riceseeds-crud-datatable', [RiceSeedsAjaxCRUDController::class, 'index']);
 Route::post('store-riceseeds', [RiceSeedsAjaxCRUDController::class, 'store']);
