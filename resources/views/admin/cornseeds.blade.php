@@ -71,7 +71,7 @@
   <!-- boostrap company model -->
     <div class="modal fade" id="cornseeds-modal" aria-hidden="true">
       <div class="modal-dialog modal-lg">
-        <div class="modal-content" style="width: 500px;left:190px">
+        <<div class="modal-content" style="width: 500px;left:190px">
           <div class="modal-header" style="height: 80px;">
             <h4 class="modal-title" id="CornSeedsModal"></h4>
           </div>

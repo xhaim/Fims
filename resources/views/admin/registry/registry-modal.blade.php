@@ -1,6 +1,6 @@
 <div class="modal fade" id="registry-modal" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-      <div class="modal-content" style="width: 500px;left:190px">
+      <<div class="modal-content" style="width: 500px;left:190px">
         <div class="modal-header" >
           <h4 class="modal-title" id="RegistryModal"></h4>
         </div>

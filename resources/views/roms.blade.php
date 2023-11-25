@@ -38,8 +38,7 @@
             </div>
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)"> Add</a>
-                <button style="background-color: #87CEEB" id="printButton"  
-                onClick="printDataTable()" href="javascript:void(0)">Print DataTable</button>
+                <a class="btn btn-secondary" onClick="printDataTable()" href="javascript:void(0)">printAll </a>
 
             </div>
         </div>
@@ -86,7 +85,7 @@
  
     <div class="modal fade" id="roms-modal" aria-hidden="true">
       <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <div class="modal-content" style="width: 500px;left:190px">
           <div class="modal-header">
             <h4 class="modal-title" id="RomsModal"></h4>
           </div>
@@ -215,7 +214,7 @@
                 </div>
               </div>
               <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-primary" id="btn-save">Save changes
+                <button type="submit" class="btn btn-success" id="btn-save">Save
                 </button>
               </div>
             </form>

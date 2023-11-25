@@ -37,9 +37,8 @@
                 <h2>Fishery</h2>
             </div>
             <div class="pull-right mb-2">
-                <a class="btn btn-success" onClick="add()" href="javascript:void(0)"> Add Company</a>
-                <button style="background-color: #87CEEB" id="printButton"  
-                onClick="printDataTable()" href="javascript:void(0)">Print DataTable</button>
+                <a class="btn btn-warning" onClick="add()" href="javascript:void(0)"> Add </a>
+                <a class="btn btn-secondary" onClick="printDataTable()" href="javascript:void(0)">printAll </a>
             </div>
         </div>
     </div>
@@ -93,7 +92,7 @@
   <!-- Bootstrap fishery model -->
     <div class="modal fade" id="fishery-modal" aria-hidden="true">
       <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <div class="modal-content" style="width: 500px;left:190px">
           <div class="modal-header">
             <h4 class="modal-title" id="CompanyModal"></h4>
           </div>
@@ -101,20 +100,20 @@
             <form action="javascript:void(0)" id="CompanyForm" name="CompanyForm" class="form-horizontal" method="POST" enctype="multipart/form-data">
               <input type="hidden" name="id" id="id">
               <div class="form-group">
-                <label for="registration_no" class="col-sm-2 control-label">Registration No.</label>
+                <label for="registration_no" class="col-sm-8 control-label">Registration No.</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="registration_no" name="registration_no" placeholder="Enter Registration No." maxlength="50" required="">
                 </div>
               </div>  
  
               <div class="form-group">
-                <label for="registration_date" class="col-sm-2 control-label">Registration Date</label>
+                <label for="registration_date" class="col-sm-8 control-label">Registration Date</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="registration_date" name="registration_date" placeholder="Enter Registration Date" maxlength="50" required="">
                 </div>
               </div>
               <div class="form-group">
-                <label for="registration_type" class="col-sm-2 control-label">Registry Type</label>
+                <label for="registration_type" class="col-sm-8 control-label">Registry Type</label>
                 <div class="col-sm-10">
                   <label class="radio-inline">
                     <input type="radio" name="registration_type" value="New registration" checked> New Registration
@@ -125,7 +124,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="salutation" class="col-sm-2 control-label">Salutation</label>
+                <label for="salutation" class="col-sm-8 control-label">Salutation</label>
                 <div class="col-sm-10">
                   <label class="radio-inline">
                     <input type="radio" name="salutation" value="Mr" checked> Mr
@@ -139,67 +138,67 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="last_name" class="col-sm-2 control-label">Last Name</label>
+                <label for="last_name" class="col-sm-8 control-label">Last Name</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter Last Name" required>
                 </div>
               </div>
               <div class="form-group">
-                <label for="first_name" class="col-sm-2 control-label">First Name</label>
+                <label for="first_name" class="col-sm-8 control-label">First Name</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter First Name" required>
                 </div>
               </div>
               <div class="form-group">
-                <label for="middle_name" class="col-sm-2 control-label">Middle Name</label>
+                <label for="middle_name" class="col-sm-8 control-label">Middle Name</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder="Enter Middle Name">
                 </div>
               </div>
               <div class="form-group">
-                <label for="appellation" class="col-sm-2 control-label">Appellation</label>
+                <label for="appellation" class="col-sm-8 control-label">Appellation</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="appellation" name="appellation" placeholder="Enter Appellation">
                 </div>
               </div>
               <div class="form-group">
-                <label for="barangay" class="col-sm-2 control-label">Barangay</label>
+                <label for="barangay" class="col-sm-8 control-label">Barangay</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="barangay" name="barangay" placeholder="Enter Barangay">
                 </div>
               </div>
               <div class="form-group">
-                <label for="contact_no" class="col-sm-2 control-label">Contact No.</label>
+                <label for="contact_no" class="col-sm-8 control-label">Contact No.</label>
                 <div class="col-sm-10">
                   <input type="number" class="form-control" id="contact_no" name="contact_no" maxlength="11" placeholder="Enter Contact No.">
                 </div>
               </div>
               <div class="form-group">
-                <label for="contact_no" class="col-sm-2 control-label">Resident of the Municipality since</label>
+                <label for="contact_no" class="col-sm-8 control-label">Resident of the Municipality since</label>
                 <div class="col-sm-10">
                   <input type="number" class="form-control" id="resident" name="resident" maxlength="11" placeholder="Enter Years of Residency">
                 </div>
               </div>
               <div class="form-group">
-                <label for="age" class="col-sm-2 control-label">Age</label>
+                <label for="age" class="col-sm-8 control-label">Age</label>
                 <div class="col-sm-10">
                   <input type="number" class="form-control" id="age" name="age" placeholder="Enter Age">
                 </div>
               </div>
               <div class="form-group">
-                <label for="date_of_birth" class="col-sm-2 control-label">Date of  Birth</label>
+                <label for="date_of_birth" class="col-sm-8 control-label">Date of  Birth</label>
                 <div class="col-sm-10">
                   <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" placeholder="Enter Date of  Birth">
                 </div>
               </div>
               <div class="form-group">
-                <label for="place_of_birth" class="col-sm-2 control-label">Place of  Birth</label>
+                <label for="place_of_birth" class="col-sm-8 control-label">Place of  Birth</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="place_of_birth" name="place_of_birth" placeholder="Enter Place of birth (municipality,province)">
                 </div>
               </div>
               <div class="form-group">
-                <label for="gender" class="col-sm-2 control-label">Gender</label>
+                <label for="gender" class="col-sm-8 control-label">Gender</label>
                 <div class="col-sm-10">
                   <label class="radio-inline">
                     <input type="radio" name="gender" value="Male" checked> Male
@@ -210,7 +209,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="civil_status" class="col-sm-2 control-label">Civil Status</label>
+                <label for="civil_status" class="col-sm-8 control-label">Civil Status</label>
                 <div class="col-sm-10">
                     <div class="radio-inline">
                         <label>
@@ -235,7 +234,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="no_of_children" class="col-sm-2 control-label">No. of Children</label>
+                <label for="no_of_children" class="col-sm-8 control-label">No. of Children</label>
                 <div class="col-sm-10">
                   <input type="number" class="form-control" id="no_of_children" name="no_of_children" placeholder="Enter No. of Children">
                 </div>
@@ -293,31 +292,31 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="person_to_notify" class="col-sm-2 control-label">Person to notify in case of emergency</label>
+                <label for="person_to_notify" class="col-sm-8 control-label">Person to notify in case of emergency</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="person_to_notify" name="person_to_notify" placeholder="Enter Person to notify in case of emergency">
                 </div>
               </div>
               <div class="form-group">
-                <label for="relationship" class="col-sm-2 control-label">Relationship</label>
+                <label for="relationship" class="col-sm-8 control-label">Relationship</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="relationship" name="relationship" placeholder="Enter relationship">
                 </div>
               </div>
               <div class="form-group">
-                <label for="contact" class="col-sm-2 control-label">Contact No. </label>
+                <label for="contact" class="col-sm-8 control-label">Contact No. </label>
                 <div class="col-sm-10">
                   <input type="number" class="form-control" id="contact" name="contact" placeholder="Enter Contact No.">
                 </div>
               </div>
               <div class="form-group">
-                <label for="address" class="col-sm-2 control-label">Address(barangay,municipality,province) </label>
+                <label for="address" class="col-sm-8 control-label">Address(barangay,municipality,province) </label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address">
                 </div>
               </div>
               <div class="form-group">
-                <label for="religion" class="col-sm-2 control-label">Religion</label>
+                <label for="religion" class="col-sm-8 control-label">Religion</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="religion" name="religion" placeholder="Enter Religion">
                 </div>
@@ -426,7 +425,7 @@
 </div>
 <button class="btn btn-primary mt-3" type="button" id="AddMemAf" onclick="addMemAf()">Add Membership/Affiliations</button>
               <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-primary" id="btn-save">Save changes</button>
+                <button type="submit" class="btn btn-success" id="btn-save">Save</button>
               </div>
             </form>
           </div>

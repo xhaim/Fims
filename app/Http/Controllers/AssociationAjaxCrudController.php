@@ -99,5 +99,11 @@
         DB::statement("UPDATE associations SET id = (@id := @id + 1)");
         return Response()->json($association);
     }
+     // In your controller, retrieve the data
+     public function fetchData() {
+        // Retrieve data from your model or source (e.g., database)
+        $data = Association::all(); // Replace YourModel with your actual model
 
+        return response()->json($data);
+    }
  }

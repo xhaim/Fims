@@ -37,7 +37,11 @@
             </div>
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)">Add</a>
+               <a class="btn btn-secondary" onClick="printDataTable()" href="javascript:void(0)">printAll </a>
             </div>
+            
+              
+          
         </div>
     </div>
     
@@ -258,7 +262,93 @@
        }
     });
   }  
- 
+ // AJAX request to fetch data from the server
+ function printDataTable() {
+          $.ajax({
+              url: '/print-corn', // Replace with your Laravel route URL to fetch data
+              method: 'GET',
+              success: function (data) {
+                  // Once the data is fetched successfully, you can proceed to print it
+                  printData(data);
+              },
+              error: function (error) {
+                  console.error('Error fetching data:', error);
+              }
+          });
+      }
+
+      // Function to print the data fetched from the server
+      function printData(data) {
+          // Columns to exclude (you can adjust these according to your requirements)
+          const excludedColumns = ['generated','created_at', 'updated_at'];
+
+          const headers = [{columns:['Id', 'Rsbsa', 'Association', 'Barangay','Name','Birth',
+                            'Season','Age','Sex', 'Cropping','Area','Location']}];
+
+          // Create a new window for printing
+          let printWindow = window.open('', '_blank');
+          
+
+          // Construct the HTML content to be printed with CSS styles for table borders
+          let htmlContent = `
+              <html>
+              <head>
+                  <title>Corn Print</title>
+                  <style>
+                      table {
+                          border-collapse: collapse;
+                          width: 100%;
+                      }
+                      table, th, td {
+                          border: 1px solid black;
+                      }
+                      th, td {
+                          padding: 8px;
+                          text-align: left;
+                      }
+                  </style>
+              </head>
+              <body>
+
+               
+
+                  <table>
+          `;
+
+         
+
+              // Generate sub-headers for "Farmer's Name" columns
+    headers.forEach(header => {
+        if (typeof header === 'object') {
+            header.columns.forEach(column => {
+                htmlContent += `<th>${column}</th>`;
+            });
+        }
+    });
+
+          // Assuming each data row is an object
+          data.forEach(row => {
+              htmlContent += '<tr>';
+              for (const key in row) {
+                  if (row.hasOwnProperty(key) && !excludedColumns.includes(key)) {
+                      htmlContent += '<td>' + row[key] + '</td>';
+                  }
+              }
+              htmlContent += '</tr>';
+          });
+
+          htmlContent += `
+                  </table>
+              </body>
+              </html>
+          `;
+
+          // Write the HTML content to the new window and print it
+          printWindow.document.write(htmlContent);
+          printWindow.document.close();
+          printWindow.print();
+      }
+  
   function deleteFunc(id){
         if (confirm("Delete Record?") == true) {
         var id = id;

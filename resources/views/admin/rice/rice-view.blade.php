@@ -143,9 +143,9 @@
           // Columns to exclude (you can adjust these according to your requirements)
           const excludedColumns = ['created_at', 'updated_at'];
 
-          const headers = ['', '',
-        { name: "Farmer's Name", columns: ['id', 'RSBSA No.','Firstname', 'Middle', 'Last','Barangay', 'Farm Location', 'Birthdate',
-        'Farm Area', 'Sex', 'Membership', 'Quantity', 'DateReceived'] },'','','','','','','',''];
+          const headers = ['No.', 'RSBSA No.',
+        { name: "Farmer's Name", columns: ['Firstname', 'Middle', 'Last'] },'Barangay', 'Farm Location', 'Birthdate',
+        'Farm Area', 'Sex', 'Membership', 'Quantity', 'DateReceived'];
 
           // Create a new window for printing
           let printWindow = window.open('', '_blank');
@@ -156,6 +156,9 @@
               <head>
                   <title>Data Table Print</title>
                   <style>
+                      body{
+                          text-align:center;  
+                      }
                       table {
                           border-collapse: collapse;
                           width: 100%;
@@ -170,8 +173,19 @@
                   </style>
               </head>
               <body>
-
-                // Add Decals Here
+                <h4>Republic of the Philippines</h4>
+                <h4 style="margin-top:-20px;">Regional Field Office No. VII</h4>
+                <h3 style="margin-top:-20px;"> Office of the Regional Executive Director</h3>
+                <h3 style="margin-top:-17px;"> DA-RFO 7 Complex, Highway Maguikay, Mandaue City 6014, Cebu</h3>
+                <h4 style="margin-top:-17px;">Tel. No. (032)268-5187;Email:redoffice7@gmail.com</h4>
+                <br>
+                <h5 style="margin-top:-20px;">SIGNED MASTERLIST OF BENEFICIATIES-HYBRID RICE FEEDS</h5>
+                <h5 style="margin-top:-20px;">RICE PROGRAM (PRODUCTION SUPPORT SERVICES)</h5>
+                <div style="text-align:left;">
+                <h5 style="margin-top:-20px;">PROVINCE: BOHOL</h5>
+                <h5 style="margin-top:-20px;">MUNICIPALITY: CARMEN</h5>
+                </div>
+                
 
                   <table>
           `;
@@ -181,7 +195,7 @@
         if (typeof header === 'object') {
             htmlContent += `<th colspan="${3}" style="text-align:center;">${header.name}</th>`;
         } else if (!excludedColumns.includes(header)) {
-            htmlContent += `<th>${header}</th>`;
+            htmlContent += `<th rowspan="${2}" style="text-align:center;">${header}</th>`;
         }
     });
     htmlContent += '</tr><tr>';
@@ -208,6 +222,34 @@
 
           htmlContent += `
                   </table>
+
+                  <table class="tg" style="border:none;">
+                    <thead style="border:none;">
+                    <tr style="border:none;">
+                        <th style="border:none;" class="tg-0lax">Prepared by:</th>
+                        <th style="border:none;" class="tg-0lax">Noted by:</th>
+                        <th style="border:none;" class="tg-0lax">Certified/Corrected by:</th>
+                        <th style="border:none;" class="tg-0lax"></th>
+                    </tr>
+                    </thead>
+                    <tbodystyle="border:none;">
+                    <tr style="border:none;">
+                        <td style="border:none;" class="tg-0lax">Municipal/City Program Coordinator:</td>
+                        <td style="border:none;" class="tg-0lax">
+                            <h5>ARLENE D. CABUSAO</h5>
+                            <br>
+                            <p style="margin-top:-40px;">Municipal/City Agriculturist</p>
+                        </td>
+                        <td style="border:none;" class="tg-0lax">
+                            <h5>ROMAN M. DABALOS</h5>
+                            <br>
+                            <p style="margin-top:-40px;">DA 7 Program Representative</p>
+                        </td>
+                        <td style="border:none;" class="tg-0lax"></td>
+                    </tr>
+                    </tbody>
+                  </table>
+
               </body>
               </html>
           `;

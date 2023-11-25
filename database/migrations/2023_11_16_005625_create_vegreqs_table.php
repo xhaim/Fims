@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('vegreqs', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('seeds_received');
+            $table->string('barangay');
+            $table->string('contact');
             $table->timestamps();
         });
     }

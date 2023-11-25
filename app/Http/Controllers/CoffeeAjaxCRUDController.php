@@ -88,7 +88,14 @@ class CoffeeAjaxCRUDController extends Controller
       
         return Response()->json($coffee);
     }
-   
+    // In your controller, retrieve the data
+ public function fetchData() {
+    // Retrieve data from your model or source (e.g., database)
+    $data = Coffee::all(); // Replace YourModel with your actual model
+
+    return response()->json($data);
+}
+    
 }
 
 

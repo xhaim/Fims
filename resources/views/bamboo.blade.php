@@ -38,7 +38,7 @@
             </div>
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)"> Add</a>
-               
+                <a class="btn btn-secondary" onClick="printDataTable()" href="javascript:void(0)">printAll </a>
 
             </div>
         </div>
@@ -83,7 +83,7 @@
  
     <div class="modal fade" id="bamboo-modal" aria-hidden="true">
       <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <div class="modal-content" style="width: 500px;left:190px">
           <div class="modal-header">
             <h4 class="modal-title" id="BambooModal"></h4>
           </div>
@@ -193,7 +193,7 @@
                 </div>
               </div>
               <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-primary" id="btn-save">Save changes
+                <button type="submit" class="btn btn-success" id="btn-save">Save
                 </button>
               </div>
             </form>
@@ -284,7 +284,139 @@
        }
     });
   }  
- 
+        function printDataTable() {
+                      $.ajax({
+                          url: '/print-hvdcpbamboo', // Replace with your Laravel route URL to fetch data
+                          method: 'GET',
+                          success: function (data) {
+                              // Once the data is fetched successfully, you can proceed to print it
+                              printData(data);
+                          },
+                          error: function (error) {
+                              console.error('Error fetching data:', error);
+                          }
+                      });
+                  }
+
+                  // Function to print the data fetched from the server
+                  function printData(data) {
+                      // Columns to exclude (you can adjust these according to your requirements)
+                      const excludedColumns = ['created_at', 'updated_at'];
+                      
+                      const headers = ['No.','NAME', 'SEX','BIRTHDAY',
+                    { name: "ADDRESS", columns: ['Purok', 'Barangay'] },{ name: "Number of Bamboo", columns: ['Newly Planted', 'Harvestable'] },'Total # of Bamboo', 'Area(in Ha./Sq.M)' , 'Age of Bamboo Trees',
+                    'Average No. of Bamboo Pole Per Month','Varieties','Group/Organization','Remark'];
+
+                      // Create a new window for printing
+                      let printWindow = window.open('', '_blank');
+                      
+
+                      // Construct the HTML content to be printed with CSS styles for table borders
+                      let htmlContent = `
+                          <html>
+                          <head>
+                              <title>Bamboo Print</title>
+                              <style>
+                                  table {
+                                      border-collapse: collapse;
+                                      width: 100%;
+                                  }
+                                  table, th, td {
+                                      border: 1px solid black;
+                                  }
+                                  th, td {
+                                      padding: 8px;
+                                      text-align: left;
+                                  }
+                              </style>
+                          </head>
+                          <body>
+                            <table class="tg">
+                                <thead>
+                                  <tr>
+                                    <th style="text-align:center;" class="tg-0lax">CLUSTER ____(___________DISTRICT) CACAO FARMER PROFILE</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td style="text-align:center;" class="tg-0lax"> AS OF 2023</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align:left;" class="tg-0lax">Municipality:</td>
+                                  </tr>
+                                </tbody>
+                            </table>
+                          
+
+                              <table>
+                      `;
+
+                        // Adding table headers
+                headers.forEach(header => {
+                    if (typeof header === 'object') {
+                        htmlContent += `<th colspan="${2}" style="text-align:center;">${header.name}</th>`;
+                    } else if (!excludedColumns.includes(header)) {
+                        htmlContent += `<th rowspan="${2}" style="text-align:center; font-size:15px;">${header}</th>`;
+                    }
+                });
+                htmlContent += '</tr><tr>';
+
+                          // Generate sub-headers for "Farmer's Name" columns
+                headers.forEach(header => {
+                    if (typeof header === 'object') {
+                        header.columns.forEach(column => {
+                            htmlContent += `<th>${column}</th>`;
+                        });
+                    }
+                });
+
+                      // Assuming each data row is an object
+                      data.forEach(row => {
+                          htmlContent += '<tr>';
+                          for (const key in row) {
+                              if (row.hasOwnProperty(key) && !excludedColumns.includes(key)) {
+                                  htmlContent += '<td>' + row[key] + '</td>';
+                              }
+                          }
+                          htmlContent += '</tr>';
+                      });
+
+                      htmlContent += `
+                              </table>
+                              <table class="tg" style="border:none;">
+                                <thead style="border:none;">
+                                  <tr style="border:none;">
+                                    <th style="border:none;" class="tg-0lax">Remark:NR- Need of Rehabilitation</th>
+                                    <th style="border:none;" class="tg-0lax">NTR: Need to rejuvinate</th>
+                                    <th style="border:none;" class="tg-0lax">AB:Abandon</th>
+                                    <th style="border:none;" class="tg-0lax"> PD-  Pest and diseases infection</th>
+                                </tr>
+                                </thead>
+                                <tbodystyle="border:none;">
+                                <tr style="border:none;">
+                                    <td style="border:none;" class="tg-0lax">
+                                        <br>
+                                        <p style="margin-top:10px;">Prepared By:</p>
+                                    </td>
+                                    <th style="border:none;" class="tg-0lax"></th>
+                                    <th style="border:none;" class="tg-0lax"></th>
+                                    <td style="border:none;" class="tg-0lax">
+                                        <br>
+                                        <p style="margin-top:10px;">Noted By:</p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                              </table>
+                          </body>
+                          </html>
+                      `;
+
+                      // Write the HTML content to the new window and print it
+                      printWindow.document.write(htmlContent);
+                      printWindow.document.close();
+                      printWindow.print();
+                  }
+                  
   function deleteFunc(id){
         if (confirm("Delete Record?") == true) {
         var id = id;

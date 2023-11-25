@@ -1,7 +1,4 @@
 
-<a href="javascript:void(0)" onClick="viewFunc({{ $id }})" class="btn btn-info">
-    <i class="fa fa-eye"></i> 
-
 <a href="javascript:void(0)" data-toggle="tooltip" onClick="editFunc({{ $id }})" data-original-title="Edit" class="edit btn btn-success">
     <i class="fa fa-pencil"></i> 
 </a>

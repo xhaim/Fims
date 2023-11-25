@@ -88,5 +88,12 @@ class BambooAjaxCRUDController extends Controller
       
         return Response()->json($bamboo);
     }
-   
+        // In your controller, retrieve the data
+    public function fetchData() {
+        // Retrieve data from your model or source (e.g., database)
+        $data = Bamboo::all(); // Replace YourModel with your actual model
+
+        return response()->json($data);
+    }
+        
 }

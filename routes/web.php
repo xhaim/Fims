@@ -27,7 +27,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dash;
 use App\Http\Controllers\CsvImportController;
-
+use App\Http\Controllers\VegReqController;
 
 
 
@@ -76,12 +76,14 @@ Route::post('store-assoc', [AssociationAjaxCRUDController::class, 'store']);
 Route::post('edit-assoc', [AssociationAjaxCRUDController::class, 'edit']);
 Route::post('delete-assoc', [AssociationAjaxCRUDController::class, 'destroy']);
 Route::get('get-association-details/{id}', [AssociationAjaxCrudController::class, 'getAssociationDetails'])->name('association.details');
+Route::get('/print-assoc', [AssociationAjaxCrudController::class, 'fetchData']);
 
 // corn
 Route::get('corn-crud-datatable', [CornAjaxController::class, 'index']);
 Route::post('store-corn', [CornAjaxController::class, 'store']);
 Route::post('edit-corn', [CornAjaxController::class, 'edit']);
 Route::post('delete-corn', [CornAjaxController::class, 'destroy']);
+Route::get('/print-corn', [CornAjaxController::class, 'fetchData']);
 
 // rice seeds
 Route::get('riceseeds-crud-datatable', [RiceSeedsAjaxCRUDController::class, 'index']);
@@ -151,54 +153,68 @@ Route::get('veg-crud-datatable', [VegetableAjaxCRUDController::class, 'index']);
 Route::post('store-veg', [VegetableAjaxCRUDController::class, 'store']);
 Route::post('edit-veg', [VegetableAjaxCRUDController::class, 'edit']);
 Route::post('delete-veg', [VegetableAjaxCRUDController::class, 'destroy']);
+Route::get('/print-hvcdpveg', [VegetableAjaxCRUDController::class, 'fetchData']);
 
 //Rootcrops
 Route::get('root-crud-datatable', [RootcropAjaxCRUDController::class, 'index']);
 Route::post('store-root', [RootcropAjaxCRUDController::class, 'store']);
 Route::post('edit-root', [RootcropAjaxCRUDController::class, 'edit']);
 Route::post('delete-root', [RootcropAjaxCRUDController::class, 'destroy']);
+Route::get('/print-hvdcprootcrops', [RootcropAjaxCRUDController::class, 'fetchData']);
 
 // Cacao
 Route::get('cacao-crud-datatable', [CacaoAjaxCRUDController::class, 'index']);
 Route::post('store-cacao', [CacaoAjaxCRUDController::class, 'store']);
 Route::post('edit-cacao', [CacaoAjaxCRUDController::class, 'edit']);
 Route::post('delete-cacao', [CacaoAjaxCRUDController::class, 'destroy']);
+Route::get('/print-hvdcpcacao', [CacaoAjaxCRUDController::class, 'fetchData']);
 
 // coffee
 Route::get('coffee-crud-datatable', [CoffeeAjaxCRUDController::class, 'index']);
 Route::post('store-coffee', [CoffeeAjaxCRUDController::class, 'store']);
 Route::post('edit-coffee', [CoffeeAjaxCRUDController::class, 'edit']);
 Route::post('delete-coffee', [CoffeeAjaxCRUDController::class, 'destroy']);
+Route::get('/print-hvdcpcoffee', [CoffeeAjaxCRUDController::class, 'fetchData']);
 
 // fruits
 Route::get('fruits-crud-datatable', [FruitsAjaxCRUDController::class, 'index']);
 Route::post('store-fruits', [FruitsAjaxCRUDController::class, 'store']);
 Route::post('edit-fruits', [FruitsAjaxCRUDController::class, 'edit']);
 Route::post('delete-fruits', [FruitsAjaxCRUDController::class, 'destroy']);
+Route::get('/print-hvdcpfruits', [FruitsAjaxCRUDController::class, 'fetchData']);
 
 // bamboo
 Route::get('bamboo-crud-datatable', [BambooAjaxCRUDController::class, 'index']);
 Route::post('store-bamboo', [BambooAjaxCRUDController::class, 'store']);
 Route::post('edit-bamboo', [BambooAjaxCRUDController::class, 'edit']);
 Route::post('delete-bamboo', [BambooAjaxCRUDController::class, 'destroy']);
+Route::get('/print-hvdcpbamboo', [BambooAjaxCRUDController::class, 'fetchData']);
 
 // Livestockpopu
 Route::get('popu-crud-datatable', [LivestockPopulationAjaxCRUDController::class, 'index']);
 Route::post('store-popu', [LivestockPopulationAjaxCRUDController::class, 'store']);
 Route::post('edit-popu', [LivestockPopulationAjaxCRUDController::class, 'edit']);
 Route::post('delete-popu', [LivestockPopulationAjaxCRUDController::class, 'destroy']);
+Route::get('/print-popu', [LivestockPopulationAjaxCRUDController::class, 'fetchData']);
 
 // ROMS
 Route::get('roms-crud-datatable', [ROMSAjaxCRUDController::class, 'index']);
 Route::post('store-roms', [ROMSAjaxCRUDController::class, 'store']);
 Route::post('edit-roms', [ROMSAjaxCRUDController::class, 'edit']);
 Route::post('delete-roms', [ROMSAjaxCRUDController::class, 'destroy']);
+Route::get('/print-roms', [ROMSAjaxCRUDController::class, 'fetchData']);
+
 
 // vaccination
 Route::get('vacc-crud-datatable', [VaccinationAjaxCRUDController::class, 'index']);
 Route::post('store-vacc', [VaccinationAjaxCRUDController::class, 'store']);
 Route::post('edit-vacc', [VaccinationAjaxCRUDController::class, 'edit']);
 Route::post('delete-vacc', [VaccinationAjaxCRUDController::class, 'destroy']);
+Route::get('/print-vacc', [VaccinationAjaxCRUDController::class, 'fetchData']);
 
-
+// veg req
+Route::get('vegreq-crud-datatable', [VegReqController::class, 'index']);
+Route::post('store-vegreq', [VegReqController::class, 'store']);
+Route::post('edit-vegreq', [VegReqController::class, 'edit']);
+Route::post('delete-vegreq', [VegReqController::class, 'destroy']);
 });

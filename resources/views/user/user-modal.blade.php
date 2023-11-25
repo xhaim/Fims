@@ -1,6 +1,6 @@
 <div class="modal fade" id="users-modal" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-      <div class="modal-content" style="width: 500px;left:190px">
+      <<div class="modal-content" style="width: 500px;left:190px">
         <div class="modal-header" style="height: 80px;">
           <h4 class="modal-title" id="UsersModal"></h4>
         </div>
@@ -11,14 +11,14 @@
             <div class="form-group">
               <label for="name" class="col-sm-8 control-label">Name</label>
               <div class="col-sm-12">
-                <input type="text" class= "form-control" id="name" name="name" placeholder="Enter Barangay" maxlength="20" required="">
+                <input type="text" class= "form-control" id="name" name="name" placeholder="Enter Name" maxlength="20" required="">
               </div>
             </div>
 
             <div class="form-group">
               <label for="email" class="col-sm-8 control-label">Email</label>
               <div class="col-sm-12">
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter Farm Location" maxlength="100" >
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" maxlength="100" >
               </div>
             </div>
           

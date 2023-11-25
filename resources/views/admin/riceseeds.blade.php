@@ -38,8 +38,7 @@
             </div>
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)">Add </a>
-                <button style="background-color: #87CEEB" id="printButton"  
-                onClick="printDataTable()" href="javascript:void(0)">Print DataTable</button>
+                <a class="btn btn-secondary" onClick="printDataTable()" href="javascript:void(0)">printAll </a>
             </div>
         </div>
     </div>
@@ -73,7 +72,7 @@
   <!-- boostrap ricesseds model -->
     <div class="modal fade" id="riceseeds-modal" aria-hidden="true">
       <div class="modal-dialog modal-lg">
-        <div class="modal-content" style="width: 500px;left:190px">
+        <<div class="modal-content" style="width: 500px;left:190px">
           <div class="modal-header" style="height: 80px;">
             <h4 class="modal-title" id="RiceSeedsModal"></h4>
           </div>

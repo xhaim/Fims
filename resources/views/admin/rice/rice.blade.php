@@ -32,11 +32,9 @@
             </div>
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)">Add</a>
+                <a class="btn btn-secondary" onClick="printDataTable()" href="javascript:void(0)">printAll </a>
             </div>
-            <div class="pull-right mb-2">
-              <a class="btn btn-warning" onClick="printDataTable()" href="javascript:void(0)">printAll </a>
-          </div>
-          </div>
+            
         </div>
     
         @if ($message = Session::get('success'))
@@ -49,7 +47,7 @@
           <div class="card-body">
           <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
-                  <div class="modal-content">
+                  <div class="modal-content" style="width: 500px;left:190px">
                       <div class="modal-header">
                           <h5 class="modal-title" id="viewModalLabel">Farmer Details</h5>
                       </div>
@@ -95,7 +93,7 @@
   <!-- Bootstrap farmers model -->
   <div class="modal fade" id="farmers-modal" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-      <div class="modal-content" style="width: 500px;left:190px">
+      <<div class="modal-content" style="width: 500px;left:190px">
         <div class="modal-header" style="height: 80px;">
           <h4 class="modal-title" id="FarmersModal"></h4>
         </div>

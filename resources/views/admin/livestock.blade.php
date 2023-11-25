@@ -76,7 +76,7 @@
   <!-- boostrap livestock model -->
     <div class="modal fade" id="livestock-modal" aria-hidden="true">
       <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <div class="modal-content" style="width: 500px;left:190px">
           <div class="modal-header" style="height: 80px;">
             <h4 class="modal-title" id="LivestockModal"></h4>
           </div>

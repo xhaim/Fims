@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Vegatble Farmer</title>
+    <title>Vegetable Farmer</title>
      
     <meta name="csrf-token" content="{{ csrf_token() }}">
      
@@ -38,8 +38,7 @@
             </div>
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)"> Add</a>
-                <button style="background-color: #87CEEB" id="printButton">Print DataTable</button>
-
+                <a class="btn btn-secondary" onClick="printDataTable()" href="javascript:void(0)">printAll </a>
             </div>
         </div>
     </div>
@@ -81,7 +80,7 @@
  
     <div class="modal fade" id="veg-modal" aria-hidden="true">
       <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <<div class="modal-content" style="width: 500px;left:190px">
           <div class="modal-header">
             <h4 class="modal-title" id="VegModal"></h4>
           </div>
@@ -177,7 +176,7 @@
                 </div>
               </div>
               <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-primary" id="btn-save">Save changes
+                <button type="submit" class="btn btn-success" id="btn-save">Save
                 </button>
               </div>
             </form>
@@ -264,6 +263,112 @@
        }
     });
   }  
+ 
+        function printDataTable() {
+              $.ajax({
+                  url: '/print-hvcdpveg', // Replace with your Laravel route URL to fetch data
+                  method: 'GET',
+                  success: function (data) {
+                      // Once the data is fetched successfully, you can proceed to print it
+                      printData(data);
+                  },
+                  error: function (error) {
+                      console.error('Error fetching data:', error);
+                  }
+              });
+          }
+
+          // Function to print the data fetched from the server
+          function printData(data) {
+              // Columns to exclude (you can adjust these according to your requirements)
+              const excludedColumns = ['id','created_at', 'updated_at'];
+
+              const headers = ['Name of Farmer',
+            { name: "LOCATION", columns: [ 'Barangay', 'Municipality'] }, 'Sex','PO Affiliation', 'Contact Number','Commodity','Area(in has.)',
+              'Number of Hills','Production/months(kgs.)','Market Outlet','Area for expansion(in has.)'];
+
+              // Create a new window for printing
+              let printWindow = window.open('', '_blank');
+              
+
+              // Construct the HTML content to be printed with CSS styles for table borders
+              let htmlContent = `
+                  <html>
+                  <head>
+                      <title>Vegetable Print</title>
+                      <style>
+                          table {
+                              border-collapse: collapse;
+                              width: 100%;
+                          }
+                          table, th, td {
+                              border: 1px solid black;
+                          }
+                          th, td {
+                              padding: 8px;
+                              text-align: left;
+                          }
+                      </style>
+                  </head>
+                  <body>
+                    <h6 style="text-align:left;">All types of Vegetables including melon varities</h6>
+                    
+
+                      <table>
+              `;
+
+              // Adding table headers
+        headers.forEach(header => {
+            if (typeof header === 'object') {
+                htmlContent += `<th colspan="${2}" style="text-align:center;">${header.name}</th>`;
+            } else if (!excludedColumns.includes(header)) {
+                htmlContent += `<th rowspan="${2}" style="text-align:center;">${header}</th>`;
+            }
+        });
+        htmlContent += '</tr><tr>';
+
+
+                  // Generate sub-headers for "Farmer's Name" columns
+        headers.forEach(header => {
+            if (typeof header === 'object') {
+                header.columns.forEach(column => {
+                    htmlContent += `<th style="font-size:15px;">${column}</th>`;
+                });
+            }
+        });
+
+              // Assuming each data row is an object
+              data.forEach(row => {
+                  htmlContent += '<tr>';
+                  for (const key in row) {
+                      if (row.hasOwnProperty(key) && !excludedColumns.includes(key)) {
+                          htmlContent += '<td>' + row[key] + '</td>';
+                      }
+                  }
+                  htmlContent += '</tr>';
+              });
+
+              htmlContent += `
+                      </table>
+                      <table class="tg" style="border:none;">
+                        <thead style="border:none;">
+                        <tr style="border:none;">
+                            <th style="border:none;" class="tg-0lax">Prepared by:</th>
+                            <th style="border:none;" class="tg-0lax">Noted by:</th>
+                            
+                        </tr>
+                        </thead>
+                      </table>
+
+                  </body>
+                  </html>
+              `;
+
+              // Write the HTML content to the new window and print it
+              printWindow.document.write(htmlContent);
+              printWindow.document.close();
+              printWindow.print();
+          }
  
   function deleteFunc(id){
         if (confirm("Delete Record?") == true) {

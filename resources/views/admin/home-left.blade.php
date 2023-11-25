@@ -59,7 +59,7 @@
             </li>
              <li  id="div_left" style="list-style: none">  <a href="{{url('fishery-crud-datatable')}}" style="text-decoration: none;font-size:15px">Fishery</a></li>
              <li  id="div_left" style="list-style: none"><a href="{{url('livestock-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Livestock</a></li>
-          
+             <li  id="div_left" style="list-style: none"><a href="{{url('vegreq-crud-datatable')}}" style="text-decoration: none;font-size:15px"> Vegetable request</a></li>
          </ul>
      </div>
      <li class="list-item">

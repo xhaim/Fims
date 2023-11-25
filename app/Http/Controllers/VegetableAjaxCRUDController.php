@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
  
 use Illuminate\Http\Request;
  
-use App\Models\Vegreq;
+use App\Models\Vegetable;
  
 use Datatables;
  
-class VegreqAjaxCRUDController extends Controller
+class VegetableAjaxCRUDController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,13 +18,13 @@ class VegreqAjaxCRUDController extends Controller
     public function index()
     {
         if(request()->ajax()) {
-            return datatables()->of(Vegreq::select('*'))
-            ->addColumn('action', 'admin/vegreq-action')
+            return datatables()->of(Vegetable::select('*'))
+            ->addColumn('action', 'veg-action')
             ->rawColumns(['action'])
             ->addIndexColumn()
             ->make(true);
         }
-        return view('admin/vegreq');
+        return view('vegetable');
     }
       
       
@@ -39,7 +39,7 @@ class VegreqAjaxCRUDController extends Controller
  
         $vegId = $request->id;
  
-        $veg   =   Vegreq::updateOrCreate(
+        $veg   =   Vegetable::updateOrCreate(
                     [
                      'id' => $vegId
                     ],
@@ -73,7 +73,7 @@ class VegreqAjaxCRUDController extends Controller
     public function edit(Request $request)
     {   
         $where = array('id' => $request->id);
-        $veg  = Vegreq::where($where)->first();
+        $veg  = Vegetable::where($where)->first();
       
         return Response()->json($veg);
     }
@@ -87,9 +87,16 @@ class VegreqAjaxCRUDController extends Controller
      */
     public function destroy(Request $request)
     {
-        $veg = Vegreq::where('id',$request->id)->delete();
+        $veg = Vegetable::where('id',$request->id)->delete();
       
         return Response()->json($veg);
     }
-   
+    // In your controller, retrieve the data
+ public function fetchData() {
+    // Retrieve data from your model or source (e.g., database)
+    $data = Vegetable::all(); // Replace YourModel with your actual model
+
+    return response()->json($data);
+}
+    
 }

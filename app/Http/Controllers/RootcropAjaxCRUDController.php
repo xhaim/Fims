@@ -88,5 +88,12 @@ class RootcropAjaxCRUDController extends Controller
       
         return Response()->json($root);
     }
-   
+    // In your controller, retrieve the data
+ public function fetchData() {
+    // Retrieve data from your model or source (e.g., database)
+    $data = RootCrops::all(); // Replace YourModel with your actual model
+
+    return response()->json($data);
+}
+    
 }

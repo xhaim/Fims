@@ -70,7 +70,7 @@
   <!-- boostrap fertilizer model -->
     <div class="modal fade" id="fert-modal" aria-hidden="true">
       <div class="modal-dialog modal-lg">
-        <div class="modal-content" style="width: 500px;left:190px">
+        <<div class="modal-content" style="width: 500px;left:190px">
           <div class="modal-header" >
             <h4 class="modal-title" id="FertModal"></h4>
           </div>
