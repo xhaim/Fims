@@ -33,7 +33,7 @@
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)">Add</a>
                 <a class="btn btn-secondary" onClick="printDataTable()" href="javascript:void(0)">printAll </a>
-                <a class="btn btn-info" id="toggleDatatables" style="margin-left:960px;" onclick="toggleDatatables()">View Archive</a>
+                <a class="btn btn-info" id="toggleDatatables" style="margin-left:950px;" onclick="toggleDatatables()">View Archive</a>
             </div>
             
         </div>

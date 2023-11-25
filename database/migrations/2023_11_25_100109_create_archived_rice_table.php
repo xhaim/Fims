@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('birthdate');
             $table->decimal('farm_area', 8, 2);
             $table->enum('sex', ['Male', 'Female']);
-            $table->json('membership');// Assuming equipment is stored as JSON
+            $table->string('membership');// Assuming equipment is stored as JSON
             $table->integer('quantity');
             $table->date('date_received');
             $table->timestamps();

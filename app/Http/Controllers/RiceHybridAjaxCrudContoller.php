@@ -86,7 +86,7 @@ class RiceHybridAjaxCrudContoller extends Controller
                 'birthdate' => $riceHB->birthdate,
                 'farm_area' => $riceHB->farm_area,
                 'sex' => $riceHB->sex,
-                'membership' => json_encode($riceHB->membership), // Convert to JSON
+                'membership' => $riceHB->membership, // Convert to JSON
                 'quantity' => $riceHB->quantity,
                 'date_received' => $riceHB->date_received,
            // Add any additional columns needed for the archived table
@@ -120,7 +120,7 @@ class RiceHybridAjaxCrudContoller extends Controller
         'birthdate' => $archivedriceHB->birthdate,
         'farm_area' => $archivedriceHB->farm_area,
         'sex' => $archivedriceHB->sex,
-        'membership' => json_encode($archivedriceHB->membership), // Convert to JSON
+        'membership' => $archivedriceHB->membership, // Convert to JSON
         'quantity' => $archivedriceHB->quantity,
         'date_received' => $archivedriceHB->date_received,
            // Add any additional columns needed for the main table
