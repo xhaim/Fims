@@ -55,7 +55,7 @@
         <table class="table table-bordered display responsive nowrap" id="vacc-crud-datatable">
            <thead>
               <tr>
-                 <th>Id</th>
+                 <th>No</th>
                  <th>Owner's Name</th>
                  <th>Birthday</th>
                  <th>Dog's Name</th>
@@ -120,11 +120,11 @@
               </div> 
 
               <label>
-            <input type="radio" name="breed" value="mongrel" checked>
+            <input type="radio" name="breed" value="Mongrel" checked>
             Mongrel
         </label>
         <label>
-            <input type="radio" name="breed" value="exotic">
+            <input type="radio" name="breed" value="Exotic">
             Exotic
         </label>
 
@@ -275,6 +275,7 @@
                   });
               }
 
+              
               // Function to print the data fetched from the server
               function printData(data) {
                   // Columns to exclude (you can adjust these according to your requirements)
@@ -346,7 +347,7 @@
 
                   htmlContent += `
                           </table>
-                          <p style="text-align:center;">s__________________________________</p>
+                          <p style="text-align:center;">__________________________________</p>
 
                       </body>
                       </html>

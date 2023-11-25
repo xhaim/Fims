@@ -5,6 +5,3 @@
 <a href="javascript:void(0)" id="delete-vegreq" onClick="deleteFunc({{ $id }})" data-toggle="tooltip" data-original-title="Delete" class="delete btn btn-danger">
     <i class="fa fa-trash"></i>
 </a>
-<a href="javascript:void(0);" id="delete-fruits" onClick="deleteFunc({{ $id }})" data-toggle="tooltip" data-original-title="Delete" class="delete btn btn-danger">
-    Delete
-</a>

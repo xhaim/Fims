@@ -126,6 +126,7 @@ Route::post('store-rental', [RentalAjaxCRUDController::class, 'store']);
 Route::post('edit-rental', [RentalAjaxCRUDController::class, 'edit']);
 Route::post('delete-rental', [RentalAjaxCRUDController::class, 'destroy']);
 Route::get('get-rental-details/{id}', [RentalAjaxCRUDController::class, 'getRentalDetails'])->name('rental.details');
+Route::post('/check-schedule-conflict', [RentalAjaxCRUDController::class ,'checkScheduleConflict']);
 
 // Rice Hybrid
 Route::get('ricehybrid-crud-datatable', [RiceHybridAjaxCrudContoller::class, 'index']);

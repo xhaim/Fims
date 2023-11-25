@@ -137,63 +137,63 @@
               <div class="form-group">
                 <label for="applicant" class="col-sm-8 control-label">Name of Applicant</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="applicant" name="applicant" placeholder="Enter Name of Applicant" maxlength="20" required="">
+                  <input type="text" class="form-control" id="applicant" name="applicant" placeholder="Enter Name of Applicant"   maxlength="100"    >
                 </div>
               </div>
               
               <div class="form-group">
                 <label for="address" class="col-sm-8 control-label">Applicant Address</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="address" name="address" placeholder="Enter Applicant Address" maxlength="100" required="">
+                  <input type="text" class="form-control" id="address" name="address" placeholder="Enter Applicant Address" maxlength="100"    >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="location" class="col-sm-8 control-label">Farm Location</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="location" name="location" placeholder="Enter Farm Location" maxlength="100" required="">
+                  <input type="text" class="form-control" id="location" name="location" placeholder="Enter Farm Location" maxlength="100"    >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="project_description" class="col-sm-8 control-label">Project Description</label>
                 <div class="col-sm-12">
-                  <input type="text" step="0.01" class="form-control" id="project_description" name="project_description" placeholder="Enter Project Description" maxlength="20" required="">
+                  <input type="text" step="0.01" class="form-control" id="project_description" name="project_description" placeholder="Enter Project Description"   maxlength="100"    >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="contact" class="col-sm-8 control-label">Contact number</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="contact" name="contact" placeholder="Enter Contact No." maxlength="2" required="">
+                  <input type="number" class="form-control" id="contact" name="contact" placeholder="Enter Contact No." maxlength="2"    >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="actual_land_area_of_farm" class="col-sm-8 control-label">Actual Land Area of Farm</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="actual_land_area_of_farm" name="actual_land_area_of_farm" placeholder="Enter Actual Land Area of Farm" maxlength="20" required>
+                  <input type="number" class="form-control" id="actual_land_area_of_farm" name="actual_land_area_of_farm" placeholder="Enter Actual Land Area of Farm"   maxlength="100"  >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="date_inspected" class="col-sm-8 control-label">Date Inspected</label>
                 <div class="col-sm-12">
-                  <input type="date" class="form-control" id="date_inspected" name="date_inspected" required>
+                  <input type="date" class="form-control" id="date_inspected" name="date_inspected"  >
                 </div>
               </div>
       
               <div class="form-group">
                 <label for="inspector" class="col-sm-8 control-label">Inspector</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="inspector" name="inspector" placeholder="Enter Inspector Name" maxlength="20" required="">
+                  <input type="text" class="form-control" id="inspector" name="inspector" placeholder="Enter Inspector Name"   maxlength="100"    >
                 </div>
               </div>
               
               <div class="form-group">
                 <label for="requirement" class="col-sm-8 control-label">Fuel Requirement</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="fuel_requirement" name="fuel_requirement" placeholder="Enter Fuel Requirement " maxlength="20" required="">
+                  <input type="number" class="form-control" id="fuel_requirement" name="fuel_requirement" placeholder="Enter Fuel Requirement "   maxlength="100"    >
                 </div>
               </div>
 
@@ -206,7 +206,7 @@
               <div class="form-group">
                 <label for="operation" class="col-sm-8 control-label">Estimated Hours of operation</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="hours_of_operation" name="hours_of_operation" placeholder="Enter Estimated Hours of operation " maxlength="20" required="">
+                  <input type="number" class="form-control" id="hours_of_operation" name="hours_of_operation" placeholder="Enter Estimated Hours of operation "   maxlength="100"    >
                 </div>
               </div>
 
@@ -239,21 +239,21 @@
               <div class="form-group">
                 <label for="area" class="col-sm-8 control-label">Land Area Requested for Operation</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="area" name="area" placeholder="Enter Land Area Requested for Operation" maxlength="20" required>
+                  <input type="number" class="form-control" id="area" name="area" placeholder="Enter Land Area Requested for Operation"   maxlength="100"  >
                 </div>
               </div>
               
               <div class="form-group">
                 <label for="rental_rate" class="col-sm-8 control-label">Rental Rate (ha)</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="rental_rate" name="rental_rate" placeholder="Enter Rental Rate/ha" maxlength="20" required>
+                  <input type="number" class="form-control" id="rental_rate" name="rental_rate" placeholder="Enter Rental Rate/ha"   maxlength="100"  >
                 </div>
               </div>
               
               <div class="form-group">
                 <label for="total_rental_amount" class="col-sm-8 control-label">Total Amount of Rental</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="total_rental_amount" name="total_rental_amount" placeholder="Enter Total Amount of Rental" maxlength="20" required>
+                  <input type="number" class="form-control" id="total_rental_amount" name="total_rental_amount" placeholder="Enter Total Amount of Rental"   maxlength="100"  >
                 </div>
               </div>
           </div>
@@ -265,48 +265,48 @@
               <div class="form-group">
                 <label for="payment" class="col-sm-8 control-label">Payment</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="payment" name="payment" placeholder="Enter Payment" maxlength="255" required>
+                  <input type="text" class="form-control" id="payment" name="payment" placeholder="Enter Payment" maxlength="255"  >
                 </div>
               </div>
               
               <div class="form-group">
                 <label for="or_number" class="col-sm-8 control-label">O.r. #</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="or_number" name="or_number" placeholder="Enter O.r. #" maxlength="255" required>
+                  <input type="text" class="form-control" id="or_number" name="or_number" placeholder="Enter O.r. #" maxlength="255"  >
                 </div>
               </div>
               
               <div class="form-group">
                 <label for="payment_date" class="col-sm-8 control-label">Date</label>
                 <div class="col-sm-12">
-                  <input type="date" class="form-control" id="payment_date" name="payment_date" required>
+                  <input type="date" class="form-control" id="payment_date" name="payment_date"  >
                 </div>
               </div>
               
               <div class="form-group">
                 <label for="payment_amount" class="col-sm-8 control-label">Amount</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="payment_amount" name="payment_amount" placeholder="Enter Amount" maxlength="20" required>
+                  <input type="number" class="form-control" id="payment_amount" name="payment_amount" placeholder="Enter Amount"   maxlength="100"  >
                 </div>
               </div>
               <div class="form-group">
                 <label for="municipal_treasurer" class="col-sm-8 control-label">Municipal Treasurer</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="municipal_treasurer" name="municipal_treasurer" placeholder="Enter Municipal Treasurer" maxlength="255" required>
+                  <input type="text" class="form-control" id="municipal_treasurer" name="municipal_treasurer" placeholder="Enter Municipal Treasurer" maxlength="255"  >
                 </div>
               </div>
               
               <div class="form-group">
                 <label for="source_of_fund" class="col-sm-8 control-label">Source of Fund</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="source_of_fund" name="source_of_fund" placeholder="Enter Source of Fund" maxlength="255" required>
+                  <input type="text" class="form-control" id="source_of_fund" name="source_of_fund" placeholder="Enter Source of Fund" maxlength="255"  >
                 </div>
               </div>
               
               <div class="form-group">
                 <label for="funds_available" class="col-sm-8 control-label">Funds Available</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="funds_available" name="funds_available" placeholder="Enter Funds Available" maxlength="20" required>
+                  <input type="number" class="form-control" id="funds_available" name="funds_available" placeholder="Enter Funds Available"   maxlength="100"  >
                 </div>
               </div>
           </div>
@@ -319,47 +319,47 @@
               <div class="form-group">
                 <label for="municipal_accountant" class="col-sm-8 control-label">Municipal Accountant</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="municipal_accountant" name="municipal_accountant" placeholder="Enter Municipal Accountant" maxlength="255" required>
+                  <input type="text" class="form-control" id="municipal_accountant" name="municipal_accountant" placeholder="Enter Municipal Accountant" maxlength="255"  >
                 </div>
               </div>
               
               <div class="form-group">
                 <label for="municipal_budget_officer" class="col-sm-8 control-label">Municipal Budget Officer</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="municipal_budget_officer" name="municipal_budget_officer" placeholder="Enter Municipal Budget Officer" maxlength="255" required>
+                  <input type="text" class="form-control" id="municipal_budget_officer" name="municipal_budget_officer" placeholder="Enter Municipal Budget Officer" maxlength="255"  >
                 </div>
               </div>
               <div class="form-group">
                 <label for="municipal_mayor" class="col-sm-8 control-label">Municipal Mayor</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="municipal_mayor" name="municipal_mayor" placeholder="Enter Municipal Mayor" maxlength="255" required>
+                  <input type="text" class="form-control" id="municipal_mayor" name="municipal_mayor" placeholder="Enter Municipal Mayor" maxlength="255"  >
                 </div>
               </div>
               
               <div class="form-group">
                 <label for="schedule_of_operation" class="col-sm-8 control-label">Schedule of Operation</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="schedule_of_operation" name="schedule_of_operation" placeholder="Enter Schedule of Operation" maxlength="255" required>
+                  <input type="date" class="form-control" id="schedule_of_operation" name="schedule_of_operation" placeholder="Enter Schedule of Operation" maxlength="255"  >
                 </div>
               </div>
               
               <div class="form-group">
                 <label for="plate_number_tractor" class="col-sm-8 control-label">Plate Number of Tractor</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="plate_number_tractor" name="plate_number_tractor" placeholder="Enter Plate Number of Tractor" maxlength="20" required>
+                  <input type="text" class="form-control" id="plate_number_tractor" name="plate_number_tractor" placeholder="Enter Plate Number of Tractor"   maxlength="100"  >
                 </div>
               </div>
               
               <div class="form-group">
                 <label for="mao_tractor_incharge" class="col-sm-8 control-label">MAO-TRACTOR INCHARGE</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="mao_tractor_incharge" name="mao_tractor_incharge" placeholder="Enter MAO-TRACTOR INCHARGE" maxlength="255" required>
+                  <input type="text" class="form-control" id="mao_tractor_incharge" name="mao_tractor_incharge" placeholder="Enter MAO-TRACTOR INCHARGE" maxlength="255"  >
                 </div>
               </div>
               <div class="form-group">
                 <label for="actual_land_area_served" class="col-sm-8 control-label">Actual Land Area Served</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="actual_land_area_served" name="actual_land_area_served" placeholder="Enter Actual Land Area Served" maxlength="20" required>
+                  <input type="number" class="form-control" id="actual_land_area_served" name="actual_land_area_served" placeholder="Enter Actual Land Area Served"   maxlength="100"  >
                 </div>
               </div>
           </div>
@@ -371,7 +371,7 @@
             <div class="form-group">
               <label for="actual_hours_of_operation" class="col-sm-8 control-label">Actual Hours of Operation</label>
               <div class="col-sm-12">
-                <input type="number" class="form-control" id="actual_hours_of_operation" name="actual_hours_of_operation" placeholder="Enter Actual Hours of Operation" maxlength="20" required>
+                <input type="number" class="form-control" id="actual_hours_of_operation" name="actual_hours_of_operation" placeholder="Enter Actual Hours of Operation"   maxlength="100"  >
               </div>
             </div>
             
@@ -385,7 +385,7 @@
             <div class="form-group">
               <label for="mo_field_inspector" class="col-sm-8 control-label">MO Field Inspector</label>
               <div class="col-sm-12">
-                <input type="text" class="form-control" id="mo_field_inspector" name="mo_field_inspector" placeholder="Enter MO Field Inspector" maxlength="255" required>
+                <input type="text" class="form-control" id="mo_field_inspector" name="mo_field_inspector" placeholder="Enter MO Field Inspector" maxlength="255"  >
               </div>
             </div>
           </div>

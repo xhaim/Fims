@@ -520,7 +520,7 @@
                   let htmlContent = `
                       <html>
                       <head>
-                          <title>Rootcrops Print</title>
+                          <title>Livestock Population Print</title>
                           <style>
                               table {
                                   border-collapse: collapse;
@@ -533,34 +533,117 @@
                                   padding: 8px;
                                   text-align: left;
                               }
+                              .name, .name td {
+                background-color: yellow;
+            }
+            .total, .total td {
+                background-color: green;
+            }
                           </style>
                       </head>
                       <body>
-                        <h6 style="text-align:left;">ROOT CROPS</h6>
-                        
-
+                        <h4 style="text-align:center;">CARMEN MUNICIPAL LIVESTOCK POPULATION 2023</h4>
+                        <p style="text-align:left;">BARANGAY:</p>
                           <table>
                   `;
 
-                  // Adding table headers
-            headers.forEach(header => {
-                if (typeof header === 'object') {
-                    htmlContent += `<th colspan="${2}" style="text-align:center;">${header.name}</th>`;
-                } else if (!excludedColumns.includes(header)) {
-                    htmlContent += `<th rowspan="${2}" style="text-align:center;">${header}</th>`;
-                }
-            });
-            htmlContent += '</tr><tr>';
+             // Adding table headers
+headers.forEach((header, index) => {
+    if (typeof header === 'object') {
+        let bgColor;
+        switch (header.name) {
+            case "KABAW":
+                bgColor = "yellow";
+                break;
+            case "BAKA":
+                bgColor = "orange";
+                break;
+            case "BABOY":
+                bgColor = "pink";
+                break;
+            case "KANDING":
+                bgColor = "purple";
+                break;
+            case "KABAYO":
+                bgColor = "#f2d2a9";
+                break;
+            case "IRO":
+                bgColor = "red";
+                break;
+            case "MANOK":
+                bgColor = "#ffd9df";
+                break;
+            case "BEBE":
+                bgColor = "#bf7fbf";
+                break;
+            case "QUAIL":
+                bgColor = "#c70133";
+                break;
+            case "BROILER":
+                bgColor = "#ffc0cb";
+                break;
+            case "RABBIT":
+                bgColor = "blue";
+                break;
+        default:
+                bgColor = "white"; // Default to white for 'NO.' and 'Name'
+        }
 
+        htmlContent += `<th colspan="${2}" style="text-align:center; background-color: ${bgColor};">${header.name}</th>`;
+    } else if (!excludedColumns.includes(header)) {
+        const bgColor = index < 2 ? 'white' : header === 'TOTAL' ? 'green' : 'yellow';
+        htmlContent += `<th rowspan="${2}" style="text-align:center; background-color: ${bgColor};">${header}</th>`;
+    }
+});
+htmlContent += '</tr><tr>';
 
-                      // Generate sub-headers for "Farmer's Name" columns
-            headers.forEach(header => {
-                if (typeof header === 'object') {
-                    header.columns.forEach(column => {
-                        htmlContent += `<th style="font-size:15px;">${column}</th>`;
-                    });
-                }
-            });
+// Generate sub-headers for "Farmer's Name" columns
+headers.forEach(header => {
+    if (typeof header === 'object') {
+        header.columns.forEach(column => {
+            let bgColor;
+            switch (header.name) {
+                case "KABAW":
+                    bgColor = "yellow";
+                    break;
+                case "BAKA":
+                    bgColor = "orange";
+                    break;
+                case "BABOY":
+                    bgColor = "pink";
+                    break;
+                case "KANDING":
+                    bgColor = "purple";
+                    break;
+                case "KABAYO":
+                    bgColor = "#f2d2a9";
+                    break;
+                case "IRO":
+                    bgColor = "red";
+                    break;
+                case "MANOK":
+                    bgColor = "#ffd9df";
+                    break;
+                case "BEBE":
+                    bgColor = "#bf7fbf";
+                    break;
+                case "QUAIL":
+                    bgColor = "#c70133";
+                    break;
+                case "BROILER":
+                    bgColor = "#ffc0cb";
+                    break;
+                case "RABBIT":
+                    bgColor = "blue";
+                    break;
+                default:
+                    bgColor = "white"; // Default to white for 'NO.' and 'Name'
+            }
+
+            htmlContent += `<th style="font-size:15px; background-color: ${bgColor};">${column}</th>`;
+        });
+    }
+});
 
                   // Assuming each data row is an object
                   data.forEach(row => {
@@ -575,13 +658,7 @@
 
                   htmlContent += `
                           </table>
-                          <table class="tg" style="border:none;">
-                            <thead style="border:none;">
-                            <tr style="border:none;">
-                                <th style="border:none;margin-rop:20px;" class="tg-0lax">Prepared by:</th>
-                                <th style="border:none;margin-rop:20px;" class="tg-0lax">Noted by:</th>
-                            </tr>
-                            </thead>
+                          <h5 style="text-align:center;">Submitted by:</h5>
                           </table>
 
                       </body>

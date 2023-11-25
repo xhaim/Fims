@@ -117,4 +117,15 @@ class RentalAjaxCrudController extends Controller
         return Response()->json($rental);
     }
 
+    public function checkScheduleConflict(Request $request)
+    {
+        $schedule = $request->input('schedule');
+
+        // Perform your conflict check logic here
+        // For example, check if the schedule already exists in the database
+        $conflict = Rental::where('schedule_of_operation', $schedule)->exists();
+
+        return response()->json(['conflict' => $conflict]);
+    }
+
  }

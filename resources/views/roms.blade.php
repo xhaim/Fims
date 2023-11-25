@@ -55,7 +55,7 @@
         <table class="table table-bordered display responsive nowrap" id="roms-crud-datatable">
            <thead>
               <tr>
-                 <th>Id</th>
+                
                  <th>Name of Farmer</th>
                  <th>Address</th>
                  <th>Animal Id</th>
@@ -172,7 +172,7 @@
               <div class="form-group">
                 <label class="col-sm-8 control-label">Date of AI</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="ai" name="ai" placeholder="EnterDate of AI" >
+                  <input type="date" class="form-control" id="ai" name="ai" placeholder="EnterDate of AI" >
                 </div>
               </div>
 
@@ -243,7 +243,6 @@
            ajax: "{{ url('roms-crud-datatable') }}",
            
            columns: [
-                    { data: 'id', name: 'id' },
                     { data: 'name', name: 'name' },
                     { data: 'address', name: 'address' },
                     { data: 'animal_id', name: 'animal_id' },
@@ -309,7 +308,194 @@
        }
     });
   }  
- 
+  function printDataTable() {
+                  $.ajax({
+                      url: '/print-roms', // Replace with your Laravel route URL to fetch data
+                      method: 'GET',
+                      success: function (data) {
+                          // Once the data is fetched successfully, you can proceed to print it
+                          printData(data);
+                      },
+                      error: function (error) {
+                          console.error('Error fetching data:', error);
+                      }
+                  });
+              }
+
+              // Function to print the data fetched from the server
+              function printData(data) {
+                  // Columns to exclude (you can adjust these according to your requirements)
+                  const excludedColumns = ['created_at', 'updated_at'];
+                 
+                  const headers = ['No.','Name of Farmer', 'Address','Signature','Animal ID','Breed of Dam','BCS','Date of last calving',
+                              'Date of ROMS(1)',"Ovarian",   'Result', 'Date of AI','UT', 'W/IEC', 'Bull ID/Name','No. of straws used','Remarks'];
+                  // Create a new window for printing
+                  let printWindow = window.open('', '_blank');
+                  
+
+                  // Construct the HTML content to be printed with CSS styles for table borders
+                  let htmlContent = `
+                      <html>
+                      <head>
+                          <title>Vaccination Report Print</title>
+                          <style>
+                              table {
+                                  border-collapse: collapse;
+                                  width: 100%;
+                              }
+                              table, th, td {
+                                  border: 1px solid black;
+                              }
+                              th, td {
+                                  padding: 8px;
+                                  text-align: left;
+                              }
+                              .container {
+                                  display: flex;
+                                justify-content: center;
+                                  align-items: center;
+                              }
+                              p{
+                                  margin-left: 15px;
+                                  margin-top:-10px;
+                              }
+                              .pnum{
+                                  margin-top:-20px;
+                              }
+                              .pone{
+                                margin-top:10px;
+                                text-align:left;
+                                
+                              }
+                              
+                              }
+                          </style>
+                      </head>
+                      <body>
+                        <h5 style="text-align:center;">Reproductive Organ Monitoring and Stimulation (ROMS)Protocol</h>
+                        
+                          <table>
+                  `;
+
+                  // Adding table headers
+            headers.forEach(header => {
+                if (typeof header === 'object') {
+                    htmlContent += `<th colspan="${2}" style="text-align:center;">${header.name}</th>`;
+                } else if (!excludedColumns.includes(header)) {
+                    htmlContent += `<th rowspan="${2}" style="text-align:center;">${header}</th>`;
+                }
+            });
+            htmlContent += '</tr><tr>';
+
+
+                      // Generate sub-headers for "Farmer's Name" columns
+            headers.forEach(header => {
+                if (typeof header === 'object') {
+                    header.columns.forEach(column => {
+                        htmlContent += `<th style="font-size:15px;">${column}</th>`;
+                    });
+                }
+            });
+
+                  // Assuming each data row is an object
+                  data.forEach(row => {
+                      htmlContent += '<tr>';
+                      for (const key in row) {
+                          if (row.hasOwnProperty(key) && !excludedColumns.includes(key)) {
+                              htmlContent += '<td>' + row[key] + '</td>';
+                          }
+                      }
+                      htmlContent += '</tr>';
+                  });
+
+                  htmlContent += `
+                          </table>
+                          <div style="display: flex; margin-top: 30px;">
+    <div>
+        <p>Prepared by:</p>
+        <div>_____________________________</div>
+        <div>Name & signature of AI Technician</div>
+    </div>
+    <div>
+        <p>Breed</p>
+        <p><b>SP</b>-Native Carabao</p>
+        <p><b>CB</b>-Cross Breed</p>
+        <p><b>RV</b>-Riverine buffalo</p>
+    </div>
+    <div style="margin-top:10px">
+        <p><b>RO</b>-right ovary</p>
+        <p><b>LO</b>-left ovary</p>
+    </div>
+    <div style="margin-top:10px">
+        <p><b>NH</b>-Natural Heat</p>
+        <p><b>ES</b>-Estrus synchronized</p>
+        <p><b>P</b>-Pregnant</p>
+    </div>
+    <div style="margin-top:10px">
+        <p><b>Y</b>-Young</p>
+        <p><b>NM</b>-Newly Mated</p>
+        <p><b>T</b>-thin(BSCS 2.5 & Below)</p>
+        <p><b>CLL</b>-corpus luteum large</p>
+    </div>
+    <div>
+        <p><b>Result</b></p>
+    </div>
+    <div style="margin-top:10px">
+        <p><b>PP</b>-Post Partum</p>
+        <p><b>NS</b>-no palpable structure</p>
+        <p><b>RF</b>-ruftured follicle</p>
+        <p><b>CLS</b>-corpus luteum small</p>
+    </div>
+    <div style="margin-top:10px">
+        <p><b>E</b>-elongated</p>
+        <p><b>VS</b>-very small</p>
+        <p><b>GF</b>-graafian follicle</p>
+    </div>
+    <div>
+        <p><b>UT-Uterine</b></p>
+        <p><b>1</b>-soft</p>
+        <p><b>2</b>-hard</p>
+        <p><b>3</b>-very hard</p>
+    </div>
+</div>
+
+<p class="pone">P1-Reproductive Organ Simulation is done by gently massaging the reproductive organ for 17 seconds</p>
+<h5 style="text-indent:30px; margin-top:-20px">Action Protocol</h5>
+<p class="pnum">P2-if CLL, monitor for heat within a week or heat induce and AI in 72 hours</p>
+<p class="pnum">P3-if CLS, inject ADE or deworm or uterine flushing then follow up ROMS after 7 days, if CLL induce heat then AI following P2, if CLS heat induce and observe heat in 3-5 days</p>
+<p class="pnum">P4- if NS, inject ADE or deworm uterine flushing then follow up ROMS after 2 weeks, if it develops to CLS or CCL induce heat then AI, if still NS needs further observation</p>
+<p class="pnum">P5-If GF, monitor for estrus within 2-4 days</p>
+<p class="pnum"><b>*Recommended first ROMS on the 28th day of calving & 7 days interval until 3rd ROMS</b></p>
+<p> Procedure for flushing:</p>
+<div style="display: flex; margin-left:60px">
+    <div>
+        <p>1. Use a syringe to withdraw the 4% povidone-iodine solution</p>
+        <p>3. Open the vulva & deposit the solution on the uterus guided by hand through rectal palpation</p>
+    </div>
+    <div>
+        <p>2. Attach a straw sheath on the syringe</p>
+        <p>4. Deposit into the uterus a total of 120 ml povidone iodine solution</p>
+    </div>
+</div>
+<table>
+    <tr>
+        <th>Form No.:PCCUS-AIQF26</th>
+        <th>Revision No.:00</th>
+        <th>Effectivity Date: June 8,2020</th>
+    </tr>
+</table>
+<h6 style="margin-top:1px;">Retention Period:1 year</h6>
+</body>
+                      </body>
+                      </html>
+                  `;
+
+                  // Write the HTML content to the new window and print it
+                  printWindow.document.write(htmlContent);
+                  printWindow.document.close();
+                  printWindow.print();
+              }
+
   function deleteFunc(id){
         if (confirm("Delete Record?") == true) {
         var id = id;

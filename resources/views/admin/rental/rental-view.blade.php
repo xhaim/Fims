@@ -196,31 +196,76 @@
           }
      }
     
-     $('#RentalForm').submit(function(e) {
-    
-        e.preventDefault();
-      
-        var formData = new FormData(this);
-      
-        $.ajax({
-           type:'POST',
-           url: "{{ url('store-rental')}}",
-           data: formData,
-           cache:false,
-           contentType: false,
-           processData: false,
-           success: (data) => {
-             $("#rental-modal").modal('hide');
-             var oTable = $('#rental-crud-datatable').dataTable();
-             oTable.fnDraw(false);
-             $("#btn-save").html('Submit');
-             $("#btn-save"). attr("disabled", false);
-           },
-           error: function(data){
-              console.log(data);
-            }
-          });
-      });
+    // Function to check for conflicts in the schedule_of_operation field
+function checkScheduleConflict(schedule) {
+    var conflict = false;
+
+    // Make an Ajax request to the server to check for conflicts
+    $.ajax({
+        type: 'POST',
+        url: "{{ url('check-schedule-conflict')}}",
+        data: { schedule: schedule },
+        async: false, // Make the request synchronous to wait for the response
+        success: function (response) {
+            conflict = response.conflict;
+        },
+        error: function (error) {
+            console.error('Error checking schedule conflict:', error);
+            
+
+        }
+    });
+
+    // Show an alert message if there's a conflict
+    if (conflict) {
+        alert('Schedule conflict detected! Please choose a different schedule.');
+        $('#schedule_of_operation').val("");
+    }
+
+    return conflict; // Return true if there's a conflict, false otherwise
+}
+
+// Add an event listener for the input event on the "id" field
+$(document).ready(function () {
+    $('#schedule_of_operation').on('input', function () {
+        var idValue = $(this).val(); // Get the value of the "id" field
+        checkScheduleConflict(idValue); // Trigger the conflict check with the id value
+    });
+});
+
+// Modify the form submission logic
+$('#RentalForm').submit(function (e) {
+    e.preventDefault();
+
+    var formData = new FormData(this);
+    var scheduleOfOperation = formData.get('schedule_of_operation');
+
+    // Check for conflicts before submitting the form
+    if (checkScheduleConflict(scheduleOfOperation)) {
+        // If there's a conflict, do not submit the form
+        return;
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: "{{ url('store-rental')}}",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            $("#rental-modal").modal('hide');
+            var oTable = $('#rental-crud-datatable').dataTable();
+            oTable.fnDraw(false);
+            $("#btn-save").html('Submit');
+            $("#btn-save").attr("disabled", false);
+        },
+        error: function (data) {
+            console.log(data);
+        }
+    });
+});
+
     
     
    </script>
