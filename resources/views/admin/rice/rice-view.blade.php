@@ -103,7 +103,121 @@
            },
        });
    }
-   
+  
+  
+  /////////////////////start of archive data///////////
+  $('#ricehybrid-archive-datatable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ url('ricehybrid-archive-datatable') }}",
+        columns: [
+            { data: 'rsbsa', name: 'rsbsa' },
+                       { data: 'name_first', name: 'name_first' },
+                       { data: 'name_middle', name: 'name_middle' },
+                       { data: 'name_last', name: 'name_last' },
+                       { data: 'barangay', name: 'barangay' },
+                       { data: 'farm_location', name: 'farm_location' },
+                       { data: 'birthdate', name: 'birthdate' },
+                       { data: 'sex', name: 'sex' },
+                       {data: 'action', name: 'action', orderable: false},
+                ],
+                order: [[0, 'desc']]
+    });
+
+  function archiveFunc(id) {
+      if (confirm("Archive Record?") == true) {
+          // Make an AJAX request to the archive route
+          $.ajax({
+              type: "POST",
+              url: "{{ url('ricehybrid/archive') }}",
+              data: { id: id },
+              dataType: 'json',
+              success: function (response) {
+                  // Handle success, e.g., show a success message
+                  console.log(response.success);
+                  // Optionally, you may want to refresh the data table
+                  var ArcTable = $('#ricehybrid-archive-datatable').DataTable();
+                  var oTable = $('#ricehybrid-crud-datatable').DataTable();
+                  ArcTable.ajax.reload(); // Reload the DataTable
+                  oTable.ajax.reload(); // Reload the DataTable
+              },
+              error: function (error) {
+                  // Handle error, e.g., show an error message
+                  console.error('Error archiving record:', error);
+              }
+          });
+      }
+  } 
+
+  function restoreFunc(id) {
+      if (confirm("Restore Record?") == true) {
+          // Make an AJAX request to the archive route
+          $.ajax({
+              type: "POST",
+              url: "{{ url('ricehybrid/restore') }}",
+              data: { id: id },
+              dataType: 'json',
+              success: function (response) {
+                  // Handle success, e.g., show a success message
+                  console.log(response.success);
+                  // Optionally, you may want to refresh the data table
+                  var ArcTable = $('#ricehybrid-archive-datatable').DataTable();
+                  var oTable = $('#ricehybrid-crud-datatable').DataTable();
+                  ArcTable.ajax.reload(); // Reload the DataTable
+                  oTable.ajax.reload(); // Reload the DataTable
+              },
+              error: function (error) {
+                  // Handle error, e.g., show an error message
+                  console.error('Error archiving record:', error);
+              }
+          });
+      }
+  } 
+
+
+  function deleteFunc(id){
+        if (confirm("Delete Record?") == true) {
+        var id = id;
+          
+          // ajax
+          $.ajax({
+              type:"POST",
+              url: "{{ url('delete-ricehybrid') }}",
+              data: { id: id },
+              dataType: 'json',
+              success: function(res){
+ 
+                var oTable = $('#ricehybrid-archive-datatable').dataTable();
+                oTable.fnDraw(false);
+             }
+          });
+       }
+  }
+
+//  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //
+
+
+  function deleteFunc(id){
+        if (confirm("Delete Record?") == true) {
+        var id = id;
+          
+          // ajax
+          $.ajax({
+              type:"POST",
+              url: "{{ url('delete-ricehybrid') }}",
+              data: { id: id },
+              dataType: 'json',
+              success: function(res){
+ 
+                var oTable = $('#ricehybrid-archive-datatable').dataTable();
+                oTable.fnDraw(false);
+             }
+          });
+       }
+  }
+
+//  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //
+
      function deleteFunc(id){
            if (confirm("Delete Record?") == true) {
            var id = id;
@@ -307,3 +421,21 @@
            });
        });
    </script>
+   <script>
+    function toggleDatatables() {
+      var div1 = document.getElementById('MainTable');
+      var div2 = document.getElementById('Archive');
+      var toggleButton = document.getElementById('toggleDatatables');
+
+      // Toggle the 'hidden' attribute
+      if (div1.hasAttribute('hidden')) {
+        div1.removeAttribute('hidden');
+        div2.setAttribute('hidden', 'hidden');
+        toggleButton.innerHTML = 'View Archive';
+      } else {
+        div1.setAttribute('hidden', 'hidden');
+        div2.removeAttribute('hidden');
+        toggleButton.innerHTML = 'Hide Archive';
+      }
+    }
+  </script>

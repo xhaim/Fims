@@ -136,6 +136,10 @@ Route::post('delete-ricehybrid', [RiceHybridAjaxCrudContoller::class, 'destroy']
 Route::get('/print-Allrice', [RiceHybridAjaxCrudContoller::class, 'fetchData']);
 Route::get('get-farmer-details/{id}', [RiceHybridAjaxCrudContoller::class, 'getFarmerDetails'])->name('farmer.details');
 
+Route::post('/ricehybrid/archive', [RiceHybridAjaxCrudContoller::class, 'archive'])->name('ricehybrid.archive');
+Route::post('/ricehybrid/restore', [RiceHybridAjaxCrudContoller::class, 'restore'])->name('ricehybrid.restore');
+Route::get('ricehybrid-archive-datatable', [RiceHybridAjaxCrudContoller::class, 'archive_index']);
+
 // Registry
 Route::get('registry-crud-datatable', [RegistryAjaxCrudController::class, 'index']);
 Route::post('store-registry', [RegistryAjaxCrudController::class, 'store']);

@@ -33,6 +33,7 @@
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)">Add</a>
                 <a class="btn btn-secondary" onClick="printDataTable()" href="javascript:void(0)">printAll </a>
+                <a class="btn btn-info" id="toggleDatatables" style="margin-left:960px;" onclick="toggleDatatables()">View Archive</a>
             </div>
             
         </div>
@@ -70,6 +71,7 @@
               </div>
           </div>
           
+          <div id="MainTable">
             <table class="table table-bordered display responsive nowrap display responsive nowrap" id="ricehybrid-crud-datatable">
                <thead>
                   <tr>
@@ -85,8 +87,26 @@
                   </tr>
                </thead>
             </table>
- 
         </div>
+        <div id="Archive" hidden="hidden">
+        <table class="table table-bordered display responsive nowrap display responsive nowrap" id="ricehybrid-archive-datatable" style="width:100%;" >
+           <thead>
+              <tr>
+                
+                <th>RSBSA No.</th>
+                    <th>First</th>
+                    <th>Middle</th>
+                    <th>Last</th>
+                    <th>Barangay</th>
+                    <th>Farm Location</th>
+                    <th>Birthdate</th>
+                    <th>Sex</th>
+                    <th width="150px">Action</th>
+              </tr>
+           </thead>
+        </table>
+        </div>
+
       </div>
     </div>
   </div>
