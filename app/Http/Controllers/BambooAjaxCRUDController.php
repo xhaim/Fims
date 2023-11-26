@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Bamboo;
+use App\Models\ArchivedBamboos;
  
 use Datatables;
 
@@ -60,6 +61,100 @@ class BambooAjaxCRUDController extends Controller
  
     }
       
+     // START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //
+
+    //  Archive Datatable
+    public function archive_index()
+    {
+        if (request()->ajax()) {
+            return datatables()->of(ArchivedBamboos::select('*'))
+                ->addColumn('action', 'archive-bamboo-action')
+                ->rawColumns(['action'])
+                ->addIndexColumn()
+                ->make(true);
+        }
+
+        return view('bamboo');
+    }
+
+
+   //  ARCHIVE
+   public function archive(Request $request)
+   {
+       // Validate the request, if necessary
+       $request->validate([
+           'id' => 'required|exists:bamboos,id',
+       ]);
+
+       // Get the record to be archived
+       $bamboos = Bamboo::find($request->id);
+
+       // Create a new archived record
+       $archivedRecord = ArchivedBamboos::create([
+
+                    'name' => $bamboos->name,
+                    'sex' => $bamboos->sex,
+                    'birthday' => $bamboos->birthday,
+                    'purok' => $bamboos->purok,
+                    'barangay' => $bamboos->barangay,
+                    'newly' => $bamboos->newly,
+                    'harvestable' => $bamboos->harvestable,
+                    'total' => $bamboos->total,
+                    'area' => $bamboos->area,
+                    'age' => $bamboos->age,
+                    'per_month' => $bamboos->per_month,
+                    'varieties' => $bamboos->varieties,
+                    'group' => $bamboos->group,
+                    'remark' => $bamboos->remark,
+
+           // Add any additional columns needed for the archived table
+       ]);
+
+       // Delete the record from the main table
+       $bamboos->delete();
+
+       return response()->json(['success' => true]);
+   }
+
+   // RESTORE ARCHIVED
+   public function restore(Request $request)
+   {
+       // Validate the request, if necessary
+       $request->validate([
+           'id' => 'required|exists:archived_bamboos,id',
+       ]);
+
+       // Get the record to be unarchived
+       $archivedbamboos = ArchivedBamboos::find($request->id);
+
+       // Create a new record in the main table
+       $bamboos = Bamboo::create([
+                    'name' => $archivedbamboos->name,
+                    'sex' => $archivedbamboos->sex,
+                    'birthday' => $archivedbamboos->birthday,
+                    'purok' => $archivedbamboos->purok,
+                    'barangay' => $archivedbamboos->barangay,
+                    'newly' => $archivedbamboos->newly,
+                    'harvestable' => $archivedbamboos->harvestable,
+                    'total' => $archivedbamboos->total,
+                    'area' => $archivedbamboos->area,
+                    'age' => $archivedbamboos->age,
+                    'per_month' => $archivedbamboos->per_month,
+                    'varieties' => $archivedbamboos->varieties,
+                    'group' => $archivedbamboos->group,
+                    'remark' => $archivedbamboos->remark,
+           // Add any additional columns needed for the main table
+       ]);
+
+       // Delete the record from the archived table
+       $archivedbamboos->delete();
+
+       return response()->json(['success' => true]);
+   }
+
+
+   // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING //
+
       
     /**
      * Show the form for editing the specified resource.

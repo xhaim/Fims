@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Fruits;
- 
+use App\Models\ArchivedFruits;
 use Datatables;
 
 class FruitsAjaxCRUDController extends Controller
@@ -60,6 +60,102 @@ class FruitsAjaxCRUDController extends Controller
  
     }
       
+    // START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //
+
+    //  Archive Datatable
+    public function archive_index()
+    {
+        if (request()->ajax()) {
+            return datatables()->of(ArchivedFruits::select('*'))
+                ->addColumn('action', 'archive-fruits-action')
+                ->rawColumns(['action'])
+                ->addIndexColumn()
+                ->make(true);
+        }
+
+        return view('Fruits');
+    }
+
+
+   //  ARCHIVE
+   public function archive(Request $request)
+   {
+       // Validate the request, if necessary
+       $request->validate([
+           'id' => 'required|exists:fruits,id',
+       ]);
+
+       // Get the record to be archived
+       $fruit = Fruits::find($request->id);
+
+       // Create a new archived record
+       $archivedRecord = ArchivedFruits::create([
+
+        'name' => $fruit->name,
+        'sex' => $fruit->sex,
+        'purok' => $fruit->purok,
+        'barangay' => $fruit->barangay,
+        'bearing' => $fruit->bearing,
+        'non_bearing' => $fruit->non_bearing,
+        'total' => $fruit->total,
+        'area' => $fruit->area,
+        'age' => $fruit->age,
+        'fruits_trees_harvested' => $fruit->fruits_trees_harvested,
+        'kilo' => $fruit->kilo,
+        'season' => $fruit->season,
+        'varieties' => $fruit->varieties,
+        'group' => $fruit->group,
+        'remark' => $fruit->remark,
+
+           // Add any additional columns needed for the archived table
+       ]);
+
+       // Delete the record from the main table
+       $fruit->delete();
+
+       return response()->json(['success' => true]);
+   }
+
+   // RESTORE ARCHIVED
+   public function restore(Request $request)
+   {
+       // Validate the request, if necessary
+       $request->validate([
+           'id' => 'required|exists:archived_fruits,id',
+       ]);
+
+       // Get the record to be unarchived
+       $archivedfruits = ArchivedFruits::find($request->id);
+
+       // Create a new record in the main table
+       $fruit = Fruits::create([
+        'name' => $archivedfruits->name,
+        'sex' => $archivedfruits->sex,
+        'purok' => $archivedfruits->purok,
+        'barangay' => $archivedfruits->barangay,
+        'bearing' => $archivedfruits->bearing,
+        'non_bearing' => $archivedfruits->non_bearing,
+        'total' => $archivedfruits->total,
+        'area' => $archivedfruits->area,
+        'age' => $archivedfruits->age,
+        'fruits_trees_harvested' => $archivedfruits->fruits_trees_harvested,
+        'kilo' => $archivedfruits->kilo,
+        'season' => $archivedfruits->season,
+        'varieties' => $archivedfruits->varieties,
+        'group' => $archivedfruits->group,
+        'remark' => $archivedfruits->remark,
+           // Add any additional columns needed for the main table
+       ]);
+
+       // Delete the record from the archived table
+       $archivedfruits->delete();
+
+       return response()->json(['success' => true]);
+   }
+
+
+   // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING //
+
       
     /**
      * Show the form for editing the specified resource.

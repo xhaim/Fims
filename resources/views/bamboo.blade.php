@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rice Seeds</title>
+    <title>Bamboo Farmer</title>
      
     <meta name="csrf-token" content="{{ csrf_token() }}">
      
@@ -34,12 +34,13 @@
 <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>HVCDP Farmer</h2>
+                <h2>HVCDP-Bamboo Farmer</h2>
             </div>
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)"> Add</a>
                 <a class="btn btn-secondary" onClick="printDataTable()" href="javascript:void(0)">printAll </a>
-
+                <a class="btn btn-info" id="toggleDatatables" style=" color: white; margin-left:950px;" onclick="toggleDatatables()">View Archive</a>
+            
             </div>
         </div>
     </div>
@@ -51,11 +52,12 @@
     @endif
  
     <div class="card-body">
- 
+
+      <div id="MainTable">
         <table class="table table-bordered display responsive nowrap" id="bamboo-crud-datatable">
            <thead>
               <tr>
-                 <th>Id</th>
+                 <th>No.</th>
                  <th>Name </th>
                  <th>Sex</th>
                  <th>Birthday</th>
@@ -75,9 +77,33 @@
               </tr>
            </thead>
         </table>
- 
+      </div>
+      <div id="Archive" hidden="hidden">
+        <table class="table table-bordered display responsive nowrap" id="bamboo-archive-datatable">
+          <thead>
+             <tr>
+                <th>No.</th>
+                <th>Name </th>
+                <th>Sex</th>
+                <th>Birthday</th>
+                <th>Purok</th>
+                <th>Barangay</th>
+                <th>Newly Planted(# of bamboo )</th>
+                <th>Harvestable(# of bamboo )</th>
+                <th>Total # of bamboo</th>
+                <th>Area(Ha./Sq. M)</th>
+                <th>Age of Bamboo Trees</th>
+                <th>Average No. of Bamboo Pole Per Month</th>
+                <th>Varieties</th>
+                <th>Group/Organization</th>
+               <th>Remark</th>
+                <th>Created at</th>
+                <th>Action</th>
+             </tr>
+          </thead>
+       </table>
     </div>
-    
+    </div>
 </div>
  
  
@@ -256,6 +282,108 @@
        $('#id').val('');
  
   }   
+
+ //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //
+
+ $('#bamboo-archive-datatable').DataTable({
+           processing: true,
+           serverSide: true,
+           ajax: "{{ url('bamboo-archive-datatable') }}",
+           columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'name', name: 'name' },
+                    { data: 'sex', name: 'sex' },
+                    { data: 'birthday', name: 'birthday' },
+                    { data: 'purok', name: 'purok' },
+                    { data: 'barangay', name: 'barangay' },
+                    { data: 'newly', name: 'newly' },
+                    { data: 'harvestable', name: 'harvestable' },
+                    { data: 'total', name: 'total' },
+                    { data: 'area', name: 'area' },
+                    { data: 'age', name: 'commodity' },
+                    { data: 'per_month', name: 'per_month' },
+                    { data: 'varieties', name: 'varieties' },
+                    { data: 'group', name: 'group' },
+                    { data: 'remark', name: 'remark' },
+                    { data: 'created_at', name: 'created_at' },
+                    {data: 'action', name: 'action', orderable: false},
+                 ],
+                 order: [[0, 'desc']]
+       });
+
+  function archiveFunc(id) {
+      if (confirm("Archive Record?") == true) {
+          // Make an AJAX request to the archive route
+          $.ajax({
+              type: "POST",
+              url: "{{ url('bamboo/archive') }}",
+              data: { id: id },
+              dataType: 'json',
+              success: function (response) {
+                  // Handle success, e.g., show a success message
+                  console.log(response.success);
+                  // Optionally, you may want to refresh the data table
+                  var ArcTable = $('#bamboo-archive-datatable').DataTable();
+                  var oTable = $('#bamboo-crud-datatable').DataTable();
+                  ArcTable.ajax.reload(); // Reload the DataTable
+                  oTable.ajax.reload(); // Reload the DataTable
+              },
+              error: function (error) {
+                  // Handle error, e.g., show an error message
+                  console.error('Error archiving record:', error);
+              }
+          });
+      }
+  } 
+
+  function restoreFunc(id) {
+      if (confirm("Restore Record?") == true) {
+          // Make an AJAX request to the archive route
+          $.ajax({
+              type: "POST",
+              url: "{{ url('bamboo/restore') }}",
+              data: { id: id },
+              dataType: 'json',
+              success: function (response) {
+                  // Handle success, e.g., show a success message
+                  console.log(response.success);
+                  // Optionally, you may want to refresh the data table
+                  var ArcTable = $('#bamboo-archive-datatable').DataTable();
+                  var oTable = $('#bamboo-crud-datatable').DataTable();
+                  ArcTable.ajax.reload(); // Reload the DataTable
+                  oTable.ajax.reload(); // Reload the DataTable
+              },
+              error: function (error) {
+                  // Handle error, e.g., show an error message
+                  console.error('Error archiving record:', error);
+              }
+          });
+      }
+  } 
+
+
+  function deleteFunc(id){
+        if (confirm("Delete Record?") == true) {
+        var id = id;
+          
+          // ajax
+          $.ajax({
+              type:"POST",
+              url: "{{ url('delete-bamboo') }}",
+              data: { id: id },
+              dataType: 'json',
+              success: function(res){
+ 
+                var oTable = $('#bamboo-archive-datatable').dataTable();
+                oTable.fnDraw(false);
+             }
+          });
+       }
+  }
+
+//  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //
+
+
   function editFunc(id){
      
     $.ajax({
@@ -334,7 +462,7 @@
                             <table class="tg">
                                 <thead>
                                   <tr>
-                                    <th style="text-align:center;" class="tg-0lax">CLUSTER ____(___________DISTRICT) CACAO FARMER PROFILE</th>
+                                    <th style="text-align:center;" class="tg-0lax">CLUSTER ____(___________DISTRICT) BAMBOO FARMER PROFILE</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -484,6 +612,23 @@
     });
 
 </script>
+<script>
+  function toggleDatatables() {
+    var div1 = document.getElementById('MainTable');
+    var div2 = document.getElementById('Archive');
+    var toggleButton = document.getElementById('toggleDatatables');
 
+    // Toggle the 'hidden' attribute
+    if (div1.hasAttribute('hidden')) {
+      div1.removeAttribute('hidden');
+      div2.setAttribute('hidden', 'hidden');
+      toggleButton.innerHTML = 'View Archive';
+    } else {
+      div1.setAttribute('hidden', 'hidden');
+      div2.removeAttribute('hidden');
+      toggleButton.innerHTML = 'Hide Archive';
+    }
+  }
+</script>
 
 </html>

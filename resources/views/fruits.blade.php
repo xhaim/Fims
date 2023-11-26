@@ -39,7 +39,7 @@
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)"> Add</a>
                 <a class="btn btn-secondary" onClick="printDataTable()" href="javascript:void(0)">printAll </a>
-
+                <a class="btn btn-info" id="toggleDatatables" style=" color: white; margin-left:950px;" onclick="toggleDatatables()">View Archive</a>
             </div>
         </div>
     </div>
@@ -51,11 +51,12 @@
     @endif
  
     <div class="card-body">
- 
+
+      <div id="MainTable">
         <table class="table table-bordered display responsive nowrap" id="fruits-crud-datatable">
            <thead>
               <tr>
-                 <th>Id</th>
+                 <th>No.</th>
                  <th>Name </th>
                  <th>Sex</th>
                  <th>Purok</th>
@@ -76,7 +77,34 @@
               </tr>
            </thead>
         </table>
- 
+      </div>
+
+      <div id="Archive" hidden="hidden">
+        <table class="table table-bordered display responsive nowrap" id="fruits-archive-datatable">
+          <thead>
+             <tr>
+                <th>No.</th>
+                <th>Name </th>
+                <th>Sex</th>
+                <th>Purok</th>
+                <th>Barangay</th>
+                <th>Bearing(# of fruits trees)</th>
+                <th>Non-Bearing(# of fruits trees)</th>
+                <th>Total # of hills</th>
+                <th>Area(in has)</th>
+                <th>Age of Trees(Years)</th>
+               <th>No. of hills Harvested</th>
+               <th>No of Kilos Harvested</th>
+               <th>Harvesting season</th>
+               <th>Varieties</th>
+               <th>Group/Organization</th>
+               <th>Remark</th>
+                <th>Created at</th>
+                <th>Action</th>
+             </tr>
+          </thead>
+       </table>
+      </div>
     </div>
     
 </div>
@@ -267,6 +295,109 @@
        $('#id').val('');
  
   }   
+
+//  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //
+
+$('#fruits-archive-datatable').DataTable({
+           processing: true,
+           serverSide: true,
+           ajax: "{{ url('fruits-archive-datatable') }}",
+           columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'name', name: 'name' },
+                    { data: 'sex', name: 'sex' },
+                    { data: 'purok', name: 'purok' },
+                    { data: 'barangay', name: 'barangay' },
+                    { data: 'bearing', name: 'bearing' },
+                    { data: 'non_bearing', name: 'non_bearing' },
+                    { data: 'total', name: 'total' },
+                    { data: 'area', name: 'area' },
+                    { data: 'age', name: 'commodity' },
+                    { data: 'fruits_trees_harvested', name: 'fruits_trees_harvested' },
+                    { data: 'kilo', name: 'kilo' },
+                    { data: 'season', name: 'season' },
+                    { data: 'varieties', name: 'varieties' },
+                    { data: 'group', name: 'group' },
+                    { data: 'remark', name: 'remark' },
+                    { data: 'created_at', name: 'created_at' },
+                    {data: 'action', name: 'action', orderable: false},
+                 ],
+                 order: [[0, 'desc']]
+       });
+
+  function archiveFunc(id) {
+      if (confirm("Archive Record?") == true) {
+          // Make an AJAX request to the archive route
+          $.ajax({
+              type: "POST",
+              url: "{{ url('fruits/archive') }}",
+              data: { id: id },
+              dataType: 'json',
+              success: function (response) {
+                  // Handle success, e.g., show a success message
+                  console.log(response.success);
+                  // Optionally, you may want to refresh the data table
+                  var ArcTable = $('#fruits-archive-datatable').DataTable();
+                  var oTable = $('#fruits-crud-datatable').DataTable();
+                  ArcTable.ajax.reload(); // Reload the DataTable
+                  oTable.ajax.reload(); // Reload the DataTable
+              },
+              error: function (error) {
+                  // Handle error, e.g., show an error message
+                  console.error('Error archiving record:', error);
+              }
+          });
+      }
+  } 
+
+  function restoreFunc(id) {
+      if (confirm("Restore Record?") == true) {
+          // Make an AJAX request to the archive route
+          $.ajax({
+              type: "POST",
+              url: "{{ url('fruits/restore') }}",
+              data: { id: id },
+              dataType: 'json',
+              success: function (response) {
+                  // Handle success, e.g., show a success message
+                  console.log(response.success);
+                  // Optionally, you may want to refresh the data table
+                  var ArcTable = $('#fruits-archive-datatable').DataTable();
+                  var oTable = $('#fruits-crud-datatable').DataTable();
+                  ArcTable.ajax.reload(); // Reload the DataTable
+                  oTable.ajax.reload(); // Reload the DataTable
+              },
+              error: function (error) {
+                  // Handle error, e.g., show an error message
+                  console.error('Error archiving record:', error);
+              }
+          });
+      }
+  } 
+
+
+  function deleteFunc(id){
+        if (confirm("Delete Record?") == true) {
+        var id = id;
+          
+          // ajax
+          $.ajax({
+              type:"POST",
+              url: "{{ url('delete-fruits') }}",
+              data: { id: id },
+              dataType: 'json',
+              success: function(res){
+ 
+                var oTable = $('#fruits-archive-datatable').dataTable();
+                oTable.fnDraw(false);
+             }
+          });
+       }
+  }
+
+//  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //
+
+
   function editFunc(id){
      
     $.ajax({
@@ -498,5 +629,22 @@
 
 </script>
 
+<script>
+  function toggleDatatables() {
+    var div1 = document.getElementById('MainTable');
+    var div2 = document.getElementById('Archive');
+    var toggleButton = document.getElementById('toggleDatatables');
 
+    // Toggle the 'hidden' attribute
+    if (div1.hasAttribute('hidden')) {
+      div1.removeAttribute('hidden');
+      div2.setAttribute('hidden', 'hidden');
+      toggleButton.innerHTML = 'View Archive';
+    } else {
+      div1.setAttribute('hidden', 'hidden');
+      div2.removeAttribute('hidden');
+      toggleButton.innerHTML = 'Hide Archive';
+    }
+  }
+</script>
 </html>

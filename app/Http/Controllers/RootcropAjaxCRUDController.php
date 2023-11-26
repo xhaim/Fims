@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
  
 use App\Models\RootCrops;
+use App\Models\ArchivedRootCrops;
  
 use Datatables;
  
@@ -60,6 +61,97 @@ class RootcropAjaxCRUDController extends Controller
  
     }
       
+
+     // START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //
+
+    //  Archive Datatable
+    public function archive_index()
+    {
+        if (request()->ajax()) {
+            return datatables()->of(ArchivedRootCrops::select('*'))
+                ->addColumn('action', 'archive-root-action')
+                ->rawColumns(['action'])
+                ->addIndexColumn()
+                ->make(true);
+        }
+
+        return view('RootCrops');
+    }
+
+
+   //  ARCHIVE
+   public function archive(Request $request)
+   {
+       // Validate the request, if necessary
+       $request->validate([
+           'id' => 'required|exists:root_crops,id',
+       ]);
+
+       // Get the record to be archived
+       $root = RootCrops::find($request->id);
+
+       // Create a new archived record
+       $archivedRecord = ArchivedRootCrops::create([
+
+            'name' => $root->name, 
+            'barangay' => $root->barangay,
+            'municipality' => $root->municipality,
+            'sex' => $root->sex,
+            'affiliation' => $root->affiliation,
+            'contact' => $root->contact,
+            'commodity' => $root->commodity,
+            'area' => $root->area,
+            'number_of_hills' => $root->number_of_hills,
+            'production' => $root->production,
+            'market' => $root->market,
+            'expansionarea' => $root->expansionarea,
+
+           // Add any additional columns needed for the archived table
+       ]);
+
+       // Delete the record from the main table
+       $root->delete();
+
+       return response()->json(['success' => true]);
+   }
+
+   // RESTORE ARCHIVED
+   public function restore(Request $request)
+   {
+       // Validate the request, if necessary
+       $request->validate([
+           'id' => 'required|exists:archived_root_crops,id',
+       ]);
+
+       // Get the record to be unarchived
+       $archivedrootcrops = ArchivedRootCrops::find($request->id);
+
+       // Create a new record in the main table
+       $root = RootCrops::create([
+            'name' => $archivedrootcrops->name, 
+            'barangay' => $archivedrootcrops->barangay,
+            'municipality' => $archivedrootcrops->municipality,
+            'sex' => $archivedrootcrops->sex,
+            'affiliation' => $archivedrootcrops->affiliation,
+            'contact' => $archivedrootcrops->contact,
+            'commodity' => $archivedrootcrops->commodity,
+            'area' => $archivedrootcrops->area,
+            'number_of_hills' => $archivedrootcrops->number_of_hills,
+            'production' => $archivedrootcrops->production,
+            'market' => $archivedrootcrops->market,
+            'expansionarea' => $archivedrootcrops->expansionarea,
+           // Add any additional columns needed for the main table
+       ]);
+
+       // Delete the record from the archived table
+       $archivedrootcrops->delete();
+
+       return response()->json(['success' => true]);
+   }
+
+
+   // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING //
+
       
     /**
      * Show the form for editing the specified resource.

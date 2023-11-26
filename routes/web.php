@@ -78,6 +78,10 @@ Route::post('delete-assoc', [AssociationAjaxCRUDController::class, 'destroy']);
 Route::get('get-association-details/{id}', [AssociationAjaxCrudController::class, 'getAssociationDetails'])->name('association.details');
 Route::get('/print-assoc', [AssociationAjaxCrudController::class, 'fetchData']);
 
+Route::post('/assoc/archive', [AssociationAjaxCrudController::class, 'archive'])->name('assoc.archive');
+Route::post('/assoc/restore', [AssociationAjaxCrudController::class, 'restore'])->name('assoc.restore');
+Route::get('assoc-archive-datatable', [AssociationAjaxCrudController::class, 'archive_index']);
+
 // corn
 Route::get('corn-crud-datatable', [CornAjaxController::class, 'index']);
 Route::post('store-corn', [CornAjaxController::class, 'store']);
@@ -106,11 +110,19 @@ Route::post('store-vegseeds', [VegSeedsAjaxCRUDController::class, 'store']);
 Route::post('edit-vegseeds', [VegSeedsAjaxCRUDController::class, 'edit']);
 Route::post('delete-vegseeds', [VegSeedsAjaxCRUDController::class, 'destroy']);
 
+Route::post('/vegseeds/archive', [VegSeedsAjaxCRUDController::class, 'archive'])->name('vegseeds.archive');
+Route::post('/vegseeds/restore', [VegSeedsAjaxCRUDController::class, 'restore'])->name('vegseeds.restore');
+Route::get('vegseeds-archive-datatable', [VegSeedsAjaxCRUDController::class, 'archive_index']);
+
 // corn Seeds
 Route::get('cornseeds-crud-datatable', [CornSeedsAjaxCRUDController::class, 'index']);
 Route::post('store-cornseeds', [CornSeedsAjaxCRUDController::class, 'store']);
 Route::post('edit-cornseeds', [CornSeedsAjaxCRUDController::class, 'edit']);
 Route::post('delete-cornseeds', [CornSeedsAjaxCRUDController::class, 'destroy']);
+
+Route::post('/cornseeds/archive', [CornSeedsAjaxCRUDController::class, 'archive'])->name('cornseeds.archive');
+Route::post('/cornseeds/restore', [CornSeedsAjaxCRUDController::class, 'restore'])->name('cornseeds.restore');
+Route::get('cornseeds-archive-datatable', [CornSeedsAjaxCRUDController::class, 'archive_index']);
 
 // livestock
 Route::get('livestock-crud-datatable', [LivestockAjaxCRUDController::class, 'index']);
@@ -118,11 +130,19 @@ Route::post('store-livestock', [LivestockAjaxCRUDController::class, 'store']);
 Route::post('edit-livestock', [LivestockAjaxCRUDController::class, 'edit']);
 Route::post('delete-livestock', [LivestockAjaxCRUDController::class, 'destroy']);
 
+Route::post('/livestock/archive', [LivestockAjaxCRUDController::class, 'archive'])->name('livestock.archive');
+Route::post('/livestock/restore', [LivestockAjaxCRUDController::class, 'restore'])->name('livestock.restore');
+Route::get('livestock-archive-datatable', [LivestockAjaxCRUDController::class, 'archive_index']);
+
 // Fertilizer
 Route::get('fert-crud-datatable', [FertilizerAjaxCRUDController::class, 'index']);
 Route::post('store-fert', [FertilizerAjaxCRUDController::class, 'store']);
 Route::post('edit-fert', [FertilizerAjaxCRUDController::class, 'edit']);
 Route::post('delete-fert', [FertilizerAjaxCRUDController::class, 'destroy']);
+
+Route::post('/fert/archive', [FertilizerAjaxCRUDController::class, 'archive'])->name('fert.archive');
+Route::post('/fert/restore', [FertilizerAjaxCRUDController::class, 'restore'])->name('fert.restore');
+Route::get('fert-archive-datatable', [FertilizerAjaxCRUDController::class, 'archive_index']);
 
 // Rental Tractor
 Route::get('rental-crud-datatable', [RentalAjaxCRUDController::class, 'index']);
@@ -131,6 +151,10 @@ Route::post('edit-rental', [RentalAjaxCRUDController::class, 'edit']);
 Route::post('delete-rental', [RentalAjaxCRUDController::class, 'destroy']);
 Route::get('get-rental-details/{id}', [RentalAjaxCRUDController::class, 'getRentalDetails'])->name('rental.details');
 Route::post('/check-schedule-conflict', [RentalAjaxCRUDController::class ,'checkScheduleConflict']);
+
+Route::post('/rental/archive', [RentalAjaxCRUDController::class, 'archive'])->name('rental.archive');
+Route::post('/rental/restore', [RentalAjaxCRUDController::class, 'restore'])->name('rental.restore');
+Route::get('rental-archive-datatable', [RentalAjaxCRUDController::class, 'archive_index']);
 
 // Rice Hybrid
 Route::get('ricehybrid-crud-datatable', [RiceHybridAjaxCrudContoller::class, 'index']);
@@ -169,12 +193,20 @@ Route::post('edit-veg', [VegetableAjaxCRUDController::class, 'edit']);
 Route::post('delete-veg', [VegetableAjaxCRUDController::class, 'destroy']);
 Route::get('/print-hvcdpveg', [VegetableAjaxCRUDController::class, 'fetchData']);
 
+Route::post('/veg/archive', [VegetableAjaxCRUDController::class, 'archive'])->name('veg.archive');
+Route::post('/veg/restore', [VegetableAjaxCRUDController::class, 'restore'])->name('veg.restore');
+Route::get('veg-archive-datatable', [VegetableAjaxCRUDController::class, 'archive_index']);
+
 //Rootcrops
 Route::get('root-crud-datatable', [RootcropAjaxCRUDController::class, 'index']);
 Route::post('store-root', [RootcropAjaxCRUDController::class, 'store']);
 Route::post('edit-root', [RootcropAjaxCRUDController::class, 'edit']);
 Route::post('delete-root', [RootcropAjaxCRUDController::class, 'destroy']);
 Route::get('/print-hvdcprootcrops', [RootcropAjaxCRUDController::class, 'fetchData']);
+
+Route::post('/root/archive', [RootcropAjaxCRUDController::class, 'archive'])->name('root.archive');
+Route::post('/root/restore', [RootcropAjaxCRUDController::class, 'restore'])->name('root.restore');
+Route::get('root-archive-datatable', [RootcropAjaxCRUDController::class, 'archive_index']);
 
 // Cacao
 Route::get('cacao-crud-datatable', [CacaoAjaxCRUDController::class, 'index']);
@@ -183,12 +215,20 @@ Route::post('edit-cacao', [CacaoAjaxCRUDController::class, 'edit']);
 Route::post('delete-cacao', [CacaoAjaxCRUDController::class, 'destroy']);
 Route::get('/print-hvdcpcacao', [CacaoAjaxCRUDController::class, 'fetchData']);
 
+Route::post('/cacao/archive', [CacaoAjaxCRUDController::class, 'archive'])->name('cacao.archive');
+Route::post('/cacao/restore', [CacaoAjaxCRUDController::class, 'restore'])->name('cacao.restore');
+Route::get('cacao-archive-datatable', [CacaoAjaxCRUDController::class, 'archive_index']);
+
 // coffee
 Route::get('coffee-crud-datatable', [CoffeeAjaxCRUDController::class, 'index']);
 Route::post('store-coffee', [CoffeeAjaxCRUDController::class, 'store']);
 Route::post('edit-coffee', [CoffeeAjaxCRUDController::class, 'edit']);
 Route::post('delete-coffee', [CoffeeAjaxCRUDController::class, 'destroy']);
 Route::get('/print-hvdcpcoffee', [CoffeeAjaxCRUDController::class, 'fetchData']);
+
+Route::post('/coffee/archive', [CoffeeAjaxCRUDController::class, 'archive'])->name('coffee.archive');
+Route::post('/coffee/restore', [CoffeeAjaxCRUDController::class, 'restore'])->name('coffee.restore');
+Route::get('coffee-archive-datatable', [CoffeeAjaxCRUDController::class, 'archive_index']);
 
 // fruits
 Route::get('fruits-crud-datatable', [FruitsAjaxCRUDController::class, 'index']);
@@ -197,12 +237,20 @@ Route::post('edit-fruits', [FruitsAjaxCRUDController::class, 'edit']);
 Route::post('delete-fruits', [FruitsAjaxCRUDController::class, 'destroy']);
 Route::get('/print-hvdcpfruits', [FruitsAjaxCRUDController::class, 'fetchData']);
 
+Route::post('/fruits/archive', [FruitsAjaxCRUDController::class, 'archive'])->name('fruits.archive');
+Route::post('/fruits/restore', [FruitsAjaxCRUDController::class, 'restore'])->name('fruits.restore');
+Route::get('fruits-archive-datatable', [FruitsAjaxCRUDController::class, 'archive_index']);
+
 // bamboo
 Route::get('bamboo-crud-datatable', [BambooAjaxCRUDController::class, 'index']);
 Route::post('store-bamboo', [BambooAjaxCRUDController::class, 'store']);
 Route::post('edit-bamboo', [BambooAjaxCRUDController::class, 'edit']);
 Route::post('delete-bamboo', [BambooAjaxCRUDController::class, 'destroy']);
 Route::get('/print-hvdcpbamboo', [BambooAjaxCRUDController::class, 'fetchData']);
+
+Route::post('/bamboo/archive', [BambooAjaxCRUDController::class, 'archive'])->name('bamboo.archive');
+Route::post('/bamboo/restore', [BambooAjaxCRUDController::class, 'restore'])->name('bamboo.restore');
+Route::get('bamboo-archive-datatable', [BambooAjaxCRUDController::class, 'archive_index']);
 
 // Livestockpopu
 Route::get('popu-crud-datatable', [LivestockPopulationAjaxCRUDController::class, 'index']);
@@ -211,12 +259,20 @@ Route::post('edit-popu', [LivestockPopulationAjaxCRUDController::class, 'edit'])
 Route::post('delete-popu', [LivestockPopulationAjaxCRUDController::class, 'destroy']);
 Route::get('/print-popu', [LivestockPopulationAjaxCRUDController::class, 'fetchData']);
 
+Route::post('/popu/archive', [LivestockPopulationAjaxCRUDController::class, 'archive'])->name('popu.archive');
+Route::post('/popu/restore', [LivestockPopulationAjaxCRUDController::class, 'restore'])->name('popu.restore');
+Route::get('popu-archive-datatable', [LivestockPopulationAjaxCRUDController::class, 'archive_index']);
+
 // ROMS
 Route::get('roms-crud-datatable', [ROMSAjaxCRUDController::class, 'index']);
 Route::post('store-roms', [ROMSAjaxCRUDController::class, 'store']);
 Route::post('edit-roms', [ROMSAjaxCRUDController::class, 'edit']);
 Route::post('delete-roms', [ROMSAjaxCRUDController::class, 'destroy']);
 Route::get('/print-roms', [ROMSAjaxCRUDController::class, 'fetchData']);
+
+Route::post('/roms/archive', [ROMSAjaxCRUDController::class, 'archive'])->name('roms.archive');
+Route::post('/roms/restore', [ROMSAjaxCRUDController::class, 'restore'])->name('roms.restore');
+Route::get('roms-archive-datatable', [ROMSAjaxCRUDController::class, 'archive_index']);
 
 
 // vaccination
@@ -226,9 +282,17 @@ Route::post('edit-vacc', [VaccinationAjaxCRUDController::class, 'edit']);
 Route::post('delete-vacc', [VaccinationAjaxCRUDController::class, 'destroy']);
 Route::get('/print-vacc', [VaccinationAjaxCRUDController::class, 'fetchData']);
 
+Route::post('/vacc/archive', [VaccinationAjaxCRUDController::class, 'archive'])->name('vacc.archive');
+Route::post('/vacc/restore', [VaccinationAjaxCRUDController::class, 'restore'])->name('vacc.restore');
+Route::get('vacc-archive-datatable', [VaccinationAjaxCRUDController::class, 'archive_index']);
+
 // veg req
 Route::get('vegreq-crud-datatable', [VegReqController::class, 'index']);
 Route::post('store-vegreq', [VegReqController::class, 'store']);
 Route::post('edit-vegreq', [VegReqController::class, 'edit']);
 Route::post('delete-vegreq', [VegReqController::class, 'destroy']);
+
+Route::post('/vegreq/archive', [VegReqController::class, 'archive'])->name('vegreq.archive');
+Route::post('/vegreq/restore', [VegReqController::class, 'restore'])->name('vegreq.restore');
+Route::get('vegreq-archive-datatable', [VegReqController::class, 'archive_index']);
 });

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
  
 use App\Models\Cacao;
+use App\Models\ArchivedCacaos;
  
 use Datatables;
  
@@ -62,7 +63,102 @@ class CacaoAjaxCRUDController extends Controller
  
     }
       
-      
+// START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //
+
+    //  Archive Datatable
+    public function archive_index()
+    {
+        if (request()->ajax()) {
+            return datatables()->of(ArchivedCacaos::select('*'))
+                ->addColumn('action', 'archive-cacao-action')
+                ->rawColumns(['action'])
+                ->addIndexColumn()
+                ->make(true);
+        }
+
+        return view('cacao');
+    }
+
+
+   //  ARCHIVE
+   public function archive(Request $request)
+   {
+       // Validate the request, if necessary
+       $request->validate([
+           'id' => 'required|exists:cacaos,id',
+       ]);
+
+       // Get the record to be archived
+       $cacaos = Cacao::find($request->id);
+
+       // Create a new archived record
+       $archivedRecord = ArchivedCacaos::create([
+
+        'name' => $cacaos->name,
+        'sex' => $cacaos->sex,
+        'purok' => $cacaos->purok,
+        'barangay' => $cacaos->barangay,
+        'bearing' => $cacaos->bearing,
+        'non_bearing' => $cacaos->non_bearing,
+        'total' => $cacaos->total,
+        'area' => $cacaos->area,
+        'age' => $cacaos->age,
+        'cacao_trees_harvested' => $cacaos->cacao_trees_harvested,
+        'kilo' => $cacaos->kilo,
+        'season' => $cacaos->season,
+        'varieties' => $cacaos->varieties,
+        'group' => $cacaos->group,
+        'remark' => $cacaos->remark,
+
+           // Add any additional columns needed for the archived table
+       ]);
+
+       // Delete the record from the main table
+       $cacaos->delete();
+
+       return response()->json(['success' => true]);
+   }
+
+   // RESTORE ARCHIVED
+   public function restore(Request $request)
+   {
+       // Validate the request, if necessary
+       $request->validate([
+           'id' => 'required|exists:archived_cacaos,id',
+       ]);
+
+       // Get the record to be unarchived
+       $archivedcacaos = ArchivedCacaos::find($request->id);
+
+       // Create a new record in the main table
+       $cacaos = Cacao::create([
+        'name' => $archivedcacaos->name,
+        'sex' => $archivedcacaos->sex,
+        'purok' => $archivedcacaos->purok,
+        'barangay' => $archivedcacaos->barangay,
+        'bearing' => $archivedcacaos->bearing,
+        'non_bearing' => $archivedcacaos->non_bearing,
+        'total' => $archivedcacaos->total,
+        'area' => $archivedcacaos->area,
+        'age' => $archivedcacaos->age,
+        'cacao_trees_harvested' => $archivedcacaos->cacao_trees_harvested,
+        'kilo' => $archivedcacaos->kilo,
+        'season' => $archivedcacaos->season,
+        'varieties' => $archivedcacaos->varieties,
+        'group' => $archivedcacaos->group,
+        'remark' => $archivedcacaos->remark,
+           // Add any additional columns needed for the main table
+       ]);
+
+       // Delete the record from the archived table
+       $archivedcacaos->delete();
+
+       return response()->json(['success' => true]);
+   }
+
+
+   // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING //
+
     /**
      * Show the form for editing the specified resource.
      *

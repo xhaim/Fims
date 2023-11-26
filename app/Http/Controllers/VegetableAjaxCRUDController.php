@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
  
 use App\Models\Vegetable;
+use App\Models\ArchivedVegetables;
  
 use Datatables;
  
@@ -70,6 +71,97 @@ class VegetableAjaxCRUDController extends Controller
      * @param  \App\company  $company
      * @return \Illuminate\Http\Response
      */
+
+     // START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //
+
+    //  Archive Datatable
+    public function archive_index()
+    {
+        if (request()->ajax()) {
+            return datatables()->of(ArchivedVegetables::select('*'))
+                ->addColumn('action', 'archive-veg-action')
+                ->rawColumns(['action'])
+                ->addIndexColumn()
+                ->make(true);
+        }
+
+        return view('vegetable');
+    }
+
+
+   //  ARCHIVE
+   public function archive(Request $request)
+   {
+       // Validate the request, if necessary
+       $request->validate([
+           'id' => 'required|exists:vegetables,id',
+       ]);
+
+       // Get the record to be archived
+       $vegetables = Vegetable::find($request->id);
+
+       // Create a new archived record
+       $archivedRecord = ArchivedVegetables::create([
+
+            'name' => $vegetables->name, 
+            'barangay' => $vegetables->barangay,
+            'municipality' => $vegetables->municipality,
+            'sex' => $vegetables->sex,
+            'affiliation' => $vegetables->affiliation,
+            'contact' => $vegetables->contact,
+            'commodity' => $vegetables->commodity,
+            'area' => $vegetables->area,
+            'number_of_hills' => $vegetables->number_of_hills,
+            'production' => $vegetables->production,
+            'market' => $vegetables->market,
+            'expansionarea' => $vegetables->expansionarea,
+
+           // Add any additional columns needed for the archived table
+       ]);
+
+       // Delete the record from the main table
+       $vegetables->delete();
+
+       return response()->json(['success' => true]);
+   }
+
+   // RESTORE ARCHIVED
+   public function restore(Request $request)
+   {
+       // Validate the request, if necessary
+       $request->validate([
+           'id' => 'required|exists:archived_vegetables,id',
+       ]);
+
+       // Get the record to be unarchived
+       $archivedvegetables = ArchivedVegetables::find($request->id);
+
+       // Create a new record in the main table
+       $vegetables = Vegetable::create([
+            'name' => $archivedvegetables->name, 
+            'barangay' => $archivedvegetables->barangay,
+            'municipality' => $archivedvegetables->municipality,
+            'sex' => $archivedvegetables->sex,
+            'affiliation' => $archivedvegetables->affiliation,
+            'contact' => $archivedvegetables->contact,
+            'commodity' => $archivedvegetables->commodity,
+            'area' => $archivedvegetables->area,
+            'number_of_hills' => $archivedvegetables->number_of_hills,
+            'production' => $archivedvegetables->production,
+            'market' => $archivedvegetables->market,
+            'expansionarea' => $archivedvegetables->expansionarea,
+           // Add any additional columns needed for the main table
+       ]);
+
+       // Delete the record from the archived table
+       $archivedvegetables->delete();
+
+       return response()->json(['success' => true]);
+   }
+
+
+   // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING //
+
     public function edit(Request $request)
     {   
         $where = array('id' => $request->id);
