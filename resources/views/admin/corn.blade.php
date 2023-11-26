@@ -53,7 +53,7 @@
     @endif
  
     <div class="card-body">
-      <div id="MainTable">
+      
         <table class="table table-bordered display responsive nowrap display responsive nowrap" id="corn-crud-datatable">
            <thead>
               <tr>

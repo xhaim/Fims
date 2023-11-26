@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Roms;
- 
+use App\Models\ArchivedRoms;
 use Datatables;
 
 class ROMSAjaxCRUDController extends Controller
@@ -61,6 +61,104 @@ class ROMSAjaxCRUDController extends Controller
  
     }
       
+    // START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //
+
+    //  Archive Datatable
+    public function archive_index()
+    {
+        if (request()->ajax()) {
+            return datatables()->of(ArchivedRoms::select('*'))
+                ->addColumn('action', 'archive-roms-action')
+                ->rawColumns(['action'])
+                ->addIndexColumn()
+                ->make(true);
+        }
+
+        return view('roms');
+    }
+
+
+   //  ARCHIVE
+   public function archive(Request $request)
+   {
+       // Validate the request, if necessary
+       $request->validate([
+           'id' => 'required|exists:roms,id',
+       ]);
+
+       // Get the record to be archived
+       $roms = Roms::find($request->id);
+
+       // Create a new archived record
+       $archivedRecord = ArchivedRoms::create([
+                        //$roms
+        'name' => $roms->name,
+        'address' => $roms->address,
+        'animal_id' => $roms->animal_id,
+        'breed' => $roms->breed,
+        'born' => $roms->born,
+        'bcs' => $roms->bcs,
+        'lastcalving' => $roms->lastcalving,
+        'romsdate' => $roms->romsdate, 
+        'ovarian' => $roms->ovarian,
+        'result' => $roms->result,
+        'ai' => $roms->ai,
+        'ut' => $roms->ut,
+        'w_iec' => $roms->w_iec,
+        'bullid' => $roms->bullid,
+        'straws' => $roms->straws,
+        'remark' => $roms->remark,
+           // Add any additional columns needed for the archived table
+       ]);
+
+       // Delete the record from the main table
+       $roms->delete();
+
+       return response()->json(['success' => true]);
+   }
+
+   // RESTORE ARCHIVED
+   public function restore(Request $request)
+   {
+       // Validate the request, if necessary
+       $request->validate([
+           'id' => 'required|exists:archived_roms,id',
+       ]);
+
+       // Get the record to be unarchived
+       $archivedroms = ArchivedRoms::find($request->id);
+
+       // Create a new record in the main table
+       $roms = Roms::create([
+                        
+        'name' => $archivedroms->name,
+        'address' => $archivedroms->address,
+        'animal_id' => $archivedroms->animal_id,
+        'breed' => $archivedroms->breed,
+        'born' => $archivedroms->born,
+        'bcs' => $archivedroms->bcs,
+        'lastcalving' => $archivedroms->lastcalving,
+        'romsdate' => $archivedroms->romsdate, 
+        'ovarian' => $archivedroms->ovarian,
+        'result' => $archivedroms->result,
+        'ai' => $archivedroms->ai,
+        'ut' => $archivedroms->ut,
+        'w_iec' => $archivedroms->w_iec,
+        'bullid' => $archivedroms->bullid,
+        'straws' => $archivedroms->straws,
+        'remark' => $archivedroms->remark,
+           // Add any additional columns needed for the main table
+       ]);
+
+       // Delete the record from the archived table
+       $archivedroms->delete();
+
+       return response()->json(['success' => true]);
+   }
+
+
+   // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING //
+  
       
     /**
      * Show the form for editing the specified resource.

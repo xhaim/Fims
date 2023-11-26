@@ -5,7 +5,7 @@
  use Illuminate\Http\Request;
   
  use App\Models\Association;
-  
+ use App\Models\ArchivedAssoc; 
  use Datatables;
  use Illuminate\Support\Facades\DB;
 
@@ -59,7 +59,83 @@
   
      }
        
-       
+     // START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //
+
+    //  Archive Datatable
+    public function archive_index()
+    {
+        if (request()->ajax()) {
+            return datatables()->of(ArchivedAssoc::select('*'))
+                ->addColumn('action', 'admin/archive-assoc-action')
+                ->rawColumns(['action'])
+                ->addIndexColumn()
+                ->make(true);
+        }
+
+        return view('admin/assoc');
+    }
+
+
+   //  ARCHIVE
+   public function archive(Request $request)
+   {
+       // Validate the request, if necessary
+       $request->validate([
+           'id' => 'required|exists:associations,id',
+       ]);
+
+       // Get the record to be archived
+       $assoc = Association::find($request->id);
+
+       // Create a new archived record
+       $archivedRecord = ArchivedAssoc::create([
+                        'association'=> $assoc->association,
+                        'barangay'=> $assoc->barangay,
+                        'chairman'=> $assoc->chairman,
+                        'contact'=> $assoc->contact,
+                        'no_of_farmers'=> $assoc->no_of_farmers,
+                        'registered'=> $assoc->registered,
+           // Add any additional columns needed for the archived table
+       ]);
+
+       // Delete the record from the main table
+       $assoc->delete();
+
+       return response()->json(['success' => true]);
+   }
+
+   // RESTORE ARCHIVED
+   public function restore(Request $request)
+   {
+       // Validate the request, if necessary
+       $request->validate([
+           'id' => 'required|exists:archived_assocs,id',
+       ]);
+
+       // Get the record to be unarchived
+       $archivedassoc = ArchivedAssoc::find($request->id);
+
+       // Create a new record in the main table
+       $assoc = Association::create([
+                        'association'=> $archivedassoc->association,
+                        'barangay'=> $archivedassoc->barangay,
+                        'chairman'=> $archivedassoc->chairman,
+                        'contact'=> $archivedassoc->contact,
+                        'no_of_farmers'=> $archivedassoc->no_of_farmers,
+                        'registered'=> $archivedassoc->registered,
+           // Add any additional columns needed for the main table
+       ]);
+
+       // Delete the record from the archived table
+       $archivedassoc->delete();
+
+       return response()->json(['success' => true]);
+   }
+
+
+   // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING //
+  
+
     //  /**
     //   * Show the form for editing the specified resource.
     //   *
