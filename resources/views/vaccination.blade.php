@@ -339,7 +339,8 @@
                       htmlContent += '<tr>';
                       for (const key in row) {
                           if (row.hasOwnProperty(key) && !excludedColumns.includes(key)) {
-                              htmlContent += '<td>' + row[key] + '</td>';
+                            const cellValue = row[key] !== null ? row[key] : ''; // Check for null and replace with an empty string
+                              htmlContent += '<td>' + cellValue + '</td>';
                           }
                       }
                       htmlContent += '</tr>';
