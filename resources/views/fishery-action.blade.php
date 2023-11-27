@@ -2,6 +2,6 @@
     <i class="fa fa-pencil"></i> 
 </a>
 
-<a href="javascript:void(0)" id="archive-rental" onClick="archiveFunc({{ $id }})" data-toggle="tooltip" data-original-title="archive" class="delete btn btn-warning">
+<a href="javascript:void(0)" id="archive-fruits" onClick="archiveFunc({{ $id }})" data-toggle="tooltip" data-original-title="archive" class="delete btn btn-warning">
     <i class="fa fa-archive"></i>
 </a>

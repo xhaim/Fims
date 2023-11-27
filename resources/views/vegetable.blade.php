@@ -56,7 +56,7 @@
         <table class="table table-bordered display responsive nowrap" id="veg-crud-datatable">
            <thead>
               <tr>
-                 <th>Id</th>
+                 <th>No.</th>
                  <th>Name of Farmer</th>
                  <th>Barangay</th>
                  <th>Municipality</th>
@@ -80,7 +80,7 @@
         <table class="table table-bordered display responsive nowrap" id="veg-archive-datatable">
            <thead>
               <tr>
-                 <th>Id</th>
+                 <th>No.</th>
                  <th>Name of Farmer</th>
                  <th>Barangay</th>
                  <th>Municipality</th>

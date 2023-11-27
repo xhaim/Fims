@@ -1,14 +1,13 @@
 <?php
- 
+
 namespace App\Models;
- 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
- 
-class Company extends Model
+
+class ArchivedFishery extends Model
 {
     use HasFactory;
- 
     protected $fillable = [
         'registration_no',
         'registration_date',
@@ -51,5 +50,4 @@ class Company extends Model
         
 
     ];
-    
 }

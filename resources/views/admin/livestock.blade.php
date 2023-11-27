@@ -38,6 +38,7 @@
             </div>
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)">Add</a>
+                <a class="btn btn-info" id="toggleDatatables" style=" color: white; margin-left:960px;" onclick="toggleDatatables()">View Archive</a>
             </div>
         </div>
     </div>
@@ -49,26 +50,46 @@
     @endif
  
     <div class="card-body">
- 
-        <table class="table table-bordered display responsive nowrap display responsive nowrap" id="livestock-crud-datatable">
-           <thead>
-              <tr>
-                <th>RSBSA ID</th>
-                <th>Generated ID</th>
-                <th>Barangay</th>
-                <th>Farmer's Name</th>
-                <th>Date of Birth</th>
-                <th>Age</th>
-                <th>Sex</th>
-                <th>Commodity Name</th>
-                <th>Number of Head/s</th>
-                <th>Deceased</th>
-                <th>Registered-in Date</th>
-                <th width="150px">Action</th>
-              </tr>
-           </thead>
-        </table>
- 
+          <div id="MainTable">
+            <table class="table table-bordered display responsive nowrap display responsive nowrap" id="livestock-crud-datatable">
+              <thead>
+                  <tr>
+                    <th>RSBSA ID</th>
+                    <th>Generated ID</th>
+                    <th>Barangay</th>
+                    <th>Farmer's Name</th>
+                    <th>Date of Birth</th>
+                    <th>Age</th>
+                    <th>Sex</th>
+                    <th>Commodity Name</th>
+                    <th>Number of Head/s</th>
+                    <th>Deceased</th>
+                    <th>Registered-in Date</th>
+                    <th width="150px">Action</th>
+                  </tr>
+              </thead>
+            </table>
+        </div>
+        <div id="Archive" hidden="hidden">
+          <table class="table table-bordered display responsive nowrap display responsive nowrap" id="livestock-archive-datatable">
+            <thead>
+               <tr>
+                 <th>RSBSA ID</th>
+                 <th>Generated ID</th>
+                 <th>Barangay</th>
+                 <th>Farmer's Name</th>
+                 <th>Date of Birth</th>
+                 <th>Age</th>
+                 <th>Sex</th>
+                 <th>Commodity Name</th>
+                 <th>Number of Head/s</th>
+                 <th>Deceased</th>
+                 <th>Registered-in Date</th>
+                 <th width="150px">Action</th>
+               </tr>
+            </thead>
+         </table>
+        </div>
     </div>
 </div>
 </div>
@@ -93,7 +114,7 @@
               <div class="form-group">
                 <label for="generated" class="col-sm-2 control-label">Generated ID</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="generated" name="generated" placeholder="Enter Generated" maxlength="20" required="">
+                  <input type="number" class="form-control" id="generated" name="generated" placeholder="Enter Generated" maxlength="20" >
                 </div>
               </div>
  
@@ -234,24 +255,108 @@
     });
   }  
  
-  function deleteFunc(id){
-        if (confirm("Delete Record?") == true) {
-        var id = id;
-          
-          // ajax
-          $.ajax({
-              type:"POST",
-              url: "{{ url('delete-livestock') }}",
-              data: { id: id },
-              dataType: 'json',
-              success: function(res){
- 
-                var oTable = $('#livestock-crud-datatable').dataTable();
-                oTable.fnDraw(false);
-             }
+      //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //
+
+      $('#livestock-archive-datatable').DataTable({
+              processing: true,
+              serverSide: true,
+              ajax: "{{ url('livestock-archive-datatable') }}",
+              columns: [ 
+                          { data: 'rsbsa', name: 'rsbsa' },
+                          { data: 'generated', name: 'generated' },
+                          { data: 'barangay', name: 'barangay' },
+                          { data: 'name', name: 'name' },
+                          { data: 'birth', name: 'birth' },
+                          { data: 'age', name: 'age' },
+                          { data: 'sex', name: 'sex' },
+                          { data: 'commodity', name: 'commodity' },
+                          { data: 'head', name: 'head' },
+                          { data: 'deceased', name: 'deceased' },
+                          { data: 'created_at', name: 'created_at' },
+                          {data: 'action', name: 'action', orderable: false},
+                      ],
+                      order: [[0, 'desc']]
           });
-       }
-  }
+
+        function archiveFunc(id) {
+            if (confirm("Archive Record?") == true) {
+                // Make an AJAX request to the archive route
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('livestock/archive') }}",
+                    data: { id: id },
+                    dataType: 'json',
+                    success: function (response) {
+                        // Handle success, e.g., show a success message
+                        console.log(response.success);
+                        // Optionally, you may want to refresh the data table
+                        var ArcTable = $('#livestock-archive-datatable').DataTable();
+                        var oTable = $('#livestock-crud-datatable').DataTable();
+                        ArcTable.ajax.reload(); // Reload the DataTable
+                        oTable.ajax.reload(); // Reload the DataTable
+                    },
+                    error: function (error) {
+                        // Handle error, e.g., show an error message
+                        console.error('Error archiving record:', error);
+                    }
+                });
+            }
+        } 
+
+        function restoreFunc(id) {
+            if (confirm("Restore Record?") == true) {
+                // Make an AJAX request to the archive route
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('livestock/restore') }}",
+                    data: { id: id },
+                    dataType: 'json',
+                    success: function (response) {
+                        // Handle success, e.g., show a success message
+                        console.log(response.success);
+                        // Optionally, you may want to refresh the data table
+                        var ArcTable = $('#livestock-archive-datatable').DataTable();
+                        var oTable = $('#livestock-crud-datatable').DataTable();
+                        ArcTable.ajax.reload(); // Reload the DataTable
+                        oTable.ajax.reload(); // Reload the DataTable
+                    },
+                    error: function (error) {
+                        // Handle error, e.g., show an error message
+                        console.error('Error archiving record:', error);
+                    }
+                });
+            }
+        } 
+
+
+
+        function deleteFunc(id) {
+            if (confirm("Delete Record?") == true) {
+                // Make an AJAX request to the archive route
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('delete-livestock') }}",
+                    data: { id: id },
+                    dataType: 'json',
+                    success: function (response) {
+                        // Handle success, e.g., show a success message
+                        console.log(response.success);
+                        // Optionally, you may want to refresh the data table
+                        var ArcTable = $('#livestock-archive-datatable').DataTable();
+                        var oTable = $('#livestock-crud-datatable').DataTable();
+                        ArcTable.ajax.reload(); // Reload the DataTable
+                        oTable.ajax.reload(); // Reload the DataTable
+                    },
+                    error: function (error) {
+                        // Handle error, e.g., show an error message
+                        console.error('Error archiving record:', error);
+                    }
+                });
+            }
+        } 
+
+      //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //
+
  
   $('#LivestockForm').submit(function(e) {
  
@@ -280,5 +385,23 @@
    });
  
  
+</script>
+<script>
+  function toggleDatatables() {
+    var div1 = document.getElementById('MainTable');
+    var div2 = document.getElementById('Archive');
+    var toggleButton = document.getElementById('toggleDatatables');
+
+    // Toggle the 'hidden' attribute
+    if (div1.hasAttribute('hidden')) {
+      div1.removeAttribute('hidden');
+      div2.setAttribute('hidden', 'hidden');
+      toggleButton.innerHTML = 'View Archive';
+    } else {
+      div1.setAttribute('hidden', 'hidden');
+      div2.removeAttribute('hidden');
+      toggleButton.innerHTML = 'Hide Archive';
+    }
+  }
 </script>
 </html>

@@ -38,6 +38,8 @@
             </div>
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)">Add </a>
+                <a class="btn btn-info" id="toggleDatatables" style=" color: white; margin-left:960px;" onclick="toggleDatatables()">View Archive</a>
+            
             </div>
         </div>
     </div>
@@ -50,6 +52,7 @@
  
     <div class="card-body">
  
+      <div id="MainTable">
         <table class="table table-bordered display responsive nowrap display responsive nowrap" id="vegreq-crud-datatable">
            <thead>
               <tr>
@@ -63,7 +66,22 @@
               </tr>
            </thead>
         </table>
- 
+      </div>
+      <div id="Archive" hidden="hidden">
+        <table class="table table-bordered display responsive nowrap display responsive nowrap" id="vegreq-archive-datatable" style="width: 100%">
+           <thead>
+              <tr>
+                
+                <th>Name </th>
+                <th>No. of Pack</th>
+                <th>Barangay</th>
+                <th>Contact Number</th>
+                <th>Registered-in Date</th>
+                <th width="150px">Action</th>
+              </tr>
+           </thead>
+        </table>
+      </div>
     </div>
 </div>
 </div>
@@ -176,25 +194,102 @@
        }
     });
   }  
- 
-  function deleteFunc(id){
-        if (confirm("Delete Record?") == true) {
-        var id = id;
-          
-          // ajax
-          $.ajax({
-              type:"POST",
-              url: "{{ url('delete-vegreq') }}",
-              data: { id: id },
-              dataType: 'json',
-              success: function(res){
- 
-                var oTable = $('#vegreq-crud-datatable').dataTable();
-                oTable.fnDraw(false);
-             }
+       //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //
+
+       $('#vegreq-archive-datatable').DataTable({
+              processing: true,
+              serverSide: true,
+              ajax: "{{ url('vegreq-archive-datatable') }}",
+              columns: [ 
+                    { data: 'name', name: 'name' },
+                    { data: 'seeds_received', name: 'seeds_received' },
+                    { data: 'barangay', name: 'barangay' },
+                    { data: 'contact', name: 'contact' }, 
+                    { data: 'created_at', name: 'created_at' },
+                    {data: 'action', name: 'action', orderable: false},
+                      ],
+                      order: [[0, 'desc']]
           });
-       }
-  }
+
+        function archiveFunc(id) {
+            if (confirm("Archive Record?") == true) {
+                // Make an AJAX request to the archive route
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('vegreq/archive') }}",
+                    data: { id: id },
+                    dataType: 'json',
+                    success: function (response) {
+                        // Handle success, e.g., show a success message
+                        console.log(response.success);
+                        // Optionally, you may want to refresh the data table
+                        var ArcTable = $('#vegreq-archive-datatable').DataTable();
+                        var oTable = $('#vegreq-crud-datatable').DataTable();
+                        ArcTable.ajax.reload(); // Reload the DataTable
+                        oTable.ajax.reload(); // Reload the DataTable
+                    },
+                    error: function (error) {
+                        // Handle error, e.g., show an error message
+                        console.error('Error archiving record:', error);
+                    }
+                });
+            }
+        } 
+
+        function restoreFunc(id) {
+            if (confirm("Restore Record?") == true) {
+                // Make an AJAX request to the archive route
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('vegreq/restore') }}",
+                    data: { id: id },
+                    dataType: 'json',
+                    success: function (response) {
+                        // Handle success, e.g., show a success message
+                        console.log(response.success);
+                        // Optionally, you may want to refresh the data table
+                        var ArcTable = $('#vegreq-archive-datatable').DataTable();
+                        var oTable = $('#vegreq-crud-datatable').DataTable();
+                        ArcTable.ajax.reload(); // Reload the DataTable
+                        oTable.ajax.reload(); // Reload the DataTable
+                    },
+                    error: function (error) {
+                        // Handle error, e.g., show an error message
+                        console.error('Error archiving record:', error);
+                    }
+                });
+            }
+        } 
+
+
+
+        function deleteFunc(id) {
+            if (confirm("Delete Record?") == true) {
+                // Make an AJAX request to the archive route
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('delete-vegreq') }}",
+                    data: { id: id },
+                    dataType: 'json',
+                    success: function (response) {
+                        // Handle success, e.g., show a success message
+                        console.log(response.success);
+                        // Optionally, you may want to refresh the data table
+                        var ArcTable = $('#vegreq-archive-datatable').DataTable();
+                        var oTable = $('#vegreq-crud-datatable').DataTable();
+                        ArcTable.ajax.reload(); // Reload the DataTable
+                        oTable.ajax.reload(); // Reload the DataTable
+                    },
+                    error: function (error) {
+                        // Handle error, e.g., show an error message
+                        console.error('Error archiving record:', error);
+                    }
+                });
+            }
+        } 
+
+      //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //
+
  
   $('#VegReqForm').submit(function(e) {
  
@@ -222,5 +317,23 @@
        });
    });
  
+</script>
+<script>
+  function toggleDatatables() {
+    var div1 = document.getElementById('MainTable');
+    var div2 = document.getElementById('Archive');
+    var toggleButton = document.getElementById('toggleDatatables');
+
+    // Toggle the 'hidden' attribute
+    if (div1.hasAttribute('hidden')) {
+      div1.removeAttribute('hidden');
+      div2.setAttribute('hidden', 'hidden');
+      toggleButton.innerHTML = 'View Archive';
+    } else {
+      div1.setAttribute('hidden', 'hidden');
+      div2.removeAttribute('hidden');
+      toggleButton.innerHTML = 'Hide Archive';
+    }
+  }
 </script>
 </html>

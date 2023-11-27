@@ -179,7 +179,7 @@ class CornAjaxController extends Controller
     
     // Reset AUTO_INCREMENT for 'corns' table
     $table = 'corns'; // Replace 'corns' with the actual table name
-    DB::statement("ALTER TABLE $table AUTO_INCREMENT = 1");
+    DB::statement("ALTER TABLE $table AUTO_MENT = 1");
     
     return Response()->json($corn);
 }

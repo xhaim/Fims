@@ -130,12 +130,6 @@
 
     // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING // END OF ARCHIVING //
 
-    
-
-    
-
-       
-       
     //  /**
     //   * Show the form for editing the specified resource.
     //   *
@@ -149,7 +143,6 @@
        
          return Response()->json($rice_seeds);
      }
-       
        
     //  /**
     //   * Remove the specified resource from storage.

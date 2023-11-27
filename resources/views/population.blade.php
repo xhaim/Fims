@@ -39,7 +39,7 @@
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)"> Add</a>
                 <a class="btn btn-secondary" onClick="printDataTable()" href="javascript:void(0)">printAll </a>
-
+                <a class="btn btn-info" id="toggleDatatables" style=" color: white; margin-left:950px;" onclick="toggleDatatables()">View Archive</a>
             </div>
         </div>
     </div>
@@ -51,7 +51,7 @@
     @endif
  
     <div class="card-body">
- 
+      <div id="MainTable">
         <table class="table table-bordered display responsive nowrap" id="popu-crud-datatable">
            <thead>
               <tr>
@@ -94,10 +94,53 @@
               </tr>
            </thead>
         </table>
- 
+      </div>
+      <div id="Archive" hidden="hidden">
+        <table class="table table-bordered display responsive nowrap" id="popu-archive-datatable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Kabaw Male</th>
+              <th>Kabaw Female</th>
+              <th>Total Kabaw</th>
+              <th>Baka Male</th>
+              <th>Baka Female</th>
+              <th>Total Baka</th>
+              <th>Anay</th>
+              <th>Butakal</th>
+              <th>Total Baboy</th>
+              <th>Kanding Male</th>
+              <th>Kanding Female</th>
+              <th>Total Kanding</th>
+              <th>Kabayo Male</th>
+              <th>Kabayo Female</th>
+              <th>Total Kabayo</th>
+              <th>Iro Male</th>
+              <th>Iro Female</th>
+              <th>Total Iro</th>
+              <th>Inahan</th>
+              <th>Sonoy</th>
+              <th>Total Manok</th>
+              <th>Bebe Male</th>
+              <th>Bebe Female</th>
+              <th>Total Bebe</th>
+              <th>Quail Male</th>
+              <th>Quail Female</th>
+              <th>Total Quail</th>
+              <th>Broiler Male</th>
+              <th>Broiler Female</th>
+              <th>Total Broiler</th>
+              <th>Rabbit Male</th>
+              <th>Rabbit Female</th>
+              <th>Total Rabbit</th>
+              <th>Created at</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
     </div>
-    
-</div>
+ 
  
  
     <div class="modal fade" id="popu-modal" aria-hidden="true">
@@ -479,7 +522,126 @@
        }
     });
   }  
-  
+
+  //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //
+
+  $('#popu-archive-datatable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ url('popu-archive-datatable') }}",
+        columns: [ 
+          { data: 'name', name: 'name' },
+                    { data: 'kabawm', name: 'kabawm'},
+                    { data: 'kabawf', name: 'kabawf'},
+                    { data: 'totalkabaw', name: 'totalkabaw' },
+                    { data: 'bakam', name: 'bakam' },
+                    { data: 'bakaf', name: 'bakaf' },
+                    { data: 'totalbaka', name: 'totalbaka' },
+                    { data: 'baboyf', name: 'baboyf' },
+                    { data: 'baboym', name: 'baboym' },
+                    { data: 'totalbaboy', name: 'totalbaboy' },
+                    { data: 'kandingm', name: 'kandingm' },
+                    { data: 'kandingf', name: 'kandingf' },
+                    { data: 'totalkanding', name: 'totalkanding' },
+                    { data: 'kabayom', name: 'kabayom' },
+                    { data: 'kabayof', name: 'kabayof' },
+                    { data: 'totalkabayo', name: 'totalkabayo' },
+                    { data: 'irom', name: 'irom' },
+                    { data: 'irof', name: 'irof' },
+                    { data: 'totaliro', name: 'totaliro' },
+                    { data: 'manokf', name: 'manokf' },
+                    { data: 'manokm', name: 'manokm' },
+                    { data: 'totalmanok', name: 'totalmanok' },
+                    { data: 'bebem', name: 'bebem' },
+                    { data: 'bebef', name: 'bebef' },
+                    { data: 'totalbebe', name: 'totalbebe' },
+                    { data: 'quailm', name: 'quailm' },
+                    { data: 'quailf', name: 'quailf' },
+                    { data: 'totalquail', name: 'totalquail' },
+                    { data: 'broilerm', name: 'broilerm' },
+                    { data: 'broilerf', name: 'broilerf' },
+                    { data: 'totalbroiler', name: 'totalbroiler' },
+                    { data: 'rabbitm', name: 'rabbitm' },
+                    { data: 'rabbitf', name: 'rabbitf' },
+                    { data: 'totalrabbit', name: 'totalrabbit' },
+                    { data: 'created_at', name: 'created_at' },
+                    {data: 'action', name: 'action', orderable: false},
+                ],
+                order: [[0, 'desc']]
+    });
+
+  function archiveFunc(id) {
+      if (confirm("Archive Record?") == true) {
+          // Make an AJAX request to the archive route
+          $.ajax({
+              type: "POST",
+              url: "{{ url('popu/archive') }}",
+              data: { id: id },
+              dataType: 'json',
+              success: function (response) {
+                  // Handle success, e.g., show a success message
+                  console.log(response.success);
+                  // Optionally, you may want to refresh the data table
+                  var ArcTable = $('#popu-archive-datatable').DataTable();
+                  var oTable = $('#popu-crud-datatable').DataTable();
+                  ArcTable.ajax.reload(); // Reload the DataTable
+                  oTable.ajax.reload(); // Reload the DataTable
+              },
+              error: function (error) {
+                  // Handle error, e.g., show an error message
+                  console.error('Error archiving record:', error);
+              }
+          });
+      }
+  } 
+
+  function restoreFunc(id) {
+      if (confirm("Restore Record?") == true) {
+          // Make an AJAX request to the archive route
+          $.ajax({
+              type: "POST",
+              url: "{{ url('popu/restore') }}",
+              data: { id: id },
+              dataType: 'json',
+              success: function (response) {
+                  // Handle success, e.g., show a success message
+                  console.log(response.success);
+                  // Optionally, you may want to refresh the data table
+                  var ArcTable = $('#popu-archive-datatable').DataTable();
+                  var oTable = $('#popu-crud-datatable').DataTable();
+                  ArcTable.ajax.reload(); // Reload the DataTable
+                  oTable.ajax.reload(); // Reload the DataTable
+              },
+              error: function (error) {
+                  // Handle error, e.g., show an error message
+                  console.error('Error archiving record:', error);
+              }
+          });
+      }
+  } 
+
+
+  function deleteFunc(id){
+        if (confirm("Delete Record?") == true) {
+        var id = id;
+          
+          // ajax
+          $.ajax({
+              type:"POST",
+              url: "{{ url('delete-popu') }}",
+              data: { id: id },
+              dataType: 'json',
+              success: function(res){
+ 
+                var oTable = $('#popu-archive-datatable').dataTable();
+                oTable.fnDraw(false);
+             }
+          });
+       }
+  }
+
+//  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //
+
   function printDataTable() {
                   $.ajax({
                       url: '/print-popu', // Replace with your Laravel route URL to fetch data
@@ -670,24 +832,7 @@ headers.forEach(header => {
                   printWindow.document.close();
                   printWindow.print();
               }
-  function deleteFunc(id){
-        if (confirm("Delete Record?") == true) {
-        var id = id;
-          
-          // ajax
-          $.ajax({
-              type:"POST",
-              url: "{{ url('delete-popu') }}",
-              data: { id: id },
-              dataType: 'json',
-              success: function(res){
  
-                var oTable = $('#popu-crud-datatable').dataTable();
-                oTable.fnDraw(false);
-             }
-          });
-       }
-  }
  
   $('#PopuForm').submit(function(e) {
  
@@ -914,6 +1059,23 @@ headers.forEach(header => {
         rabbitfInput.addEventListener('input', updateTotalrabbit);
     });
 </script>
+<script>
+  function toggleDatatables() {
+    var div1 = document.getElementById('MainTable');
+    var div2 = document.getElementById('Archive');
+    var toggleButton = document.getElementById('toggleDatatables');
 
+    // Toggle the 'hidden' attribute
+    if (div1.hasAttribute('hidden')) {
+      div1.removeAttribute('hidden');
+      div2.setAttribute('hidden', 'hidden');
+      toggleButton.innerHTML = 'View Archive';
+    } else {
+      div1.setAttribute('hidden', 'hidden');
+      div2.removeAttribute('hidden');
+      toggleButton.innerHTML = 'Hide Archive';
+    }
+  }
+</script>
 
 </html>

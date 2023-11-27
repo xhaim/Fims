@@ -39,7 +39,7 @@
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)"> Add</a>
                 <a class="btn btn-secondary" onClick="printDataTable()" href="javascript:void(0)">printAll </a>
-
+                <a class="btn btn-info" id="toggleDatatables" style=" color: white; margin-left:950px;" onclick="toggleDatatables()">View Archive</a>
             </div>
         </div>
     </div>
@@ -52,6 +52,7 @@
  
     <div class="card-body">
  
+      <div id="MainTable">
         <table class="table table-bordered display responsive nowrap" id="vacc-crud-datatable">
            <thead>
               <tr>
@@ -71,10 +72,31 @@
               </tr>
            </thead>
         </table>
- 
-    </div>
+      </div>
+
+        <div id="Archive" hidden="hidden">
+            <table class="table table-bordered display responsive nowrap" id="vacc-archive-datatable">
+              <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Owner's Name</th>
+                    <th>Birthday</th>
+                    <th>Dog's Name</th>
+                    <th>Origin</th>
+                    <th>Breed</th>
+                    <th>Color</th>
+                    <th>Age Yr</th>
+                    <th>Age Month</th>
+                  <th>Sex (Male)</th>
+                  <th>Sex(Female)</th>
+                    <th>Created at</th>
+                    <th>Action</th>
+                </tr>
+              </thead>
+          </table>
+        </div>
     
-</div>
+    </div>
  
  
     <div class="modal fade" id="vacc-modal" aria-hidden="true">
@@ -235,6 +257,103 @@
        $('#id').val('');
  
   }   
+
+  //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //
+
+  $('#vacc-archive-datatable').DataTable({
+           processing: true,
+           serverSide: true,
+           ajax: "{{ url('vacc-archive-datatable') }}",
+           columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'owner_name', name: 'owner_name' },
+                    { data: 'birthday', name: 'birthday' },
+                    { data: 'dog_name', name: 'dog_name' },
+                    { data: 'origin', name: 'origin' },
+                    { data: 'breed', name: 'breed' },
+                    { data: 'color', name: 'color' },
+                    { data: 'ageyr', name: 'ageyr' },
+                    { data: 'age_month', name: 'age_month' },
+                    { data: 'sex_male', name: 'sex_male' },
+                    { data: 'sex_female', name: 'sex_female' },
+                    { data: 'created_at', name: 'created_at' },
+                    {data: 'action', name: 'action', orderable: false},
+                 ],
+                 order: [[0, 'desc']]
+       });
+
+  function archiveFunc(id) {
+      if (confirm("Archive Record?") == true) {
+          // Make an AJAX request to the archive route
+          $.ajax({
+              type: "POST",
+              url: "{{ url('vacc/archive') }}",
+              data: { id: id },
+              dataType: 'json',
+              success: function (response) {
+                  // Handle success, e.g., show a success message
+                  console.log(response.success);
+                  // Optionally, you may want to refresh the data table
+                  var ArcTable = $('#vacc-archive-datatable').DataTable();
+                  var oTable = $('#vacc-crud-datatable').DataTable();
+                  ArcTable.ajax.reload(); // Reload the DataTable
+                  oTable.ajax.reload(); // Reload the DataTable
+              },
+              error: function (error) {
+                  // Handle error, e.g., show an error message
+                  console.error('Error archiving record:', error);
+              }
+          });
+      }
+  } 
+
+  function restoreFunc(id) {
+      if (confirm("Restore Record?") == true) {
+          // Make an AJAX request to the archive route
+          $.ajax({
+              type: "POST",
+              url: "{{ url('vacc/restore') }}",
+              data: { id: id },
+              dataType: 'json',
+              success: function (response) {
+                  // Handle success, e.g., show a success message
+                  console.log(response.success);
+                  // Optionally, you may want to refresh the data table
+                  var ArcTable = $('#vacc-archive-datatable').DataTable();
+                  var oTable = $('#vacc-crud-datatable').DataTable();
+                  ArcTable.ajax.reload(); // Reload the DataTable
+                  oTable.ajax.reload(); // Reload the DataTable
+              },
+              error: function (error) {
+                  // Handle error, e.g., show an error message
+                  console.error('Error archiving record:', error);
+              }
+          });
+      }
+  } 
+
+
+  function deleteFunc(id){
+        if (confirm("Delete Record?") == true) {
+        var id = id;
+          
+          // ajax
+          $.ajax({
+              type:"POST",
+              url: "{{ url('delete-vacc') }}",
+              data: { id: id },
+              dataType: 'json',
+              success: function(res){
+ 
+                var oTable = $('#vacc-archive-datatable').dataTable();
+                oTable.fnDraw(false);
+             }
+          });
+       }
+  }
+
+//  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //
+
   function editFunc(id){
      
     $.ajax({
@@ -433,5 +552,23 @@
                 exoticSpecifyInput.style.display = 'none';
             }
         });
+    </script>
+    <script>
+      function toggleDatatables() {
+        var div1 = document.getElementById('MainTable');
+        var div2 = document.getElementById('Archive');
+        var toggleButton = document.getElementById('toggleDatatables');
+    
+        // Toggle the 'hidden' attribute
+        if (div1.hasAttribute('hidden')) {
+          div1.removeAttribute('hidden');
+          div2.setAttribute('hidden', 'hidden');
+          toggleButton.innerHTML = 'View Archive';
+        } else {
+          div1.setAttribute('hidden', 'hidden');
+          div2.removeAttribute('hidden');
+          toggleButton.innerHTML = 'Hide Archive';
+        }
+      }
     </script>
 </html>

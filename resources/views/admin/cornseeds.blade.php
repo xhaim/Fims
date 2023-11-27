@@ -38,6 +38,7 @@
             </div>
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)">Add </a>
+                <a class="btn btn-info" id="toggleDatatables" style=" color: white; margin-left:960px;" onclick="toggleDatatables()">View Archive</a>
             </div>
         </div>
     </div>
@@ -49,11 +50,11 @@
     @endif
  
     <div class="card-body">
- 
+      <div id="MainTable">
         <table class="table table-bordered display responsive nowrap" id="cornseeds-crud-datatable">
            <thead>
               <tr>
-                <th>Id</th>
+                
                 <th>Variety</th>
                 <th>No. of Seeds Received(sack/pack)</th>
                 <th>Date Received</th>
@@ -63,7 +64,21 @@
               </tr>
            </thead>
         </table>
- 
+      </div>
+        <div id="Archive" hidden="hidden">
+          <table class="table table-bordered display responsive nowrap" id="cornseeds-archive-datatable">
+            <thead>
+               <tr>
+               
+                 <th>Variety</th>
+                 <th>No. of Seeds Received(sack/pack)</th>
+                 <th>Date Received</th>
+                 <th>Source of Funds</th>
+                 <th>Registered-in Date</th>
+                 <th width="150px">Action</th>
+               </tr>
+            </thead>
+         </table>
     </div>
 </div>
 </div>
@@ -137,7 +152,7 @@
            serverSide: true,
            ajax: "{{ url('cornseeds-crud-datatable') }}",
            columns: [
-                    { data: 'id', name: 'id' },
+                   
                     { data: 'variety', name: 'variety' },
                     { data: 'seeds_received', name: 'seeds_received' },
                     { data: 'date_received', name: 'date_received' },
@@ -159,6 +174,104 @@
        $('#id').val('');
  
   }   
+
+//  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //
+
+$('#cornseeds-archive-datatable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ url('cornseeds-archive-datatable') }}",
+        columns: [ 
+                { data: 'variety', name: 'variety' },
+                { data: 'seeds_received', name: 'seeds_received' },
+                { data: 'date_received', name: 'date_received' },
+                { data: 'source_of_funds', name: 'source_of_funds' },
+                { data: 'created_at', name: 'created_at' },
+                {data: 'action', name: 'action', orderable: false},
+                ],
+                order: [[0, 'desc']]
+    });
+
+  function archiveFunc(id) {
+      if (confirm("Archive Record?") == true) {
+          // Make an AJAX request to the archive route
+          $.ajax({
+              type: "POST",
+              url: "{{ url('cornseeds/archive') }}",
+              data: { id: id },
+              dataType: 'json',
+              success: function (response) {
+                  // Handle success, e.g., show a success message
+                  console.log(response.success);
+                  // Optionally, you may want to refresh the data table
+                  var ArcTable = $('#cornseeds-archive-datatable').DataTable();
+                  var oTable = $('#cornseeds-crud-datatable').DataTable();
+                  ArcTable.ajax.reload(); // Reload the DataTable
+                  oTable.ajax.reload(); // Reload the DataTable
+              },
+              error: function (error) {
+                  // Handle error, e.g., show an error message
+                  console.error('Error archiving record:', error);
+              }
+          });
+      }
+  } 
+
+  function restoreFunc(id) {
+      if (confirm("Restore Record?") == true) {
+          // Make an AJAX request to the archive route
+          $.ajax({
+              type: "POST",
+              url: "{{ url('cornseeds/restore') }}",
+              data: { id: id },
+              dataType: 'json',
+              success: function (response) {
+                  // Handle success, e.g., show a success message
+                  console.log(response.success);
+                  // Optionally, you may want to refresh the data table
+                  var ArcTable = $('#cornseeds-archive-datatable').DataTable();
+                  var oTable = $('#cornseeds-crud-datatable').DataTable();
+                  ArcTable.ajax.reload(); // Reload the DataTable
+                  oTable.ajax.reload(); // Reload the DataTable
+              },
+              error: function (error) {
+                  // Handle error, e.g., show an error message
+                  console.error('Error archiving record:', error);
+              }
+          });
+      }
+  } 
+
+
+
+  function deleteFunc(id) {
+      if (confirm("Delete Record?") == true) {
+          // Make an AJAX request to the archive route
+          $.ajax({
+              type: "POST",
+              url: "{{ url('delete-cornseeds') }}",
+              data: { id: id },
+              dataType: 'json',
+              success: function (response) {
+                  // Handle success, e.g., show a success message
+                  console.log(response.success);
+                  // Optionally, you may want to refresh the data table
+                  var ArcTable = $('#cornseeds-archive-datatable').DataTable();
+                  var oTable = $('#cornseeds-crud-datatable').DataTable();
+                  ArcTable.ajax.reload(); // Reload the DataTable
+                  oTable.ajax.reload(); // Reload the DataTable
+              },
+              error: function (error) {
+                  // Handle error, e.g., show an error message
+                  console.error('Error archiving record:', error);
+              }
+          });
+      }
+  } 
+
+//  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //
+
+
   function editFunc(id){
      
     $.ajax({
@@ -177,25 +290,6 @@
        }
     });
   }  
- 
-  function deleteFunc(id){
-        if (confirm("Delete Record?") == true) {
-        var id = id;
-          
-          // ajax
-          $.ajax({
-              type:"POST",
-              url: "{{ url('delete-cornseeds') }}",
-              data: { id: id },
-              dataType: 'json',
-              success: function(res){
- 
-                var oTable = $('#cornseeds-crud-datatable').dataTable();
-                oTable.fnDraw(false);
-             }
-          });
-       }
-  }
  
   $('#CornSeedsForm').submit(function(e) {
  
@@ -223,5 +317,23 @@
        });
    });
  
+</script>
+<script>
+  function toggleDatatables() {
+    var div1 = document.getElementById('MainTable');
+    var div2 = document.getElementById('Archive');
+    var toggleButton = document.getElementById('toggleDatatables');
+
+    // Toggle the 'hidden' attribute
+    if (div1.hasAttribute('hidden')) {
+      div1.removeAttribute('hidden');
+      div2.setAttribute('hidden', 'hidden');
+      toggleButton.innerHTML = 'View Archive';
+    } else {
+      div1.setAttribute('hidden', 'hidden');
+      div2.removeAttribute('hidden');
+      toggleButton.innerHTML = 'Hide Archive';
+    }
+  }
 </script>
 </html>

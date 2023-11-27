@@ -39,6 +39,7 @@
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)"> Add </a>
                 <a class="btn btn-secondary" onClick="printDataTable()" href="javascript:void(0)">printAll </a>
+                <a class="btn btn-info" id="toggleDatatables" style=" color: white; margin-left:960px;" onclick="toggleDatatables()">View Archive</a>
             </div>
         </div>
     </div>
@@ -48,43 +49,80 @@
  
     <div class="card-body">
  
-    <table class="table table-bordered display responsive nowrap " id="fishery-crud-datatable">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Registration No.</th>
-            <th>Registration Date</th>
-            <th>Registration Type</th>
-            <th>Salutation</th>
-            <th>Last Name</th>
-            <th>First Name</th>
-            <th>Middle Name</th>
-            <th>Appellation</th>
-            <th>Barangay</th>
-            <th>Contact No</th>
-            <th>Resident of the Municipality Since</th>
-            <th>Age</th>
-            <th>Date of Birth</th>
-            <th>Place of Birth</th>
-            <th>Gender </th>
-            <th>Civil Status</th>
-            <th>No. of Children</th>
-            <th>Nationality</th>
-            <th>Educational Background</th>
-            <th>Person to notify in case of emergency</th>
-            <th>Relationship</th>
-            <th>Contact No.</th>
-            <th>Address</th>
-            <th>Religion</th>
-            <th>Main Source of Income</th>
-            <th>Other Source of Income</th>
-            <th>Created at</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-</table>
-
- 
+      <div id="MainTable" >
+            <table class="table table-bordered display responsive nowrap " id="fishery-crud-datatable">
+            <thead>
+                <tr>
+                    
+                    <th>Registration No.</th>
+                    <th>Registration Date</th>
+                    <th>Registration Type</th>
+                    <th>Salutation</th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>Appellation</th>
+                    <th>Barangay</th>
+                    <th>Contact No</th>
+                    <th>Resident of the Municipality Since</th>
+                    <th>Age</th>
+                    <th>Date of Birth</th>
+                    <th>Place of Birth</th>
+                    <th>Gender </th>
+                    <th>Civil Status</th>
+                    <th>No. of Children</th>
+                    <th>Nationality</th>
+                    <th>Educational Background</th>
+                    <th>Person to notify in case of emergency</th>
+                    <th>Relationship</th>
+                    <th>Contact No.</th>
+                    <th>Address</th>
+                    <th>Religion</th>
+                    <th>Main Source of Income</th>
+                    <th>Other Source of Income</th>
+                    <th>Created at</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            </table>
+      </div>
+      <div id="Archive" hidden="hidden">
+        <table class="table table-bordered display responsive nowrap " id="fishery-archive-datatable">
+          <thead>
+              <tr>
+                  
+                  <th>Registration No.</th>
+                  <th>Registration Date</th>
+                  <th>Registration Type</th>
+                  <th>Salutation</th>
+                  <th>Last Name</th>
+                  <th>First Name</th>
+                  <th>Middle Name</th>
+                  <th>Appellation</th>
+                  <th>Barangay</th>
+                  <th>Contact No</th>
+                  <th>Resident of the Municipality Since</th>
+                  <th>Age</th>
+                  <th>Date of Birth</th>
+                  <th>Place of Birth</th>
+                  <th>Gender </th>
+                  <th>Civil Status</th>
+                  <th>No. of Children</th>
+                  <th>Nationality</th>
+                  <th>Educational Background</th>
+                  <th>Person to notify in case of emergency</th>
+                  <th>Relationship</th>
+                  <th>Contact No.</th>
+                  <th>Address</th>
+                  <th>Religion</th>
+                  <th>Main Source of Income</th>
+                  <th>Other Source of Income</th>
+                  <th>Created at</th>
+                  <th>Action</th>
+              </tr>
+          </thead>
+          </table>
+      </div>
     </div>
     
 </div>
@@ -452,7 +490,6 @@
            serverSide: true,
            ajax: "{{ url('fishery-crud-datatable') }}",
            columns: [
-            { data: 'id', name: 'id' },
             { data: 'registration_no', name: 'registration_no' },
             { data: 'registration_date', name: 'registration_date' },
             { data: 'registration_type', name: 'registration_type' },
@@ -491,7 +528,7 @@
   function add(){
  
        $('#CompanyForm').trigger("reset");
-       $('#CompanyModal').html("Add Company");
+       $('#CompanyModal').html("Add ");
        $('#fishery-modal').modal('show');
        $('#id').val('');
  
@@ -504,7 +541,7 @@
         data: { id: id },
         dataType: 'json',
         success: function(res){
-          $('#CompanyModal').html("Edit Company");
+          $('#CompanyModal').html("Edit ");
           $('#fishery-modal').modal('show');
           $('#id').val(res.id);
           $('#registration_no').val(res.registration_no);
@@ -610,23 +647,124 @@
     });
 }
  
-  function deleteFunc(id){
-        if (confirm("Delete Record?") == true) {
-        var id = id;
-          
-          // ajax
-          $.ajax({
-              type:"POST",
-              url: "{{ url('delete-fishery') }}",
-              data: { id: id },
-              dataType: 'json',
-              success: function(res){
-                var oTable = $('#fishery-crud-datatable').dataTable();
-                oTable.fnDraw(false);
-             }
+  //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //
+
+  $('#fishery-archive-datatable').DataTable({
+              processing: true,
+              serverSide: true,
+              ajax: "{{ url('fishery-archive-datatable') }}",
+              columns: [ 
+            { data: 'registration_no', name: 'registration_no' },
+            { data: 'registration_date', name: 'registration_date' },
+            { data: 'registration_type', name: 'registration_type' },
+            { data: 'salutation', name: 'salutation' },
+            { data: 'last_name', name: 'last_name' },
+            { data: 'first_name', name: 'first_name' },
+            { data: 'middle_name', name: 'middle_name' },
+            { data: 'appellation', name: 'appellation' },
+            { data: 'barangay', name: 'barangay' },
+            { data: 'contact_no', name: 'contact_no' },
+            { data: 'resident', name: 'resident' },
+            { data: 'age', name: 'age' },
+            { data: 'date_of_birth', name: 'date_of_birth' },
+            { data: 'place_of_birth', name: 'place_of_birth' },
+            { data: 'gender', name: 'gender' }, 
+            { data: 'civil_status', name: 'civil_status' }, 
+            { data: 'no_of_children', name: 'no_of_children' }, 
+            { data: 'nationality', name: 'nationality' }, 
+            { data: 'education', name: 'education' }, 
+            { data: 'person_to_notify', name: 'person_to_notify' }, 
+            { data: 'relationship', name: 'relationship' }, 
+            { data: 'contact', name: 'contact' }, 
+            { data: 'address', name: 'address' },
+            { data: 'religion', name: 'religion' },  
+            { data: 'incomeSource', name: 'incomeSource' },
+            { data: 'OtherincomeSource', name: 'OtherincomeSource' },
+            { data: 'created_at', name: 'created_at' },
+            { data: 'action', name: 'action', orderable: false },
+                      ],
+                      order: [[0, 'desc']]
           });
-       }
-  }
+
+        function archiveFunc(id) {
+            if (confirm("Archive Record?") == true) {
+                // Make an AJAX request to the archive route
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('fishery/archive') }}",
+                    data: { id: id },
+                    dataType: 'json',
+                    success: function (response) {
+                        // Handle success, e.g., show a success message
+                        console.log(response.success);
+                        // Optionally, you may want to refresh the data table
+                        var ArcTable = $('#fishery-archive-datatable').DataTable();
+                        var oTable = $('#fishery-crud-datatable').DataTable();
+                        ArcTable.ajax.reload(); // Reload the DataTable
+                        oTable.ajax.reload(); // Reload the DataTable
+                    },
+                    error: function (error) {
+                        // Handle error, e.g., show an error message
+                        console.error('Error archiving record:', error);
+                    }
+                });
+            }
+        } 
+
+        function restoreFunc(id) {
+            if (confirm("Restore Record?") == true) {
+                // Make an AJAX request to the archive route
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('fishery/restore') }}",
+                    data: { id: id },
+                    dataType: 'json',
+                    success: function (response) {
+                        // Handle success, e.g., show a success message
+                        console.log(response.success);
+                        // Optionally, you may want to refresh the data table
+                        var ArcTable = $('#fishery-archive-datatable').DataTable();
+                        var oTable = $('#fishery-crud-datatable').DataTable();
+                        ArcTable.ajax.reload(); // Reload the DataTable
+                        oTable.ajax.reload(); // Reload the DataTable
+                    },
+                    error: function (error) {
+                        // Handle error, e.g., show an error message
+                        console.error('Error archiving record:', error);
+                    }
+                });
+            }
+        } 
+
+
+
+        function deleteFunc(id) {
+            if (confirm("Delete Record?") == true) {
+                // Make an AJAX request to the archive route
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('delete-fishery') }}",
+                    data: { id: id },
+                    dataType: 'json',
+                    success: function (response) {
+                        // Handle success, e.g., show a success message
+                        console.log(response.success);
+                        // Optionally, you may want to refresh the data table
+                        var ArcTable = $('#fishery-archive-datatable').DataTable();
+                        var oTable = $('#fishery-crud-datatable').DataTable();
+                        ArcTable.ajax.reload(); // Reload the DataTable
+                        oTable.ajax.reload(); // Reload the DataTable
+                    },
+                    error: function (error) {
+                        // Handle error, e.g., show an error message
+                        console.error('Error archiving record:', error);
+                    }
+                });
+            }
+        } 
+
+      //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //
+
  
   $('#CompanyForm').submit(function(e) {
  
@@ -785,5 +923,22 @@ function removeMemAf(memberId) {
 }
 </script>
 
+<script>
+  function toggleDatatables() {
+    var div1 = document.getElementById('MainTable');
+    var div2 = document.getElementById('Archive');
+    var toggleButton = document.getElementById('toggleDatatables');
 
+    // Toggle the 'hidden' attribute
+    if (div1.hasAttribute('hidden')) {
+      div1.removeAttribute('hidden');
+      div2.setAttribute('hidden', 'hidden');
+      toggleButton.innerHTML = 'View Archive';
+    } else {
+      div1.setAttribute('hidden', 'hidden');
+      div2.removeAttribute('hidden');
+      toggleButton.innerHTML = 'Hide Archive';
+    }
+  }
+</script>
 </html>

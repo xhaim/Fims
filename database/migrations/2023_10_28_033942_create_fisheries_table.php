@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('fisheries', function (Blueprint $table) {
             $table->id();
             $table->string('registration_no');
             $table->string('registration_date');
@@ -43,7 +43,6 @@ return new class extends Migration
           $table->text('membership')->nullable();
           $table->integer('member_since')->nullable();
           $table->text('position')->nullable();
-         
 
           // M&A 2
           $table->text('membership2')->nullable();
@@ -58,6 +57,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('fisheries');
     }
 };

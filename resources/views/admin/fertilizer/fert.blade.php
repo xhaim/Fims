@@ -38,6 +38,7 @@
             </div>
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)">Add </a>
+                <a class="btn btn-info" id="toggleDatatables" style=" color: white; margin-left:960px;" onclick="toggleDatatables()">View Archive</a>
             </div>
         </div>
     </div>
@@ -50,11 +51,12 @@
  
     <div class="card-body">
  
+    <div id="MainTable">
         <table class="table table-bordered display responsive nowrap display responsive nowrap" id="fert-crud-datatable">
            <thead>
               <tr>
                 {{-- <th>Id</th> --}}
-                <th>No. of Seeds Received(sack/s)</th>
+                <th>No. of Sack/s Received</th>
                 <th>Date Received</th>
                 <th>Source of Funds</th>
                 <th>Registered-in Date</th>
@@ -62,6 +64,20 @@
               </tr>
            </thead>
         </table>
+    </div>
+    <div id="Archive" hidden="hidden">
+        <table class="table table-bordered display responsive nowrap display responsive nowrap" id="fert-archive-datatable">
+          <thead>
+             <tr>
+               {{-- <th>Id</th> --}}
+               <th>No. of Sack/s Received</th>
+               <th>Date Received</th>
+               <th>Source of Funds</th>
+               <th>Registered-in Date</th>
+               <th width="150px">Action</th>
+             </tr>
+          </thead>
+       </table>
  
     </div>
 </div>

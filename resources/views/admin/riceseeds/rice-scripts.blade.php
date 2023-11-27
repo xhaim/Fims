@@ -62,8 +62,7 @@
         processing: true,
         serverSide: true,
         ajax: "{{ url('riceseeds-archive-datatable') }}",
-        columns: [
-                
+        columns: [ 
                 { data: 'variety', name: 'variety' },
                 { data: 'seeds_received', name: 'seeds_received' },
                 { data: 'date_received', name: 'date_received' },
