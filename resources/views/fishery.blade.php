@@ -1022,12 +1022,12 @@ function removeMemAf(memberId) {
 
     // Toggle the 'hidden' attribute
     if (div1.hasAttribute('hidden')) {
-      div1.removeAttr('hidden');
+      div1.removeAttribute('hidden');
       div2.setAttribute('hidden', 'hidden');
       toggleButton.innerHTML = 'View Archive';
     } else {
       div1.setAttribute('hidden', 'hidden');
-      div2.removeAttr('hidden');
+      div2.removeAttribute('hidden');
       toggleButton.innerHTML = 'Hide Archive';
     }
   }

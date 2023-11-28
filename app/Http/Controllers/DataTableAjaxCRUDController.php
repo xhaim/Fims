@@ -172,15 +172,15 @@ class DataTableAjaxCRUDController extends Controller
         'gender' => $fisheries->gender,
         'civil_status' => $fisheries->civil_status,
         'no_of_children'=> $fisheries->no_of_children,
-        'nationality' => json_encode($nationality),
-        'education'=> json_encode($education),
+        'nationality' => $fisheries->nationality,
+        'education'=> $fisheries->education,
         'person_to_notify' => $fisheries->person_to_notify,
         'relationship' => $fisheries->relationship,
         'contact' => $fisheries->contact,
         'address'=> $fisheries->address,
         'religion'=> $fisheries->religion,
-        'incomeSource'=> json_encode($fisheries->incomeSource),
-        'OtherincomeSource'=> json_encode($fisheries->OtherincomeSource),
+        'incomeSource'=> $fisheries->incomeSource,
+        'OtherincomeSource'=> $fisheries->OtherincomeSource,
        // MEMBERSHIP & AFFILIATIONS // MEMBERSHIP & AFFILIATIONS // MEMBERSHIP & AFFILIATIONS // MEMBERSHIP & AFFILIATIONS //
 
         // M&A 1
@@ -234,15 +234,15 @@ class DataTableAjaxCRUDController extends Controller
         'gender' => $archivedfishery->gender,
         'civil_status' => $archivedfishery->civil_status,
         'no_of_children'=> $archivedfishery->no_of_children,
-        'nationality' => json_encode($nationality),
-        'education'=> json_encode($education),
+        'nationality' => $archivedfishery->nationality,
+        'education'=> $archivedfishery->education,
         'person_to_notify' => $archivedfishery->person_to_notify,
         'relationship' => $archivedfishery->relationship,
         'contact' => $archivedfishery->contact,
         'address'=> $archivedfishery->address,
         'religion'=> $archivedfishery->religion,
-        'incomeSource'=> json_encode($archivedfishery->incomeSource),
-        'OtherincomeSource'=> json_encode($archivedfishery->OtherincomeSource),
+        'incomeSource'=> $archivedfishery->incomeSource,
+        'OtherincomeSource'=> $archivedfishery->OtherincomeSource,
        // MEMBERSHIP & AFFILIATIONS // MEMBERSHIP & AFFILIATIONS // MEMBERSHIP & AFFILIATIONS // MEMBERSHIP & AFFILIATIONS //
 
         // M&A 1
@@ -260,7 +260,7 @@ class DataTableAjaxCRUDController extends Controller
        ]);
 
        // Delete the record from the archived table
-       $ArchivedFishery->delete();
+       $archivedfishery->delete();
 
        return response()->json(['success' => true]);
    }
