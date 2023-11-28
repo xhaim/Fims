@@ -77,7 +77,10 @@
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)"> Add</a>
                 <a class="btn btn-info" id="toggleDatatables" style=" color: white; margin-left:960px;" onclick="toggleDatatables()">View Archive</a>
-            </div>
+                <div class="pull-right mb-2" style="margin-top: 10px;">
+                  @include('csv.importAssistance')
+              </div>
+              </div>
         </div>
     </div>
    
@@ -90,7 +93,7 @@
     <div class="card-body">
       
       <div id="MainTable">
-        <table class="table table-bordered" id="assistance-crud-datatable">
+        <table class="table table-bordered" id="assistance-crud-datatable" style="width: 100%">
            <thead>
               <tr>
                  <th>RSBSA Id</th>
