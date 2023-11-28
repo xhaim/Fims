@@ -13,23 +13,23 @@ return new class extends Migration
     {
         Schema::create('archived_fisheries', function (Blueprint $table) {
             $table->id();
-            $table->string('registration_no');
-            $table->string('registration_date');
-            $table->string('registration_type');
-            $table->string('salutation');
+            $table->string('registration_no') ->nullable();
+            $table->string('registration_date') ->nullable();
+            $table->string('registration_type') ->nullable();
+            $table->string('salutation') ->nullable();
             $table->string('last_name');
             $table->string('first_name');
             $table->string('middle_name')->nullable();
             $table->string('appellation')->nullable();
-            $table->string('barangay');
-            $table->string('contact_no');
-            $table->string('resident');
-            $table->string('age');
-            $table->string('date_of_birth');
-            $table->string('place_of_birth');
+            $table->string('barangay') ->nullable();
+            $table->string('contact_no') ->nullable();
+            $table->string('resident') ->nullable();
+            $table->string('age') ->nullable();
+            $table->string('date_of_birth') ->nullable();
+            $table->string('place_of_birth') ->nullable();
             $table->string('gender')->nullable();
-            $table->string('civil_status');
-            $table->string('no_of_children');
+            $table->string('civil_status') ->nullable();
+            $table->string('no_of_children') ->nullable();
             $table->json('nationality')->nullable();
             $table->json('education')->nullable();
             $table->string('person_to_notify')->nullable();

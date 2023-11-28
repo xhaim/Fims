@@ -176,7 +176,7 @@ class RootcropAjaxCRUDController extends Controller
      */
     public function destroy(Request $request)
     {
-        $root = RootCrops::where('id',$request->id)->delete();
+        $root = ArchivedRootCrops::where('id',$request->id)->delete();
       
         return Response()->json($root);
     }

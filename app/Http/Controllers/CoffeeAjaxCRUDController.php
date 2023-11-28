@@ -181,7 +181,7 @@ class CoffeeAjaxCRUDController extends Controller
      */
     public function destroy(Request $request)
     {
-        $coffee = Coffee::where('id',$request->id)->delete();
+        $coffee = ArchivedCoffees::where('id',$request->id)->delete();
       
         return Response()->json($coffee);
     }

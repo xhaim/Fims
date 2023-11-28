@@ -175,7 +175,7 @@ class CornAjaxController extends Controller
     //   */
     public function destroy(Request $request)
 {
-    $corn = Corn::where('id', $request->id)->delete();
+    $corn = Archivedcorns::where('id', $request->id)->delete();
     
     // Reset AUTO_INCREMENT for 'corns' table
     $table = 'corns'; // Replace 'corns' with the actual table name

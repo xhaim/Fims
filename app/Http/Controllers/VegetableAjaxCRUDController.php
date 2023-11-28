@@ -179,7 +179,7 @@ class VegetableAjaxCRUDController extends Controller
      */
     public function destroy(Request $request)
     {
-        $veg = Vegetable::where('id',$request->id)->delete();
+        $veg = ArchivedVegetables::where('id',$request->id)->delete();
       
         return Response()->json($veg);
     }

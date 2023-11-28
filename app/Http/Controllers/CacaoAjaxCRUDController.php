@@ -182,7 +182,7 @@ class CacaoAjaxCRUDController extends Controller
      */
     public function destroy(Request $request)
     {
-        $cacao = Cacao::where('id',$request->id)->delete();
+        $cacao = ArchivedCacaos::where('id',$request->id)->delete();
       
         return Response()->json($cacao);
     }

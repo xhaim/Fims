@@ -180,7 +180,7 @@ class FruitsAjaxCRUDController extends Controller
      */
     public function destroy(Request $request)
     {
-        $fruits = Fruits::where('id',$request->id)->delete();
+        $fruits = ArchivedFruits::where('id',$request->id)->delete();
       
         return Response()->json($fruits);
     }

@@ -179,7 +179,7 @@ class BambooAjaxCRUDController extends Controller
      */
     public function destroy(Request $request)
     {
-        $bamboo = Bamboo::where('id',$request->id)->delete();
+        $bamboo = ArchivedBamboos::where('id',$request->id)->delete();
       
         return Response()->json($bamboo);
     }

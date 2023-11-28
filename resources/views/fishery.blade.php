@@ -48,6 +48,31 @@
 
  
     <div class="card-body">
+
+      {{-- show modal --}}
+    <div class="card-body" >
+      <div class="modal fade" id="viewModal"  tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+              <div class="modal-content" style="width: 1000px; left: -90px">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="viewModalLabel">View Record Details</h5>
+                      <button onClick="closeviewModal();" type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body" >
+                      <!-- Placeholders for displaying record details -->
+                      <div>
+                        <button class="btn-primary" id="printButton" onClick="printDiv('printable_div_id');">Print Document</button>
+                        <div id="printable_div_id">
+                      @include('fishery-printable')
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      {{-- end of show modal --}}
  
       <div id="MainTable" >
             <table class="table table-bordered display responsive nowrap " id="fishery-crud-datatable">
@@ -140,14 +165,14 @@
               <div class="form-group">
                 <label for="registration_no" class="col-sm-8 control-label">Registration No.</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="registration_no" name="registration_no" placeholder="Enter Registration No." maxlength="50" required="">
+                  <input type="text" class="form-control" id="registration_no" name="registration_no" placeholder="Enter Registration No." maxlength="50"  >
                 </div>
               </div>  
  
               <div class="form-group">
                 <label for="registration_date" class="col-sm-8 control-label">Registration Date</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="registration_date" name="registration_date" placeholder="Enter Registration Date" maxlength="50" required="">
+                  <input type="text" class="form-control" id="registration_date" name="registration_date" placeholder="Enter Registration Date" maxlength="50"  >
                 </div>
               </div>
               <div class="form-group">
@@ -178,13 +203,13 @@
               <div class="form-group">
                 <label for="last_name" class="col-sm-8 control-label">Last Name</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter Last Name" required>
+                  <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter Last Name"   >
                 </div>
               </div>
               <div class="form-group">
                 <label for="first_name" class="col-sm-8 control-label">First Name</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter First Name" required>
+                  <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter First Name"   >
                 </div>
               </div>
               <div class="form-group">
@@ -593,7 +618,7 @@
             for (let m = 2; m <= 5; m++) {
 
               
-                // Check if the required data exists in the response for the current member
+                // Check if the    data exists in the response for the current member
                 if (res[`membership${m}`] && typeof res[`membership${m}`] === 'string' && res[`membership${m}`].trim() !== '') {
                     const newMemAfDetails = document.createElement('div');
                     newMemAfDetails.id = `MemAf${m}`;
@@ -765,7 +790,73 @@
 
       //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //
 
- 
+      function viewFunc(id) {
+       $.ajax({
+           type: "GET",
+           url: "{{ url('get-fishery-details') }}/" + id,
+           success: function (data) {
+               // Populate the modal with record details
+                $("#view_registration_no").text(data.registration_no);
+                $("#view_registration_date").text(data.registration_date);
+                $("#view_registration_type").text(data.registration_type);
+                if (data.registration_type === "Renewal") {
+                    $("#renewal").removeAttr("hidden");
+                    $("#renewal_cont").css('background-color','black');
+                } else if (data.registration_type === "New registration") {
+                    $("#new_registration").removeAttr("hidden");
+                    $("#newregis_cont").css('background-color','black');
+                }
+
+                $("#view_salutation").text(data.salutation);
+                if (data.salutation === "Mr") {
+                    $("#mister").removeAttr("hidden");
+                    $("#mister_cont").css('background-color','black');
+                } else if (data.salutation === "Ms") {
+                    $("#miss").removeAttr("hidden");
+                    $("#miss_cont").css('background-color','black');
+                }
+                else if (data.salutation === "Mrs") {
+                    $("#missis").removeAttr("hidden");
+                    $("#missis_cont").css('background-color','black');
+                }
+                $("#view_last_name").text(data.last_name);
+                $("#view_first_name").text(data.first_name);
+                $("#view_middle_name").text(data.middle_name);
+                $("#view_appellation").text(data.appellation);
+                $("#view_barangay").text(data.barangay);
+                $("#view_contact_no").text(data.contact_no);
+                $("#view_contact_no").css("font-size", "20px");
+
+                $("#view_resident").text(data.resident);
+                $("#view_age").text(data.age);
+                $("#view_date_of_birth").text(data.date_of_birth);
+                $("#view_place_of_birth").text(data.place_of_birth);
+                $("#view_gender").text(data.gender); 
+                $("#view_civil_status").text(data.civil_status); 
+                $("#view_no_of_children").text(data.no_of_children); 
+                $("#view_nationality").text(data.nationality); 
+                $("#view_education").text(data.education); 
+                $("#view_person_to_notify").text(data.person_to_notify); 
+                $("#view_ptn_relationship").text(data.relationship); 
+                $("#view_ptn_contact").text(data.contact); 
+                $("#view_ptn_address").text(data.address);
+                $("#view_religion").text(data.religion);  
+                $("#view_incomeSource").text(data.incomeSource);
+                $("#view_OtherincomeSource").text(data.OtherincomeSource);
+                $("#view_membership").text(data.membership);
+                $("#view_membership_since").text(data.member_since);
+                $("#view_position").text(data.position);
+
+                $("#view_applicant_name").text(data.first_name+" "+data.last_name);
+   
+               // Show the modal
+               $("#viewModal").modal("show");
+           },
+           error: function (data) {
+               console.log("Error:", data);
+           },
+       });
+   }
   $('#CompanyForm').submit(function(e) {
  
      e.preventDefault();
@@ -931,12 +1022,12 @@ function removeMemAf(memberId) {
 
     // Toggle the 'hidden' attribute
     if (div1.hasAttribute('hidden')) {
-      div1.removeAttribute('hidden');
+      div1.removeAttr('hidden');
       div2.setAttribute('hidden', 'hidden');
       toggleButton.innerHTML = 'View Archive';
     } else {
       div1.setAttribute('hidden', 'hidden');
-      div2.removeAttribute('hidden');
+      div2.removeAttr('hidden');
       toggleButton.innerHTML = 'Hide Archive';
     }
   }

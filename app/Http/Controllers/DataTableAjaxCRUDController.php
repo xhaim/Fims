@@ -117,7 +117,13 @@ class DataTableAjaxCRUDController extends Controller
       
         return Response()->json($fishery);
     }
-      
+      //  show
+    public function getFisheryDetails($id)
+    {
+        $fishery = Fishery::find($id);
+        return response()->json($fishery);
+    }
+    // end show
       
     // START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //START OF ARCHIVING //
 

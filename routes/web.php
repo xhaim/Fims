@@ -189,6 +189,7 @@ Route::post('delete-fishery', [DataTableAjaxCRUDController::class, 'destroy']);
 Route::post('/fishery/archive', [DataTableAjaxCRUDController::class, 'archive'])->name('fishery.archive');
 Route::post('/fishery/restore', [DataTableAjaxCRUDController::class, 'restore'])->name('fishery.restore');
 Route::get('fishery-archive-datatable', [DataTableAjaxCRUDController::class, 'archive_index']);
+Route::get('get-fishery-details/{id}', [DataTableAjaxCRUDController::class, 'getFisheryDetails'])->name('fishery.details');
 
 
 // vegetable

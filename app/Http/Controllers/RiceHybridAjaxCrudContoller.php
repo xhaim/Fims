@@ -147,9 +147,10 @@ class RiceHybridAjaxCrudContoller extends Controller
         $rental = Ricehybrid::find($id);
         return response()->json($rental);
     }
+    // end show
     public function destroy(Request $request)
     {
-        $farmer = Ricehybrid::where('id', $request->id)->delete();
+        $farmer = ArchivedRice::where('id', $request->id)->delete();
 
         return response()->json($farmer);
     }
