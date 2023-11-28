@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('assistances', function (Blueprint $table) {
+        Schema::create('archived_assistances', function (Blueprint $table) {
             $table->id();
             $table->text('rsbsa')->nullable();
             $table->text('date')->nullable();
@@ -40,7 +40,7 @@ return new class extends Migration
             $table->text('soil_type')->nullable();
             $table->json('source')->nullable();
 
-        
+             
  
              // AR Content 1
              $table->text('intended_crop')->nullable();
@@ -263,8 +263,6 @@ $table->text('imagePreview2')->nullable();
 
 // Special Notes
 $table->text('special_notes')->nullable();
-
- 
             $table->timestamps();
         });
     }
@@ -274,6 +272,6 @@ $table->text('special_notes')->nullable();
      */
     public function down(): void
     {
-        Schema::dropIfExists('assistances');
+        Schema::dropIfExists('archived_assistances');
     }
 };

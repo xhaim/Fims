@@ -28,7 +28,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dash;
 use App\Http\Controllers\CsvImportController;
 use App\Http\Controllers\VegReqController;
-
+use App\Http\Controllers\AssistanceAjaxCRUDController;
 
 
 
@@ -307,6 +307,10 @@ Route::get('assistance-crud-datatable', [AssistanceAjaxCRUDController::class, 'i
 Route::post('store-assistance', [AssistanceAjaxCRUDController::class, 'store']);
 Route::post('edit-assistance', [AssistanceAjaxCRUDController::class, 'edit']);
 Route::post('delete-assistance', [AssistanceAjaxCRUDController::class, 'destroy']);
+
+Route::post('/assistance/archive', [AssistanceAjaxCRUDController::class, 'archive'])->name('vegreq.archive');
+Route::post('/assistance/restore', [AssistanceAjaxCRUDController::class, 'restore'])->name('vegreq.restore');
+Route::get('assistance-archive-datatable', [AssistanceAjaxCRUDController::class, 'archive_index']);
 
 
 });
