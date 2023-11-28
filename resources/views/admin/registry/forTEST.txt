@@ -1,26 +1,21 @@
-'null','null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null','null','null',
-'null','null','null','null','null','null','null','null'
-
-
- 
+if ($textInput2 === "Not null" && $image2 && $image2->isValid()) {
+            // Image upload field is not empty, use its data
+            if ($image2 && $image2->isValid()) {
+                
+                if ($image2) {
+                    $imageName2 = '_' . \Str::uuid() . '_2.' . $image2->extension();
+                    $image2->move(public_path('images'), $imageName2);
+                    $imagePath2 = 'images/' . $imageName2;
+                } else {
+                    $imagePath2 = null;
+                }
+                    }
+            
+        }
+         else if($imagePath2 === null && $textInput2 !== " " && $textInput2 !== "Not null"){
+            $imagePath2 = $textInput2; 
+         } else {
+            // Image upload field is empty, use data from the input field
+            $imagePath2 = $textInput2; 
+            
+        }

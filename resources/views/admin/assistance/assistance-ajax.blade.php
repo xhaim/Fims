@@ -29,7 +29,11 @@
           $('#AssistanceForm').trigger("reset");
           $('#AssistanceModal').html("Add Farmers Assistance");
           $('#assistance-modal').modal('show');
+          $('#btn-save').removeAttr('hidden');
+          $('#btn-save-withIMG').attr('hidden', 'hidden');
+
           $('#id').val('');
+
    
      }   
      function editFunc(id){
@@ -40,8 +44,13 @@
            data: { id: id },
            dataType: 'json',
            success: function(res){
+            $('#btn-save').attr('hidden', 'hidden');
+            
+            $('#btn-save-withIMG').removeAttr('hidden');
+
              $('#AssistanceModal').html("Edit Farmers Assistance");
              $('#assistance-modal').modal('show');
+             $('#id').val(res.id);
              $('#rsbsa').val(res.rsbsa);
              $('#date').val(res.date);
              $('#timepicker').val(res.timepicker);
@@ -173,8 +182,6 @@
                });
    
                $(`#notes`).val(res[`notes`]);
-          }
-       });
    
              $('#intended_crop').val(res.intended_crop);
    $('#evaluation_intended_crop').val(res.evaluation_intended_crop);
@@ -379,18 +386,32 @@
    // Notes
    $('#notes').val(res.notes);
    
-   // Image Upload 1
-   $('#imageUpload1').val(res.imageUpload1);
-   $('#imagePreviewContainer1').val(res.imagePreviewContainer1);
-   $('#imagePreview1').val(res.imagePreview1);
+            // Set image preview for imageUpload1
+            if (res.imageUpload1 !== null) {
+                $('#imagePreview1').attr('src',res.imageUpload1);
+                $('#imageUploadData1').val(res.imageUpload1)
+                $('#imagePreview1').removeClass("d-none");
+            } else {
+                // If there is no image, you can set a default image or hide the preview
+                $('#imagePreview1').attr('src',"images/defaultimg/no_image.jpg");
+                $('#imagePreview1').removeClass("d-none");
+            }
+
+            // Set image preview for imageUpload2
+            if (res.imageUpload2 !== null) {
+                $('#imagePreview2').attr('src',res.imageUpload2);
+                $('#imageUploadData2').val(res.imageUpload2)
+                $('#imagePreview2').removeClass("d-none");
+            } else {
+                // If there is no image, you can set a default image or hide the preview
+                $('#imagePreview2').attr('src',"images/defaultimg/no_image.jpg");
+                $('#imagePreview2').removeClass("d-none");
+            }
    
-   // Image Upload 2
-   $('#imageUpload2').val(res.imageUpload2);
-   $('#imagePreviewContainer2').val(res.imagePreviewContainer2);
-   $('#imagePreview2').val(res.imagePreview2);
-   
-   // Special Notes
-   $('#special_notes').val(res.special_notes);  
+            // Special Notes
+            $('#special_notes').val(res.special_notes);  
+        }
+       });
      }  
    
      //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //
@@ -489,33 +510,66 @@
      } 
    
    //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //
-   
-   
-     $('#AssistanceForm').submit(function(e) {
-   
-        e.preventDefault();
-     
-        var formData = new FormData(this);
-     
+
+
+    $('#btn-save').click(function() {
+        var formData = new FormData($('#AssistanceForm')[0]);
+
         $.ajax({
-           type:'POST',
-           url: "{{ url('store-assistance')}}",
-           data: formData,
-           cache:false,
-           contentType: false,
-           processData: false,
-           success: (data) => {
-             $("#assistance-modal").modal('hide');
-             var oTable = $('#assistance-crud-datatable').dataTable();
-             oTable.fnDraw(false);
-             $("#btn-save").html('Submit');
-             $("#btn-save"). attr("disabled", false);
-           },
-           error: function(data){
-              console.log(data);
+            type: 'POST',
+            url: "{{ url('store-assistance')}}",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                $("#assistance-modal").modal('hide');
+                var oTable = $('#assistance-crud-datatable').dataTable();
+                oTable.fnDraw(false);
+                $("#btn-save").html('Submit');
+                $("#btn-save").attr("disabled", false);
+            },
+            error: function(data) {
+                console.log(data);
             }
-          });
-      });
+        });
+    });
+
+    // Manually trigger form submission when the button is clicked
+    $('#btn-save').click(function() {
+        $('#AssistanceForm').submit();
+    });
+
+
+    //   EDIT WITH IMG SUBMIT
+    $('#btn-save-withIMG').click(function() {
+        var formData = new FormData($('#AssistanceForm')[0]);
+
+        $.ajax({
+            type: 'POST',
+            url: "{{ url('store-assistance-withIMG')}}",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                $("#assistance-modal").modal('hide');
+                var oTable = $('#assistance-crud-datatable').dataTable();
+                oTable.fnDraw(false);
+                $("#btn-save-withIMG").html('Submit');
+                $("#btn-save-withIMG").attr("disabled", false);
+            },
+            error: function(data) {
+                console.log(data);
+            }
+        });
+    });
+
+    // Manually trigger form submission when the button is clicked
+    $('#btn-save-withIMG').click(function() {
+        $('#AssistanceForm').submit();
+    });
+
    
    </script>
    
@@ -581,3 +635,43 @@
          }
      }
    </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var fileInput1 = document.getElementById('imageUpload1');
+        var textInput1 = document.getElementById('imageUploadData1');
+
+        // Add an event listener to the file input field
+        fileInput1.addEventListener('change', function () {
+            // Check if a file is selected
+            if (this.files && this.files[0]) {
+                // Enable the text input and set its value
+                textInput1.disabled = false;
+                textInput1.value = 'Not null';
+            } else {
+                // Disable the text input and reset its value
+                textInput1.disabled = true;
+                textInput1.value = '';
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var fileInput2 = document.getElementById('imageUpload2');
+        var textInput2 = document.getElementById('imageUploadData2');
+
+        // Add an event listener to the file input field
+        fileInput2.addEventListener('change', function () {
+            // Check if a file is selected
+            if (this.files && this.files[0]) {
+                // Enable the text input and set its value
+                textInput2.disabled = false;
+                textInput2.value = 'Not null';
+            } else {
+                // Disable the text input and reset its value
+                textInput2.disabled = true;
+                textInput2S.value = '';
+            }
+        });
+    });
+</script>

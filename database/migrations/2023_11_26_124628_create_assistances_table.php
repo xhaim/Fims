@@ -255,11 +255,7 @@ $table->text('notes')->nullable();
 
 // Image Uploads and Previews
 $table->text('imageUpload1')->nullable();
-$table->text('imagePreviewContainer1')->nullable();
-$table->text('imagePreview1')->nullable();
 $table->text('imageUpload2')->nullable();
-$table->text('imagePreviewContainer2')->nullable();
-$table->text('imagePreview2')->nullable();
 
 // Special Notes
 $table->text('special_notes')->nullable();

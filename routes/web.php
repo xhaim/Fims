@@ -306,6 +306,7 @@ Route::get('vegreq-archive-datatable', [VegReqController::class, 'archive_index'
 //assistance
 Route::get('assistance-crud-datatable', [AssistanceAjaxCRUDController::class, 'index']);
 Route::post('store-assistance', [AssistanceAjaxCRUDController::class, 'store']);
+Route::post('store-assistance-withIMG', [AssistanceAjaxCRUDController::class, 'storeWithIMG']);
 Route::post('edit-assistance', [AssistanceAjaxCRUDController::class, 'edit']);
 Route::post('delete-assistance', [AssistanceAjaxCRUDController::class, 'destroy']);
 

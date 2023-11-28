@@ -1127,7 +1127,7 @@
       <div class="triangle-icon" id="triangleIcon18">&#9654;</div>
     </div>
 
-    <div class="hidden-content" id="content1">
+    <div class="hidden-content" id="content18">
       <!-- Requestion Details -->
       <div class="form-row">
         <div class="form-group col-md-4">
@@ -1609,17 +1609,23 @@
   <div class="image-preview-container">
     <label for="imageUpload1">Farm Sketch</label>
     <div id="imagePreviewContainer1" class="image-preview">
-        <img id="imagePreview1" src="#" alt="Preview" class="img-fluid d-none">
+        <img id="imagePreview1"  alt="Preview" class="img-fluid d-none">
     </div>
-    <input type="file" class="form-control-file" id="imageUpload1" name="image1" accept="image/*" onchange="previewImage(this, 'imagePreview1')">
+  
+    
+    <input id="imageUploadData1"name="imageUploadData1" type="text" hidden="hidden">
+    <input type="file" class="form-control-file" id="imageUpload1" name="imageUpload1" accept="image/*" onchange="previewImage(this, 'imagePreview1')">
 </div>
 
 <div class="image-preview-container">
     <label for="imageUpload2">Farm Sketch</label>
     <div id="imagePreviewContainer2" class="image-preview">
-        <img id="imagePreview2" src="#" alt="Preview" class="img-fluid d-none">
+        <img id="imagePreview2"  alt="Preview" class="img-fluid d-none">
     </div>
-    <input type="file" class="form-control-file" id="imageUpload2" name="image2" accept="image/*" onchange="previewImage(this, 'imagePreview2')">
+    
+    
+    <input id="imageUploadData2" name="imageUploadData2" type="text" hidden="hidden">
+    <input type="file" class="form-control-file" id="imageUpload2" name="imageUpload2" accept="image/*" onchange="previewImage(this, 'imagePreview2')">
 </div>
 
 </div>
@@ -1634,7 +1640,8 @@
             <div>
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                  <button type="submit" class="btn btn-success" id="btn-save">Save changes</button>
+                  <button type="button" class="btn btn-success" id="btn-save">Save</button>
+                  <button type="button" class="btn btn-success" id="btn-save-withIMG" hidden="">Save changes</button>
                 </div>
               </div>
             </div>
