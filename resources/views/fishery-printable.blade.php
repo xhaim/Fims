@@ -383,7 +383,7 @@
                         <div style="flex: 1;  text-align: center; margin-top: 50px;">
                             <p style="text-decoration: underline;">______________<span id="rb_name"></span>______________</p>
                             <br>
-                            <p style="margin-top: -5px;">(Signature over printed name of Applicant)</p>
+                            <p style="margin-top: -5px;">(Signature over printed name)</p>
                         </div>
                 </div>
                 <div style="flex: 1;  border-top: black solid 2px; border-right: black solid 2px; padding-left: 5px;">
@@ -392,7 +392,7 @@
                         <div style="flex: 1;  text-align: center; margin-top: 50px;">
                             <p style="text-decoration: underline;">______________<span id="cb_name"></span>______________</p>
                             <br>
-                            <p style="margin-top: -5px;">(Signature over printed name of Applicant)</p>
+                            <p style="margin-top: -5px;">(Signature over printed name)</p>
                         </div>
                 </div>
                 <div style="flex: 1;  border-top: black solid 2px; border-right: black solid 2px; padding-left: 5px;">
@@ -401,7 +401,7 @@
                     <div style="flex: 1;  text-align: center; margin-top: 50px;">
                         <p style="text-decoration: underline;">______________<span id="ab_name"></span>______________</p>
                         <p style="margin-top: -10px;">Municipality Mayor</p>
-                        <p style="margin-top: -10px;">(Signature over printed name of Applicant)</p>
+                        <p style="margin-top: -10px;">(Signature over printed name)</p>
                     </div>
                 </div>
             </div>            

@@ -479,7 +479,7 @@
                           <table class="tg" style="border:none;">
                             <thead style="border:none;">
                             <tr style="border:none;">
-                                <th style="border:none;margin-rop:20px;" class="tg-0lax">Prepared by:</th>
+                                <th style="border:none;margin-rop:20px;" class="tg-0lax">Prepared by: {{ Auth::user()->name }}</th>
                                 <th style="border:none;margin-rop:20px;" class="tg-0lax">Noted by:</th>
                             </tr>
                             </thead>

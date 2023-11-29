@@ -820,7 +820,7 @@ headers.forEach(header => {
 
                   htmlContent += `
                           </table>
-                          <h5 style="text-align:center;">Submitted by:</h5>
+                          <h5 style="text-align:center;">Submitted by: {{ Auth::user()->name }}</h5>
                           </table>
 
                       </body>

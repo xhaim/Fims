@@ -544,7 +544,7 @@
                           <div style="display: flex; margin-top: 30px;">
     <div>
         <p>Prepared by:</p>
-        <div>_____________________________</div>
+        <div>________{{ Auth::user()->name }}________</div>
         <div>Name & signature of AI Technician</div>
     </div>
     <div>

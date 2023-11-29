@@ -539,7 +539,7 @@ $('#fruits-archive-datatable').DataTable({
                                 <tr style="border:none;">
                                     <td style="border:none;" class="tg-0lax">
                                         <br>
-                                        <p style="margin-top:10px;">Prepared By:</p>
+                                        <p style="margin-top:10px;">Prepared By: {{ Auth::user()->name }}</p>
                                     </td>
                                     <th style="border:none;" class="tg-0lax"></th>
                                     <th style="border:none;" class="tg-0lax"></th>
