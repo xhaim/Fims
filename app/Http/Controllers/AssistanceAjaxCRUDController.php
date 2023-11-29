@@ -1232,32 +1232,32 @@ class AssistanceAjaxCRUDController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
-    {
-        $assistance = ArchivedAssistances::findOrFail($request->id);
+        {
+            $assistance = ArchivedAssistances::findOrFail($request->id);
 
-        // Delete image files
-        $imagePath1 = public_path($assistance->imageUpload1);
-        $imagePath2 = public_path($assistance->imageUpload2);
+            // Delete image files
+            $imagePath1 = public_path($assistance->imageUpload1);
+            $imagePath2 = public_path($assistance->imageUpload2);
 
-        if (file_exists($imagePath1)) {
-            unlink($imagePath1);
+            if (file_exists($imagePath1)) {
+                unlink($imagePath1);
+            }
+
+            if (file_exists($imagePath2)) {
+                unlink($imagePath2);
+            }
+
+            // Update the database to remove image paths
+            $assistance->update([
+                'imageUpload1' => null,
+                'imageUpload2' => null,
+            ]);
+
+            // Delete the assistance record
+            $assistance->delete();
+
+            return response()->json(['message' => 'Assistance and associated images deleted successfully.']);
         }
-
-        if (file_exists($imagePath2)) {
-            unlink($imagePath2);
-        }
-
-        // Update the database to remove image paths
-        $assistance->update([
-            'imageUpload1' => null,
-            'imageUpload2' => null,
-        ]);
-
-        // Delete the assistance record
-        $assistance->delete();
-
-        return response()->json(['message' => 'Assistance and associated images deleted successfully.']);
-    }
 
 
     
