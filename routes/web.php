@@ -54,7 +54,7 @@ Route::group(['middleware' => ['auth', 'checkRole:superad']], function () {
     Route::get('get-user-details/{id}', [UserController::class, 'getUserDetails'])->name('user.details');
     Route::get('/register', function () {
         return view('dashboard');
-    });
+    }); 
 
 });
 
@@ -130,6 +130,7 @@ Route::get('livestock-crud-datatable', [LivestockAjaxCRUDController::class, 'ind
 Route::post('store-livestock', [LivestockAjaxCRUDController::class, 'store']);
 Route::post('edit-livestock', [LivestockAjaxCRUDController::class, 'edit']);
 Route::post('delete-livestock', [LivestockAjaxCRUDController::class, 'destroy']);
+Route::get('/print-livestock', [LivestockAjaxCRUDController::class, 'fetchData']);
 
 Route::post('/livestock/archive', [LivestockAjaxCRUDController::class, 'archive'])->name('livestock.archive');
 Route::post('/livestock/restore', [LivestockAjaxCRUDController::class, 'restore'])->name('livestock.restore');
@@ -178,6 +179,10 @@ Route::get('get-registry-details/{id}', [RegistryAjaxCrudController::class, 'get
 
 Route::get('/upload-csv', [CsvImportController::class, 'showForm']);
 Route::post('/upload-csv', [CsvImportController::class, 'import']);
+
+Route::post('/registry/archive', [RegistryAjaxCrudController::class, 'archive'])->name('registry.archive');
+Route::post('/registry/restore', [RegistryAjaxCrudController::class, 'restore'])->name('registry.restore');
+Route::get('registry-archive-datatable', [RegistryAjaxCrudController::class, 'archive_index']);
 
 
 
@@ -316,6 +321,6 @@ Route::get('assistance-archive-datatable', [AssistanceAjaxCRUDController::class,
 
 Route::get('/upload-csv', [CsvAssistanceImportController::class, 'showForm']);
 Route::post('/upload-csv', [CsvAssistanceImportController::class, 'import']);
-
+Route::get('get-assistance-details/{id}', [AssistanceAjaxCRUDController::class, 'getAssistanceDetails'])->name('assistance.details');
 
 });

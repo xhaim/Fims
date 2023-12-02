@@ -166,7 +166,7 @@
     //   */
     public function destroy(Request $request)
     {
-        $association = Association::where('id', $request->id)->delete();
+        $association = ArchivedAssoc::where('id', $request->id)->delete();
 
         // Reset AUTO_INCREMENT
         $associations = 'associations'; // Replace 'your_table' with the actual table name

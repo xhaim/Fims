@@ -281,11 +281,11 @@ class CsvAssistanceImportController extends Controller
 
                 // Image Uploads and Previews
                 'imageUpload1' => $rowData['imageUpload1'],
-                'imagePreviewContainer1' => $rowData['imagePreviewContainer1'],
-                'imagePreview1' => $rowData['imagePreview1'],
+               
+                
                 'imageUpload2' => $rowData['imageUpload2'],
-                'imagePreviewContainer2' => $rowData['imagePreviewContainer2'],
-                'imagePreview2' => $rowData['imagePreview2'],
+                
+               
 
                 // Special Notes
                 'special_notes' => $rowData['special_notes'],

@@ -117,21 +117,21 @@
               <div class="form-group">
                 <label for="name" class="col-sm-8 control-label"> Name of Farmer</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name of Farmer" maxlength="100" required="">
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name of Farmer" maxlength="100" >
                 </div>
               </div>  
  
               <div class="form-group">
                 <label for="barangay" class="col-sm-8 control-label">Barangay</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="barangay" name="barangay" placeholder="Enter Barangay" maxlength="100" required="">
+                  <input type="text" class="form-control" id="barangay" name="barangay" placeholder="Enter Barangay" maxlength="100" >
                 </div>
               </div>
  
               <div class="form-group">
                 <label class="col-sm-8 control-label">Municipality</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="municipality" name="municipality" placeholder="Enter Municipality" required="">
+                  <input type="text" class="form-control" id="municipality" name="municipality" placeholder="Enter Municipality" >
                 </div>
               </div>
  
@@ -479,7 +479,7 @@
                       <table class="tg" style="border:none;">
                         <thead style="border:none;">
                         <tr style="border:none;">
-                            <th style="border:none;" class="tg-0lax">Prepared by:{{ Auth::user()->name }}</th>
+                            <th style="border:none;" class="tg-0lax">Prepared by: {{ Auth::user()->name }}</th>
                             <th style="border:none;" class="tg-0lax">Noted by:</th>
                             
                         </tr>
@@ -496,24 +496,6 @@
               printWindow.print();
           }
  
-  function deleteFunc(id){
-        if (confirm("Delete Record?") == true) {
-        var id = id;
-          
-          // ajax
-          $.ajax({
-              type:"POST",
-              url: "{{ url('delete-veg') }}",
-              data: { id: id },
-              dataType: 'json',
-              success: function(res){
- 
-                var oTable = $('#veg-crud-datatable').dataTable();
-                oTable.fnDraw(false);
-             }
-          });
-       }
-  }
  
   $('#VegForm').submit(function(e) {
  

@@ -117,42 +117,42 @@
               <div class="form-group">
                 <label for="rsbsa" class="col-md-auto control-label" >RSBSA ID</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="rsbsa" name="rsbsa" placeholder="Enter RSBSA ID " maxlength="50" required="">
+                  <input type="number" class="form-control" id="rsbsa" name="rsbsa" placeholder="Enter RSBSA ID " maxlength="50" >
                 </div>
               </div>  
  
               <div class="form-group">
                 <label for="generated" class="col-md-auto control-label">Generated ID</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="generated" name="generated" placeholder="Enter Generated" maxlength="20" required="">
+                  <input type="number" class="form-control" id="generated" name="generated" placeholder="Enter Generated" maxlength="20" >
                 </div>
               </div>
  
               <div class="form-group">
                 <label for="association" class="col-sm-8 control-label">Name of Association</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="association" name="association" placeholder="Enter Name of Association" maxlength="20" required="">
+                  <input type="text" class="form-control" id="association" name="association" placeholder="Enter Name of Association" maxlength="20" >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="barangay" class="col-md-auto control-label">Barangay</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="barangay" name="barangay" placeholder="Enter Barangay" maxlength="20" required="">
+                  <input type="text" class="form-control" id="barangay" name="barangay" placeholder="Enter Barangay" maxlength="20" >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="name" class="col-sm-8 control-label">Farmer's Name</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter Farmer's Name" maxlength="20" required="">
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter Farmer's Name" maxlength="20" >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="birth" class="col-md-auto control-label">Date of Birth</label>
                 <div class="col-sm-12">
-                  <input type="date" class="form-control" id="birth" name="birth" placeholder="Enter Date of Birth" maxlength="20" required="">
+                  <input type="date" class="form-control" id="birth" name="birth" placeholder="Enter Date of Birth" maxlength="20" >
                 </div>
               </div>
               
@@ -169,7 +169,7 @@
               <div class="form-group">
                 <label for="age" class="col-md-auto control-label">Age</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="age" name="age" placeholder="Enter Age" maxlength="2" required="">
+                  <input type="number" class="form-control" id="age" name="age" placeholder="Enter Age" maxlength="2" >
                 </div>
               </div>
 
@@ -186,21 +186,21 @@
               <div class="form-group">
                 <label for="cropping" class="col-sm-8 control-label">Cropping Season</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="cropping" name="cropping" placeholder="Enter Cropping Season" maxlength="20" required="">
+                  <input type="text" class="form-control" id="cropping" name="cropping" placeholder="Enter Cropping Season" maxlength="20" >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="area" class="col-md-auto control-label">Area</label>
                 <div class="col-sm-12">
-                  <input type="number" step="0.01" class="form-control" id="area" name="area" placeholder="Enter no. of hectare/s" maxlength="20" required="">
+                  <input type="number" step="0.01" class="form-control" id="area" name="area" placeholder="Enter no. of hectare/s" maxlength="20" >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="location" class="col-md-auto control-label">Location</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="location" name="location" placeholder="Enter Location" maxlength="50" required="">
+                  <input type="text" class="form-control" id="location" name="location" placeholder="Enter Location" maxlength="50" >
                 </div>
               </div>
               <div class="col-sm-offset-2 col-md-auto" style="margin-top: 20px;">

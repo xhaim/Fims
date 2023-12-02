@@ -121,42 +121,42 @@
               <div class="form-group">
                 <label for="association" class="col-sm-8 control-label">Name of Association</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="association" name="association" placeholder="Enter Name of Association" maxlength="20" required="">
+                  <input type="text" class="form-control" id="association" name="association" placeholder="Enter Name of Association" maxlength="20" >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="barangay" class="col-sm-8 control-label">Barangay</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="barangay" name="barangay" placeholder="Enter Barangay" maxlength="20" required="">
+                  <input type="text" class="form-control" id="barangay" name="barangay" placeholder="Enter Barangay" maxlength="20" >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="name" class="col-sm-8 control-label">Chairman</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="chairman" name="chairman" placeholder="Enter Chairman's Name" maxlength="20" required="">
+                  <input type="text" class="form-control" id="chairman" name="chairman" placeholder="Enter Chairman's Name" maxlength="20" >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="age" class="col-sm-8 control-label">Contact number</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="contact" name="contact" placeholder="Enter Contact No." maxlength="2" required="">
+                  <input type="number" class="form-control" id="contact" name="contact" placeholder="Enter Contact No." maxlength="2" >
                 </div>
               </div>
       
               <div class="form-group">
                 <label for="area" class="col-sm-8 control-label">Number of farmers</label>
                 <div class="col-sm-12">
-                  <input type="number" step="0.01" class="form-control" id="no_of_farmers" name="no_of_farmers" placeholder="Enter no. of farmers" maxlength="20" required="">
+                  <input type="number" step="0.01" class="form-control" id="no_of_farmers" name="no_of_farmers" placeholder="Enter no. of farmers" maxlength="20" >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="birth" class="col-sm-8 control-label">Date registered</label>
                 <div class="col-sm-12">
-                  <input type="date" class="form-control" id="registered" name="registered" placeholder="Enter Date registered" maxlength="20" required="">
+                  <input type="date" class="form-control" id="registered" name="registered" placeholder="Enter Date registered" maxlength="20" >
                 </div>
               </div>
               
@@ -381,6 +381,9 @@
               <head>
                   <title>Association Print</title>
                   <style>
+                    body{
+                        text-align:center;
+                      }
                       table {
                           border-collapse: collapse;
                           width: 100%;
@@ -396,7 +399,8 @@
               </head>
               <body>
 
-               
+            <h4>Association </h4>
+
 
                   <table>
           `;
@@ -434,24 +438,7 @@
           printWindow.document.close();
           printWindow.print();
       }
-  function deleteFunc(id){
-        if (confirm("Delete Record?") == true) {
-        var id = id;
-          
-          // ajax
-          $.ajax({
-              type:"POST",
-              url: "{{ url('delete-assoc') }}",
-              data: { id: id },
-              dataType: 'json',
-              success: function(res){
  
-                var oTable = $('#assoc-crud-datatable').dataTable();
-                oTable.fnDraw(false);
-             }
-          });
-       }
-  }
  
   $('#AssocForm').submit(function(e) {
  

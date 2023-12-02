@@ -171,6 +171,12 @@ class LivestockAjaxCRUDController extends Controller
      
        return Response()->json($livestock);
    }
+  // In your controller, retrieve the data
+  public function fetchData() {
+    // Retrieve data from your model or source (e.g., database)
+    $data = Livestock::all(); // Replace YourModel with your actual model
 
+    return response()->json($data);
+}
 }
 

@@ -51,6 +51,7 @@
              $('#name_first').val(res.name_first);
              $('#name_middle').val(res.name_middle);
              $('#name_last').val(res.name_last);
+             $('#suffix').val(res.suffix);
              $('#barangay').val(res.barangay);
              $('#farm_location').val(res.farm_location);
              $('#birthdate').val(res.birthdate);
@@ -196,47 +197,6 @@
 
 //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //
 
-
-  function deleteFunc(id){
-        if (confirm("Delete Record?") == true) {
-        var id = id;
-          
-          // ajax
-          $.ajax({
-              type:"POST",
-              url: "{{ url('delete-ricehybrid') }}",
-              data: { id: id },
-              dataType: 'json',
-              success: function(res){
- 
-                var oTable = $('#ricehybrid-archive-datatable').dataTable();
-                oTable.fnDraw(false);
-             }
-          });
-       }
-  }
-
-//  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //
-
-     function deleteFunc(id){
-           if (confirm("Delete Record?") == true) {
-           var id = id;
-             
-             // ajax
-             $.ajax({
-                 type:"POST",
-                 url: "{{ url('delete-ricehybrid') }}",
-                 data: { id: id },
-                 dataType: 'json',
-                 success: function(res){
-    
-                   var oTable = $('#ricehybrid-crud-datatable').dataTable();
-                   oTable.fnDraw(false);
-                }
-             });
-          }
-     }
-
      // AJAX request to fetch data from the server
      function printDataTable() {
           $.ajax({
@@ -258,7 +218,7 @@
           const excludedColumns = ['created_at', 'updated_at'];
 
           const headers = ['No.', 'RSBSA No.',
-        { name: "Farmer's Name", columns: ['Firstname', 'Middle', 'Last'] },'Barangay', 'Farm Location', 'Birthdate',
+        { name: "Farmer's Name", columns: ['Firstname', 'Middle', 'Last','Suffix'] },'Barangay', 'Farm Location', 'Birthdate',
         'Farm Area', 'Sex', 'Membership', 'Quantity', 'DateReceived'];
 
           // Create a new window for printing
@@ -307,7 +267,7 @@
           // Adding table headers
     headers.forEach(header => {
         if (typeof header === 'object') {
-            htmlContent += `<th colspan="${3}" style="text-align:center;">${header.name}</th>`;
+            htmlContent += `<th colspan="${4}" style="text-align:center;">${header.name}</th>`;
         } else if (!excludedColumns.includes(header)) {
             htmlContent += `<th rowspan="${2}" style="text-align:center;">${header}</th>`;
         }

@@ -71,53 +71,53 @@
                $('#tax_declarration_no').val(res.tax_declarration_no);
                
    
-               // Tenure Display Saved Data
+            //    Tenure Display Saved Data
    
-               const tenureString = "["+res.tenure+"]";    
-               const tenureArray = JSON.parse(tenureString);
-               Object.freeze(tenureArray); // Freeze the Tenure array to make it a constant
+            //    const tenureString = "["+res.tenure+"]";    
+            //    const tenureArray = JSON.parse(tenureString);
+            //    Object.freeze(tenureArray); // Freeze the Tenure array to make it a constant
    
-               tenureArray.forEach(item => {
-                   const checkboxId = item; // Generate checkbox ID
+            //    tenureArray.forEach(item => {
+            //        const checkboxId = item; // Generate checkbox ID
                    
-                   if(checkboxId !== null){
-                   if (checkboxId === "Owned") {
-                       const checkbox = document.getElementById('ownedCheckbox');
-                       checkbox.checked = true; // Check the checkbox if the item exists in the array
-                   }
-                   if (checkboxId.includes("Rent")) {
-                       const checkbox = document.getElementById('rentCheckbox');
-                       checkbox.checked = true; // Check the checkbox if the item exists in the array
-                       var originalString = tenureString;
-                       var strippedString = originalString.replace(/Rent: | year\(s\)/g, "");
-                       var output = JSON.parse(strippedString);
-                       var numberOnly = output[0].match(/\d+/);
+            //        if(checkboxId !== null){
+            //        if (checkboxId === "Owned") {
+            //            const checkbox = document.getElementById('ownedCheckbox');
+            //            checkbox.checked = true; // Check the checkbox if the item exists in the array
+            //        }
+            //        if (checkboxId.includes("Rent")) {
+            //            const checkbox = document.getElementById('rentCheckbox');
+            //            checkbox.checked = true; // Check the checkbox if the item exists in the array
+            //            var originalString = tenureString;
+            //            var strippedString = originalString.replace(/Rent: | year\(s\)/g, "");
+            //            var output = JSON.parse(strippedString);
+            //            var numberOnly = output[0].match(/\d+/);
    
-                       $(`#rentYears`).val(numberOnly[0]);
-                       $(`#rentCheckbox`).val('Rent: '+numberOnly[0]+"year(s)");
-                       $(`#rentYears`).css('display', 'block');
+            //            $(`#rentYears`).val(numberOnly[0]);
+            //            $(`#rentCheckbox`).val('Rent: '+numberOnly[0]+"year(s)");
+            //            $(`#rentYears`).css('display', 'block');
    
-                       console.log(numberOnly[0]);
-                       console.log(strippedString); // Output: 2 year(s)
-                   }
-                   if (checkboxId === "Tenant") {
-                       const checkbox = document.getElementById('tenantCheckbox');
-                       checkbox.checked = true; // Check the checkbox if the item exists in the array
-                   }
-                   if (checkboxId.includes("Others")) {
-                       const checkbox = document.getElementById('othersCheckbox');
-                       checkbox.checked = true; // Check the checkbox if the item exists in the array
-                       var originalOthersString = checkboxId;
-                       var strippedOthersString = originalOthersString.replace("Others: ", "");
+            //            console.log(numberOnly[0]);
+            //            console.log(strippedString); // Output: 2 year(s)
+            //        }
+            //        if (checkboxId === "Tenant") {
+            //            const checkbox = document.getElementById('tenantCheckbox');
+            //            checkbox.checked = true; // Check the checkbox if the item exists in the array
+            //        }
+            //        if (checkboxId.includes("Others")) {
+            //            const checkbox = document.getElementById('othersCheckbox');
+            //            checkbox.checked = true; // Check the checkbox if the item exists in the array
+            //            var originalOthersString = checkboxId;
+            //            var strippedOthersString = originalOthersString.replace("Others: ", "");
    
-                       $('#otherInput').val(strippedOthersString);
-                       $('#othersCheckbox').val(checkboxId);
-                       $('#otherInput').css('display', 'block');
+            //            $('#otherInput').val(strippedOthersString);
+            //            $('#othersCheckbox').val(checkboxId);
+            //            $('#otherInput').css('display', 'block');
    
-                       console.log(strippedOthersString); // Output: 
-                   }
-               }
-               });
+            //            console.log(strippedOthersString); // Output: 
+            //        }
+            //    }
+            //    });
    
                $('#existing_crop').val(res.existing_crop);
                $('#previous_crop').val(res.previous_crop);
@@ -414,6 +414,334 @@
        });
      }  
    
+     function viewFunc(id) {
+       $.ajax({
+           type: "GET",
+           url: "{{ url('get-assistance-details') }}/" + id,
+           success: function (data) {
+               // Populate the modal with record details
+            $('#view_rsbsa').text(data.rsbsa);
+            $('#view_date').text(data.date);
+            $('#view_timepicker').text(data.timepicker);
+            $('#view_name').text(data.name);
+            $('#view_gender').text(data.gender);
+            $('#view_birthdate').text(data.birthdate);
+            $('#view_spouse').text(data.spouse);
+            $('#view_spouse_gender').text(data.spouse_gender);
+            $('#view_spouse_birthdate').text(data.spouse_birthdate);
+            $('#view_dependents').text(data.dependents);
+            $('#view_income').text(data.income);
+            $('#view_address').text(data.address);
+            // Particulars
+            $('#view_purok').text(data.purok);
+            $('#view_brngy').text(data.brngy);
+            $('#view_geographic_coordinates').text(data.geographic_coordinates);
+            $('#view_title_no').text(data.title_no);
+            $('#view_tax_declarration_no').text(data.tax_declarration_no);
+                // Land Checkbox Edit Res
+                const landString = "["+data.land+"]";    
+               const landArray = JSON.parse(landString);
+               Object.freeze(landArray); // Freeze the array to make it a constant
+   
+               landArray.forEach(item => {
+                   const checkboxId = item; // Generate checkbox ID
+                   
+                   
+                   if (checkboxId === "Flat") {
+                        $("#flat_check").removeAttr("hidden");
+                        $("#flat").css('background-color','black'); // Check the checkbox if the item exists in the array
+                   }
+                   if (checkboxId === "Gently Sloping") {
+                        $("#slope_check").removeAttr("hidden");
+                        $("#slope").css('background-color','black');// Check the checkbox if the item exists in the array
+                   }
+                   if (checkboxId === "Rolling or Undulating") {
+                        $("#rolling_check").removeAttr("hidden");
+                        $("#rolling").css('background-color','black');// Check the checkbox if the item exists in the array
+                   }
+                   if (checkboxId === "Hilly or Steep Slopes") {
+                        $("#hillysteep_check").removeAttr("hidden");
+                        $("#hillysteep").css('background-color','black');// Check the checkbox if the item exists in the array
+                   }
+               });
+   
+               console.log(landArray);
+   
+               $('#view_soil_type').text(data.soil_type);
+   
+               const sourceString = "["+data.source+"]";    
+               const sourceArray = JSON.parse(sourceString);
+               Object.freeze(sourceArray); // Freeze the array to make it a constant
+   
+               sourceArray.forEach(item => {
+                   const checkboxId = item; // Generate checkbox ID
+                   
+                   
+                   if (checkboxId === "Irrigated") {
+                        $("#irrigated_check").removeAttr("hidden");
+                        $("#irrigated").css('background-color','black');// Check the checkbox if the item exists in the array
+                   }
+                   if (checkboxId === "SWIP or SIS") {
+                        $("#swip_check").removeAttr("hidden");
+                        $("#swip").css('background-color','black'); // Check the checkbox if the item exists in the array
+                   }
+                   if (checkboxId === "Water Pump") {
+                        $("#waterpump_check").removeAttr("hidden");
+                        $("#waterpump").css('background-color','black');// Check the checkbox if the item exists in the array
+                   }
+                   if (checkboxId === "Rainfed") {
+                        $("#rainfed_check").removeAttr("hidden");
+                        $("#rainfed").css('background-color','black');// Check the checkbox if the item exists in the array
+                   }
+               });
+
+               const tenureString = "["+data.tenure+"]";    
+               const tenureArray = JSON.parse(tenureString);
+               Object.freeze(sourceArray); // Freeze the array to make it a constant
+   
+               tenureArray.forEach(item => {
+                   const checkboxId = item; // Generate checkbox ID
+                   
+                   
+                   if (checkboxId === "Owned") {
+                        $("#owned_check").removeAttr("hidden");
+                        $("#owned").css('background-color','black');// Check the checkbox if the item exists in the array
+                   }
+                   if (checkboxId === "Rent") {
+                        $("#lease_check").removeAttr("hidden");
+                        $("#lease").css('background-color','black'); // Check the checkbox if the item exists in the array
+                   }
+                   if (checkboxId === "Tenant") {
+                        $("#tenant_check").removeAttr("hidden");
+                        $("#tenant").css('background-color','black');// Check the checkbox if the item exists in the array
+                   }
+                   if (checkboxId === "Rainfed") {
+                        $("#others_check").removeAttr("hidden");
+                        $("#others").css('background-color','black');// Check the checkbox if the item exists in the array
+                   }
+               });
+   
+               $('#view_notes').text(data['notes']);
+   
+             $('#view_intended_crop').text(data.intended_crop);
+   $('#view_evaluation_intended_crop').text(data.evaluation_intended_crop);
+   $('#view_target_date_intended_crop').text(data.target_date_intended_crop);
+   $('#view_completion_date_intended_crop').text(data.completion_date_intended_crop);
+   $('#view_servedby_intended_crop').text(data.servedby_intended_crop);
+   $('#view_conform_intended_crop').text(data.conform_intended_crop);
+   
+   $('#view_program_applied').text(data.program_applied);
+   $('#view_evaluation_program_applied').text(data.evaluation_program_applied);
+   $('#view_target_date_program_applied').text(data.target_date_program_applied);
+   $('#view_completion_date_program_applied').text(data.completion_date_program_applied);
+   $('#view_servedby_program_applied').text(data.servedby_program_applied);
+   $('#view_conform_program_applied').text(data.conform_program_applied);
+   // Area Applied
+   $('#view_area_applied').text(data.area_applied);
+   $('#view_evaluation_area_applied').text(data.evaluation_area_applied);
+   $('#view_target_date_area_applied').text(data.target_date_area_applied);
+   $('#view_completion_date_area_applied').text(data.completion_date_area_applied);
+   $('#view_servedby_area_applied').text(data.servedby_area_applied);
+   $('#view_conform_area_applied').text(data.conform_area_applied);
+   
+   // Land Preparation
+   $('#view_land_preparation').text(data.land_preparation);
+   $('#view_evaluation_land_preparation').text(data.evaluation_land_preparation);
+   $('#view_target_date_land_preparation').text(data.target_date_land_preparation);
+   $('#view_completion_date_land_preparation').text(data.completion_date_land_preparation);
+   $('#view_servedby_land_preparation').text(data.servedby_land_preparation);
+   $('#view_conform_land_preparation').text(data.conform_land_preparation);
+   
+   // Lay Outing
+   $('#view_lay_outing').text(data.lay_outing);
+   $('#view_evaluation_lay_outing').text(data.evaluation_lay_outing);
+   $('#view_target_date_lay_outing').text(data.target_date_lay_outing);
+   $('#view_completion_date_lay_outing').text(data.completion_date_lay_outing);
+   $('#view_servedby_lay_outing').text(data.servedby_lay_outing);
+   $('#view_conform_lay_outing').text(data.conform_lay_outing);
+   
+   // Farm Development
+   $('#view_farm_development').text(data.farm_development);
+   $('#view_evaluation_farm_development').text(data.evaluation_farm_development);
+   $('#view_target_date_farm_development').text(data.target_date_farm_development);
+   $('#view_completion_date_farm_development').text(data.completion_date_farm_development);
+   $('#view_servedby_farm_development').text(data.servedby_farm_development);
+   $('#view_conform_farm_development').text(data.conform_farm_development);
+   
+   // Plowing
+   $('#view_plowing').text(data.plowing);
+   $('#view_evaluation_plowing').text(data.evaluation_plowing);
+   $('#view_target_date_plowing').text(data.target_date_plowing);
+   $('#view_completion_date_plowing').text(data.completion_date_plowing);
+   $('#view_servedby_plowing').text(data.servedby_plowing);
+   $('#view_conform_plowing').text(data.conform_plowing);
+   
+   // Harrowing
+   $('#view_harrowing').text(data.harrowing);
+   $('#view_evaluation_harrowing').text(data.evaluation_harrowing);
+   $('#view_target_date_harrowing').text(data.target_date_harrowing);
+   $('#view_completion_date_harrowing').text(data.completion_date_harrowing);
+   $('#view_servedby_harrowing').text(data.servedby_harrowing);
+   $('#view_conform_harrowing').text(data.conform_harrowing);
+   
+   // Rotavator
+   $('#view_rotavator').text(data.rotavator);
+   $('#view_evaluation_rotavator').text(data.evaluation_rotavator);
+   $('#view_target_date_rotavator').text(data.target_date_rotavator);
+   $('#view_completion_date_rotavator').text(data.completion_date_rotavator);
+   $('#view_servedby_rotavator').text(data.servedby_rotavator);
+   $('#view_conform_rotavator').text(data.conform_rotavator);
+   
+   // Seeds
+   $('#view_seeds').text(data.seeds);
+   $('#view_evaluation_seeds').text(data.evaluation_seeds);
+   $('#view_target_date_seeds').text(data.target_date_seeds);
+   $('#view_completion_date_seeds').text(data.completion_date_seeds);
+   $('#view_servedby_seeds').text(data.servedby_seeds);
+   $('#view_conform_seeds').text(data.conform_seeds);
+   
+   // Inoculant
+   $('#view_inoculant').text(data.inoculant);
+   $('#view_evaluation_inoculant').text(data.evaluation_inoculant);
+   $('#view_target_date_inoculant').text(data.target_date_inoculant);
+   $('#view_completion_date_inoculant').text(data.completion_date_inoculant);
+   $('#view_servedby_inoculant').text(data.servedby_inoculant);
+   $('#view_conform_inoculant').text(data.conform_inoculant);
+   
+   // Enrollment
+   $('#view_enrollment').text(data.enrollment);
+   $('#view_evaluation_enrollment').text(data.evaluation_enrollment);
+   $('#view_target_date_enrollment').text(data.target_date_enrollment);
+   $('#view_completion_date_enrollment').text(data.completion_date_enrollment);
+   $('#view_servedby_enrollment').text(data.servedby_enrollment);
+   $('#view_conform_enrollment').text(data.conform_enrollment);
+   
+   // Insurance Claim
+   $('#view_insurance_claim').text(data.insurance_claim);
+   $('#view_evaluation_insurance_claim').text(data.evaluation_insurance_claim);
+   $('#view_target_date_insurance_claim').text(data.target_date_insurance_claim);
+   $('#view_completion_date_insurance_claim').text(data.completion_date_insurance_claim);
+   $('#view_servedby_insurance_claim').text(data.servedby_insurance_claim);
+   $('#view_conform_insurance_claim').text(data.conform_insurance_claim);
+   
+   // Production
+   $('#view_production').text(data.production);
+   $('#view_evaluation_production').text(data.evaluation_production);
+   $('#view_target_date_production').text(data.target_date_production);
+   $('#view_completion_date_production').text(data.completion_date_production);
+   $('#view_servedby_production').text(data.servedby_production);
+   $('#view_conform_production').text(data.conform_production);
+   
+   // Fertilizer
+   $('#view_evaluation_fertilizer').text(data.evaluation_fertilizer);
+   $('#view_target_date_fertilizer').text(data.target_date_fertilizer);
+   $('#view_completion_date_fertilizer').text(data.completion_date_fertilizer);
+   $('#view_servedby_fertilizer').text(data.servedby_fertilizer);
+   $('#view_conform_fertilizer').text(data.conform_fertilizer);
+   
+   // Feeding Inputs
+   $('#view_evaluation_feeding_inputs').text(data.evaluation_feeding_inputs);
+   $('#view_target_date_feeding_inputs').text(data.target_date_feeding_inputs);
+   $('#view_completion_date_feeding_inputs').text(data.completion_date_feeding_inputs);
+   $('#view_servedby_feeding_inputs').text(data.servedby_feeding_inputs);
+   $('#view_conform_feeding_inputs').text(data.conform_feeding_inputs);
+   
+   // Pest Control
+   $('#view_evaluation_pest_control').text(data.evaluation_pest_control);
+   $('#view_target_date_pest_control').text(data.target_date_pest_control);
+   $('#view_completion_date_pest_control').text(data.completion_date_pest_control);
+   $('#view_servedby_pest_control').text(data.servedby_pest_control);
+   $('#view_conform_pest_control').text(data.conform_pest_control);
+   
+   // Irrigation
+   $('#view_evaluation_irrigation').text(data.evaluation_irrigation);
+   $('#view_target_date_irrigation').text(data.target_date_irrigation);
+   $('#view_completion_date_irrigation').text(data.completion_date_irrigation);
+   $('#view_servedby_irrigation').text(data.servedby_irrigation);
+   $('#view_conform_irrigation').text(data.conform_irrigation);
+   
+   // Post Harvest
+   $('#view_evaluation_post_harvest').text(data.evaluation_post_harvest);
+   $('#view_target_date_post_harvest').text(data.target_date_post_harvest);
+   $('#view_completion_date_post_harvest').text(data.completion_date_post_harvest);
+   $('#view_servedby_post_harvest').text(data.servedby_post_harvest);
+   $('#view_conform_post_harvest').text(data.conform_post_harvest);
+   
+   // Harvester
+   $('#view_harvester').text(data.harvester);
+   $('#view_evaluation_harvester').text(data.evaluation_harvester);
+   $('#view_target_date_harvester').text(data.target_date_harvester);
+   $('#view_completion_date_harvester').text(data.completion_date_harvester);
+   $('#view_servedby_harvester').text(data.servedby_harvester);
+   $('#view_conform_harvester').text(data.conform_harvester);
+   
+   // Hauling
+   $('#view_hauling').text(data.hauling);
+   $('#view_evaluation_hauling').text(data.evaluation_hauling);
+   $('#view_target_date_hauling').text(data.target_date_hauling);
+   $('#view_completion_date_hauling').text(data.completion_date_hauling);
+   $('#view_servedby_hauling').text(data.servedby_hauling);
+   $('#view_conform_hauling').text(data.conform_hauling);
+   
+   // Drying
+   $('#view_drying').text(data.drying);
+   $('#view_evaluation_drying').text(data.evaluation_drying);
+   $('#view_target_date_drying').text(data.target_date_drying);
+   $('#view_completion_date_drying').text(data.completion_date_drying);
+   $('#view_servedby_drying').text(data.servedby_drying);
+   $('#view_conform_drying').text(data.conform_drying);
+   
+   // Milling
+   $('#view_milling').text(data.milling);
+   $('#view_evaluation_milling').text(data.evaluation_milling);
+   $('#view_target_date_milling').text(data.target_date_milling);
+   $('#view_completion_date_milling').text(data.completion_date_milling);
+   $('#view_servedby_milling').text(data.servedby_milling);
+   $('#view_conform_milling').text(data.conform_milling);
+   
+   // Grading
+   $('#view_grading').text(data.grading);
+   $('#view_evaluation_grading').text(data.evaluation_grading);
+   $('#view_target_date_grading').text(data.target_date_grading);
+   $('#view_completion_date_grading').text(data.completion_date_grading);
+   $('#view_servedby_grading').text(data.servedby_grading);
+   $('#view_conform_grading').text(data.conform_grading);
+   
+   // Marketing
+   $('#view_marketing').text(data.marketing);
+   $('#view_evaluation_marketing').text(data.evaluation_marketing);
+   $('#view_target_date_marketing').text(data.target_date_marketing);
+   $('#view_completion_date_marketing').text(data.completion_date_marketing);
+   $('#view_servedby_marketing').text(data.servedby_marketing);
+   $('#view_conform_marketing').text(data.conform_marketing);
+   
+   // Others
+   $('#view_others').text(data.others);
+   $('#view_evaluation_others').text(data.evaluation_others);
+   $('#view_target_date_others').text(data.target_date_others);
+   $('#view_completion_date_others').text(data.completion_date_others);
+   $('#view_servedby_others').text(data.servedby_others);
+   $('#view_conform_others').text(data.conform_others);
+   
+   // Notes
+   $('#view_notes').text(data.notes);
+
+//    IMGAGES
+   $('#view_imagePreview1').attr('src',data.imageUpload1);
+   $('#view_imagePreview2').attr('src',data.imageUpload2);
+   
+   
+            // Special Notes
+            $('#view_special_notes').text(data.special_notes);     
+               // Show the modal
+               $("#viewModal").modal("show");
+           },
+           error: function (data) {
+               console.log("Error:", data);
+           },
+       });
+   }
+  
      //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //
    
    $('#assistance-archive-datatable').DataTable({
@@ -675,3 +1003,43 @@
         });
     });
 </script>
+
+<script>
+
+    var printClicked = false; // Initialize a flag variable
+    
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+    
+        document.body.innerHTML = printContents;
+    
+        // Set the flag to true when printDiv is clicked
+        printClicked = true;
+    
+        window.onafterprint = function() {
+            document.body.innerHTML = originalContents;
+        };
+    
+        window.print();
+    }
+    
+    function closeviewModal() {
+            var addRoomModal = document.getElementById("viewModal");
+            addRoomModal.classList.remove('show');
+            $("#viewModal").modal('hide');
+            setTimeout(function() {
+                var modalBackdrop = document.querySelector('.modal-backdrop.fade.show');
+                if (modalBackdrop) {
+                    modalBackdrop.remove('show');
+                }
+                
+                // Check if printDiv was clicked before running location.reload()
+                if (printClicked) {
+                    location.reload();
+                }
+            }, 400);
+        }
+         </script>
+         
+  <script src="{{asset('dash-assets/js/registry/CheckBoxHandler.js')}}"></script>

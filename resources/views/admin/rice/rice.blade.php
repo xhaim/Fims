@@ -93,7 +93,7 @@
            <thead>
               <tr>
                 
-                <th>RSBSA No.</th>
+                    <th>RSBSA No.</th>
                     <th>First</th>
                     <th>Middle</th>
                     <th>Last</th>
@@ -124,56 +124,63 @@
             <div class="form-group">
               <label for="rsbsa" class="col-sm-8 control-label" >RSBSA No.</label>
               <div class="col-sm-12">
-                <input type="number" class="form-control" id="rsbsa" name="rsbsa" placeholder="Enter RSBSA No." maxlength="50" required="">
+                <input type="number" class="form-control" id="rsbsa" name="rsbsa" placeholder="Enter RSBSA No." maxlength="50" >
               </div>
             </div>  
  
             <div class="form-group">
               <label for="name_first" class="col-sm-8 control-label">Farmers Name (First)</label>
               <div class="col-sm-12">
-                <input type="text" class="form-control" id="name_first" name="name_first" placeholder="Enter First Name" maxlength="20" required="">
+                <input type="text" class="form-control" id="name_first" name="name_first" placeholder="Enter First Name" maxlength="20" >
               </div>
             </div>
 
             <div class="form-group">
               <label for="name_middle" class="col-sm-8 control-label">Farmers Name (Middle)</label>
               <div class="col-sm-12">
-                <input type="text" class="form-control" id="name_middle" name="name_middle" placeholder="Enter Middle Name" maxlength="20" required="">
+                <input type="text" class="form-control" id="name_middle" name="name_middle" placeholder="Enter Middle Name" maxlength="20" >
               </div>
             </div>
 
             <div class="form-group">
               <label for="name_last" class="col-sm-8 control-label">Farmers Name (Last)</label>
               <div class="col-sm-12">
-                <input type="text" class="form-control" id="name_last" name="name_last" placeholder="Enter Last Name" maxlength="20" required="">
+                <input type="text" class="form-control" id="name_last" name="name_last" placeholder="Enter Last Name" maxlength="20" >
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="name_last" class="col-sm-8 control-label">Suffix</label>
+              <div class="col-sm-12">
+                <input type="text" class="form-control" id="suffix" name="suffix" placeholder="Enter Suffix" maxlength="20" >
               </div>
             </div>
 
             <div class="form-group">
               <label for="barangay" class="col-sm-8 control-label">Barangay</label>
               <div class="col-sm-12">
-                <input type="text" class= "form-control" id="barangay" name="barangay" placeholder="Enter Barangay" maxlength="20" required="">
+                <input type="text" class= "form-control" id="barangay" name="barangay" placeholder="Enter Barangay" maxlength="20" >
               </div>
             </div>
 
             <div class="form-group">
               <label for="farm_location" class="col-sm-8 control-label">Farm Location</label>
               <div class="col-sm-12">
-                <input type="text" class="form-control" id="farm_location" name="farm_location" placeholder="Enter Farm Location" maxlength="100" required="">
+                <input type="text" class="form-control" id="farm_location" name="farm_location" placeholder="Enter Farm Location" maxlength="100" >
               </div>
             </div>
 
             <div class="form-group">
               <label for="birthdate" class="col-sm-8 control-label">Birthdate</label>
               <div class="col-sm-12">
-                <input type="date" class="form-control" id="birthdate" name="birthdate" placeholder="Enter Birthdate" maxlength="20" required="">
+                <input type="date" class="form-control" id="birthdate" name="birthdate" placeholder="Enter Birthdate" maxlength="20" >
               </div>
             </div>
               
             <div class="form-group">
               <label for="farm_area" class="col-sm-8 control-label">Farm Area (hectares)</label>
               <div class="col-sm-12">
-                  <input type="text" class="form-control" id="farm_area" name="farm_area" placeholder="Enter farm area (hectares)" required="">
+                  <input type="text" class="form-control" id="farm_area" name="farm_area" placeholder="Enter farm area (hectares)" >
               </div>
           </div>
           
@@ -223,14 +230,14 @@
             <div class="form-group">
               <label for="quantity" class="col-sm-8 control-label">Quantity</label>
               <div class="col-sm-12">
-                <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter Quantity" maxlength="20" required="">
+                <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter Quantity" maxlength="20" >
               </div>
             </div>
 
             <div class="form-group">
               <label for="date_received" class="col-sm-8 control-label">Date Received</label>
               <div class="col-sm-12">
-                <input type="date" class="form-control" id="date_received" name="date_received" placeholder="Enter Date Received" maxlength="20" required="">
+                <input type="date" class="form-control" id="date_received" name="date_received" placeholder="Enter Date Received" maxlength="20" >
               </div>
             </div>
 

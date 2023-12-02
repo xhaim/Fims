@@ -111,21 +111,21 @@
               <div class="form-group">
                 <label for="name" class="col-sm-8 control-label"> Owner's Name </label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="owner_name" name="owner_name" placeholder="Enter Owner's Name" maxlength="100" required="">
+                  <input type="text" class="form-control" id="owner_name" name="owner_name" placeholder="Enter Owner's Name" maxlength="100" >
                 </div>
               </div>  
 
               <div class="form-group">
                 <label class="col-sm-8 control-label">Birthday</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="birthday" name="birthday" placeholder="Enter Birthday" required="">
+                  <input type="text" class="form-control" id="birthday" name="birthday" placeholder="Enter Birthday" >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="barangay" class="col-sm-8 control-label">Dog's Name</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="dog_name" name="dog_name" placeholder="Enter Dog's Name" maxlength="100" required="">
+                  <input type="text" class="form-control" id="dog_name" name="dog_name" placeholder="Enter Dog's Name" maxlength="100" >
                 </div>
               </div>
  
@@ -478,25 +478,7 @@
                   printWindow.document.close();
                   printWindow.print();
               }
-  function deleteFunc(id){
-        if (confirm("Delete Record?") == true) {
-        var id = id;
-          
-          // ajax
-          $.ajax({
-              type:"POST",
-              url: "{{ url('delete-vacc') }}",
-              data: { id: id },
-              dataType: 'json',
-              success: function(res){
- 
-                var oTable = $('#vacc-crud-datatable').dataTable();
-                oTable.fnDraw(false);
-             }
-          });
-       }
-  }
- 
+  
   $('#VaccForm').submit(function(e) {
  
      e.preventDefault();

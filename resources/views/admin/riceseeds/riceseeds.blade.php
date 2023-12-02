@@ -101,28 +101,28 @@
               <div class="form-group">
                 <label for="name" class="col-sm-8-2 control-label" >Variety</label>
                 <div class="col-sm-8-12">
-                  <input type="text" class="form-control" id="variety" name="variety" placeholder="Enter Variety" maxlength="50" required="">
+                  <input type="text" class="form-control" id="variety" name="variety" placeholder="Enter Variety" maxlength="50" >
                 </div>
               </div>  
  
               <div class="form-group">
                 <label for="name" class="col-sm-8-3 control-label">No. of Seeds Received</label>
                 <div class="col-sm-8-12">
-                  <input type="number" class="form-control" id="seeds_received" name="seeds_received" placeholder="Enter No. of Seeds Received" maxlength="20" required="">
+                  <input type="number" class="form-control" id="seeds_received" name="seeds_received" placeholder="Enter No. of Seeds Received" maxlength="20" >
                 </div>
               </div>
  
               <div class="form-group">
                 <label class="col-sm-8-3 control-label">Date Received</label>
                 <div class="col-sm-8-12">
-                  <input type="date" class="form-control" id="date_received" name="date_received" maxlength="11" placeholder="Enter Date Received" required="">
+                  <input type="date" class="form-control" id="date_received" name="date_received" maxlength="11" placeholder="Enter Date Received" >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="name" class="col-sm-8-3 control-label">Source of Funds</label>
                 <div class="col-sm-8-12">
-                  <input type="text" class="form-control" id="source_of_funds" name="source_of_funds" placeholder="Enter Source of Funds" maxlength="50" required="">
+                  <input type="text" class="form-control" id="source_of_funds" name="source_of_funds" placeholder="Enter Source of Funds" maxlength="50" >
                 </div>
               </div>
 

@@ -38,6 +38,7 @@
             </div>
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)">Add</a>
+                <a class="btn btn-info" id="toggleDatatables" style=" color: white; margin-left:960px;" onclick="toggleDatatables()">View Archive</a>
             </div>
             <div class="pull-right mb-2">
                 @include('csv.importRegistries')
@@ -70,7 +71,7 @@
         </div>
     </div>
     {{-- end of show modal --}}
-
+    <div id="MainTable">
         <table class="table table-bordered display responsive nowrap display responsive nowrap" id="registry-crud-datatable">
            <thead>
               <tr>
@@ -87,7 +88,25 @@
            </thead>
            
         </table>
- 
+    </div>
+    <div id="Archive" hidden="hidden">
+        <table class="table table-bordered display responsive nowrap display responsive nowrap" id="registry-archive-datatable" style="width: 100%;">
+            <thead>
+               <tr>
+                 
+                 <th>RSBSA ID</th>
+                 <th>GENERATED ID</th>
+                 <th>Date Enrolled</th>
+                 <th>Income Source</th>
+                 <th>Address</th>
+                 <th>Purok</th>
+                 <th>Barangay</th>
+                 <th width="150px">Action</th>
+               </tr>
+            </thead>
+            
+         </table>
+    </div>
     </div>
 </div>
 </div>

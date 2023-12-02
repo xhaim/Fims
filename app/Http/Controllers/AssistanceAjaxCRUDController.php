@@ -937,7 +937,13 @@ class AssistanceAjaxCRUDController extends Controller
 
        return response()->json(['success' => true]);
    }
-
+    //  show
+    public function getAssistanceDetails($id)
+    {
+        $rental = Assistance::find($id);
+        return response()->json($rental);
+    }
+    // end show
    // RESTORE ARCHIVED
    public function restore(Request $request)
    {

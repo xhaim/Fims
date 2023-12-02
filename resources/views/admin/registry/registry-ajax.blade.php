@@ -183,6 +183,7 @@
                         { data: 'address', name: 'address' },
                         { data: 'sitio_purok', name: 'sitio_purok'},
                         { data: 'barangay', name: 'barangay' },
+                        
                         // { data: 'city', name: 'city', visible: false  },
                         // { data: 'geo_coordinates', name: 'geo_coordinates', visible: false },
                         // { data: 'years_of_residency', name: 'years_of_residency', visible: false },
@@ -437,34 +438,34 @@
                         <div class="form-group">
             <label for="hh_member" class="col-sm-8 control-label">HH Member</label>
             <div class="col-sm-12">
-                <input type="text" class="form-control" id="hh_member${i}" name="hh_member${i}" placeholder="Enter HH Member" maxlength="100" required="">
+                <input type="text" class="form-control" id="hh_member${i}" name="hh_member${i}" placeholder="Enter HH Member" maxlength="100" >
             </div>
 
             <div class="form-group">
             <label for="surname" class="col-sm-8 control-label">Surname</label>
             <div class="col-sm-12">
-                <input type="text" class="form-control" id="surname${i}" name="surname${i}" placeholder="Enter Surname" maxlength="100" required="">
+                <input type="text" class="form-control" id="surname${i}" name="surname${i}" placeholder="Enter Surname" maxlength="100" >
             </div>
             </div>
 
             <div class="form-group">
             <label for="firstname" class="col-sm-8 control-label">First Name</label>
             <div class="col-sm-12">
-                <input type="text" class="form-control" id="firstname${i}" name="firstname${i}" placeholder="Enter First Name" maxlength="100" required="">
+                <input type="text" class="form-control" id="firstname${i}" name="firstname${i}" placeholder="Enter First Name" maxlength="100" >
             </div>
             </div>
 
             <div class="form-group">
             <label for="middlename" class="col-sm-8 control-label">Middle Name</label>
             <div class="col-sm-12">
-                <input type="text" class="form-control" id="middlename${i}" name="middlename${i}" placeholder="Enter Middle Name" maxlength="100" required="">
+                <input type="text" class="form-control" id="middlename${i}" name="middlename${i}" placeholder="Enter Middle Name" maxlength="100" >
             </div>
             </div>
 
             <div class="form-group">
             <label for="gender" class="col-sm-8 control-label">Gender</label>
             <div class="col-sm-12">
-                <select class="form-control" id="gender${i}" name="gender${i}" required="">
+                <select class="form-control" id="gender${i}" name="gender${i}" >
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 </select>
@@ -474,14 +475,14 @@
             <div class="form-group">
             <label for="age" class="col-sm-8 control-label">Age</label>
             <div class="col-sm-12">
-                <input type="number" class="form-control" id="age${i}" name="age${i}" placeholder="Enter Age" required="">
+                <input type="number" class="form-control" id="age${i}" name="age${i}" placeholder="Enter Age" >
             </div>
             </div>
 
             <div class="form-group">
             <label for="birthdate" class="col-sm-8 control-label">Date of Birth (mm/dd/yyyy)</label>
             <div class="col-sm-12">
-                <input type="date" class="form-control" id="birthdate${i}" name="birthdate${i}" placeholder="Enter Date of Birth (mm/dd/yyyy)" required="">
+                <input type="date" class="form-control" id="birthdate${i}" name="birthdate${i}" placeholder="Enter Date of Birth (mm/dd/yyyy)" >
             </div>
             </div>
             <button class="btn-danger" type="button" onclick="removeMember(${i})">Remove Member</button>
@@ -1215,24 +1216,107 @@
 
      
     
-     function deleteFunc(id){
-           if (confirm("Delete Record?") == true) {
-           var id = id;
-             
-             // ajax
+     //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //
+   
+   $('#registry-archive-datatable').DataTable({
+           processing: true,
+           serverSide: true,
+           ajax: "{{ url('registry-archive-datatable') }}",
+           columns: [ 
+                        { data: 'rsbsa_id', name: 'rsbsa_id'},
+                        { data: 'generated_id', name: 'generated_id'},
+                        { data: 'date_enrolled', name: 'date_enrolled' },
+                       // INCOME
+                       { data: 'income_source', name: 'income_source' },
+                        // { data: 'est_annual_income', name: 'est_annual_income', visible: false },
+                        { data: 'address', name: 'address' },
+                        { data: 'sitio_purok', name: 'sitio_purok'},
+                        { data: 'barangay', name: 'barangay' },
+                       {data: 'action', name: 'action', orderable: false},
+                    ],
+                   
+                   order: [[0, 'desc']]
+       });
+   
+     function archiveFunc(id) {
+         if (confirm("Archive Record?") == true) {
+             // Make an AJAX request to the archive route
              $.ajax({
-                 type:"POST",
+                 type: "POST",
+                 url: "{{ url('registry/archive') }}",
+                 data: { id: id },
+                 dataType: 'json',
+                 success: function (response) {
+                     // Handle success, e.g., show a success message
+                     console.log(response.success);
+                     // Optionally, you may want to refresh the data table
+                     var ArcTable = $('#registry-archive-datatable').DataTable();
+                     var oTable = $('#registry-crud-datatable').DataTable();
+                     ArcTable.ajax.reload(); // Reload the DataTable
+                     oTable.ajax.reload(); // Reload the DataTable
+                 },
+                 error: function (error) {
+                     // Handle error, e.g., show an error message
+                     console.error('Error archiving record:', error);
+                 }
+             });
+         }
+     } 
+   
+     function restoreFunc(id) {
+         if (confirm("Restore Record?") == true) {
+             // Make an AJAX request to the archive route
+             $.ajax({
+                 type: "POST",
+                 url: "{{ url('registry/restore') }}",
+                 data: { id: id },
+                 dataType: 'json',
+                 success: function (response) {
+                     // Handle success, e.g., show a success message
+                     console.log(response.success);
+                     // Optionally, you may want to refresh the data table
+                     var ArcTable = $('#registry-archive-datatable').DataTable();
+                     var oTable = $('#registry-crud-datatable').DataTable();
+                     ArcTable.ajax.reload(); // Reload the DataTable
+                     oTable.ajax.reload(); // Reload the DataTable
+                 },
+                 error: function (error) {
+                     // Handle error, e.g., show an error message
+                     console.error('Error archiving record:', error);
+                 }
+             });
+         }
+     } 
+   
+   
+   
+     function deleteFunc(id) {
+         if (confirm("Delete Record?") == true) {
+             // Make an AJAX request to the archive route
+             $.ajax({
+                 type: "POST",
                  url: "{{ url('delete-registry') }}",
                  data: { id: id },
                  dataType: 'json',
-                 success: function(res){
-    
-                   var oTable = $('#registry-crud-datatable').dataTable();
-                   oTable.fnDraw(false);
-                }
+                 success: function (response) {
+                     // Handle success, e.g., show a success message
+                     console.log(response.success);
+                     // Optionally, you may want to refresh the data table
+                     var ArcTable = $('#registry-archive-datatable').DataTable();
+                     var oTable = $('#registry-crud-datatable').DataTable();
+                     ArcTable.ajax.reload(); // Reload the DataTable
+                     oTable.ajax.reload(); // Reload the DataTable
+                 },
+                 error: function (error) {
+                     // Handle error, e.g., show an error message
+                     console.error('Error archiving record:', error);
+                 }
              });
-          }
-     }
+         }
+     } 
+   
+   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //
+
     
      $('#RegistryForm').submit(function(e) {
     
@@ -1298,5 +1382,23 @@
                 location.reload();
             }
         }, 400);
+    }
+  </script>
+ <script>
+    function toggleDatatables() {
+      var div1 = document.getElementById('MainTable');
+      var div2 = document.getElementById('Archive');
+      var toggleButton = document.getElementById('toggleDatatables');
+  
+      // Toggle the 'hidden' attribute
+      if (div1.hasAttribute('hidden')) {
+        div1.removeAttribute('hidden');
+        div2.setAttribute('hidden', 'hidden');
+        toggleButton.innerHTML = 'View Archive';
+      } else {
+        div1.setAttribute('hidden', 'hidden');
+        div2.removeAttribute('hidden');
+        toggleButton.innerHTML = 'Hide Archive';
+      }
     }
   </script>

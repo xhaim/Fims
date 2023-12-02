@@ -53,7 +53,7 @@
     <div class="card-body">
  
       <div id="MainTable">
-        <table class="table table-bordered display responsive nowrap display responsive nowrap" id="vegreq-crud-datatable">
+        <table class="table table-bordered display responsive nowrap display responsive nowrap" id="vegreq-crud-datatable" style="width:100%;">
            <thead>
               <tr>
                 
@@ -100,21 +100,21 @@
               <div class="form-group">
                 <label for="name" class="col-sm-8 control-label" >Name</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="name" name="variety" placeholder="Enter  Name"  required="">
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter  Name"  >
                 </div>
               </div>  
  
               <div class="form-group">
                 <label for="no." class="col-sm-8 control-label">No. of Seeds(pack)</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="seeds_received" name="seeds_received" placeholder="Enter No. of Seeds(pack)" maxlength="20" required="">
+                  <input type="number" class="form-control" id="seeds_received" name="seeds_received" placeholder="Enter No. of Seeds(pack)" maxlength="20" >
                 </div>
               </div>
  
               <div class="form-group">
                 <label class="col-sm-8 control-label">Barangay</label>
                 <div class="col-sm-12">
-                  <input type="date" class="form-control" id="barangay" name="barangay" maxlength="100" placeholder="Enter Barangay" required="">
+                  <input type="date" class="form-control" id="barangay" name="barangay" maxlength="100" placeholder="Enter Barangay" >
                 </div>
               </div>
 

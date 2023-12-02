@@ -15,6 +15,7 @@ class Ricehybrid extends Model
         'name_first',
         'name_middle',
         'name_last',
+        'suffix',
         'barangay',
         'farm_location',
         'birthdate',

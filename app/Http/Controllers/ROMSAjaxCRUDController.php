@@ -183,7 +183,7 @@ class ROMSAjaxCRUDController extends Controller
      */
     public function destroy(Request $request)
     {
-        $roms = Roms::where('id',$request->id)->delete();
+        $roms = ArchivedRoms::where('id',$request->id)->delete();
       
         return Response()->json($roms);
     }

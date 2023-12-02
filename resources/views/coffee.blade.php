@@ -123,7 +123,7 @@
               <div class="form-group">
                 <label for="name" class="col-sm-8 control-label"> Name </label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name of Farmer" maxlength="100" required="">
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name of Farmer" maxlength="100" >
                 </div>
               </div>  
  
@@ -142,14 +142,14 @@
               <div class="form-group">
                 <label class="col-sm-8 control-label">Purok</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="purok" name="purok" placeholder="Enter Purok" required="">
+                  <input type="text" class="form-control" id="purok" name="purok" placeholder="Enter Purok" >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="barangay" class="col-sm-8 control-label">Barangay</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="barangay" name="barangay" placeholder="Enter Barangay" maxlength="100" required="">
+                  <input type="text" class="form-control" id="barangay" name="barangay" placeholder="Enter Barangay" maxlength="100" >
                 </div>
               </div>
  
@@ -561,24 +561,6 @@
                 printWindow.print();
             }
 
-  function deleteFunc(id){
-        if (confirm("Delete Record?") == true) {
-        var id = id;
-          
-          // ajax
-          $.ajax({
-              type:"POST",
-              url: "{{ url('delete-coffee') }}",
-              data: { id: id },
-              dataType: 'json',
-              success: function(res){
- 
-                var oTable = $('#coffee-crud-datatable').dataTable();
-                oTable.fnDraw(false);
-             }
-          });
-       }
-  }
  
   $('#CoffeeForm').submit(function(e) {
  

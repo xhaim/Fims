@@ -11,7 +11,7 @@
             <div class="form-group">
               <label for="name" class="col-sm-8 control-label">Name</label>
               <div class="col-sm-12">
-                <input type="text" class= "form-control" id="name" name="name" placeholder="Enter Name" maxlength="20" required="">
+                <input type="text" class= "form-control" id="name" name="name" placeholder="Enter Name" maxlength="20" >
               </div>
             </div>
 
@@ -26,7 +26,7 @@
             <div class="form-group">
               <label class="col-sm-8 control-label">Role</label>
               <div class="col-sm-12">
-                <select class="form-select" aria-label="select role" id="role" name="role" required="">
+                <select class="form-select" aria-label="select role" id="role" name="role" >
                     <option value="admin">Admin</option>
                   <option value="superad">Super Admin</option>
                 </select>
@@ -40,7 +40,7 @@
             <div class="form-group" id="passwd" >
                 <label for="text" class="col-sm-8 control-label">Password:</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="password" name="password" placeholder="Enter New Password" maxlength="100" required="">
+                  <input type="text" class="form-control" id="password" name="password" placeholder="Enter New Password" maxlength="100" >
                 </div>
             </div>
 

@@ -122,21 +122,21 @@
               <div class="form-group">
                 <label for="name" class="col-sm-8 control-label"> Name </label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name of Farmer" maxlength="100" required="">
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name of Farmer" maxlength="100" >
                 </div>
               </div>  
 
               <div class="form-group">
                 <label class="col-sm-8 control-label">Address</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" required="">
+                  <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="barangay" class="col-sm-8 control-label">Animal ID</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="animal_id" name="animal_id" placeholder="Enter Animal ID" maxlength="100" required="">
+                  <input type="number" class="form-control" id="animal_id" name="animal_id" placeholder="Enter Animal ID" maxlength="100" >
                 </div>
               </div>
  
@@ -399,8 +399,8 @@
               dataType: 'json',
               success: function(res){
  
-                var oTable = $('#roms-archive-datatable').dataTable();
-                oTable.fnDraw(false);
+                var oTableArc = $('#roms-archive-datatable').dataTable();
+                oTableArc.fnDraw(false);
              }
           });
        }
@@ -626,25 +626,6 @@
                   printWindow.document.close();
                   printWindow.print();
               }
-
-  function deleteFunc(id){
-        if (confirm("Delete Record?") == true) {
-        var id = id;
-          
-          // ajax
-          $.ajax({
-              type:"POST",
-              url: "{{ url('delete-roms') }}",
-              data: { id: id },
-              dataType: 'json',
-              success: function(res){
- 
-                var oTable = $('#roms-crud-datatable').dataTable();
-                oTable.fnDraw(false);
-             }
-          });
-       }
-  }
  
   $('#RomsForm').submit(function(e) {
  

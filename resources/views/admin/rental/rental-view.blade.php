@@ -17,32 +17,8 @@
                         { data: 'location', name: 'location' },
                         { data: 'project_description', name: 'project_description' },
                         { data: 'contact', name: 'contact' },
-                        { data: 'actual_land_area_of_farm', name: 'actual_land_area_of_farm', visible: true  },
-                        { data: 'date_inspected', name: 'date_inspected' , visible: true },
-                        { data: 'inspector', name: 'inspector', visible: false },
-                        { data: 'fuel_requirement', name: 'fuel_requirement', visible: false },
-                        { data: 'hours_of_operation', name: 'hours_of_operation', visible: false },
-                        { data: 'equipment', name: 'equipment', visible: false },
-                        { data: 'area', name: 'area', visible: false},
-                        { data: 'rental_rate', name: 'rental_rate', visible: false },
-                        { data: 'total_rental_amount', name: 'total_rental_amount', visible: false },
-                        { data: 'payment', name: 'payment', visible: false },
-                        { data: 'or_number', name: 'or_number', visible: false },
-                        { data: 'payment_date', name: 'payment_date', visible: false },
-                        { data: 'payment_amount', name: 'payment_amount', visible: false },
-                        { data: 'municipal_treasurer', name: 'municipal_treasurer', visible: false },
-                        { data: 'source_of_fund', name: 'source_of_fund', visible: false },
-                        { data: 'funds_available', name: 'funds_available', visible: false },
-                        { data: 'municipal_accountant', name: 'municipal_accountant', visible: false },
-                        { data: 'municipal_budget_officer', name: 'municipal_budget_officer', visible: false },
-                        { data: 'municipal_mayor', name: 'municipal_mayor', visible: false },
-                        { data: 'schedule_of_operation', name: 'schedule_of_operation', visible: false },
-                        { data: 'plate_number_tractor', name: 'plate_number_tractor', visible: false },
-                        { data: 'mao_tractor_incharge', name: 'mao_tractor_incharge', visible: false },
-                        { data: 'actual_land_area_served', name: 'actual_land_area_served', visible: false },
-                        { data: 'actual_hours_of_operation', name: 'actual_hours_of_operation', visible: false },
-                        { data: 'remarks', name: 'remarks', visible: false },
-                        { data: 'mo_field_inspector', name: 'mo_field_inspector', visible: false },
+                        { data: 'actual_land_area_of_farm', name: 'actual_land_area_of_farm' },
+                        { data: 'date_inspected', name: 'date_inspected'  },
                         { data: 'created_at', name: 'created_at' },
                         {data: 'action', name: 'action', orderable: false},
                     ],
@@ -177,42 +153,132 @@
     });
 }
     
-     function deleteFunc(id){
-           if (confirm("Delete Record?") == true) {
-           var id = id;
-             
-             // ajax
-             $.ajax({
-                 type:"POST",
-                 url: "{{ url('delete-rental') }}",
-                 data: { id: id },
-                 dataType: 'json',
-                 success: function(res){
+     //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //
+
+     $('#rental-archive-datatable').DataTable({
+              processing: true,
+              serverSide: true,
+              ajax: "{{ url('rental-archive-datatable') }}",
+              columns: [ 
+                        { data: 'applicant', name: 'applicant' },
+                        { data: 'address', name: 'address' },
+                        { data: 'location', name: 'location' },
+                        { data: 'project_description', name: 'project_description' },
+                        { data: 'contact', name: 'contact' },
+                        { data: 'actual_land_area_of_farm', name: 'actual_land_area_of_farm' },
+                        { data: 'date_inspected', name: 'date_inspected'  },
+                        { data: 'created_at', name: 'created_at' },
+                        {data: 'action', name: 'action', orderable: false},
+                      ],
+                      order: [[0, 'desc']]
+          });
+
+        function archiveFunc(id) {
+            if (confirm("Archive Record?") == true) {
+                // Make an AJAX request to the archive route
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('rental/archive') }}",
+                    data: { id: id },
+                    dataType: 'json',
+                    success: function (response) {
+                        // Handle success, e.g., show a success message
+                        console.log(response.success);
+                        // Optionally, you may want to refresh the data table
+                        var ArcTable = $('#rental-archive-datatable').DataTable();
+                        var oTable = $('#rental-crud-datatable').DataTable();
+                        ArcTable.ajax.reload(); // Reload the DataTable
+                        oTable.ajax.reload(); // Reload the DataTable
+                    },
+                    error: function (error) {
+                        // Handle error, e.g., show an error message
+                        console.error('Error archiving record:', error);
+                    }
+                });
+            }
+        } 
+
+        function restoreFunc(id) {
+            if (confirm("Restore Record?") == true) {
+                // Make an AJAX request to the archive route
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('rental/restore') }}",
+                    data: { id: id },
+                    dataType: 'json',
+                    success: function (response) {
+                        // Handle success, e.g., show a success message
+                        console.log(response.success);
+                        // Optionally, you may want to refresh the data table
+                        var ArcTable = $('#rental-archive-datatable').DataTable();
+                        var oTable = $('#rental-crud-datatable').DataTable();
+                        ArcTable.ajax.reload(); // Reload the DataTable
+                        oTable.ajax.reload(); // Reload the DataTable
+                    },
+                    error: function (error) {
+                        // Handle error, e.g., show an error message
+                        console.error('Error archiving record:', error);
+                    }
+                });
+            }
+        } 
+
+
+
+        function deleteFunc(id) {
+            if (confirm("Delete Record?") == true) {
+                // Make an AJAX request to the archive route
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('delete-rental') }}",
+                    data: { id: id },
+                    dataType: 'json',
+                    success: function (response) {
+                        // Handle success, e.g., show a success message
+                        console.log(response.success);
+                        // Optionally, you may want to refresh the data table
+                        var ArcTable = $('#rental-archive-datatable').DataTable();
+                        var oTable = $('#rental-crud-datatable').DataTable();
+                        ArcTable.ajax.reload(); // Reload the DataTable
+                        oTable.ajax.reload(); // Reload the DataTable
+                    },
+                    error: function (error) {
+                        // Handle error, e.g., show an error message
+                        console.error('Error archiving record:', error);
+                    }
+                });
+            }
+        } 
+
+      //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //  END ARCHIVE AJAX   //
+
+ 
     
-                   var oTable = $('#rental-crud-datatable').dataTable();
-                   oTable.fnDraw(false);
-                }
-             });
-          }
-     }
-    
-    // Function to check for conflicts in the schedule_of_operation field
+   // Function to check for conflicts in the schedule_of_operation field
 function checkScheduleConflict(schedule) {
     var conflict = false;
+
+    // Check if the selected date is in the past
+    var selectedDate = new Date(schedule);
+    var currentDate = new Date();
+
+    if (selectedDate < currentDate) {
+        alert('Please choose a date equal to or later than today.');
+        $('#schedule_of_operation').val("");
+        return true; // Return true to indicate a conflict
+    }
 
     // Make an Ajax request to the server to check for conflicts
     $.ajax({
         type: 'POST',
         url: "{{ url('check-schedule-conflict')}}",
         data: { schedule: schedule },
-        async: false, // Make the request synchronous to wait for the response
+        async: false,
         success: function (response) {
             conflict = response.conflict;
         },
         error: function (error) {
             console.error('Error checking schedule conflict:', error);
-            
-
         }
     });
 
@@ -225,11 +291,11 @@ function checkScheduleConflict(schedule) {
     return conflict; // Return true if there's a conflict, false otherwise
 }
 
-// Add an event listener for the input event on the "id" field
+// Add an event listener for the input event on the "schedule_of_operation" field
 $(document).ready(function () {
     $('#schedule_of_operation').on('input', function () {
-        var idValue = $(this).val(); // Get the value of the "id" field
-        checkScheduleConflict(idValue); // Trigger the conflict check with the id value
+        var scheduleValue = $(this).val(); // Get the value of the "schedule_of_operation" field
+        checkScheduleConflict(scheduleValue); // Trigger the conflict check with the schedule value
     });
 });
 
@@ -240,9 +306,9 @@ $('#RentalForm').submit(function (e) {
     var formData = new FormData(this);
     var scheduleOfOperation = formData.get('schedule_of_operation');
 
-    // Check for conflicts before submitting the form
+    // Check for conflicts and past dates before submitting the form
     if (checkScheduleConflict(scheduleOfOperation)) {
-        // If there's a conflict, do not submit the form
+        // If there's a conflict or past date, do not submit the form
         return;
     }
 
@@ -266,7 +332,6 @@ $('#RentalForm').submit(function (e) {
     });
 });
 
-    
     
    </script>
 
@@ -305,5 +370,23 @@ $('#RentalForm').submit(function (e) {
                 location.reload();
             }
         }, 400);
+    }
+  </script>
+  <script>
+    function toggleDatatables() {
+      var div1 = document.getElementById('MainTable');
+      var div2 = document.getElementById('Archive');
+      var toggleButton = document.getElementById('toggleDatatables');
+  
+      // Toggle the 'hidden' attribute
+      if (div1.hasAttribute('hidden')) {
+        div1.removeAttribute('hidden');
+        div2.setAttribute('hidden', 'hidden');
+        toggleButton.innerHTML = 'View Archive';
+      } else {
+        div1.setAttribute('hidden', 'hidden');
+        div2.removeAttribute('hidden');
+        toggleButton.innerHTML = 'Hide Archive';
+      }
     }
   </script>

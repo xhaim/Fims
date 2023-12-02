@@ -45,6 +45,7 @@
             </div>
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)">Add</a>
+                <a class="btn btn-info" id="toggleDatatables" style=" color: white; margin-left:960px;" onclick="toggleDatatables()">View Archive</a>
             </div>
         </div>
     </div>
@@ -73,50 +74,48 @@
             </div>
         </div>
         {{-- end of show modal --}}
+    <div id="MainTable">
+          <table class="table table-bordered display responsive nowrap display responsive nowrap" id="rental-crud-datatable">
+            <thead>
+                <tr>
+                  
+                  <th>Name of Applicant</th>
+                  <th>Applicant Address</th>
+                  <th>Farm Location</th>
+                  <th>Project Description</th>
+                  <th>Contact Number</th>
+                  <th>Actual Land Area of Farm</th>
+                  <th>Date Inspected</th>
+                 
+                  <th>Registered-in Date</th>
+                  <th width="150px">Action</th>
+                </tr>
+            </thead>
+            
+          </table>
+      </div>
+      <div id="Archive" hidden="hidden">
+        <table class="table table-bordered display responsive nowrap display responsive nowrap" id="rental-archive-datatable">
+          <thead>
+            <tr>
+              
+              <th>Name of Applicant</th>
+              <th>Applicant Address</th>
+              <th>Farm Location</th>
+              <th>Project Description</th>
+              <th>Contact Number</th>
+              <th>Actual Land Area of Farm</th>
+              <th>Date Inspected</th>
+             
+              <th>Registered-in Date</th>
+              <th width="150px">Action</th>
+            </tr>
+          </thead>
+          
+      </table>
 
-        <table class="table table-bordered display responsive nowrap display responsive nowrap" id="rental-crud-datatable">
-           <thead>
-              <tr>
-                
-                <th>Name of Applicant</th>
-                <th>Applicant Address</th>
-                <th>Farm Location</th>
-                <th>Project Description</th>
-                <th>Contact Number</th>
-                <th>Actual Land Area of Farm</th>
-                <th>Date Inspected</th>
-                <th>Inspector</th>
-                <th>Fuel Requirement</th>
-                <th>Estimated Hours of Operation</th>
-                <th>Equipment</th>
-                <th>Land Area Requested for Operation</th>
-                <th>Rental Rate (ha)</th>
-                <th>Total Amount of Rental</th>
-                <th>Payment</th>
-                <th>O.r. #</th>
-                <th>Date</th>
-                <th>Amount</th>
-                <th>Municipal Treasurer</th>
-                <th>Source of Fund</th>
-                <th>Funds Available</th>
-                <th>Municipal Accountant</th>
-                <th>Municipal Budget Officer</th>
-                <th>Municipal Mayor</th>
-                <th>Schedule of Operation</th>
-                <th>Plate Number of Tractor</th>
-                <th>MAO-TRACTOR INCHARGE</th>
-                <th>Actual Land Area Served</th>
-                <th>Actual Hours of Operation</th>
-                <th>Remarks</th>
-                <th>MO Field Inspector</th>
-                <th>Registered-in Date</th>
-                <th width="150px">Action</th>
-              </tr>
-           </thead>
-           
-        </table>
- 
-    </div>
+      </div>
+  </div>
 </div>
 </div>
 </div>

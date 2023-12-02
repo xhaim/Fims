@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name_first');
             $table->string('name_middle');
             $table->string('name_last');
+            $table->string('suffix')->nullable();
             $table->string('barangay');
             $table->string('farm_location');
             $table->date('birthdate');

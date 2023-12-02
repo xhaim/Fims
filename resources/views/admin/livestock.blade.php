@@ -38,6 +38,7 @@
             </div>
             <div class="pull-right mb-2">
                 <a class="btn btn-warning" onClick="add()" href="javascript:void(0)">Add</a>
+                <a class="btn btn-secondary" onClick="printDataTable()" href="javascript:void(0)">printAll </a>
                 <a class="btn btn-info" id="toggleDatatables" style=" color: white; margin-left:960px;" onclick="toggleDatatables()">View Archive</a>
             </div>
         </div>
@@ -107,7 +108,7 @@
               <div class="form-group">
                 <label for="rsbsa" class="col-sm-2 control-label" >RSBSA ID</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="rsbsa" name="rsbsa" placeholder="Enter RSBSA ID " maxlength="50" required="">
+                  <input type="number" class="form-control" id="rsbsa" name="rsbsa" placeholder="Enter RSBSA ID " maxlength="50" >
                 </div>
               </div>  
  
@@ -121,28 +122,28 @@
               <div class="form-group">
                 <label for="barangay" class="col-sm-2 control-label">Barangay</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="barangay" name="barangay" placeholder="Enter Barangay" maxlength="20" required="">
+                  <input type="text" class="form-control" id="barangay" name="barangay" placeholder="Enter Barangay" maxlength="20" >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="name" class="col-sm-3 control-label">Farmer's Name</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter Farmer's Name" maxlength="20" required="">
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter Farmer's Name" maxlength="20" >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="birth" class="col-sm-2 control-label">Date of Birth</label>
                 <div class="col-sm-12">
-                  <input type="date" class="form-control" id="birth" name="birth" placeholder="Enter Date of Birth" maxlength="20" required="">
+                  <input type="date" class="form-control" id="birth" name="birth" placeholder="Enter Date of Birth" maxlength="20" >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="age" class="col-sm-2 control-label">Age</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="age" name="age" placeholder="Enter Age" maxlength="2" required="">
+                  <input type="number" class="form-control" id="age" name="age" placeholder="Enter Age" maxlength="2" >
                 </div>
               </div>
 
@@ -150,8 +151,8 @@
                 <label for="sex" class="col-sm-2 control-label">Sex</label>
                 <div class="col-sm-12">
                   <select class="form-select" aria-label="select sex" id="sex" name="sex">
-                    <option value="1">Female</option>
-                    <option value="2">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
                   </select>
                 </div>
               </div>
@@ -159,21 +160,21 @@
               <div class="form-group">
                 <label for="commodity" class="col-sm-3 control-label">Commodity Name</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="commodity" name="commodity" placeholder="Enter Commodity Name" maxlength="20" required="">
+                  <input type="text" class="form-control" id="commodity" name="commodity" placeholder="Enter Commodity Name" maxlength="20" >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="head" class="col-sm-3 control-label">Number of head/s</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="head" name="head" placeholder="Enter no. of head/s" maxlength="20" required="">
+                  <input type="number" class="form-control" id="head" name="head" placeholder="Enter no. of head/s" maxlength="20" >
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="deceased" class="col-sm-2 control-label">Deceased</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="deceased" name="deceased" placeholder="Enter no. of deceased" maxlength="50" required="">
+                  <input type="number" class="form-control" id="deceased" name="deceased" placeholder="Enter no. of deceased" maxlength="50" >
                 </div>
               </div>
               <div class="col-sm-offset-2 col-sm-10" style="margin-top: 20px;">
@@ -254,6 +255,95 @@
        }
     });
   }  
+   // AJAX request to fetch data from the server
+   function printDataTable() {
+          $.ajax({
+              url: '/print-livestock', // Replace with your Laravel route URL to fetch data
+              method: 'GET',
+              success: function (data) {
+                  // Once the data is fetched successfully, you can proceed to print it
+                  printData(data);
+              },
+              error: function (error) {
+                  console.error('Error fetching data:', error);
+              }
+          });
+      }
+
+      // Function to print the data fetched from the server
+      function printData(data) {
+          // Columns to exclude (you can adjust these according to your requirements)
+          const excludedColumns = ['id','generated','created_at', 'updated_at'];
+
+          const headers = [{columns:['RSBSA ID','Barangay', 'Farmer Name', 'Date of Birth','Age', 'Sex','Commodity Name','Number of Head/s','Deceased']}];
+
+          // Create a new window for printing
+          let printWindow = window.open('', '_blank');
+          
+
+          // Construct the HTML content to be printed with CSS styles for table borders
+          let htmlContent = `
+              <html>
+              <head>
+                  <title>Livestock Print</title>
+                  <style>
+                    body{
+                        text-align:center;
+                      }
+                      table {
+                          border-collapse: collapse;
+                          width: 100%;
+                      }
+                      table, th, td {
+                          border: 1px solid black;
+                      }
+                      th, td {
+                          padding: 8px;
+                          text-align: left;
+                      }
+                  </style>
+              </head>
+              <body>
+
+            <h4>Livestock Owners </h4>
+
+
+                  <table>
+          `;
+
+         
+
+              // Generate sub-headers for "Farmer's Name" columns
+    headers.forEach(header => {
+        if (typeof header === 'object') {
+            header.columns.forEach(column => {
+                htmlContent += `<th>${column}</th>`;
+            });
+        }
+    });
+ // Assuming each data row is an object
+ data.forEach(row => {
+                      htmlContent += '<tr>';
+                      for (const key in row) {
+                          if (row.hasOwnProperty(key) && !excludedColumns.includes(key)) {
+                            const cellValue = row[key] !== null ? row[key] : ''; // Check for null and replace with an empty string
+                              htmlContent += '<td>' + cellValue + '</td>';
+                          }
+                      }
+                      htmlContent += '</tr>';
+                  });
+
+          htmlContent += `
+                  </table>
+              </body>
+              </html>
+          `;
+
+          // Write the HTML content to the new window and print it
+          printWindow.document.write(htmlContent);
+          printWindow.document.close();
+          printWindow.print();
+      }
  
       //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //  START ARCHIVE AJAX   //
 

@@ -92,6 +92,31 @@
 
     <div class="card-body">
       
+      {{-- show modal --}}
+    <div class="card-body" >
+      <div class="modal fade" id="viewModal"  tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+              <div class="modal-content" style="width: 1000px; left: -90px">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="viewModalLabel">View Record Details</h5>
+                      <button onClick="closeviewModal();" type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body" >
+                      <!-- Placeholders for displaying record details -->
+                      <div>
+                        <button class="btn-primary" id="printButton" onClick="printDiv('printable_div_id');">Print Document</button>
+                        <div id="printable_div_id">
+                      @include('admin/assistance/assistance-printable')
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      {{-- end of show modal --}}
+
       <div id="MainTable">
         <table class="table table-bordered" id="assistance-crud-datatable" style="width: 100%">
            <thead>
@@ -257,7 +282,7 @@
                                   <div class="form-check">
                                       <input type="checkbox" id="rentCheckbox" class="form-check-input" name="tenure" value="Rent" onclick="handleCheckboxChange(this.value)">
                                       <label for="rentCheckbox" class="form-check-label">Rent</label>
-                                      <input type="number" id="rentYears" class="form-control" placeholder="Number of years renting" style="display: none;" oninput="setRentCheckboxValue(this.value)">
+                                      <input type="number" id="rentYears" class="form-control" placeholder="Number of years renting" style="display: none; width:100px; position:sticky; top:100px; z-index:9px;" oninput="setRentCheckboxValue(this.value)">
                                   </div>
                               </div>
           
@@ -272,7 +297,7 @@
                                   <div class="form-check">
                                       <input type="checkbox" id="othersCheckbox" class="form-check-input" name="tenure" value="Others" onclick="handleCheckboxChange(this.value)">
                                       <label for="othersCheckbox" class="form-check-label">Others</label>
-                                      <input type="text" id="otherInput" class="form-control" placeholder="Specify 'Others'" style="display: none;" oninput="setOthersCheckboxValue(this.value)">
+                                      <input type="text" id="otherInput" class="form-control" placeholder="Specify 'Others'" style="display: none;  width:100px; position:sticky; top:100px; z-index:20px;" oninput="setOthersCheckboxValue(this.value)">
                                   </div>
                               </div>
                           </div>
