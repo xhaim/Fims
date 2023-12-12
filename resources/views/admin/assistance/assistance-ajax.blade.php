@@ -29,8 +29,11 @@
           $('#AssistanceForm').trigger("reset");
           $('#AssistanceModal').html("Add Farmers Assistance");
           $('#assistance-modal').modal('show');
-          $('#btn-save').removeAttr('hidden');
           $('#btn-save-withIMG').attr('hidden', 'hidden');
+
+          
+          $('#btn-save-withIMG').css("display","none");
+          $('#btn-save').css("display","inline-flex");
 
           $('#id').val('');
 
@@ -46,7 +49,8 @@
            success: function(res){
             $('#btn-save').attr('hidden', 'hidden');
             
-            $('#btn-save-withIMG').removeAttr('hidden');
+            $('#btn-save').css("display","none");
+            $('#btn-save-withIMG').css("display","inline-flex");
 
              $('#AssistanceModal').html("Edit Farmers Assistance");
              $('#assistance-modal').modal('show');

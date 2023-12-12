@@ -13,18 +13,18 @@ return new class extends Migration
     {
         Schema::create('archived_corn', function (Blueprint $table) {
             $table->id();
-            $table->string('rsbsa');
-            $table->string('generated');
-            $table->string('association');
-            $table->string('barangay');
-            $table->string('name');
-            $table->string('birth');
-            $table->string('season');
-            $table->string('age');
-            $table->string('sex');
-            $table->string('cropping');
-            $table->double('area');
-            $table->string('location');
+            $table->string('rsbsa')-> nullable();
+            $table->string('generated')-> nullable();
+            $table->string('association')-> nullable();
+            $table->string('barangay')-> nullable();
+            $table->string('name')-> nullable();
+            $table->string('birth')-> nullable();
+            $table->string('season')-> nullable();
+            $table->string('age')-> nullable();
+            $table->string('sex')-> nullable();
+            $table->string('cropping')-> nullable();
+            $table->double('area')-> nullable();
+            $table->string('location')-> nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('archived_corn');
+        Schema::dropIfExists('archived_corn')-> nullable();
     }
 };

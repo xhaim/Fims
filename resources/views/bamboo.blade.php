@@ -57,7 +57,7 @@
         <table class="table table-bordered display responsive nowrap" id="bamboo-crud-datatable">
            <thead>
               <tr>
-                 <th>No.</th>
+                
                  <th>Name </th>
                  <th>Sex</th>
                  <th>Birthday</th>
@@ -82,7 +82,7 @@
         <table class="table table-bordered display responsive nowrap" id="bamboo-archive-datatable">
           <thead>
              <tr>
-                <th>No.</th>
+             
                 <th>Name </th>
                 <th>Sex</th>
                 <th>Birthday</th>
@@ -248,7 +248,7 @@
            ajax: "{{ url('bamboo-crud-datatable') }}",
            
            columns: [
-                    { data: 'id', name: 'id' },
+                  
                     { data: 'name', name: 'name' },
                     { data: 'sex', name: 'sex' },
                     { data: 'birthday', name: 'birthday' },
@@ -290,7 +290,7 @@
            serverSide: true,
            ajax: "{{ url('bamboo-archive-datatable') }}",
            columns: [
-                    { data: 'id', name: 'id' },
+                   
                     { data: 'name', name: 'name' },
                     { data: 'sex', name: 'sex' },
                     { data: 'birthday', name: 'birthday' },

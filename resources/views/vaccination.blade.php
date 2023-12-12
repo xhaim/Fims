@@ -56,7 +56,7 @@
         <table class="table table-bordered display responsive nowrap" id="vacc-crud-datatable">
            <thead>
               <tr>
-                 <th>No</th>
+                 
                  <th>Owner's Name</th>
                  <th>Birthday</th>
                  <th>Dog's Name</th>
@@ -78,7 +78,7 @@
             <table class="table table-bordered display responsive nowrap" id="vacc-archive-datatable">
               <thead>
                 <tr>
-                    <th>No</th>
+                    
                     <th>Owner's Name</th>
                     <th>Birthday</th>
                     <th>Dog's Name</th>
@@ -230,7 +230,7 @@
            ajax: "{{ url('vacc-crud-datatable') }}",
            
            columns: [
-                    { data: 'id', name: 'id' },
+                  
                     { data: 'owner_name', name: 'owner_name' },
                     { data: 'birthday', name: 'birthday' },
                     { data: 'dog_name', name: 'dog_name' },
@@ -265,7 +265,7 @@
            serverSide: true,
            ajax: "{{ url('vacc-archive-datatable') }}",
            columns: [
-                    { data: 'id', name: 'id' },
+                    
                     { data: 'owner_name', name: 'owner_name' },
                     { data: 'birthday', name: 'birthday' },
                     { data: 'dog_name', name: 'dog_name' },

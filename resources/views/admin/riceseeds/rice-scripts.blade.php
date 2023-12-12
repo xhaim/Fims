@@ -45,7 +45,7 @@
         data: { id: id },
         dataType: 'json',
         success: function(res){
-          $('#RiceseedsModal').html("Edit Rice Seeds");
+          $('#RiceSeedsModal').html("Edit");
           $('#riceseeds-modal').modal('show');
           $('#id').val(res.id);
           $('#variety').val(res.variety);

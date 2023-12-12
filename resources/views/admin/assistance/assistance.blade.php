@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Corn Seeds</title>
+    <title>Farmers' Assistance</title>
      
     <meta name="csrf-token" content="{{ csrf_token() }}">
      
@@ -159,258 +159,260 @@
         <div class="modal-body">
           <form action="javascript:void(0)" id="AssistanceForm" name="AssistanceForm" class="form-horizontal" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="id" id="id">
-  
-            <!-- Assistance Name and Email side by side -->
-            <div class="form-row">
-              <div class="form-group col-md-4">
-                  <label for="rsbsa">RSBSA ID.</label>
-                  <input type="number" class="form-control" id="rsbsa" name="rsbsa" placeholder="Enter RSBSA ID"    >
-              </div>
-              
-              <!-- Application group with Date and Time -->
-              <div class="form-group col-md-8">
-                  <label for="application">Application</label>
-
-                  <div class="form-row">
-                      <div class="form-group col-md-6">
-                          <input type="date" class="form-control" id="date" name="date" placeholder="Enter Application Date">
-                      </div>
-
-                      <div class="form-group col-md-6">
-                          <input type="text" class="form-control timepicker" id="timepicker" name="timepicker" placeholder="Select Time" >
-                      </div>
-                  </div>
-              </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="name"> Name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter  Name"    >
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="email">Gender</label>
-                    <input type="text" class="form-control" id="gender" name="gender" placeholder="Enter Gender">
-                </div>
-                <div class="form-group col-md-4">
-                  <label for="email">Date of Birth</label>
-                  <input type="date" class="form-control" id="birthdate" name="birthdate" placeholder="Enter birthdate" >
-              </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="name"> Spouse</label>
-                    <input type="text" class="form-control" id="spouse" name="spouse" placeholder="Enter Spouse Name" >
-                </div>
-                <div class="form-group col-md-4">
-                    <label>Gender</label>
-                    <input type="text" class="form-control" id="spouse_gender" name="spouse_gender" placeholder="Enter Spouse Gender">
-                </div>
-                <div class="form-group col-md-4">
-                  <label for="email">Date of Birth</label>
-                  <input type="date" class="form-control" id="spouse_birthdate" name="spouse_birthdate" placeholder="Enter birthdate" >
-                </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-md-4">
-                  <label for="name">No. of Dependents/Children</label>
-                  <input type="number" class="form-control" id="dependents" name="dependents" placeholder="Enter No. of Dependents/Children" >
-              </div>
-              <div class="form-group col-md-4">
-                  <label>Estimated Income PHP</label>
-                  <input type="number" class="form-control" id="income" name="income" placeholder="Enter Estimated Income">
-              </div>
-              <div class="form-group col-md-4">
-                <label for="email">Home Address</label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="Enter Home Address" >
-              </div>
-            </div>
-            <!-- Farm adress/location -->
-            <div class="form-row">
+      <div id="Part1">
+                <!-- Assistance Name and Email side by side -->
+                <div class="form-row">
                   <div class="form-group col-md-4">
-                    <label for="purok" class="col-sm-8 control-label">Sitio/Purok</label>
-                    <div class="col-sm-12">
-                      <input type="text" class="form-control" id="purok" name="purok" placeholder="Enter Sitio/Purok" maxlength="255" >
-                    </div>
+                      <label for="rsbsa">RSBSA ID.</label>
+                      <input type="number" class="form-control" id="rsbsa" name="rsbsa" placeholder="Enter RSBSA ID">
                   </div>
                   
-                  <div class="form-group col-md-4">
-                    <label for="brngy" class="col-sm-8 control-label">Barangay</label>
-                    <div class="col-sm-12">
-                      <input type="text" class="form-control" id="brngy" name="brngy" placeholder="Enter Barangay" maxlength="255" >
+                  <!-- Application group with Date and Time -->
+                  <div class="form-group col-md-8">
+                      <label for="application">Application</label>
+
+                      <div class="form-row">
+                          <div class="form-group col-md-6">
+                              <input type="date" class="form-control" id="date" name="date" placeholder="Enter Application Date">
+                          </div>
+
+                          <div class="form-group col-md-6">
+                              <input type="text" class="form-control timepicker" id="timepicker" name="timepicker" placeholder="Select Time" >
+                          </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="name"> Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter  Name"    >
                     </div>
+                    <div class="form-group col-md-4">
+                        <label for="email">Gender</label>
+                        <input type="text" class="form-control" id="gender" name="gender" placeholder="Enter Gender">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="email">Date of Birth</label>
+                      <input type="date" class="form-control" id="birthdate" name="birthdate" placeholder="Enter birthdate" >
+                  </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="name"> Spouse</label>
+                        <input type="text" class="form-control" id="spouse" name="spouse" placeholder="Enter Spouse Name" >
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Gender</label>
+                        <input type="text" class="form-control" id="spouse_gender" name="spouse_gender" placeholder="Enter Spouse Gender">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="email">Date of Birth</label>
+                      <input type="date" class="form-control" id="spouse_birthdate" name="spouse_birthdate" placeholder="Enter birthdate" >
+                    </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                      <label for="name">No. of Dependents/Children</label>
+                      <input type="number" class="form-control" id="dependents" name="dependents" placeholder="Enter No. of Dependents/Children" >
                   </div>
                   <div class="form-group col-md-4">
-                    <label for="geographic_coordinates" class="col-sm-8 control-label">Geographic Coordinates</label>
-                    <div class="col-sm-12">
-                      <input type="text" class="form-control" id="geographic_coordinates" name="geographic_coordinates" placeholder="Enter Geographic Coordinates" maxlength="255" >
-                    </div>
+                      <label>Estimated Income PHP</label>
+                      <input type="number" class="form-control" id="income" name="income" placeholder="Enter Estimated Income">
                   </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="title_no" class="col-sm-8 control-label">Title No.</label>
-                  <div class="col-sm-12">
-                    <input type="number" class="form-control" id="title_no" name="title_no" placeholder="Enter Title No." maxlength="255" >
+                  <div class="form-group col-md-4">
+                    <label for="email">Home Address</label>
+                    <input type="text" class="form-control" id="address" name="address" placeholder="Enter Home Address" >
+                  </div>
+                </div>
+      </div>    
+            <!-- Farm adress/location -->
+      <div id="Part2" hidden="hidden">
+                    <div class="form-row">
+                          <div class="form-group col-md-4">
+                            <label for="purok" class="col-sm-8 control-label">Sitio/Purok</label>
+                            <div class="col-sm-12">
+                              <input type="text" class="form-control" id="purok" name="purok" placeholder="Enter Sitio/Purok" maxlength="255" >
+                            </div>
+                          </div>
+                          
+                          <div class="form-group col-md-4">
+                            <label for="brngy" class="col-sm-8 control-label">Barangay</label>
+                            <div class="col-sm-12">
+                              <input type="text" class="form-control" id="brngy" name="brngy" placeholder="Enter Barangay" maxlength="255" >
+                            </div>
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label for="geographic_coordinates" class="col-sm-8 control-label">Geographic Coordinates</label>
+                            <div class="col-sm-12">
+                              <input type="text" class="form-control" id="geographic_coordinates" name="geographic_coordinates" placeholder="Enter Geographic Coordinates" maxlength="255" >
+                            </div>
+                          </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="title_no" class="col-sm-8 control-label">Title No.</label>
+                          <div class="col-sm-12">
+                            <input type="number" class="form-control" id="title_no" name="title_no" placeholder="Enter Title No." maxlength="255" >
+                          </div>
+                        </div>
+                        
+                        <div class="form-group col-md-6">
+                          <label for="tax_declarration_no" class="col-sm-8 control-label">Tax Declaration No</label>
+                          <div class="col-sm-12">
+                            <input type="number" class="form-control" id="tax_declarration_no" name="tax_declarration_no" placeholder="Enter Tax Declaration No" maxlength="100" >
+                          </div>
+                        </div>
+                    </div>
+                    <!-- farm address -->
+                    <div class="form-group">
+                      <div class="form-row">
+                          <!-- Tenure type checkboxes -->
+                          <div class="form-group col-md-4">
+                              <label class="col-sm-8 control-label">Tenure type:</label>
+                              <div class="col-sm-12">
+                                  <div class="form-row">
+                                      <div class="form-group col-md-3">
+                                          <div class="form-check">
+                                              <input type="checkbox" id="ownedCheckbox" class="form-check-input" name="tenure" value="Owned" onclick="handleCheckboxChange(this.value)">
+                                              <label for="ownedCheckbox" class="form-check-label">Owned</label>
+                                          </div>
+                                      </div>
+                  
+                                      <div class="form-group col-md-3">
+                                          <div class="form-check">
+                                              <input type="checkbox" id="rentCheckbox" class="form-check-input" name="tenure" value="Rent" onclick="handleCheckboxChange(this.value)">
+                                              <label for="rentCheckbox" class="form-check-label">Rent</label>
+                                              <input type="number" id="rentYears" class="form-control" placeholder="Number of years renting" style="display: none; width:100px; position:sticky; top:100px; z-index:9px;" oninput="setRentCheckboxValue(this.value)">
+                                          </div>
+                                      </div>
+                  
+                                      <div class="form-group col-md-3">
+                                          <div class="form-check">
+                                              <input type="checkbox" id="tenantCheckbox" class="form-check-input" name="tenure" value="Tenant" onclick="handleCheckboxChange(this.value)">
+                                              <label for="tenantCheckbox" class="form-check-label">Tenant</label>
+                                          </div>
+                                      </div>
+                  
+                                      <div class="form-group col-md-3">
+                                          <div class="form-check">
+                                              <input type="checkbox" id="othersCheckbox" class="form-check-input" name="tenure" value="Others" onclick="handleCheckboxChange(this.value)">
+                                              <label for="othersCheckbox" class="form-check-label">Others</label>
+                                              <input type="text" id="otherInput" class="form-control" placeholder="Specify 'Others'" style="display: none;  width:100px; position:sticky; top:100px; z-index:20px;" oninput="setOthersCheckboxValue(this.value)">
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                  
+                          <div class="form-group col-md-8">
+                            <label for="existing_crop" class="col-sm-8 control-label" >Existing Crop</label>
+                            <div class="col-sm-12">
+                              <input type="text" class="form-control" id="existing_crop" name="existing_crop" placeholder="Enter Existing Crop" maxlength="100" >
+                            </div>
+                          </div>
+
+                      </div>
+                  </div>
+                  <!-- topography -->
+                
+                <div class="form-row">
+                    
+                  <div class="form-group col-md-8">
+                    <label class="col-sm-8 control-label">Topography:</label>
+                    <div class="col-sm-12">
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                  <div class="form-check">
+                                      <input type="checkbox" id="flatCheckbox" class="form-check-input" name="land" value="Flat" onclick="handleLandTypeChange(this.value)">
+                                      <label for="flatCheckbox" class="form-check-label">Flat</label>
+                                  </div>
+                              </div>
+                  
+                              <div class="form-group col-md-3">
+                                  <div class="form-check">
+                                      <input type="checkbox" id="gentlySlopingCheckbox" class="form-check-input" name="land" value="Gently Sloping" onclick="handleLandTypeChange(this.value)">
+                                      <label for="gentlySlopingCheckbox" class="form-check-label">Gently Sloping</label>
+                                  </div>
+                              </div>
+                  
+                              <div class="form-group col-md-3">
+                                  <div class="form-check">
+                                      <input type="checkbox" id="rollingUndulatingCheckbox" class="form-check-input" name="land" value="Rolling or Undulating" onclick="handleLandTypeChange(this.value)">
+                                      <label for="rollingUndulatingCheckbox" class="form-check-label">Rolling/Undulating</label>
+                                  </div>
+                              </div>
+                  
+                              <div class="form-group col-md-3">
+                                  <div class="form-check">
+                                      <input type="checkbox" id="hillySteepSlopesCheckbox" class="form-check-input" name="land" value="Hilly or Steep Slopes" onclick="handleLandTypeChange(this.value)">
+                                      <label for="hillySteepSlopesCheckbox" class="form-check-label">Hilly/Steep Slopes</label>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="form-group col-md-4 ">
+                    <label for="soil" class="col-sm-8 control-label"> Soil Type</label>
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id="soil_type" name="soil_type" placeholder="Enter Soil Type" maxlength="255" >
+                    </div>
                   </div>
                 </div>
                 
-                <div class="form-group col-md-6">
-                  <label for="tax_declarration_no" class="col-sm-8 control-label">Tax Declaration No</label>
+                <div class="form-row">
+                <div class="form-group">
+                  <label class="col-sm-8 control-label">Sources of Water:</label>
                   <div class="col-sm-12">
-                    <input type="number" class="form-control" id="tax_declarration_no" name="tax_declarration_no" placeholder="Enter Tax Declaration No" maxlength="100" >
+                      <div class="form-row">
+                          <div class="form-group col-md-3">
+                              <div class="checkbox">
+                                  <label>
+                                      <input type="checkbox" id="irrigated" name="source" value="Irrigated" onclick="handleWaterSourceChange(this.value)"> Irrigated
+                                  </label>
+                              </div>
+                          </div>
+              
+                          <div class="form-group col-md-3">
+                              <div class="checkbox">
+                                  <label>
+                                      <input type="checkbox" id="swip" name="source" value="SWIP or SIS" onclick="handleWaterSourceChange(this.value)"> SWIP/SIS
+                                  </label>
+                              </div>
+                          </div>
+              
+                          <div class="form-group col-md-3">
+                              <div class="checkbox">
+                                  <label>
+                                      <input type="checkbox" id="pump" name="source" value="Water Pump" onclick="handleWaterSourceChange(this.value)"> Water Pump
+                                  </label>
+                              </div>
+                          </div>
+              
+                          <div class="form-group col-md-3">
+                              <div class="checkbox">
+                                  <label>
+                                      <input type="checkbox" id="rainfed" name="source" value="Rainfed" onclick="handleWaterSourceChange(this.value)"> Rainfed
+                                  </label>
+                              </div>
+                          </div>
+                      </div>
                   </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="previous_crop" class="col-sm-8 control-label" >Previous Crop/s</label>
+                <div class="col-sm-12">
+                  <input type="text" class="form-control" id="previous_crop" name="previous_crop" placeholder="Enter Previous Crop/s" maxlength="100" >
                 </div>
             </div>
-            <!-- farm address -->
-            <div class="form-group">
-              <div class="form-row">
-                  <!-- Tenure type checkboxes -->
-                  <div class="form-group col-md-4">
-                      <label class="col-sm-8 control-label">Tenure type:</label>
-                      <div class="col-sm-12">
-                          <div class="form-row">
-                              <div class="form-group col-md-3">
-                                  <div class="form-check">
-                                      <input type="checkbox" id="ownedCheckbox" class="form-check-input" name="tenure" value="Owned" onclick="handleCheckboxChange(this.value)">
-                                      <label for="ownedCheckbox" class="form-check-label">Owned</label>
-                                  </div>
-                              </div>
-          
-                              <div class="form-group col-md-3">
-                                  <div class="form-check">
-                                      <input type="checkbox" id="rentCheckbox" class="form-check-input" name="tenure" value="Rent" onclick="handleCheckboxChange(this.value)">
-                                      <label for="rentCheckbox" class="form-check-label">Rent</label>
-                                      <input type="number" id="rentYears" class="form-control" placeholder="Number of years renting" style="display: none; width:100px; position:sticky; top:100px; z-index:9px;" oninput="setRentCheckboxValue(this.value)">
-                                  </div>
-                              </div>
-          
-                              <div class="form-group col-md-3">
-                                  <div class="form-check">
-                                      <input type="checkbox" id="tenantCheckbox" class="form-check-input" name="tenure" value="Tenant" onclick="handleCheckboxChange(this.value)">
-                                      <label for="tenantCheckbox" class="form-check-label">Tenant</label>
-                                  </div>
-                              </div>
-          
-                              <div class="form-group col-md-3">
-                                  <div class="form-check">
-                                      <input type="checkbox" id="othersCheckbox" class="form-check-input" name="tenure" value="Others" onclick="handleCheckboxChange(this.value)">
-                                      <label for="othersCheckbox" class="form-check-label">Others</label>
-                                      <input type="text" id="otherInput" class="form-control" placeholder="Specify 'Others'" style="display: none;  width:100px; position:sticky; top:100px; z-index:20px;" oninput="setOthersCheckboxValue(this.value)">
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-          
-                  <div class="form-group col-md-8">
-                    <label for="existing_crop" class="col-sm-8 control-label" >Existing Crop</label>
-                    <div class="col-sm-12">
-                      <input type="text" class="form-control" id="existing_crop" name="existing_crop" placeholder="Enter Existing Crop" maxlength="100" >
-                    </div>
-                  </div>
-
-              </div>
-          </div>
-          <!-- topography -->
-        
-        <div class="form-row">
-            
-          <div class="form-group col-md-8">
-            <label class="col-sm-8 control-label">Topography:</label>
-            <div class="col-sm-12">
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                          <div class="form-check">
-                              <input type="checkbox" id="flatCheckbox" class="form-check-input" name="land" value="Flat" onclick="handleLandTypeChange(this.value)">
-                              <label for="flatCheckbox" class="form-check-label">Flat</label>
-                          </div>
-                      </div>
-          
-                      <div class="form-group col-md-3">
-                          <div class="form-check">
-                              <input type="checkbox" id="gentlySlopingCheckbox" class="form-check-input" name="land" value="Gently Sloping" onclick="handleLandTypeChange(this.value)">
-                              <label for="gentlySlopingCheckbox" class="form-check-label">Gently Sloping</label>
-                          </div>
-                      </div>
-          
-                      <div class="form-group col-md-3">
-                          <div class="form-check">
-                              <input type="checkbox" id="rollingUndulatingCheckbox" class="form-check-input" name="land" value="Rolling or Undulating" onclick="handleLandTypeChange(this.value)">
-                              <label for="rollingUndulatingCheckbox" class="form-check-label">Rolling/Undulating</label>
-                          </div>
-                      </div>
-          
-                      <div class="form-group col-md-3">
-                          <div class="form-check">
-                              <input type="checkbox" id="hillySteepSlopesCheckbox" class="form-check-input" name="land" value="Hilly or Steep Slopes" onclick="handleLandTypeChange(this.value)">
-                              <label for="hillySteepSlopesCheckbox" class="form-check-label">Hilly/Steep Slopes</label>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-
-          <div class="form-group col-md-4 ">
-            <label for="soil" class="col-sm-8 control-label"> Soil Type</label>
-            <div class="col-sm-12">
-              <input type="text" class="form-control" id="soil_type" name="soil_type" placeholder="Enter Soil Type" maxlength="255" >
             </div>
-          </div>
-        </div>
-         
-        <div class="form-row">
-        <div class="form-group">
-          <label class="col-sm-8 control-label">Sources of Water:</label>
-          <div class="col-sm-12">
-              <div class="form-row">
-                  <div class="form-group col-md-3">
-                      <div class="checkbox">
-                          <label>
-                              <input type="checkbox" id="irrigated" name="source" value="Irrigated" onclick="handleWaterSourceChange(this.value)"> Irrigated
-                          </label>
-                      </div>
-                  </div>
-      
-                  <div class="form-group col-md-3">
-                      <div class="checkbox">
-                          <label>
-                              <input type="checkbox" id="swip" name="source" value="SWIP or SIS" onclick="handleWaterSourceChange(this.value)"> SWIP/SIS
-                          </label>
-                      </div>
-                  </div>
-      
-                  <div class="form-group col-md-3">
-                      <div class="checkbox">
-                          <label>
-                              <input type="checkbox" id="pump" name="source" value="Water Pump" onclick="handleWaterSourceChange(this.value)"> Water Pump
-                          </label>
-                      </div>
-                  </div>
-      
-                  <div class="form-group col-md-3">
-                      <div class="checkbox">
-                          <label>
-                              <input type="checkbox" id="rainfed" name="source" value="Rainfed" onclick="handleWaterSourceChange(this.value)"> Rainfed
-                          </label>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="form-group col-md-6">
-        <label for="previous_crop" class="col-sm-8 control-label" >Previous Crop/s</label>
-        <div class="col-sm-12">
-          <input type="text" class="form-control" id="previous_crop" name="previous_crop" placeholder="Enter Previous Crop/s" maxlength="100" >
-        </div>
-    </div>
-    </div>
-          
+    </div>     
 <!-- AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR -->
     
      <div class="ar-container">
-
+      <div id="Part3" hidden="hidden" style="margin-bottom: 10px;">
                 <!-- 1st Content -->
                 <div class="clickable-container" onclick="toggleContent('content1', 'triangleIcon1')">
                   <div class="sample-name"><h6>Intended Crop</h6></div>
@@ -422,7 +424,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="rsbsa">Specify</label>
-                        <input type="number" class="form-control" id="intended_crop" name="intended_crop" placeholder="Intended Crop">
+                        <input type="text" class="form-control" id="intended_crop" name="intended_crop" placeholder="Intended Crop">
                     </div>
                     
                     <!-- Application group with Date and Time -->
@@ -470,7 +472,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="rsbsa">Specify</label>
-                        <input type="number" class="form-control" id="program_applied" name="program_applied" placeholder="Specify">
+                        <input type="text" class="form-control" id="program_applied" name="program_applied" placeholder="Specify">
                     </div>
                     
                     <!-- Application group with Date and Time -->
@@ -518,7 +520,7 @@
                       <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="rsbsa">Specify</label>
-                            <input type="number" class="form-control" id="area_applied" name="area_applied" placeholder="specify">
+                            <input type="text" class="form-control" id="area_applied" name="area_applied" placeholder="specify">
                         </div>
                         
                         <!-- Application group with Date and Time -->
@@ -563,7 +565,7 @@
                       <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="rsbsa">Specify</label>
-                            <input type="number" class="form-control" id="land_preparation" name="land_preparation" placeholder="specify">
+                            <input type="text" class="form-control" id="land_preparation" name="land_preparation" placeholder="specify">
                         </div>
                         
                         <!-- Application group with Date and Time -->
@@ -608,7 +610,7 @@
                       <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="rsbsa">Specify</label>
-                            <input type="number" class="form-control" id="lay_outing" name="lay_outing" placeholder="specify">
+                            <input type="text" class="form-control" id="lay_outing" name="lay_outing" placeholder="specify">
                         </div>
                         
                         <!-- Application group with Date and Time -->
@@ -653,7 +655,7 @@
                       <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="rsbsa">Specify</label>
-                            <input type="number" class="form-control" id="farm_development" name="farm_development" placeholder="specify">
+                            <input type="text" class="form-control" id="farm_development" name="farm_development" placeholder="specify">
                         </div>
                         
                         <!-- Application group with Date and Time -->
@@ -698,7 +700,7 @@
                         <div class="form-row">
                           <div class="form-group col-md-4">
                               <label for="rsbsa">Specify</label>
-                              <input type="number" class="form-control" id="plowing" name="plowing" placeholder="specify">
+                              <input type="text" class="form-control" id="plowing" name="plowing" placeholder="specify">
                           </div>
                           
                           <!-- Application group with Date and Time -->
@@ -743,7 +745,7 @@
                       <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="rsbsa">Specify</label>
-                            <input type="number" class="form-control" id="harrowing" name="harrowing" placeholder="specify">
+                            <input type="text" class="form-control" id="harrowing" name="harrowing" placeholder="specify">
                         </div>
                         
                         <!-- Application group with Date and Time -->
@@ -777,6 +779,8 @@
                     </div>
                   </div>
                 <!-- End of 8th Content -->
+      </div>
+      <div id="Part4" hidden="hidden" style="margin-bottom: 10px;">
                 <!-- 9th Content -->
                 <div class="clickable-container" onclick="toggleContent('content9', 'triangleIcon9')">
                   <div class="sample-name"><h6>Rotavator</h6></div>
@@ -788,7 +792,7 @@
                       <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="rsbsa">Specify</label>
-                            <input type="number" class="form-control" id="rotavator" name="rotavator" placeholder="specify">
+                            <input type="text" class="form-control" id="rotavator" name="rotavator" placeholder="specify">
                         </div>
                         
                         <!-- Application group with Date and Time -->
@@ -833,7 +837,7 @@
                       <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="rsbsa">Specify</label>
-                            <input type="number" class="form-control" id="seeds" name="seeds" placeholder="specify">
+                            <input type="text" class="form-control" id="seeds" name="seeds" placeholder="specify">
                         </div>
                         
                         <!-- Application group with Date and Time -->
@@ -878,7 +882,7 @@
                       <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="rsbsa">Specify</label>
-                            <input type="number" class="form-control" id="inoculant" name="inoculant" placeholder="specify">
+                            <input type="text" class="form-control" id="inoculant" name="inoculant" placeholder="specify">
                         </div>
                         
                         <!-- Application group with Date and Time -->
@@ -923,7 +927,7 @@
                       <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="rsbsa">Specify</label>
-                            <input type="number" class="form-control" id="enrollment" name="enrollment" placeholder="specify">
+                            <input type="text" class="form-control" id="enrollment" name="enrollment" placeholder="specify">
                         </div>
                         
                         <!-- Application group with Date and Time -->
@@ -968,7 +972,7 @@
                       <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="rsbsa">Specify</label>
-                            <input type="number" class="form-control" id="insurance_claim" name="insurance_claim" placeholder="specify">
+                            <input type="text" class="form-control" id="insurance_claim" name="insurance_claim" placeholder="specify">
                         </div>
                         
                         <!-- Application group with Date and Time -->
@@ -1003,17 +1007,17 @@
                   </div>
                 <!-- End of 14th Content -->
                 <!-- 15th Content -->
-    <div class="clickable-container" onclick="toggleContent('content15', 'triangleIcon15')">
-      <div class="sample-name"><h6>Production</h6></div>
-      <div class="triangle-icon" id="triangleIcon15">&#9654;</div>
-    </div>
+        <div class="clickable-container" onclick="toggleContent('content15', 'triangleIcon15')">
+          <div class="sample-name"><h6>Production</h6></div>
+          <div class="triangle-icon" id="triangleIcon15">&#9654;</div>
+        </div>
 
     <div class="hidden-content" id="content15">
       <!-- Requestion Details -->
       <div class="form-row">
         <div class="form-group col-md-4">
             <label for="rsbsa">Specify</label>
-            <input type="number" class="form-control" id="production" name="production" placeholder="Specify">
+            <input type="text" class="form-control" id="production" name="production" placeholder="Specify">
         </div>
         
         <!-- Application group with Date and Time -->
@@ -1061,7 +1065,7 @@
       <div class="form-row">
         <div class="form-group col-md-4">
             <label for="rsbsa">Specify</label>
-            <input type="number" class="form-control" id="fertilizer" name="fertilizer" placeholder="Specify">
+            <input type="text" class="form-control" id="fertilizer" name="fertilizer" placeholder="Specify">
         </div>
         
         <!-- Application group with Date and Time -->
@@ -1109,7 +1113,7 @@
       <div class="form-row">
         <div class="form-group col-md-4">
             <label for="rsbsa">Specify</label>
-            <input type="number" class="form-control" id="feeding_inputs" name="feeding_inputs" placeholder="Specify">
+            <input type="text" class="form-control" id="feeding_inputs" name="feeding_inputs" placeholder="Specify">
         </div>
         
         <!-- Application group with Date and Time -->
@@ -1146,6 +1150,7 @@
     </div>
   <!-- End of 17th Content -->
 
+
       <!-- 18th Content -->
       <div class="clickable-container" onclick="toggleContent('content18', 'triangleIcon18')">
       <div class="sample-name"><h6>Pest/Disease Control</h6></div>
@@ -1157,7 +1162,7 @@
       <div class="form-row">
         <div class="form-group col-md-4">
             <label for="rsbsa">Specify</label>
-            <input type="number" class="form-control" id="pest_control" name="pest_control" placeholder="Specify">
+            <input type="text" class="form-control" id="pest_control" name="pest_control" placeholder="Specify">
         </div>
         
         <!-- Application group with Date and Time -->
@@ -1205,7 +1210,7 @@
       <div class="form-row">
         <div class="form-group col-md-4">
             <label for="rsbsa">Specify</label>
-            <input type="number" class="form-control" id="irrigation" name="irrigation" placeholder="Specify">
+            <input type="text" class="form-control" id="irrigation" name="irrigation" placeholder="Specify">
         </div>
         
         <!-- Application group with Date and Time -->
@@ -1252,7 +1257,7 @@
       <div class="form-row">
         <div class="form-group col-md-4">
             <label for="rsbsa">Specify</label>
-            <input type="number" class="form-control" id="post_harvest" name="post_harvest" placeholder="Specify">
+        <input type="text" class="form-control" id="post_harvest" name="post_harvest" placeholder="Specify">
         </div>
         
         <!-- Application group with Date and Time -->
@@ -1299,7 +1304,7 @@
       <div class="form-row">
         <div class="form-group col-md-4">
             <label for="rsbsa">Specify</label>
-            <input type="number" class="form-control" id="harvester" name="harvester" placeholder="Specify">
+        <input type="text" class="form-control" id="harvester" name="harvester" placeholder="Specify">
         </div>
         
         <!-- Application group with Date and Time -->
@@ -1346,7 +1351,7 @@
       <div class="form-row">
         <div class="form-group col-md-4">
             <label for="rsbsa">Specify</label>
-            <input type="number" class="form-control" id="hauling" name="hauling" placeholder="Specify">
+        <input type="text" class="form-control" id="hauling" name="hauling" placeholder="Specify">
         </div>
         
         <!-- Application group with Date and Time -->
@@ -1393,7 +1398,7 @@
       <div class="form-row">
         <div class="form-group col-md-4">
             <label for="rsbsa">Specify</label>
-            <input type="number" class="form-control" id="drying" name="drying" placeholder="Specify">
+        <input type="text" class="form-control" id="drying" name="drying" placeholder="Specify">
         </div>
         
         <!-- Application group with Date and Time -->
@@ -1440,7 +1445,7 @@
       <div class="form-row">
         <div class="form-group col-md-4">
             <label for="rsbsa">Specify</label>
-            <input type="number" class="form-control" id="milling" name="milling" placeholder="Specify">
+        <input type="text" class="form-control" id="milling" name="milling" placeholder="Specify">
         </div>
         
         <!-- Application group with Date and Time -->
@@ -1487,7 +1492,7 @@
       <div class="form-row">
         <div class="form-group col-md-4">
             <label for="rsbsa">Specify</label>
-            <input type="number" class="form-control" id="grading" name="grading" placeholder="Specify">
+        <input type="text" class="form-control" id="grading" name="grading" placeholder="Specify">
         </div>
         
         <!-- Application group with Date and Time -->
@@ -1534,7 +1539,7 @@
       <div class="form-row">
         <div class="form-group col-md-4">
             <label for="rsbsa">Specify</label>
-            <input type="number" class="form-control" id="marketing" name="marketing" placeholder="Specify">
+        <input type="text" class="form-control" id="marketing" name="marketing" placeholder="Specify">
         </div>
         
         <!-- Application group with Date and Time -->
@@ -1581,7 +1586,7 @@
       <div class="form-row">
         <div class="form-group col-md-4">
             <label for="rsbsa">Specify</label>
-            <input type="number" class="form-control" id="others" name="others" placeholder="Specify">
+        <input type="text" class="form-control" id="others" name="others" placeholder="Specify">
         </div>
         
         <!-- Application group with Date and Time -->
@@ -1617,55 +1622,57 @@
 
     </div>
   <!-- End of 27th Content -->
-    </div>
+</div>
 
 <!-- // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR // AR -->
-           
-<div class="form-group">
-  <label for="notes" class="col-sm-8 control-label">Remarks/Notes</label>
-  <div class="col-sm-12">
-    <textarea class="form-control" id="notes" name="notes" placeholder="Enter Remarks/Notes" rows="3"></textarea>
+ <div id="Part5" hidden="hidden">         
+                  <div class="form-group">
+                    <label for="notes" class="col-sm-8 control-label">Remarks/Notes</label>
+                    <div class="col-sm-12">
+                      <textarea class="form-control" id="notes" name="notes" placeholder="Enter Remarks/Notes" rows="3"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="container">
+                  
+
+                    <div class="image-preview-container">
+                      <label for="imageUpload1">Farm Sketch</label>
+                      <div id="imagePreviewContainer1" class="image-preview">
+                          <img id="imagePreview1"  alt="Preview" class="img-fluid d-none">
+                      </div>
+                    
+                      
+                      <input id="imageUploadData1"name="imageUploadData1" type="text" hidden="hidden">
+                      <input type="file" class="form-control-file" id="imageUpload1" name="imageUpload1" accept="image/*" onchange="previewImage(this, 'imagePreview1')">
+                  </div>
+
+                  <div class="image-preview-container">
+                      <label for="imageUpload2">Farm Sketch</label>
+                      <div id="imagePreviewContainer2" class="image-preview">
+                          <img id="imagePreview2"  alt="Preview" class="img-fluid d-none">
+                      </div>
+                      
+                      
+                      <input id="imageUploadData2" name="imageUploadData2" type="text" hidden="hidden">
+                      <input type="file" class="form-control-file" id="imageUpload2" name="imageUpload2" accept="image/*" onchange="previewImage(this, 'imagePreview2')">
+                  </div>
+
+                  </div>
+
+                      <div class="form-group">
+                      <label for="notes" class="col-sm-8 control-label">Special Notes/Instructions</label>
+                      <div class="col-sm-12">
+                          <textarea class="form-control" id="special_notes" name="special_notes" placeholder="Enter Special Notes/Instructions" rows="3"></textarea>
+                      </div>
+                      </div>
   </div>
-</div>
-
-<div class="container">
- 
-
-  <div class="image-preview-container">
-    <label for="imageUpload1">Farm Sketch</label>
-    <div id="imagePreviewContainer1" class="image-preview">
-        <img id="imagePreview1"  alt="Preview" class="img-fluid d-none">
-    </div>
-  
-    
-    <input id="imageUploadData1"name="imageUploadData1" type="text" hidden="hidden">
-    <input type="file" class="form-control-file" id="imageUpload1" name="imageUpload1" accept="image/*" onchange="previewImage(this, 'imagePreview1')">
-</div>
-
-<div class="image-preview-container">
-    <label for="imageUpload2">Farm Sketch</label>
-    <div id="imagePreviewContainer2" class="image-preview">
-        <img id="imagePreview2"  alt="Preview" class="img-fluid d-none">
-    </div>
-    
-    
-    <input id="imageUploadData2" name="imageUploadData2" type="text" hidden="hidden">
-    <input type="file" class="form-control-file" id="imageUpload2" name="imageUpload2" accept="image/*" onchange="previewImage(this, 'imagePreview2')">
-</div>
-
-</div>
-
-    <div class="form-group">
-    <label for="notes" class="col-sm-8 control-label">Special Notes/Instructions</label>
-    <div class="col-sm-12">
-        <textarea class="form-control" id="special_notes" name="special_notes" placeholder="Enter Special Notes/Instructions" rows="3"></textarea>
-    </div>
-    </div>
-
             <div>
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                  <button type="button" class="btn btn-success" id="btn-save">Save</button>
+                  <button type="button" class="btn btn-primary" id="btn-back" onclick="prevPart()">Back</button>
+                  <button type="button" class="btn btn-primary" id="btn-next" onclick="nextPart()">Next</button>
+                  <button type="button" class="btn btn-success" id="btn-save" hidden="hidden">Save</button>
                   <button type="button" class="btn btn-success" id="btn-save-withIMG" hidden="">Save changes</button>
                 </div>
               </div>
@@ -1673,6 +1680,7 @@
 
           </form>
         </div>
+     
         <div class="modal-footer">
           <!-- Additional modal footer content if needed -->
         </div>
@@ -1681,6 +1689,55 @@
   </div>
   <!-- end bootstrap model -->
   @include('admin/assistance/assistance-ajax')
+
+  <script>
+      let currentPart = 1;
+
+      function showPart(partNumber) {
+          // Hide all divs
+          for (let i = 1; i <= 5; i++) {
+              document.getElementById(`Part${i}`).hidden = true;
+
+              if(currentPart == 1){
+                document.getElementById('btn-back').hidden = true;
+              }else{
+                document.getElementById('btn-back').hidden = false;
+              }
+              
+              if(currentPart < 5){
+              document.getElementById('btn-next').hidden = false;
+              document.getElementById('btn-save').hidden = true;
+              document.getElementById('btn-save-withIMG').hidden = true;
+              }else{
+              document.getElementById('btn-save').hidden = false;
+              document.getElementById('btn-next').hidden = true;
+              document.getElementById('btn-save-withIMG').hidden = false;
+              }
+
+          }
+
+          // Show the selected div
+          document.getElementById(`Part${partNumber}`).hidden = false;
+      }
+
+      function prevPart() {
+          if (currentPart > 1) {
+              currentPart--;
+              showPart(currentPart);
+          }
+      }
+
+      function nextPart() {
+          if (currentPart < 5) {
+              currentPart++;
+              showPart(currentPart);
+          }
+      }
+
+      // Show the initial part
+      showPart(currentPart);
+  </script>
+
 </body>
 
 

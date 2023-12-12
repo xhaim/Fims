@@ -56,7 +56,7 @@
         <table class="table table-bordered display responsive nowrap" id="coffee-crud-datatable">
            <thead>
               <tr>
-                 <th>No.</th>
+                
                  <th>Name </th>
                  <th>Sex</th>
                  <th>Purok</th>
@@ -83,7 +83,7 @@
         <table class="table table-bordered display responsive nowrap" id="coffee-archive-datatable">
           <thead>
              <tr>
-                <th>No.</th>
+               
                 <th>Name </th>
                 <th>Sex</th>
                 <th>Purok</th>
@@ -261,7 +261,7 @@
            ajax: "{{ url('coffee-crud-datatable') }}",
            
            columns: [
-                    { data: 'id', name: 'id' },
+                    
                     { data: 'name', name: 'name' },
                     { data: 'sex', name: 'sex' },
                     { data: 'purok', name: 'purok' },
@@ -304,7 +304,7 @@
            serverSide: true,
            ajax: "{{ url('coffee-archive-datatable') }}",
            columns: [
-                    { data: 'id', name: 'id' },
+                    
                     { data: 'name', name: 'name' },
                     { data: 'sex', name: 'sex' },
                     { data: 'purok', name: 'purok' },

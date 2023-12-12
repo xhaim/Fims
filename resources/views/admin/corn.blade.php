@@ -406,7 +406,7 @@
           // Columns to exclude (you can adjust these according to your requirements)
           const excludedColumns = ['generated','created_at', 'updated_at'];
 
-          const headers = [{columns:['Id', 'Rsbsa', 'Association', 'Barangay','Name','Birth',
+          const headers = [{columns:['Id', 'Rsbsa', 'Association', 'Barangay','Name','Date of Birth',
                             'Season','Age','Sex', 'Cropping','Area','Location']}];
 
           // Create a new window for printing

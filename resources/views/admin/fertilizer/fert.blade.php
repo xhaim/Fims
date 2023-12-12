@@ -66,7 +66,7 @@
         </table>
     </div>
     <div id="Archive" hidden="hidden">
-        <table class="table table-bordered display responsive nowrap display responsive nowrap" id="fert-archive-datatable">
+        <table class="table table-bordered display responsive nowrap display responsive nowrap" id="fert-archive-datatable" style="width: 100%">
           <thead>
              <tr>
                {{-- <th>Id</th> --}}

@@ -1,4 +1,4 @@
-<form action="/upload-csv" method="post" enctype="multipart/form-data">
+<form action="/upload-csv-registry" method="post" enctype="multipart/form-data">
     @csrf
     <input id="csvFileInput" type="file" name="csv_file" accept=".csv">
     <button id="uploadButton" class="btn-success" type="submit" style="display: none;">Import CSV</button>

@@ -56,7 +56,7 @@
         <table class="table table-bordered display responsive nowrap" id="fruits-crud-datatable">
            <thead>
               <tr>
-                 <th>No.</th>
+                
                  <th>Name </th>
                  <th>Sex</th>
                  <th>Purok</th>
@@ -83,7 +83,7 @@
         <table class="table table-bordered display responsive nowrap" id="fruits-archive-datatable">
           <thead>
              <tr>
-                <th>No.</th>
+               
                 <th>Name </th>
                 <th>Sex</th>
                 <th>Purok</th>
@@ -260,7 +260,7 @@
            ajax: "{{ url('fruits-crud-datatable') }}",
            
            columns: [
-                    { data: 'id', name: 'id' },
+                   
                     { data: 'name', name: 'name' },
                     { data: 'sex', name: 'sex' },
                     { data: 'purok', name: 'purok' },
@@ -303,7 +303,7 @@ $('#fruits-archive-datatable').DataTable({
            serverSide: true,
            ajax: "{{ url('fruits-archive-datatable') }}",
            columns: [
-                    { data: 'id', name: 'id' },
+                   
                     { data: 'name', name: 'name' },
                     { data: 'sex', name: 'sex' },
                     { data: 'purok', name: 'purok' },

@@ -56,7 +56,7 @@
         <table class="table table-bordered display responsive nowrap" id="root-crud-datatable">
            <thead>
               <tr>
-                 <th>No.</th>
+                 
                  <th>Name of Farmer</th>
                  <th>Barangay</th>
                  <th>Municipality</th>
@@ -80,7 +80,7 @@
         <table class="table table-bordered display responsive nowrap" id="root-archive-datatable">
            <thead>
               <tr>
-                 <th>No.</th>
+                
                  <th>Name of Farmer</th>
                  <th>Barangay</th>
                  <th>Municipality</th>
@@ -232,7 +232,7 @@
            ajax: "{{ url('root-crud-datatable') }}",
            
            columns: [
-                    { data: 'id', name: 'id' },
+                  
                     { data: 'name', name: 'name' },
                     { data: 'barangay', name: 'barangay' },
                     { data: 'municipality', name: 'municipality' },
@@ -272,7 +272,7 @@
            serverSide: true,
            ajax: "{{ url('root-archive-datatable') }}",
            columns: [
-                    { data: 'id', name: 'id' },
+                    
                     { data: 'name', name: 'name' },
                     { data: 'barangay', name: 'barangay' },
                     { data: 'municipality', name: 'municipality' },

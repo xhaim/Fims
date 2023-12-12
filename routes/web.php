@@ -177,8 +177,8 @@ Route::post('edit-registry', [RegistryAjaxCrudController::class, 'edit']);
 Route::post('delete-registry', [RegistryAjaxCrudController::class, 'destroy']);
 Route::get('get-registry-details/{id}', [RegistryAjaxCrudController::class, 'getRegistryDetails'])->name('farmer.details');
 
-Route::get('/upload-csv', [CsvImportController::class, 'showForm']);
-Route::post('/upload-csv', [CsvImportController::class, 'import']);
+Route::get('/upload-csv-registry', [CsvImportController::class, 'showForm']);
+Route::post('/upload-csv-registry', [CsvImportController::class, 'import']);
 
 Route::post('/registry/archive', [RegistryAjaxCrudController::class, 'archive'])->name('registry.archive');
 Route::post('/registry/restore', [RegistryAjaxCrudController::class, 'restore'])->name('registry.restore');
