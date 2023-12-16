@@ -12,11 +12,13 @@
             <div id="first_part">
               
               <div class="form-group">
-                <label for="rsbsa" class="col-sm-8 control-label">RSBSA ID</label>
+                <label for="rsbsa_id" class="col-sm-8 control-label">RSBSA ID</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="rsbsa_id" name="rsbsa_id" placeholder="Enter RSBSA ID" maxlength="100" >
+                    <input type="number" class="form-control" id="rsbsa_id" name="rsbsa_id" placeholder="Enter RSBSA ID" maxlength="100">
+                    <div id="rsbsa-id-validation-message" class="text-danger"></div>
                 </div>
-              </div>
+            </div>
+            
 
               <div class="form-group">
                 <label for="generated_id" class="col-sm-8 control-label">Generated ID</label>

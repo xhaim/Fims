@@ -82,6 +82,9 @@ Route::get('/print-assoc', [AssociationAjaxCrudController::class, 'fetchData']);
 Route::post('/assoc/archive', [AssociationAjaxCrudController::class, 'archive'])->name('assoc.archive');
 Route::post('/assoc/restore', [AssociationAjaxCrudController::class, 'restore'])->name('assoc.restore');
 Route::get('assoc-archive-datatable', [AssociationAjaxCrudController::class, 'archive_index']);
+// Add this route to your web.php file
+Route::post('/check-association', [AssociationAjaxCrudController::class, 'checkAssociation'])->name('check.association');
+
 
 // corn
 Route::get('corn-crud-datatable', [CornAjaxController::class, 'index']);
@@ -93,6 +96,7 @@ Route::get('/print-corn', [CornAjaxController::class, 'fetchData']);
 Route::post('/corn/archive', [CornAjaxController::class, 'archive'])->name('corn.archive');
 Route::post('/corn/restore', [CornAjaxController::class, 'restore'])->name('corn.restore');
 Route::get('corn-archive-datatable', [CornAjaxController::class, 'archive_index']);
+Route::post('/check-rsbsa-corn',[CornAjaxController::class, 'checkRsbsa'])->name('check.rsbsa.corn');
 
 // rice seeds
 Route::get('riceseeds-crud-datatable', [RiceSeedsAjaxCRUDController::class, 'index']);
@@ -135,6 +139,7 @@ Route::get('/print-livestock', [LivestockAjaxCRUDController::class, 'fetchData']
 Route::post('/livestock/archive', [LivestockAjaxCRUDController::class, 'archive'])->name('livestock.archive');
 Route::post('/livestock/restore', [LivestockAjaxCRUDController::class, 'restore'])->name('livestock.restore');
 Route::get('livestock-archive-datatable', [LivestockAjaxCRUDController::class, 'archive_index']);
+Route::post('/check-rsbsa-livestock', [LivestockAjaxCRUDController::class, 'checkRsbsa'])->name('check.rsbsa.livestock');
 
 // Fertilizer
 Route::get('fert-crud-datatable', [FertilizerAjaxCRUDController::class, 'index']);
@@ -169,6 +174,8 @@ Route::get('get-farmer-details/{id}', [RiceHybridAjaxCrudContoller::class, 'getF
 Route::post('/ricehybrid/archive', [RiceHybridAjaxCrudContoller::class, 'archive'])->name('ricehybrid.archive');
 Route::post('/ricehybrid/restore', [RiceHybridAjaxCrudContoller::class, 'restore'])->name('ricehybrid.restore');
 Route::get('ricehybrid-archive-datatable', [RiceHybridAjaxCrudContoller::class, 'archive_index']);
+Route::post('/check-rsbsa',[RiceHybridAjaxCrudContoller::class, 'checkRsbsa'])->name('check.rsbsa');
+
 
 // Registry
 Route::get('registry-crud-datatable', [RegistryAjaxCrudController::class, 'index']);
@@ -183,6 +190,9 @@ Route::post('/upload-csv-registry', [CsvImportController::class, 'import']);
 Route::post('/registry/archive', [RegistryAjaxCrudController::class, 'archive'])->name('registry.archive');
 Route::post('/registry/restore', [RegistryAjaxCrudController::class, 'restore'])->name('registry.restore');
 Route::get('registry-archive-datatable', [RegistryAjaxCrudController::class, 'archive_index']);
+// Add this route to your web.php file
+Route::post('/check-rsbsa-id', [RegistryAjaxCrudController::class, 'checkRsbsaId'])->name('check.rsbsa_id');
+
 
 
 
@@ -197,6 +207,8 @@ Route::post('/fishery/restore', [DataTableAjaxCRUDController::class, 'restore'])
 Route::get('fishery-archive-datatable', [DataTableAjaxCRUDController::class, 'archive_index']);
 Route::get('get-fishery-details/{id}', [DataTableAjaxCRUDController::class, 'getFisheryDetails'])->name('fishery.details');
 
+Route::post('/check-registration-no', [DataTableAjaxCRUDController::class, 'checkRegistrationNo'])->name('check.registration_no');
+
 
 // vegetable
 Route::get('veg-crud-datatable', [VegetableAjaxCRUDController::class, 'index']);
@@ -208,6 +220,9 @@ Route::get('/print-hvcdpveg', [VegetableAjaxCRUDController::class, 'fetchData'])
 Route::post('/veg/archive', [VegetableAjaxCRUDController::class, 'archive'])->name('veg.archive');
 Route::post('/veg/restore', [VegetableAjaxCRUDController::class, 'restore'])->name('veg.restore');
 Route::get('veg-archive-datatable', [VegetableAjaxCRUDController::class, 'archive_index']);
+// Add this route to your web.php file
+Route::post('/check-farmer-name', [VegetableAjaxCRUDController::class, 'checkFarmerName'])->name('check.farmer_name');
+
 
 //Rootcrops
 Route::get('root-crud-datatable', [RootcropAjaxCRUDController::class, 'index']);
@@ -219,6 +234,7 @@ Route::get('/print-hvdcprootcrops', [RootcropAjaxCRUDController::class, 'fetchDa
 Route::post('/root/archive', [RootcropAjaxCRUDController::class, 'archive'])->name('root.archive');
 Route::post('/root/restore', [RootcropAjaxCRUDController::class, 'restore'])->name('root.restore');
 Route::get('root-archive-datatable', [RootcropAjaxCRUDController::class, 'archive_index']);
+Route::post('/check-name-root', [RootcropAjaxCRUDController::class, 'checkName'])->name('check.name.root');
 
 // Cacao
 Route::get('cacao-crud-datatable', [CacaoAjaxCRUDController::class, 'index']);
@@ -230,6 +246,7 @@ Route::get('/print-hvdcpcacao', [CacaoAjaxCRUDController::class, 'fetchData']);
 Route::post('/cacao/archive', [CacaoAjaxCRUDController::class, 'archive'])->name('cacao.archive');
 Route::post('/cacao/restore', [CacaoAjaxCRUDController::class, 'restore'])->name('cacao.restore');
 Route::get('cacao-archive-datatable', [CacaoAjaxCRUDController::class, 'archive_index']);
+Route::post('/check-name-cacao', [CacaoAjaxCRUDController::class, 'checkName'])->name('check.name.cacao');
 
 // coffee
 Route::get('coffee-crud-datatable', [CoffeeAjaxCRUDController::class, 'index']);
@@ -285,6 +302,9 @@ Route::get('/print-roms', [ROMSAjaxCRUDController::class, 'fetchData']);
 Route::post('/roms/archive', [ROMSAjaxCRUDController::class, 'archive'])->name('roms.archive');
 Route::post('/roms/restore', [ROMSAjaxCRUDController::class, 'restore'])->name('roms.restore');
 Route::get('roms-archive-datatable', [ROMSAjaxCRUDController::class, 'archive_index']);
+// Add this route to your web.php file
+Route::post('/check-name', [ROMSAjaxCRUDController::class, 'checkName'])->name('check.name');
+
 
 
 // vaccination

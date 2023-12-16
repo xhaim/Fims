@@ -115,11 +115,13 @@
               <input type="hidden" name="id" id="id">
 
               <div class="form-group">
-                <label for="rsbsa" class="col-md-auto control-label" >RSBSA ID</label>
+                <label for="rsbsa" class="col-sm-8 control-label">RSBSA ID</label>
                 <div class="col-sm-12">
-                  <input type="number" class="form-control" id="rsbsa" name="rsbsa" placeholder="Enter RSBSA ID " maxlength="50" >
+                    <input type="number" class="form-control" id="rsbsa" name="rsbsa" placeholder="Enter RSBSA No." maxlength="50">
+                    <div id="rsbsa-validation-message" class="text-danger"></div>
                 </div>
-              </div>  
+            </div>
+            
  
               <div class="form-group">
                 <label for="generated" class="col-md-auto control-label">Generated ID</label>
@@ -519,4 +521,33 @@
     }
   }
 </script>
+<script>
+  $(document).ready(function () {
+      $('#rsbsa').on('input', function () {
+          var rsbsaValue = $(this).val();
+
+          // Make an Ajax request to check if the RSBSA ID exists
+          $.ajax({
+              url: '{{ route("check.rsbsa.corn") }}', // Update with your actual route
+              method: 'POST',
+              data: {
+                  _token: '{{ csrf_token() }}',
+                  rsbsa: rsbsaValue
+              },
+              success: function (response) {
+                  // Update the validation message based on the response
+                  if (response.exists) {
+                      $('#rsbsa-validation-message').text('RSBSA ID already exists');
+                  } else {
+                      $('#rsbsa-validation-message').text('');
+                  }
+              },
+              error: function (error) {
+                  console.error('Error checking RSBSA ID:', error);
+              }
+          });
+      });
+  });
+</script>
+
 </html>

@@ -161,12 +161,15 @@
           <div class="modal-body">
             <form action="javascript:void(0)" id="CompanyForm" name="CompanyForm" class="form-horizontal" method="POST" enctype="multipart/form-data">
               <input type="hidden" name="id" id="id">
+              
               <div class="form-group">
                 <label for="registration_no" class="col-sm-8 control-label">Registration No.</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="registration_no" name="registration_no" placeholder="Enter Registration No." maxlength="50"  >
+                    <input type="text" class="form-control" id="registration_no" name="registration_no" placeholder="Enter Registration No." maxlength="50">
+                    <div id="registration-no-validation-message" class="text-danger"></div>
                 </div>
-              </div>  
+            </div>
+            
  
               <div class="form-group">
                 <label for="registration_date" class="col-sm-8 control-label">Registration Date</label>
@@ -1031,4 +1034,34 @@ function removeMemAf(memberId) {
     }
   }
 </script>
+<script>
+  $(document).ready(function () {
+      $('#registration_no').on('input', function () {
+          var registrationNoValue = $(this).val();
+
+          // Make an Ajax request to check if the Registration No. exists
+          $.ajax({
+              url: '{{ route("check.registration_no") }}', // Update with your actual route
+              method: 'POST',
+              data: {
+                  _token: '{{ csrf_token() }}',
+                  registration_no: registrationNoValue
+              },
+              success: function (response) {
+                  // Update the validation message based on the response
+                  if (response.exists) {
+                      $('#registration-no-validation-message').text('Registration No. already exists ');
+                  } else {
+                      $('#registration-no-validation-message').text('');
+                  }
+              },
+              error: function (error) {
+                  console.error('Error checking Registration No.:', error);
+              }
+          });
+      });
+  });
+</script>
+
+
 </html>

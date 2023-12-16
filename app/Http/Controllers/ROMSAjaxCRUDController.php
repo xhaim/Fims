@@ -194,6 +194,17 @@ class ROMSAjaxCRUDController extends Controller
 
         return response()->json($data);
     }
+    // Add this method to your controller
+    public function checkName(Request $request)
+    {
+        $name = $request->input('name');
+
+        // Check if the Name exists in the database
+        $exists = Roms::where('name', $name)->exists();
+
+        return response()->json(['exists' => $exists]);
+    }
+
    
 }
 

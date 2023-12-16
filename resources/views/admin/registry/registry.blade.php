@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Association</title>
+    <title>Farmer's Enrolment</title>
      
     <meta name="csrf-token" content="{{ csrf_token() }}">
      

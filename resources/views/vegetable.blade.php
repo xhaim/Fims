@@ -114,13 +114,16 @@
           <div class="modal-body">
             <form action="javascript:void(0)" id="VegForm" name="VegForm" class="form-horizontal" method="POST" enctype="multipart/form-data">
               <input type="hidden" name="id" id="id">
+
               <div class="form-group">
-                <label for="name" class="col-sm-8 control-label"> Name of Farmer</label>
+                <label for="name" class="col-sm-8 control-label">Name of Farmer</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name of Farmer" maxlength="100" >
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name of Farmer" maxlength="100">
+                    <div id="name-validation-message" class="text-danger"></div>
                 </div>
-              </div>  
- 
+            </div>
+            
+            
               <div class="form-group">
                 <label for="barangay" class="col-sm-8 control-label">Barangay</label>
                 <div class="col-sm-12">
@@ -131,7 +134,7 @@
               <div class="form-group">
                 <label class="col-sm-8 control-label">Municipality</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="municipality" name="municipality" placeholder="Enter Municipality" >
+                  <input type="text" class="form-control" id="municipality" name="municipality" placeholder="Enter Municipality" value="Carmen" >
                 </div>
               </div>
  
@@ -542,5 +545,37 @@
     }
   }
 </script>
+<script>
+  $(document).ready(function () {
+      $('#name').on('input', function () {
+          var nameValue = $(this).val();
+
+          // Make an Ajax request to check if the Name of Farmer exists
+          $.ajax({
+              url: '{{ route("check.farmer_name") }}', // Update with your actual route
+              method: 'POST',
+              data: {
+                  _token: '{{ csrf_token() }}',
+                  name: nameValue
+              },
+              success: function (response) {
+                  // Update the validation message based on the response
+                  if (response.exists) {
+                      $('#name-validation-message').text('Farmer name already exists');
+                  } else {
+                      $('#name-validation-message').text('');
+                  }
+              },
+              error: function (error) {
+                  console.error('Error checking Farmer name:', error);
+              }
+          });
+      });
+  });
+</script>
+
+
+
+
 
 </html>

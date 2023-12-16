@@ -122,11 +122,13 @@
             <input type="hidden" name="id" id="id">
 
             <div class="form-group">
-              <label for="rsbsa" class="col-sm-8 control-label" >RSBSA No.</label>
+              <label for="rsbsa" class="col-sm-8 control-label">RSBSA No.</label>
               <div class="col-sm-12">
-                <input type="number" class="form-control" id="rsbsa" name="rsbsa" placeholder="Enter RSBSA No." maxlength="50" >
+                  <input type="number" class="form-control" id="rsbsa" name="rsbsa" placeholder="Enter RSBSA No." maxlength="50">
+                  <div id="rsbsa-validation-message" class="text-danger"></div>
               </div>
-            </div>  
+          </div>
+          
  
             <div class="form-group">
               <label for="name_first" class="col-sm-8 control-label">Farmers Name (First)</label>

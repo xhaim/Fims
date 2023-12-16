@@ -182,4 +182,15 @@
 
         return response()->json($data);
     }
+    // Add this method to your controller
+public function checkAssociation(Request $request)
+{
+    $association = $request->input('association');
+
+    // Check if the Name of Association exists in the database
+    $exists = Association::where('association', $association)->exists();
+
+    return response()->json(['exists' => $exists]);
+}
+
  }

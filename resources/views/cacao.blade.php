@@ -118,12 +118,15 @@
           <div class="modal-body">
             <form action="javascript:void(0)" id="CacaoForm" name="CacaoForm" class="form-horizontal" method="POST" enctype="multipart/form-data">
               <input type="hidden" name="id" id="id">
-              <div class="form-group">
-                <label for="name" class="col-sm-8 control-label"> Name </label>
+
+             <div class="form-group">
+                <label for="name" class="col-sm-8 control-label">Name</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name of Farmer" maxlength="100" >
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" maxlength="100">
+                    <div id="name-validation-message" class="text-danger"></div>
                 </div>
-              </div>  
+            </div>
+
  
               <div class="form-group">
                 <label for="sex" class="col-sm-2 control-label">Sex</label>
@@ -627,4 +630,33 @@
     }
   }
 </script>
+<script>
+  $(document).ready(function () {
+      $('#name').on('input', function () {
+          var nameValue = $(this).val();
+
+          // Make an Ajax request to check if the Name exists
+          $.ajax({
+              url: '{{ route("check.name.cacao") }}', // Update with your actual route
+              method: 'POST',
+              data: {
+                  _token: '{{ csrf_token() }}',
+                  name: nameValue
+              },
+              success: function (response) {
+                  // Update the validation message based on the response
+                  if (response.exists) {
+                      $('#name-validation-message').text('Name already exists ');
+                  } else {
+                      $('#name-validation-message').text('');
+                  }
+              },
+              error: function (error) {
+                  console.error('Error checking Name:', error);
+              }
+          });
+      });
+  });
+</script>
+
 </html>

@@ -19,7 +19,7 @@ public function up()
         $table->string('barangay');
         $table->string('municipality');
         $table->string('sex');
-        $table->string('affiliation');
+        $table->string('affiliation')->nullable();
         $table->string('contact');
         $table->string('commodity');
         $table->string('area');

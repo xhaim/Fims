@@ -193,5 +193,15 @@ class CacaoAjaxCRUDController extends Controller
 
     return response()->json($data);
 }
-    
+    // Add this method to your controller
+public function checkName(Request $request)
+{
+    $name = $request->input('name');
+
+    // Check if the Name exists in the database
+    $exists = Cacao::where('name', $name)->exists();
+
+    return response()->json(['exists' => $exists]);
+}
+
 }

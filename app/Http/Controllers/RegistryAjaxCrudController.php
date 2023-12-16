@@ -1100,6 +1100,16 @@ class RegistryAjaxCrudController extends Controller
      
        return Response()->json($registry);
    }
+   // Add this method to your controller
+public function checkRsbsaId(Request $request)
+{
+    $rsbsaId = $request->input('rsbsa_id');
+
+    // Check if the RSBSA ID exists in the database
+    $exists = Registry::where('rsbsa_id', $rsbsaId)->exists();
+
+    return response()->json(['exists' => $exists]);
+}
 
 }
 

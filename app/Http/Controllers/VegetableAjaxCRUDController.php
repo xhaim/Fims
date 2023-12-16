@@ -184,11 +184,25 @@ class VegetableAjaxCRUDController extends Controller
         return Response()->json($veg);
     }
     // In your controller, retrieve the data
- public function fetchData() {
-    // Retrieve data from your model or source (e.g., database)
-    $data = Vegetable::all(); // Replace YourModel with your actual model
+    public function fetchData() {
+        // Retrieve data from your model or source (e.g., database)
+        $data = Vegetable::all(); // Replace YourModel with your actual model
 
-    return response()->json($data);
+        return response()->json($data);
+    }
+    // Add this method to your controller
+   // Add this method to your controller
+public function checkFarmerName(Request $request)
+{
+    $name = $request->input('name');
+
+    // Check if the Name of Farmer exists in the database
+    $exists = Vegetable::where('name', $name)->exists();
+
+    return response()->json(['exists' => $exists]);
 }
+
+
+
     
 }

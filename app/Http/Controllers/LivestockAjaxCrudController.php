@@ -178,5 +178,16 @@ class LivestockAjaxCRUDController extends Controller
 
     return response()->json($data);
 }
+// Add this method to your controller
+public function checkRsbsa(Request $request)
+{
+    $rsbsa = $request->input('rsbsa');
+
+    // Check if the RSBSA ID exists in the database
+    $exists = Livestock::where('rsbsa', $rsbsa)->exists();
+
+    return response()->json(['exists' => $exists]);
+}
+
 }
 

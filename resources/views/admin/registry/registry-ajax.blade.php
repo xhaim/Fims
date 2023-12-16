@@ -1402,3 +1402,31 @@
       }
     }
   </script>
+  <script>
+    $(document).ready(function () {
+        $('#rsbsa_id').on('input', function () {
+            var rsbsaIdValue = $(this).val();
+
+            // Make an Ajax request to check if the RSBSA ID exists
+            $.ajax({
+                url: '{{ route("check.rsbsa_id") }}', // Update with your actual route
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    rsbsa_id: rsbsaIdValue
+                },
+                success: function (response) {
+                    // Update the validation message based on the response
+                    if (response.exists) {
+                        $('#rsbsa-id-validation-message').text('RSBSA ID already exists');
+                    } else {
+                        $('#rsbsa-id-validation-message').text('');
+                    }
+                },
+                error: function (error) {
+                    console.error('Error checking RSBSA ID:', error);
+                }
+            });
+        });
+    });
+</script>

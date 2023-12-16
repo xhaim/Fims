@@ -16,9 +16,9 @@
      <div id="fileContent" class="collapse">
          <ul>
              <li  id="div_left" style="list-style: none"><a href="{{url('assoc-crud-datatable')}}" style="text-decoration: none;font-size:15px;"> Association</a></li>
-             <li   id="div_left" style="list-style: none"><a href="{{url('assistance-crud-datatable ')}}" style="text-decoration: none;font-size:15px;"> Farmer's Assistance</li>
              <li  id="div_left" style="list-style: none"><a href="{{url('registry-crud-datatable')}}" style="text-decoration: none;font-size:15px;">Farmer's Enrolment</a></li>
              <li   id="div_left" style="list-style: none"><a href="{{url('/rental-crud-datatable')}}" style="text-decoration: none;font-size:15px;"> Rental Tractor </a></li>
+             <li   id="div_left" style="list-style: none"><a href="{{url('assistance-crud-datatable ')}}" style="text-decoration: none;font-size:15px;"> Farmer's Assistance</li>
          </ul>
      </div>
      <li class="list-item">

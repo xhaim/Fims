@@ -117,13 +117,15 @@
           <div class="modal-body">
             <form action="javascript:void(0)" id="AssocForm" name="AssocForm" class="form-horizontal" method="POST" enctype="multipart/form-data">
               <input type="hidden" name="id" id="id">
- 
+
               <div class="form-group">
                 <label for="association" class="col-sm-8 control-label">Name of Association</label>
                 <div class="col-sm-12">
-                  <input type="text" class="form-control" id="association" name="association" placeholder="Enter Name of Association" maxlength="20" >
+                    <input type="text" class="form-control" id="association" name="association" placeholder="Enter Name of Association" maxlength="20">
+                    <div id="association-validation-message" class="text-danger"></div>
                 </div>
-              </div>
+            </div>
+            
 
               <div class="form-group">
                 <label for="barangay" class="col-sm-8 control-label">Barangay</label>
@@ -486,4 +488,33 @@
     }
   }
 </script>
+<script>
+  $(document).ready(function () {
+      $('#association').on('input', function () {
+          var associationValue = $(this).val();
+
+          // Make an Ajax request to check if the Name of Association exists
+          $.ajax({
+              url: '{{ route("check.association") }}', // Update with your actual route
+              method: 'POST',
+              data: {
+                  _token: '{{ csrf_token() }}',
+                  association: associationValue
+              },
+              success: function (response) {
+                  // Update the validation message based on the response
+                  if (response.exists) {
+                      $('#association-validation-message').text('Association name already exists');
+                  } else {
+                      $('#association-validation-message').text('');
+                  }
+              },
+              error: function (error) {
+                  console.error('Error checking Association name:', error);
+              }
+          });
+      });
+  });
+</script>
+
 </html>

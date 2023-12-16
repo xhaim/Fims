@@ -280,5 +280,17 @@ class DataTableAjaxCRUDController extends Controller
      
        return Response()->json($fishery);
    }
+// Add this method to your controller
+// Add this method to your controller
+public function checkRegistrationNo(Request $request)
+{
+    $registrationNo = $request->input('registration_no');
+
+    // Check if the Registration No. exists in the database
+    $exists = Fishery::where('registration_no', $registrationNo)->exists();
+
+    return response()->json(['exists' => $exists]);
+}
+
 
 }
